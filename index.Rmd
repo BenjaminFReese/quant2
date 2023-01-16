@@ -1,0 +1,29 @@
+---
+title: "GOVT 8002 Shared Working Book | Spring 2023"
+subtitle: "[Zoom Link for Office Hours](https://georgetown.zoom.us/j/91496732913) | bfr11@georgetown.edu"
+author: "Benjamin Reese"
+format: html
+theme: cosmo
+self-contained: true
+---
+
+# Introduction
+
+```{r, echo=FALSE}
+knitr::include_graphics("intro_image.jpg")
+```
+
+## Purpose of This Site
+
+The goal of this site is to have a place where you can look for examples of code. Data analysis is a collaborative process where we all should be actively learning from each other. Think of this document as a log of all of the topics we cover in class and in lab sessions. I will make updates throughout the semester as we cover more advanced material.
+
+I encourage you to comment and ask questions on this document and to post any interesting code you come across during the semester. I’ll check this page every Monday Morning before the lab  and address any questions during the workshop that afternoon. I hope this proves to be a helpful and beneficial resource, but this document is no substitute for rigorous study of causal inference and R programming. 
+
+Let me know if any of this code doesn’t run correctly or if you have any questions or issues!
+
+# 9/23 | Lab I: Tidyverse & OLS Review
+
+```{r, echo=FALSE}
+knitr::include_graphics("lab1_image.jpg")
+```
+

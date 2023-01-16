@@ -1,3 +1,3 @@
 introduction
-purpose-of-this-document
+purpose-of-this-site
 lab-i-tidyverse-ols-review
