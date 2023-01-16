@@ -1,7 +1,7 @@
 ---
 title: "GOVT 8002 Shared Working Book"
 subtitle: "[Zoom Link for Office Hours](https://georgetown.zoom.us/j/91496732913) | bfr11@georgetown.edu"
-author: "Author: Benjamin Reese"
+author: "Benjamin Reese"
 format: html
 theme: cosmo
 self-contained: true
