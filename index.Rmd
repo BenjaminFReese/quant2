@@ -46,11 +46,11 @@ The easiest way to load data into R and ensure you have the correct file path is
 11. You should also be able to see your data file in the bottom right window of RStudio, click the file and follow the options depending on the file type
 
 12. Once your data is imported into R, the code that R automatically ran will be in the console window on the bottom left, copy and paste it to your fresh R script
-  - For example, in Lab 1, my code looked like: read_excel("Data/USstates.xlsx")
+  - For example, in Lab 1, my code looked like: `read_excel("Data/USstates.xlsx")`
 
 13. Run this copy and pasted line of code whenever you open the R Project and you will never have to worry about complicated file pathing commands
 
-14. I recommend using the assignment operator “<-” to give  your dataset a short and simple name like “df”, “dta”, or, if you are working with multiple datasets, name each something short and descriptive
+14. I recommend using the assignment operator `<-` to give  your dataset a short and simple name like `df`, `dta`, or, if you are working with multiple datasets, name each something short and descriptive
 
 
 # 9/23 | Lab I: Tidyverse & OLS Review
