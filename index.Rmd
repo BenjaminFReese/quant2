@@ -56,7 +56,7 @@ The easiest way to load data into R and ensure you have the correct file path is
 # 9/23 | Lab I: Tidyverse & OLS Review
 
 ```{r, echo=FALSE}
-knitr::include_graphics("lab1_image.jpg")
+knitr::include_graphics("lab1_image.png")
 ```
 
 ```{r, include=TRUE, message = FALSE, warning = FALSE}
