@@ -15,7 +15,7 @@ knitr::include_graphics("intro_image.jpg")
 
 ## Purpose of This Site
 
-The goal of this site is to have a place where you can look for examples of code. Think of this site as a log of all of the topics we cover in class and in lab sessions. I will make updates throughout the semester as we cover more advanced material. I hope this proves to be a helpful and beneficial resource and offer an easier to access format than the Google Doc. 
+The goal of this site is to have a place where you can look for examples of code. Think of this site as a log of all of the topics we cover in class and in lab sessions. It also serves as a limited solution set for the lab problems. I will make updates throughout the semester as we cover more advanced material. I hope this proves to be a helpful and beneficial resource and offer an easier to access format than the Google Doc. 
 
 Let me know if any of this code doesn’t run correctly or if you have any questions or issues!
 
@@ -177,3 +177,120 @@ linearHypothesis(ols.4, c("vaxed_pct_jans = vaxed_pct_moderna"))
 ```
 
 We can see that the $p$-value is not statistically significant, meaning that we cannot reject the null hypothesis that $\beta_1$ is statistically significantly different than $\beta_2$.
+
+## OPTIONAL Lab 1b
+
+### Load the World Values Survey data from "Data/WV7_small.csv" and the CountryCode data from "Data/Country codes for WVS wave 7.csv".
+The codebook for the World Values Survey data is available at 
+http://www.worldvaluessurvey.org/WVSDocumentationWV7.jsp
+
+The variables in WV_small were created as follows:
+
+- Satisfaction with your life from 1 (completely dissatisfied) to 10 (completely satisfied) (*V23*)
+- Income: a country-specific scale ranging from 1 (lowest income category) to 10 (highest income category) (*V239* in the dataset)
+- Education: a scale ranging from 1 (no formal education) to 9 (a degree from a university) (*V248* in the dataset)
+- Country: based on *V2* in the dataset.  See “Country codes for WVS wave 6.csv”
+- Conservatism: self-identified political conservatism from 1 (most liberal) to 10 (most conservative) (*V95* in the data set)
+- Male: a dummy variable indicating male (*V240*)
+- Religious: Indicating how often the individual attends religious services ranging from 1 (almost never) to 7 (more than once a week) (this is a re-coding of *V145* that had the polarity reversed, but is harder to interpret)
+- Marital: Marital status 1 = Married 2 = Living together as married 3 = Divorced 4 = Separated 5 = Widowed 6 = Single
+- Survey year: year survey taken
+- Birth year: respondent's year of birth
+
+```{r, warning=FALSE, message=FALSE}
+## World Values Dataset
+wv <- read_csv("Data/WV7_small.csv")
+
+## Country Codes
+cc <- read_csv("Data/Country codes for WVS wave 7.csv")
+```
+
+
+### Join the country name from the CountryCode data to the World Values data.  The country code is *V2* in CountryCode and *B_Country* in the World Values data.  Create two data objects of the countries in and not in the World Values data. Display the first 10 countries for each list.
+
+```{r, warning=FALSE, message=FALSE}
+## Left Join
+wv <- wv %>%
+  left_join(cc, by = c("B_COUNTRY" = "V2"))
+
+## Showing countries in
+countries_in_wv <- tibble(unique(wv$country))
+countries_in_wv[1:10,]
+
+## Anti Join
+countries_out <- cc %>%
+  anti_join(wv, by = c("V2" = "B_COUNTRY")) %>%
+  filter(V2 > 0)
+
+## Countries not in wv
+countries_out %>%
+  slice(1:10)
+```
+
+### Using pipes, calculate the percent immigrant in every country. Show the highest 10 and lowest 10 countries. (Be sure to think through what the variable in the data set means.) 
+
+```{r, warning=FALSE, message=FALSE}
+## Recoding Immigrant Variable
+wv$Immigrant <- wv$Immigrant-1
+
+## 10 Highest
+wv %>%
+  group_by(country) %>%
+  summarize(pct_imm = mean(Immigrant, na.rm=T), n=n())%>%
+  arrange(desc(pct_imm)) %>%
+  slice(1:10)
+
+## 10 Lowest
+## Percent immigrant in each country
+wv %>%
+  group_by(country) %>%
+  summarize(pct_imm = mean(Immigrant, na.rm=T), n=n())%>%
+  arrange(pct_imm) %>%
+  slice(1:10)
+
+```
+
+
+### We're now going to give some examples of the kind of data we can calculate.  Think about how you would do this in Excel (but don't actually do it!) and then calculate in R. Calculate the percent of immigrants who are men, by country and show the highest and lowest 10 countries.
+
+```{r, message=FALSE, warning=FALSE}
+## 10 Highest
+wv %>%
+  filter(Male==1) %>%
+  group_by(country) %>%
+  summarize(pct_imm = mean(Immigrant, na.rm=T), n=n()) %>%
+  arrange(desc(pct_imm)) %>%
+  slice(1:10)
+
+## 10 Lowest
+wv %>%
+  filter(Male==1) %>%
+  group_by(country) %>%
+  summarize(pct_imm = mean(Immigrant, na.rm=T), n=n()) %>%
+  arrange(pct_imm) %>%
+  slice(1:10)
+```
+
+
+### Group by marital status and country and show the percent of people in each category who are men.  Show the results for a country of your choice and briefly discuss what it means when the percentages in each category are not roughly 50 percent. Recall that the coding for the *Marital* variable is 1 = Married 2 = Living together as married 3 = Divorced 4 = Separated 5 = Widowed 6 = Single.
+
+```{r, message=FALSE, warning=FALSE}
+wv %>%
+  group_by(country, Marital) %>%
+  summarize(male_pct = mean(Male, na.rm=T), n=n()) %>%
+  filter(country == "United States")
+
+```
+
+
+### Come up with your own alternatives: think about some possible subset of people and some information we have about them and see if you can write code to capture that information.
+
+```{r, warning=FALSE, message=FALSE}
+wv %>%
+  group_by(country, Income) %>%
+  summarize(imm_pct = mean(Immigrant, na.rm=T), n=n()) %>%
+  filter(country == "United States")
+
+```
+
+This code shows the proportion of immigrants in each income category.
