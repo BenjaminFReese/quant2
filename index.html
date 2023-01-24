@@ -134,6 +134,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#purpose-of-this-site"><i class="fa fa-check"></i><b>1.1</b> Purpose of This Site</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#loading-data"><i class="fa fa-check"></i><b>1.2</b> Loading Data</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html"><i class="fa fa-check"></i><b>2</b> 9/23 | Lab I: Tidyverse &amp; OLS Review</a>
 <ul>
@@ -180,6 +181,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">1.1</span> Purpose of This Site<a href="index.html#purpose-of-this-site" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The goal of this site is to have a place where you can look for examples of code. Think of this site as a log of all of the topics we cover in class and in lab sessions. I will make updates throughout the semester as we cover more advanced material. I hope this proves to be a helpful and beneficial resource and offer an easier to access format than the Google Doc.</p>
 <p>Let me know if any of this code doesn’t run correctly or if you have any questions or issues!</p>
+</div>
+<div id="loading-data" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Loading Data<a href="index.html#loading-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The easiest way to load data into R and ensure you have the correct file path is to create a folder on your computer for each assignment and place the datasets directly into that folder.</p>
+<ol style="list-style-type: decimal">
+<li><p>Create a folder on your computer for each new analysis</p></li>
+<li><p>Download your Data and move the file to your newly created folder</p></li>
+<li><p>Then open RStudio</p></li>
+<li><p>Click the project button in the top right corner</p></li>
+<li><p>Click new project</p></li>
+<li><p>Click existing directory</p></li>
+<li><p>Click browse and find the folder that you created</p></li>
+<li><p>Click create project</p></li>
+<li><p>Once your new project opens, click the blank page with a green plus sign icon in the top left corner under the file option</p></li>
+<li><p>Click R script to open a new script</p></li>
+<li><p>You should also be able to see your data file in the bottom right window of RStudio, click the file and follow the options depending on the file type</p></li>
+<li><p>Once your data is imported into R, the code that R automatically ran will be in the console window on the bottom left, copy and paste it to your fresh R script</p></li>
+</ol>
+<ul>
+<li>For example, in Lab 1, my code looked like: read_excel(“Data/USstates.xlsx”)</li>
+</ul>
+<ol start="13" style="list-style-type: decimal">
+<li><p>Run this copy and pasted line of code whenever you open the R Project and you will never have to worry about complicated file pathing commands</p></li>
+<li><p>I recommend using the assignment operator “&lt;-” to give your dataset a short and simple name like “df”, “dta”, or, if you are working with multiple datasets, name each something short and descriptive</p></li>
+</ol>
 </div>
 </div>
             </section>

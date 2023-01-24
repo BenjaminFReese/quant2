@@ -1,5 +1,6 @@
 introduction
 purpose-of-this-site
+loading-data
 lab-i-tidyverse-ols-review
 join-the-data-sets.
 create-and-add-the-following-variables-to-your-dataframe-density-deaths-per-capita-cases-per-capita-and-vaccinated-percent.

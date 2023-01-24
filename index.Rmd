@@ -19,6 +19,40 @@ The goal of this site is to have a place where you can look for examples of code
 
 Let me know if any of this code doesn’t run correctly or if you have any questions or issues!
 
+## Loading Data
+
+The easiest way to load data into R and ensure you have the correct file path is to create a folder on your computer for each assignment and place the datasets directly into that folder.
+
+1. Create a folder on your computer for each new analysis
+
+2. Download your Data and move the file to your newly created folder
+
+3. Then open RStudio
+
+4. Click the project button in the top right corner
+
+5. Click new project
+
+6. Click existing directory
+
+7. Click browse and find the folder that you created
+
+8. Click create project
+
+9. Once your new project opens, click the blank page with a green plus sign icon in the top left corner under the file option
+
+10. Click R script to open a new script
+
+11. You should also be able to see your data file in the bottom right window of RStudio, click the file and follow the options depending on the file type
+
+12. Once your data is imported into R, the code that R automatically ran will be in the console window on the bottom left, copy and paste it to your fresh R script
+  - For example, in Lab 1, my code looked like: read_excel("Data/USstates.xlsx")
+
+13. Run this copy and pasted line of code whenever you open the R Project and you will never have to worry about complicated file pathing commands
+
+14. I recommend using the assignment operator “<-” to give  your dataset a short and simple name like “df”, “dta”, or, if you are working with multiple datasets, name each something short and descriptive
+
+
 # 9/23 | Lab I: Tidyverse & OLS Review
 
 ```{r, echo=FALSE}
@@ -73,6 +107,7 @@ count(tibble(unique(df$state)))
 
 ```
 
+To use `janitor::clean_names()` above, be sure to install the `janitor` package with `install.packages("janitor")`
 
 ## Create and add the following variables to your dataframe density, deaths per capita, cases per capita and vaccinated percent.
 
