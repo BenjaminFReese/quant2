@@ -34,7 +34,7 @@ library(stargazer)
 library(car)
 ```
 
-## 1) Join the data sets.
+## Join the data sets.
 - Join the cases and vaccination data by date and state.
     - Case data: [United_States_COVID-19_Cases_and_Deaths_by_State_over_Time.csv](# https://data.cdc.gov/Case-Surveillance/United-States-COVID-19-Cases-and-Deaths-by-State-o/9mfq-cb36)
 
@@ -74,7 +74,7 @@ count(tibble(unique(df$state)))
 ```
 
 
-## 2) Create and add the following variables to your dataframe density, deaths per capita, cases per capita and vaccinated percent.
+## Create and add the following variables to your dataframe density, deaths per capita, cases per capita and vaccinated percent.
 
 - For a specific day, show the top five states ranked by deaths per capita and calculate the average vaccinated per capita and the mean, minimum and maximum deaths per capita.
 
@@ -105,7 +105,7 @@ df_day %>%
 
 ```
 
-## 3) Estimate three regression models with deaths per capita on your selected day as the dependent variable.
+## Estimate three regression models with deaths per capita on your selected day as the dependent variable.
 - Your first model will have only Trump 2020 percent as an independent variable.
 - Your second model will add vaccinated percent as an independent variable.
 - Your third model will add density.
@@ -127,7 +127,7 @@ summary(ols.3)
 
 The results of `ols.1`, using October 1st, 2021 as the day, indicate that area with higher support for Donald Trump have more deaths per capita, specifically, a one percentage increase in Trump's 2020 vote share, on average, increases deaths per capita by 1.6. This is a classic case of omitted variable bias, however. Once we control for the percent vaxed in an area, the `trump2020_percent` loses statistical significance. We can see in the second model that the coefficient on the Trump vote share variable greatly decreases and is no longer statistically significant at conventional thresholds. `vaxed_pct` is statistically significant at the $p<.05$ level and indicates that a one percent increase in an areas vaccination rate corresponds, on average, with a 1.9 decrease in deaths per capita, holding `trump2020_percent` constant. This result stands even when controlling for an areas density as shown in model 3.
 
-## 4) Assess specific vaccines
+## Assess specific vaccines
 - Create and add vaccinated percent by state for each of the Pfizer, Modern and Janssen (which is Johnson and Johnson) vaccines.
 - Use _pop2019_ for population
 - Use Series\_Complete\_Moderna\_18Plus, Series\_Complete\_Janssen\_18Plus and Series\_Complete\_Pfizer\_18Plus for the vaccination totals.

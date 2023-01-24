@@ -137,10 +137,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="2" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html"><i class="fa fa-check"></i><b>2</b> 9/23 | Lab I: Tidyverse &amp; OLS Review</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html#join-the-data-sets."><i class="fa fa-check"></i><b>2.1</b> 1) Join the data sets.</a></li>
-<li class="chapter" data-level="2.2" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html#create-and-add-the-following-variables-to-your-dataframe-density-deaths-per-capita-cases-per-capita-and-vaccinated-percent."><i class="fa fa-check"></i><b>2.2</b> 2) Create and add the following variables to your dataframe density, deaths per capita, cases per capita and vaccinated percent.</a></li>
-<li class="chapter" data-level="2.3" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html#estimate-three-regression-models-with-deaths-per-capita-on-your-selected-day-as-the-dependent-variable."><i class="fa fa-check"></i><b>2.3</b> 3) Estimate three regression models with deaths per capita on your selected day as the dependent variable.</a></li>
-<li class="chapter" data-level="2.4" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html#assess-specific-vaccines"><i class="fa fa-check"></i><b>2.4</b> 4) Assess specific vaccines</a></li>
+<li class="chapter" data-level="2.1" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html#join-the-data-sets."><i class="fa fa-check"></i><b>2.1</b> Join the data sets.</a></li>
+<li class="chapter" data-level="2.2" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html#create-and-add-the-following-variables-to-your-dataframe-density-deaths-per-capita-cases-per-capita-and-vaccinated-percent."><i class="fa fa-check"></i><b>2.2</b> Create and add the following variables to your dataframe density, deaths per capita, cases per capita and vaccinated percent.</a></li>
+<li class="chapter" data-level="2.3" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html#estimate-three-regression-models-with-deaths-per-capita-on-your-selected-day-as-the-dependent-variable."><i class="fa fa-check"></i><b>2.3</b> Estimate three regression models with deaths per capita on your selected day as the dependent variable.</a></li>
+<li class="chapter" data-level="2.4" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html#assess-specific-vaccines"><i class="fa fa-check"></i><b>2.4</b> Assess specific vaccines</a></li>
 </ul></li>
 </ul>
 
@@ -169,7 +169,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-5"><a href="lab-i-tidyverse-ols-review.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stargazer)</span>
 <span id="cb1-6"><a href="lab-i-tidyverse-ols-review.html#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span></code></pre></div>
 <div id="join-the-data-sets." class="section level2 hasAnchor" number="2.1">
-<h2><span class="header-section-number">2.1</span> 1) Join the data sets.<a href="lab-i-tidyverse-ols-review.html#join-the-data-sets." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2><span class="header-section-number">2.1</span> Join the data sets.<a href="lab-i-tidyverse-ols-review.html#join-the-data-sets." class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li>Join the cases and vaccination data by date and state.
 <ul>
@@ -209,7 +209,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="lab-i-tidyverse-ols-review.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="do">## View(df)</span></span></code></pre></div>
 </div>
 <div id="create-and-add-the-following-variables-to-your-dataframe-density-deaths-per-capita-cases-per-capita-and-vaccinated-percent." class="section level2 hasAnchor" number="2.2">
-<h2><span class="header-section-number">2.2</span> 2) Create and add the following variables to your dataframe density, deaths per capita, cases per capita and vaccinated percent.<a href="lab-i-tidyverse-ols-review.html#create-and-add-the-following-variables-to-your-dataframe-density-deaths-per-capita-cases-per-capita-and-vaccinated-percent." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2><span class="header-section-number">2.2</span> Create and add the following variables to your dataframe density, deaths per capita, cases per capita and vaccinated percent.<a href="lab-i-tidyverse-ols-review.html#create-and-add-the-following-variables-to-your-dataframe-density-deaths-per-capita-cases-per-capita-and-vaccinated-percent." class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li>For a specific day, show the top five states ranked by deaths per capita and calculate the average vaccinated per capita and the mean, minimum and maximum deaths per capita.</li>
 </ul>
@@ -249,7 +249,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 1      0.625       0.551          0       2.90</code></pre>
 </div>
 <div id="estimate-three-regression-models-with-deaths-per-capita-on-your-selected-day-as-the-dependent-variable." class="section level2 hasAnchor" number="2.3">
-<h2><span class="header-section-number">2.3</span> 3) Estimate three regression models with deaths per capita on your selected day as the dependent variable.<a href="lab-i-tidyverse-ols-review.html#estimate-three-regression-models-with-deaths-per-capita-on-your-selected-day-as-the-dependent-variable." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2><span class="header-section-number">2.3</span> Estimate three regression models with deaths per capita on your selected day as the dependent variable.<a href="lab-i-tidyverse-ols-review.html#estimate-three-regression-models-with-deaths-per-capita-on-your-selected-day-as-the-dependent-variable." class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li>Your first model will have only Trump 2020 percent as an independent variable.</li>
 <li>Your second model will add vaccinated percent as an independent variable.</li>
@@ -326,7 +326,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The results of <code>ols.1</code>, using October 1st, 2021 as the day, indicate that area with higher support for Donald Trump have more deaths per capita, specifically, a one percentage increase in Trump’s 2020 vote share, on average, increases deaths per capita by 1.6. This is a classic case of omitted variable bias, however. Once we control for the percent vaxed in an area, the <code>trump2020_percent</code> loses statistical significance. We can see in the second model that the coefficient on the Trump vote share variable greatly decreases and is no longer statistically significant at conventional thresholds. <code>vaxed_pct</code> is statistically significant at the <span class="math inline">\(p&lt;.05\)</span> level and indicates that a one percent increase in an areas vaccination rate corresponds, on average, with a 1.9 decrease in deaths per capita, holding <code>trump2020_percent</code> constant. This result stands even when controlling for an areas density as shown in model 3.</p>
 </div>
 <div id="assess-specific-vaccines" class="section level2 hasAnchor" number="2.4">
-<h2><span class="header-section-number">2.4</span> 4) Assess specific vaccines<a href="lab-i-tidyverse-ols-review.html#assess-specific-vaccines" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2><span class="header-section-number">2.4</span> Assess specific vaccines<a href="lab-i-tidyverse-ols-review.html#assess-specific-vaccines" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
 <li><p>Create and add vaccinated percent by state for each of the Pfizer, Modern and Janssen (which is Johnson and Johnson) vaccines.</p></li>
 <li><p>Use <em>pop2019</em> for population</p></li>
