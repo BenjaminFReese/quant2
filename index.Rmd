@@ -15,7 +15,7 @@ knitr::include_graphics("intro_image.jpg")
 
 ## Purpose of This Site
 
-The goal of this site is to have a place where you can look for examples of code. Data analysis is a collaborative process where we all should be actively learning from each other. Think of this document as a log of all of the topics we cover in class and in lab sessions. I will make updates throughout the semester as we cover more advanced material. I hope this proves to be a helpful and beneficial resource, but this document is no substitute for rigorous study of causal inference and R programming. 
+The goal of this site is to have a place where you can look for examples of code. Think of this site as a log of all of the topics we cover in class and in lab sessions. I will make updates throughout the semester as we cover more advanced material. I hope this proves to be a helpful and beneficial resource and offer an easier to access format than the Google Doc. 
 
 Let me know if any of this code doesn’t run correctly or if you have any questions or issues!
 
@@ -25,3 +25,155 @@ Let me know if any of this code doesn’t run correctly or if you have any quest
 knitr::include_graphics("lab1_image.jpg")
 ```
 
+```{r, include=TRUE, message = FALSE, warning = FALSE}
+# Preparation
+library(tidyverse)
+library(readr)
+library(readxl)
+library(stargazer)
+library(car)
+```
+
+## 1) Join the data sets.
+- Join the cases and vaccination data by date and state.
+    - Case data: [United_States_COVID-19_Cases_and_Deaths_by_State_over_Time.csv](# https://data.cdc.gov/Case-Surveillance/United-States-COVID-19-Cases-and-Deaths-by-State-o/9mfq-cb36)
+
+    - Vaccination data: [COVID-19_Vaccinations_in_the_United_States_Jurisdiction.csv](https://data.cdc.gov/Vaccinations/COVID-19-Vaccinations-in-the-United-States-Jurisdi/unsk-b7fc)
+
+    - Other state variables: USstates.xlsx
+
+- Add the USstates.xlsx data and limit your dataframe to the states listed in USstates.xlsx.  
+- How do you know if your merge was successful?
+
+
+```{r, warning=FALSE, message=FALSE}
+## Loading Case Data
+case <- read_csv("Data/United_States_COVID-19_Cases_and_Deaths_by_State_over_Time.csv")
+
+## Loading Vax Data 
+vax <- read_csv("Data/COVID-19_Vaccinations_in_the_United_States_Jurisdiction.csv")
+
+## Joining Case & Vax
+case_vax <- case %>%
+  left_join(vax, by = c("submission_date" = "Date", "state" = "Location"))
+
+## Adding in state variables
+states <- read_excel("Data/USstates.xlsx")
+
+## Joining all datasets to create df
+df <- case_vax %>%
+  filter(state %in% states$stateAbbr) %>%
+  left_join(states, by = c("state" = "stateAbbr")) %>%
+  janitor::clean_names() ## making variable names lowercase with underscores
+
+## Checking for only states
+count(tibble(unique(df$state)))
+
+## View(df)
+
+```
+
+
+## 2) Create and add the following variables to your dataframe density, deaths per capita, cases per capita and vaccinated percent.
+
+- For a specific day, show the top five states ranked by deaths per capita and calculate the average vaccinated per capita and the mean, minimum and maximum deaths per capita.
+
+```{r, warning=FALSE, message=FALSE}
+## Creating Variables
+df <- df %>% 
+  mutate("deaths_pc" = 100000*new_death/pop2019, 
+         "cases_pc"  = 100000*new_case/pop2019,
+         "vaxed_pct"  = series_complete_12plus_pop_pct/100,
+         "density"   = pop2019/(1000000*sq_miles))
+
+## Filtering to specific day
+df_day <- df %>%
+  filter(submission_date == "10/1/2021")
+
+## Top five states by deaths per capita
+df_day %>%
+  arrange(desc(deaths_pc)) %>%
+  dplyr::select(submission_date, state, deaths_pc, cases_pc, vaxed_pct, density) %>%
+  slice(1:5)
+
+## Mean vaxed per capita and mean, min, max of deaths per capita
+df_day %>%
+  summarise(mean_vaxed = mean(vaxed_pct),
+            mean_deaths = mean(deaths_pc),
+            min_deaths = min(deaths_pc),
+            max_deaths = max(deaths_pc))
+
+```
+
+## 3) Estimate three regression models with deaths per capita on your selected day as the dependent variable.
+- Your first model will have only Trump 2020 percent as an independent variable.
+- Your second model will add vaccinated percent as an independent variable.
+- Your third model will add density.
+- Before you estimate the models, write down your expectations about what will happen in these models.
+
+```{r, message=FALSE, warning=FALSE}
+## Trump percent model
+ols.1 <- lm(deaths_pc ~ trump2020_percent, data = df_day)
+summary(ols.1)
+
+## Trump and Vax model
+ols.2 <- lm(deaths_pc ~ trump2020_percent + vaxed_pct, data = df_day)
+summary(ols.2)
+
+## Trump, Vax, and Density Model
+ols.3 <- lm(deaths_pc ~ trump2020_percent + vaxed_pct + density, data = df_day)
+summary(ols.3)
+```
+
+The results of `ols.1`, using October 1st, 2021 as the day, indicate that area with higher support for Donald Trump have more deaths per capita, specifically, a one percentage increase in Trump's 2020 vote share, on average, increases deaths per capita by 1.6. This is a classic case of omitted variable bias, however. Once we control for the percent vaxed in an area, the `trump2020_percent` loses statistical significance. We can see in the second model that the coefficient on the Trump vote share variable greatly decreases and is no longer statistically significant at conventional thresholds. `vaxed_pct` is statistically significant at the $p<.05$ level and indicates that a one percent increase in an areas vaccination rate corresponds, on average, with a 1.9 decrease in deaths per capita, holding `trump2020_percent` constant. This result stands even when controlling for an areas density as shown in model 3.
+
+## 4) Assess specific vaccines
+- Create and add vaccinated percent by state for each of the Pfizer, Modern and Janssen (which is Johnson and Johnson) vaccines.
+- Use _pop2019_ for population
+- Use Series\_Complete\_Moderna\_18Plus, Series\_Complete\_Janssen\_18Plus and Series\_Complete\_Pfizer\_18Plus for the vaccination totals.
+
+- Estimate a model in which deaths per capita is a function of all three vaccination rates.
+
+- Explain what the results mean, especially in light of the results above for overall vaccination results.
+
+- Explain how one would compare the efficacy of the individual vaccines (e.g., whether the Moderna vaccine works better than the Johnson and Johnson vaccine). Many answers would work here.
+
+```{r, message=FALSE, warning=FALSE}
+## Creating vaxed percent variables for different vaccines
+df <- df %>% 
+  mutate(vaxed_pct_moderna  = series_complete_moderna_18plus/(100*pop2019),
+         vaxed_pct_jans  = series_complete_janssen_18plus/(100*pop2019),
+         vaxed_pct_pfizer  = series_complete_pfizer_18plus/(100*pop2019))
+
+## Filtering to day
+df_day = df %>% 
+  filter(submission_date == "10/1/2021")
+
+## Running Model
+ols.4 <- lm(deaths_pc ~ vaxed_pct_jans + vaxed_pct_moderna +
+             vaxed_pct_pfizer, data = df_day)
+summary(ols.4)
+```
+
+```{r echo = FALSE, results = 'asis', collapse = TRUE}
+## Outputting Final Model
+stargazer(ols.1, ols.2, ols.3, ols.4,
+          keep.stat = c("n","ser", "rsq", "f"),
+          report = "vcst", header = FALSE, type="html",
+          column.labels = c("Model 1", "Model 2", "Model 3", "Model 4"),
+          digits = 3, title = "Lab I OLS Results",
+          dep.var.caption = "", dep.var.labels.include = FALSE)
+```
+
+The results are no longer statistically significance due to multicollinearity. There is a high degree of correlation between the rates each vaccine were administered which is contributing to the large standard errors. The p-value of the $F$-statistic tells us the probability that we would see a result this extreme given all of the coefficients on the vaccines are actually zero, reinforcing our findings above. 
+
+This is not necessary for this lab, but to assess the efficacy of one vaccine over another, we could conduct an $F$ test. Remember, the formula for F-tests is: $$F_{q, N-k} = \frac{(R^2_{Unrestricted}-R^2_{Restricted})\setminus q}{(1-R^2_{Unrestricted}) \setminus (N-k)}$$
+
+As an example, I will evaluate if $\beta_1 = \beta_2$ in the following model: $deaths_pc_{it} = \beta_0 + \beta_1jans_{it} + \beta_2moderna_{it} + \beta_3pfizer_{it} + \epsilon_i$ which is `ols.4` estimated above that examines the relationship between the rate of vaccination for each vaccine and deaths per capita in state $i$ and day $t$. We can do this manually, but `library(car)` makes it easy. See the code below:
+
+```{r, warning=FALSE, message=FALSE}
+## F Test 
+linearHypothesis(ols.4, c("vaxed_pct_jans = vaxed_pct_moderna"))
+```
+
+We can see that the $p$-value is not statistically significant, meaning that we cannot reject the null hypothesis that $\beta_1$ is statistically significantly different than $\beta_2$.

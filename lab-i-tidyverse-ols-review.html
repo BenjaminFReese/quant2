@@ -53,6 +53,70 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
 
 
 </head>
@@ -71,7 +135,13 @@
 <ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#purpose-of-this-site"><i class="fa fa-check"></i><b>1.1</b> Purpose of This Site</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html"><i class="fa fa-check"></i><b>2</b> 9/23 | Lab I: Tidyverse &amp; OLS Review</a></li>
+<li class="chapter" data-level="2" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html"><i class="fa fa-check"></i><b>2</b> 9/23 | Lab I: Tidyverse &amp; OLS Review</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html#join-the-data-sets."><i class="fa fa-check"></i><b>2.1</b> 1) Join the data sets.</a></li>
+<li class="chapter" data-level="2.2" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html#create-and-add-the-following-variables-to-your-dataframe-density-deaths-per-capita-cases-per-capita-and-vaccinated-percent."><i class="fa fa-check"></i><b>2.2</b> 2) Create and add the following variables to your dataframe density, deaths per capita, cases per capita and vaccinated percent.</a></li>
+<li class="chapter" data-level="2.3" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html#estimate-three-regression-models-with-deaths-per-capita-on-your-selected-day-as-the-dependent-variable."><i class="fa fa-check"></i><b>2.3</b> 3) Estimate three regression models with deaths per capita on your selected day as the dependent variable.</a></li>
+<li class="chapter" data-level="2.4" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html#assess-specific-vaccines"><i class="fa fa-check"></i><b>2.4</b> 4) Assess specific vaccines</a></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -92,7 +162,744 @@
 <div id="lab-i-tidyverse-ols-review" class="section level1 hasAnchor" number="2">
 <h1><span class="header-section-number">2</span> 9/23 | Lab I: Tidyverse &amp; OLS Review<a href="lab-i-tidyverse-ols-review.html#lab-i-tidyverse-ols-review" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p><img src="lab1_image.jpg" width="2880" /></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="lab-i-tidyverse-ols-review.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Preparation</span></span>
+<span id="cb1-2"><a href="lab-i-tidyverse-ols-review.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="lab-i-tidyverse-ols-review.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb1-4"><a href="lab-i-tidyverse-ols-review.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb1-5"><a href="lab-i-tidyverse-ols-review.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stargazer)</span>
+<span id="cb1-6"><a href="lab-i-tidyverse-ols-review.html#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span></code></pre></div>
+<div id="join-the-data-sets." class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> 1) Join the data sets.<a href="lab-i-tidyverse-ols-review.html#join-the-data-sets." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Join the cases and vaccination data by date and state.
+<ul>
+<li><p>Case data: <a href="#id_%20https://data.cdc.gov/Case-Surveillance/United-States-COVID-19-Cases-and-Deaths-by-State-o/9mfq-cb36">United_States_COVID-19_Cases_and_Deaths_by_State_over_Time.csv</a></p></li>
+<li><p>Vaccination data: <a href="https://data.cdc.gov/Vaccinations/COVID-19-Vaccinations-in-the-United-States-Jurisdi/unsk-b7fc">COVID-19_Vaccinations_in_the_United_States_Jurisdiction.csv</a></p></li>
+<li><p>Other state variables: USstates.xlsx</p></li>
+</ul></li>
+<li>Add the USstates.xlsx data and limit your dataframe to the states listed in USstates.xlsx.<br />
+</li>
+<li>How do you know if your merge was successful?</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="lab-i-tidyverse-ols-review.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Loading Case Data</span></span>
+<span id="cb2-2"><a href="lab-i-tidyverse-ols-review.html#cb2-2" aria-hidden="true" tabindex="-1"></a>case <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;Data/United_States_COVID-19_Cases_and_Deaths_by_State_over_Time.csv&quot;</span>)</span>
+<span id="cb2-3"><a href="lab-i-tidyverse-ols-review.html#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="lab-i-tidyverse-ols-review.html#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Loading Vax Data </span></span>
+<span id="cb2-5"><a href="lab-i-tidyverse-ols-review.html#cb2-5" aria-hidden="true" tabindex="-1"></a>vax <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;Data/COVID-19_Vaccinations_in_the_United_States_Jurisdiction.csv&quot;</span>)</span>
+<span id="cb2-6"><a href="lab-i-tidyverse-ols-review.html#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="lab-i-tidyverse-ols-review.html#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Joining Case &amp; Vax</span></span>
+<span id="cb2-8"><a href="lab-i-tidyverse-ols-review.html#cb2-8" aria-hidden="true" tabindex="-1"></a>case_vax <span class="ot">&lt;-</span> case <span class="sc">%&gt;%</span></span>
+<span id="cb2-9"><a href="lab-i-tidyverse-ols-review.html#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(vax, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;submission_date&quot;</span> <span class="ot">=</span> <span class="st">&quot;Date&quot;</span>, <span class="st">&quot;state&quot;</span> <span class="ot">=</span> <span class="st">&quot;Location&quot;</span>))</span>
+<span id="cb2-10"><a href="lab-i-tidyverse-ols-review.html#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="lab-i-tidyverse-ols-review.html#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Adding in state variables</span></span>
+<span id="cb2-12"><a href="lab-i-tidyverse-ols-review.html#cb2-12" aria-hidden="true" tabindex="-1"></a>states <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;Data/USstates.xlsx&quot;</span>)</span>
+<span id="cb2-13"><a href="lab-i-tidyverse-ols-review.html#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="lab-i-tidyverse-ols-review.html#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="do">## Joining all datasets to create df</span></span>
+<span id="cb2-15"><a href="lab-i-tidyverse-ols-review.html#cb2-15" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> case_vax <span class="sc">%&gt;%</span></span>
+<span id="cb2-16"><a href="lab-i-tidyverse-ols-review.html#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(state <span class="sc">%in%</span> states<span class="sc">$</span>stateAbbr) <span class="sc">%&gt;%</span></span>
+<span id="cb2-17"><a href="lab-i-tidyverse-ols-review.html#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(states, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;state&quot;</span> <span class="ot">=</span> <span class="st">&quot;stateAbbr&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb2-18"><a href="lab-i-tidyverse-ols-review.html#cb2-18" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>() <span class="do">## making variable names lowercase with underscores</span></span>
+<span id="cb2-19"><a href="lab-i-tidyverse-ols-review.html#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="lab-i-tidyverse-ols-review.html#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="do">## Checking for only states</span></span>
+<span id="cb2-21"><a href="lab-i-tidyverse-ols-review.html#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="fu">count</span>(<span class="fu">tibble</span>(<span class="fu">unique</span>(df<span class="sc">$</span>state)))</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 1
+##       n
+##   &lt;int&gt;
+## 1    51</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="lab-i-tidyverse-ols-review.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="do">## View(df)</span></span></code></pre></div>
+</div>
+<div id="create-and-add-the-following-variables-to-your-dataframe-density-deaths-per-capita-cases-per-capita-and-vaccinated-percent." class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> 2) Create and add the following variables to your dataframe density, deaths per capita, cases per capita and vaccinated percent.<a href="lab-i-tidyverse-ols-review.html#create-and-add-the-following-variables-to-your-dataframe-density-deaths-per-capita-cases-per-capita-and-vaccinated-percent." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>For a specific day, show the top five states ranked by deaths per capita and calculate the average vaccinated per capita and the mean, minimum and maximum deaths per capita.</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="lab-i-tidyverse-ols-review.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Creating Variables</span></span>
+<span id="cb5-2"><a href="lab-i-tidyverse-ols-review.html#cb5-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb5-3"><a href="lab-i-tidyverse-ols-review.html#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">&quot;deaths_pc&quot;</span> <span class="ot">=</span> <span class="dv">100000</span><span class="sc">*</span>new_death<span class="sc">/</span>pop2019, </span>
+<span id="cb5-4"><a href="lab-i-tidyverse-ols-review.html#cb5-4" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;cases_pc&quot;</span>  <span class="ot">=</span> <span class="dv">100000</span><span class="sc">*</span>new_case<span class="sc">/</span>pop2019,</span>
+<span id="cb5-5"><a href="lab-i-tidyverse-ols-review.html#cb5-5" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;vaxed_pct&quot;</span>  <span class="ot">=</span> series_complete_12plus_pop_pct<span class="sc">/</span><span class="dv">100</span>,</span>
+<span id="cb5-6"><a href="lab-i-tidyverse-ols-review.html#cb5-6" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;density&quot;</span>   <span class="ot">=</span> pop2019<span class="sc">/</span>(<span class="dv">1000000</span><span class="sc">*</span>sq_miles))</span>
+<span id="cb5-7"><a href="lab-i-tidyverse-ols-review.html#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="lab-i-tidyverse-ols-review.html#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Filtering to specific day</span></span>
+<span id="cb5-9"><a href="lab-i-tidyverse-ols-review.html#cb5-9" aria-hidden="true" tabindex="-1"></a>df_day <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb5-10"><a href="lab-i-tidyverse-ols-review.html#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(submission_date <span class="sc">==</span> <span class="st">&quot;10/1/2021&quot;</span>)</span>
+<span id="cb5-11"><a href="lab-i-tidyverse-ols-review.html#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="lab-i-tidyverse-ols-review.html#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Top five states by deaths per capita</span></span>
+<span id="cb5-13"><a href="lab-i-tidyverse-ols-review.html#cb5-13" aria-hidden="true" tabindex="-1"></a>df_day <span class="sc">%&gt;%</span></span>
+<span id="cb5-14"><a href="lab-i-tidyverse-ols-review.html#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(deaths_pc)) <span class="sc">%&gt;%</span></span>
+<span id="cb5-15"><a href="lab-i-tidyverse-ols-review.html#cb5-15" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(submission_date, state, deaths_pc, cases_pc, vaxed_pct, density) <span class="sc">%&gt;%</span></span>
+<span id="cb5-16"><a href="lab-i-tidyverse-ols-review.html#cb5-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 5 × 6
+##   submission_date state deaths_pc cases_pc vaxed_pct   density
+##   &lt;chr&gt;           &lt;chr&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+## 1 10/1/2021       WV         2.90     91.8     0.465 0.0000746
+## 2 10/1/2021       OH         2.81     53.3     0.588 0.000286 
+## 3 10/1/2021       GA         1.49     31.5     0.537 0.000185 
+## 4 10/1/2021       ID         1.34     99.5     0     0.0000216
+## 5 10/1/2021       ND         1.31     93.3     0.529 0.0000110</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="lab-i-tidyverse-ols-review.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Mean vaxed per capita and mean, min, max of deaths per capita</span></span>
+<span id="cb7-2"><a href="lab-i-tidyverse-ols-review.html#cb7-2" aria-hidden="true" tabindex="-1"></a>df_day <span class="sc">%&gt;%</span></span>
+<span id="cb7-3"><a href="lab-i-tidyverse-ols-review.html#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_vaxed =</span> <span class="fu">mean</span>(vaxed_pct),</span>
+<span id="cb7-4"><a href="lab-i-tidyverse-ols-review.html#cb7-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_deaths =</span> <span class="fu">mean</span>(deaths_pc),</span>
+<span id="cb7-5"><a href="lab-i-tidyverse-ols-review.html#cb7-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">min_deaths =</span> <span class="fu">min</span>(deaths_pc),</span>
+<span id="cb7-6"><a href="lab-i-tidyverse-ols-review.html#cb7-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">max_deaths =</span> <span class="fu">max</span>(deaths_pc))</span></code></pre></div>
+<pre><code>## # A tibble: 1 × 4
+##   mean_vaxed mean_deaths min_deaths max_deaths
+##        &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
+## 1      0.625       0.551          0       2.90</code></pre>
+</div>
+<div id="estimate-three-regression-models-with-deaths-per-capita-on-your-selected-day-as-the-dependent-variable." class="section level2 hasAnchor" number="2.3">
+<h2><span class="header-section-number">2.3</span> 3) Estimate three regression models with deaths per capita on your selected day as the dependent variable.<a href="lab-i-tidyverse-ols-review.html#estimate-three-regression-models-with-deaths-per-capita-on-your-selected-day-as-the-dependent-variable." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Your first model will have only Trump 2020 percent as an independent variable.</li>
+<li>Your second model will add vaccinated percent as an independent variable.</li>
+<li>Your third model will add density.</li>
+<li>Before you estimate the models, write down your expectations about what will happen in these models.</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="lab-i-tidyverse-ols-review.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Trump percent model</span></span>
+<span id="cb9-2"><a href="lab-i-tidyverse-ols-review.html#cb9-2" aria-hidden="true" tabindex="-1"></a>ols<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">lm</span>(deaths_pc <span class="sc">~</span> trump2020_percent, <span class="at">data =</span> df_day)</span>
+<span id="cb9-3"><a href="lab-i-tidyverse-ols-review.html#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ols<span class="fl">.1</span>)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = deaths_pc ~ trump2020_percent, data = df_day)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.88445 -0.31999 -0.09294  0.17142  2.18890 
+## 
+## Coefficients:
+##                   Estimate Std. Error t value Pr(&gt;|t|)  
+## (Intercept)        -0.2412     0.3422  -0.705   0.4843  
+## trump2020_percent   1.6103     0.6759   2.382   0.0211 *
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.573 on 49 degrees of freedom
+## Multiple R-squared:  0.1038, Adjusted R-squared:  0.08552 
+## F-statistic: 5.676 on 1 and 49 DF,  p-value: 0.02112</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="lab-i-tidyverse-ols-review.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Trump and Vax model</span></span>
+<span id="cb11-2"><a href="lab-i-tidyverse-ols-review.html#cb11-2" aria-hidden="true" tabindex="-1"></a>ols<span class="fl">.2</span> <span class="ot">&lt;-</span> <span class="fu">lm</span>(deaths_pc <span class="sc">~</span> trump2020_percent <span class="sc">+</span> vaxed_pct, <span class="at">data =</span> df_day)</span>
+<span id="cb11-3"><a href="lab-i-tidyverse-ols-review.html#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ols<span class="fl">.2</span>)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = deaths_pc ~ trump2020_percent + vaxed_pct, data = df_day)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -0.8757 -0.2596 -0.1054  0.1314  2.1706 
+## 
+## Coefficients:
+##                   Estimate Std. Error t value Pr(&gt;|t|)  
+## (Intercept)         1.5915     0.8539   1.864   0.0685 .
+## trump2020_percent   0.3252     0.8514   0.382   0.7041  
+## vaxed_pct          -1.9208     0.8264  -2.324   0.0244 *
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.5489 on 48 degrees of freedom
+## Multiple R-squared:  0.1945, Adjusted R-squared:  0.1609 
+## F-statistic: 5.795 on 2 and 48 DF,  p-value: 0.005569</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="lab-i-tidyverse-ols-review.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Trump, Vax, and Density Model</span></span>
+<span id="cb13-2"><a href="lab-i-tidyverse-ols-review.html#cb13-2" aria-hidden="true" tabindex="-1"></a>ols<span class="fl">.3</span> <span class="ot">&lt;-</span> <span class="fu">lm</span>(deaths_pc <span class="sc">~</span> trump2020_percent <span class="sc">+</span> vaxed_pct <span class="sc">+</span> density, <span class="at">data =</span> df_day)</span>
+<span id="cb13-3"><a href="lab-i-tidyverse-ols-review.html#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ols<span class="fl">.3</span>)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = deaths_pc ~ trump2020_percent + vaxed_pct + density, 
+##     data = df_day)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -0.8859 -0.2580 -0.1098  0.1301  2.1695 
+## 
+## Coefficients:
+##                   Estimate Std. Error t value Pr(&gt;|t|)  
+## (Intercept)         1.5157     1.0494   1.444   0.1553  
+## trump2020_percent   0.4184     1.1311   0.370   0.7131  
+## vaxed_pct          -1.8785     0.8991  -2.089   0.0421 *
+## density             8.2056    64.6874   0.127   0.8996  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.5546 on 47 degrees of freedom
+## Multiple R-squared:  0.1948, Adjusted R-squared:  0.1434 
+## F-statistic: 3.789 on 3 and 47 DF,  p-value: 0.01628</code></pre>
+<p>The results of <code>ols.1</code>, using October 1st, 2021 as the day, indicate that area with higher support for Donald Trump have more deaths per capita, specifically, a one percentage increase in Trump’s 2020 vote share, on average, increases deaths per capita by 1.6. This is a classic case of omitted variable bias, however. Once we control for the percent vaxed in an area, the <code>trump2020_percent</code> loses statistical significance. We can see in the second model that the coefficient on the Trump vote share variable greatly decreases and is no longer statistically significant at conventional thresholds. <code>vaxed_pct</code> is statistically significant at the <span class="math inline">\(p&lt;.05\)</span> level and indicates that a one percent increase in an areas vaccination rate corresponds, on average, with a 1.9 decrease in deaths per capita, holding <code>trump2020_percent</code> constant. This result stands even when controlling for an areas density as shown in model 3.</p>
+</div>
+<div id="assess-specific-vaccines" class="section level2 hasAnchor" number="2.4">
+<h2><span class="header-section-number">2.4</span> 4) Assess specific vaccines<a href="lab-i-tidyverse-ols-review.html#assess-specific-vaccines" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li><p>Create and add vaccinated percent by state for each of the Pfizer, Modern and Janssen (which is Johnson and Johnson) vaccines.</p></li>
+<li><p>Use <em>pop2019</em> for population</p></li>
+<li><p>Use Series_Complete_Moderna_18Plus, Series_Complete_Janssen_18Plus and Series_Complete_Pfizer_18Plus for the vaccination totals.</p></li>
+<li><p>Estimate a model in which deaths per capita is a function of all three vaccination rates.</p></li>
+<li><p>Explain what the results mean, especially in light of the results above for overall vaccination results.</p></li>
+<li><p>Explain how one would compare the efficacy of the individual vaccines (e.g., whether the Moderna vaccine works better than the Johnson and Johnson vaccine). Many answers would work here.</p></li>
+</ul>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="lab-i-tidyverse-ols-review.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Creating vaxed percent variables for different vaccines</span></span>
+<span id="cb15-2"><a href="lab-i-tidyverse-ols-review.html#cb15-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb15-3"><a href="lab-i-tidyverse-ols-review.html#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">vaxed_pct_moderna  =</span> series_complete_moderna_18plus<span class="sc">/</span>(<span class="dv">100</span><span class="sc">*</span>pop2019),</span>
+<span id="cb15-4"><a href="lab-i-tidyverse-ols-review.html#cb15-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">vaxed_pct_jans  =</span> series_complete_janssen_18plus<span class="sc">/</span>(<span class="dv">100</span><span class="sc">*</span>pop2019),</span>
+<span id="cb15-5"><a href="lab-i-tidyverse-ols-review.html#cb15-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">vaxed_pct_pfizer  =</span> series_complete_pfizer_18plus<span class="sc">/</span>(<span class="dv">100</span><span class="sc">*</span>pop2019))</span>
+<span id="cb15-6"><a href="lab-i-tidyverse-ols-review.html#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="lab-i-tidyverse-ols-review.html#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Filtering to day</span></span>
+<span id="cb15-8"><a href="lab-i-tidyverse-ols-review.html#cb15-8" aria-hidden="true" tabindex="-1"></a>df_day <span class="ot">=</span> df <span class="sc">%&gt;%</span> </span>
+<span id="cb15-9"><a href="lab-i-tidyverse-ols-review.html#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(submission_date <span class="sc">==</span> <span class="st">&quot;10/1/2021&quot;</span>)</span>
+<span id="cb15-10"><a href="lab-i-tidyverse-ols-review.html#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="lab-i-tidyverse-ols-review.html#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Running Model</span></span>
+<span id="cb15-12"><a href="lab-i-tidyverse-ols-review.html#cb15-12" aria-hidden="true" tabindex="-1"></a>ols<span class="fl">.4</span> <span class="ot">&lt;-</span> <span class="fu">lm</span>(deaths_pc <span class="sc">~</span> vaxed_pct_jans <span class="sc">+</span> vaxed_pct_moderna <span class="sc">+</span></span>
+<span id="cb15-13"><a href="lab-i-tidyverse-ols-review.html#cb15-13" aria-hidden="true" tabindex="-1"></a>             vaxed_pct_pfizer, <span class="at">data =</span> df_day)</span>
+<span id="cb15-14"><a href="lab-i-tidyverse-ols-review.html#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ols<span class="fl">.4</span>)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = deaths_pc ~ vaxed_pct_jans + vaxed_pct_moderna + 
+##     vaxed_pct_pfizer, data = df_day)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.93880 -0.29403 -0.05261  0.15284  2.13378 
+## 
+## Coefficients:
+##                   Estimate Std. Error t value Pr(&gt;|t|)   
+## (Intercept)          2.373      0.679   3.496  0.00104 **
+## vaxed_pct_jans    -570.304   1174.009  -0.486  0.62938   
+## vaxed_pct_moderna -359.090    586.494  -0.612  0.54331   
+## vaxed_pct_pfizer  -321.407    333.845  -0.963  0.34060   
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.5544 on 47 degrees of freedom
+## Multiple R-squared:  0.1954, Adjusted R-squared:  0.1441 
+## F-statistic: 3.806 on 3 and 47 DF,  p-value: 0.01599</code></pre>
+<table style="text-align:center">
+<caption>
+<strong>Lab I OLS Results</strong>
+</caption>
+<tr>
+<td colspan="5" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+Model 1
+</td>
+<td>
+Model 2
+</td>
+<td>
+Model 3
+</td>
+<td>
+Model 4
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(1)
+</td>
+<td>
+(2)
+</td>
+<td>
+(3)
+</td>
+<td>
+(4)
+</td>
+</tr>
+<tr>
+<td colspan="5" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+trump2020_percent
+</td>
+<td>
+1.610
+</td>
+<td>
+0.325
+</td>
+<td>
+0.418
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.676)
+</td>
+<td>
+(0.851)
+</td>
+<td>
+(1.131)
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+t = 2.382
+</td>
+<td>
+t = 0.382
+</td>
+<td>
+t = 0.370
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+vaxed_pct
+</td>
+<td>
+</td>
+<td>
+-1.921
+</td>
+<td>
+-1.879
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+(0.826)
+</td>
+<td>
+(0.899)
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+t = -2.324
+</td>
+<td>
+t = -2.089
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+density
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+8.206
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+(64.687)
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+t = 0.127
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+vaxed_pct_jans
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+-570.304
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+(1,174.009)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+t = -0.486
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+vaxed_pct_moderna
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+-359.090
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+(586.494)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+t = -0.612
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+vaxed_pct_pfizer
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+-321.407
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+(333.845)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+t = -0.963
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Constant
+</td>
+<td>
+-0.241
+</td>
+<td>
+1.591
+</td>
+<td>
+1.516
+</td>
+<td>
+2.374
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+(0.342)
+</td>
+<td>
+(0.854)
+</td>
+<td>
+(1.049)
+</td>
+<td>
+(0.679)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+t = -0.705
+</td>
+<td>
+t = 1.864
+</td>
+<td>
+t = 1.444
+</td>
+<td>
+t = 3.496
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td colspan="5" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Observations
+</td>
+<td>
+51
+</td>
+<td>
+51
+</td>
+<td>
+51
+</td>
+<td>
+51
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+R<sup>2</sup>
+</td>
+<td>
+0.104
+</td>
+<td>
+0.194
+</td>
+<td>
+0.195
+</td>
+<td>
+0.195
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Residual Std. Error
+</td>
+<td>
+0.573 (df = 49)
+</td>
+<td>
+0.549 (df = 48)
+</td>
+<td>
+0.555 (df = 47)
+</td>
+<td>
+0.554 (df = 47)
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+F Statistic
+</td>
+<td>
+5.676<sup>**</sup> (df = 1; 49)
+</td>
+<td>
+5.795<sup>***</sup> (df = 2; 48)
+</td>
+<td>
+3.789<sup>**</sup> (df = 3; 47)
+</td>
+<td>
+3.806<sup>**</sup> (df = 3; 47)
+</td>
+</tr>
+<tr>
+<td colspan="5" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+<em>Note:</em>
+</td>
+<td colspan="4" style="text-align:right">
+<sup><em></sup>p&lt;0.1; <sup><strong></sup>p&lt;0.05; <sup></strong></em></sup>p&lt;0.01
+</td>
+</tr>
+</table>
+<p>The results are no longer statistically significance due to multicollinearity. There is a high degree of correlation between the rates each vaccine were administered which is contributing to the large standard errors. The p-value of the <span class="math inline">\(F\)</span>-statistic tells us the probability that we would see a result this extreme given all of the coefficients on the vaccines are actually zero, reinforcing our findings above.</p>
+<p>This is not necessary for this lab, but to assess the efficacy of one vaccine over another, we could conduct an <span class="math inline">\(F\)</span> test. Remember, the formula for F-tests is: <span class="math display">\[F_{q, N-k} = \frac{(R^2_{Unrestricted}-R^2_{Restricted})\setminus q}{(1-R^2_{Unrestricted}) \setminus (N-k)}\]</span></p>
+<p>As an example, I will evaluate if <span class="math inline">\(\beta_1 = \beta_2\)</span> in the following model: <span class="math inline">\(deaths_pc_{it} = \beta_0 + \beta_1jans_{it} + \beta_2moderna_{it} + \beta_3pfizer_{it} + \epsilon_i\)</span> which is <code>ols.4</code> estimated above that examines the relationship between the rate of vaccination for each vaccine and deaths per capita in state <span class="math inline">\(i\)</span> and day <span class="math inline">\(t\)</span>. We can do this manually, but <code>library(car)</code> makes it easy. See the code below:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="lab-i-tidyverse-ols-review.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="do">## F Test </span></span>
+<span id="cb17-2"><a href="lab-i-tidyverse-ols-review.html#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">linearHypothesis</span>(ols<span class="fl">.4</span>, <span class="fu">c</span>(<span class="st">&quot;vaxed_pct_jans = vaxed_pct_moderna&quot;</span>))</span></code></pre></div>
+<pre><code>## Linear hypothesis test
+## 
+## Hypothesis:
+## vaxed_pct_jans - vaxed_pct_moderna = 0
+## 
+## Model 1: restricted model
+## Model 2: deaths_pc ~ vaxed_pct_jans + vaxed_pct_moderna + vaxed_pct_pfizer
+## 
+##   Res.Df    RSS Df Sum of Sq      F Pr(&gt;F)
+## 1     48 14.451                           
+## 2     47 14.445  1 0.0056829 0.0185 0.8924</code></pre>
+<p>We can see that the <span class="math inline">\(p\)</span>-value is not statistically significant, meaning that we cannot reject the null hypothesis that <span class="math inline">\(\beta_1\)</span> is statistically significantly different than <span class="math inline">\(\beta_2\)</span>.</p>
 
+</div>
 </div>
             </section>
 
@@ -154,6 +961,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

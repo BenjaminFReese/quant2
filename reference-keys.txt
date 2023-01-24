@@ -1,3 +1,7 @@
 introduction
 purpose-of-this-site
 lab-i-tidyverse-ols-review
+join-the-data-sets.
+create-and-add-the-following-variables-to-your-dataframe-density-deaths-per-capita-cases-per-capita-and-vaccinated-percent.
+estimate-three-regression-models-with-deaths-per-capita-on-your-selected-day-as-the-dependent-variable.
+assess-specific-vaccines
