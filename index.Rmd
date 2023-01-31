@@ -356,7 +356,7 @@ The key variables we will use are
  - edcat: 1 for less than high school, 2 for high school, 3 for some college and 4 for college graduate
  - race: 1 for white, 2 for black, 3 for other races (self-identified, first race mentioned)
 
-### Use OLS to estimate the difference in happiness (the "happy" variable) for married versus unmarried people.  Then use the t test function to assess the difference in happiness by gender (see the Computing Corner in Chapter 6 of the book). Discuss similarities and differences in OLS model and t test function results
+## Use OLS to estimate the difference in happiness (the "happy" variable) for married versus unmarried people.  Then use the t test function to assess the difference in happiness by gender (see the Computing Corner in Chapter 6 of the book). Discuss similarities and differences in OLS model and t test function results
 
 ```{r}
 ## Difference in Happiness with OLS
@@ -368,7 +368,7 @@ confint(model_1)
 t.test(dta$happy[dta$married==1], dta$happy[dta$married==0])
 ```
 
-### Use OLS with robust standard errors to estimate the difference in happiness for married and unmarried people.  Then use the t test function with unequal variances to assess the difference in happiness by marital status.  Discuss similarities and differences in OLS model and t test function results.
+## Use OLS with robust standard errors to estimate the difference in happiness for married and unmarried people.  Then use the t test function with unequal variances to assess the difference in happiness by marital status.  Discuss similarities and differences in OLS model and t test function results.
 
 ```{r}
 ## model_1 with Robust Standard Errors
@@ -378,7 +378,7 @@ coeftest(model_1, vcov. = vcovHC(model_1, type = "HC1"))
 t.test(dta$happy[dta$married==1], dta$happy[dta$married==0], var.equal = FALSE)
 ```
 
-### Create an interaction between married and age.  Estimate a model that explains happiness as a function of age and marital status, allowing for the age effect to differ according to marital status.   (For simplicity, we use only married and unmarried for marital status.)  What is the effect of age for unmarried people?  For married people?
+## Create an interaction between married and age.  Estimate a model that explains happiness as a function of age and marital status, allowing for the age effect to differ according to marital status.   (For simplicity, we use only married and unmarried for marital status.)  What is the effect of age for unmarried people?  For married people?
 
 ```{r}
 ## Interaction Term
@@ -395,7 +395,7 @@ summary(model_2b)
 
 The effect of age is $-0.00281$ for unmarried people and  $-0.00281 +  0.002350 =  -0.0004699$ for married people. The intercept is $2.13$ for unmarried people and $2.13 + 0.2109 = 2.3409$ for married people.
 
-### Estimate separate models explaining happiness in terms of age for married and unmarried people.  Comment on similarities and differences compared to results immediately above for (i) the estimated effect of age and (ii) the intercept.
+## Estimate separate models explaining happiness in terms of age for married and unmarried people.  Comment on similarities and differences compared to results immediately above for (i) the estimated effect of age and (ii) the intercept.
 
 ```{r}
 ## Model 3a
@@ -413,7 +413,7 @@ The results here are the same as above: for unmarried people, the effect of age 
 The effect of age for married people also the same: $-0.000469$, with an intercept of $2.3409$.
 
 
-### Marianne Bertrand wrote an article called ``Work on Women’s Work is Never Done: Career, Family, and the Well-Being of College-Educated Women'' published in the *American Economic Review: Papers & Proceedings* 2013, 103(3): 244–250.  She analyzed the effect of careers and family on college-educated women. She defines a career variable that is 1 if someone's earnings are above the twenty-fifth percentile in the relevant year and age group. Estimate a model in which happiness is a function of career, being married and an interaction of career and married ("careermarried"). To match Betrand's analysis, limit the data to only to college educated (dta\$educat==4) women (dta\$sex==2). Interpret the estimated average happiness for the four types of women implied by this analysis.
+## Marianne Bertrand wrote an article called ``Work on Women’s Work is Never Done: Career, Family, and the Well-Being of College-Educated Women'' published in the *American Economic Review: Papers & Proceedings* 2013, 103(3): 244–250.  She analyzed the effect of careers and family on college-educated women. She defines a career variable that is 1 if someone's earnings are above the twenty-fifth percentile in the relevant year and age group. Estimate a model in which happiness is a function of career, being married and an interaction of career and married ("careermarried"). To match Betrand's analysis, limit the data to only to college educated (dta\$educat==4) women (dta\$sex==2). Interpret the estimated average happiness for the four types of women implied by this analysis.
 
 ```{r}
 model_4 <- lm(happy ~ career*married, data=dta[dta$sex==2 & dta$educat==4,])
@@ -432,7 +432,7 @@ College-educated women with no career but are married have average happiness of 
 
 College-educated women that are both married and have careers have average happiness of $2.12 + 0.092 + 0.29 -0.099 = 2.4$.
 
-### The GSS provides a race variable (dta$race).  The variable equals 1 for white respondents, 2 for black respondents and 3 for everyone else.  Add race to the above model and interpret the coefficients related to race. Estimate another model with a different reference category and explain coefficients across the two models.
+## The GSS provides a race variable (dta$race).  The variable equals 1 for white respondents, 2 for black respondents and 3 for everyone else.  Add race to the above model and interpret the coefficients related to race. Estimate another model with a different reference category and explain coefficients across the two models.
 
 ```{r}
 ## First Race Model with White as Reference
@@ -449,7 +449,7 @@ summary(model_5b)
 
 Both results indicated white college-educated women are both $0.16$ higher on the happiness variable than African-American college-educated women and $0.10$ higher than other college-educated women of other races. Even though the coefficient on the other race variables change across specifications, our interpretation of the results does not change; the change is due solely to the change in reference category.
 
-### Estimate a model similar to the above, but for a different group of your choice (e.g., limit by race or gender or education) and feel free to include different covariates.
+## Estimate a model similar to the above, but for a different group of your choice (e.g., limit by race or gender or education) and feel free to include different covariates.
 
 No wrong answers here (mostly)
 
