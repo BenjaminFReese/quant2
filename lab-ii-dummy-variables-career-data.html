@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3 9/30 | Lab II: Dummy Variables &amp; Career Data | GOVT 8002 Shared Working Book</title>
+  <meta name="description" content="3 9/30 | Lab II: Dummy Variables &amp; Career Data | GOVT 8002 Shared Working Book" />
+  <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3 9/30 | Lab II: Dummy Variables &amp; Career Data | GOVT 8002 Shared Working Book" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 9/30 | Lab II: Dummy Variables &amp; Career Data | GOVT 8002 Shared Working Book" />
+  
+  
+  
+
+<meta name="author" content="Zoom Link for Office Hours | bfr11@georgetown.edu" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="lab-i-tidyverse-ols-review.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#purpose-of-this-site"><i class="fa fa-check"></i><b>1.1</b> Purpose of This Site</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#loading-data"><i class="fa fa-check"></i><b>1.2</b> Loading Data</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html"><i class="fa fa-check"></i><b>2</b> 9/23 | Lab I: Tidyverse &amp; OLS Review</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html#join-the-data-sets."><i class="fa fa-check"></i><b>2.1</b> Join the data sets.</a></li>
+<li class="chapter" data-level="2.2" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html#create-and-add-the-following-variables-to-your-dataframe-density-deaths-per-capita-cases-per-capita-and-vaccinated-percent."><i class="fa fa-check"></i><b>2.2</b> Create and add the following variables to your dataframe density, deaths per capita, cases per capita and vaccinated percent.</a></li>
+<li class="chapter" data-level="2.3" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html#estimate-three-regression-models-with-deaths-per-capita-on-your-selected-day-as-the-dependent-variable."><i class="fa fa-check"></i><b>2.3</b> Estimate three regression models with deaths per capita on your selected day as the dependent variable.</a></li>
+<li class="chapter" data-level="2.4" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html#assess-specific-vaccines"><i class="fa fa-check"></i><b>2.4</b> Assess specific vaccines</a></li>
+<li class="chapter" data-level="2.5" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html#optional-lab-1b"><i class="fa fa-check"></i><b>2.5</b> Optional Lab 1b</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html#load-the-world-values-survey-data-from-datawv7_small.csv-and-the-countrycode-data-from-datacountry-codes-for-wvs-wave-7.csv."><i class="fa fa-check"></i><b>2.5.1</b> Load the World Values Survey data from “Data/WV7_small.csv” and the CountryCode data from “Data/Country codes for WVS wave 7.csv”.</a></li>
+<li class="chapter" data-level="2.5.2" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html#join-the-country-name-from-the-countrycode-data-to-the-world-values-data.-the-country-code-is-v2-in-countrycode-and-b_country-in-the-world-values-data.-create-two-data-objects-of-the-countries-in-and-not-in-the-world-values-data.-display-the-first-10-countries-for-each-list."><i class="fa fa-check"></i><b>2.5.2</b> Join the country name from the CountryCode data to the World Values data. The country code is <em>V2</em> in CountryCode and <em>B_Country</em> in the World Values data. Create two data objects of the countries in and not in the World Values data. Display the first 10 countries for each list.</a></li>
+<li class="chapter" data-level="2.5.3" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html#using-pipes-calculate-the-percent-immigrant-in-every-country.-show-the-highest-10-and-lowest-10-countries.-be-sure-to-think-through-what-the-variable-in-the-data-set-means."><i class="fa fa-check"></i><b>2.5.3</b> Using pipes, calculate the percent immigrant in every country. Show the highest 10 and lowest 10 countries. (Be sure to think through what the variable in the data set means.)</a></li>
+<li class="chapter" data-level="2.5.4" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html#were-now-going-to-give-some-examples-of-the-kind-of-data-we-can-calculate.-think-about-how-you-would-do-this-in-excel-but-dont-actually-do-it-and-then-calculate-in-r.-calculate-the-percent-of-immigrants-who-are-men-by-country-and-show-the-highest-and-lowest-10-countries."><i class="fa fa-check"></i><b>2.5.4</b> We’re now going to give some examples of the kind of data we can calculate. Think about how you would do this in Excel (but don’t actually do it!) and then calculate in R. Calculate the percent of immigrants who are men, by country and show the highest and lowest 10 countries.</a></li>
+<li class="chapter" data-level="2.5.5" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html#group-by-marital-status-and-country-and-show-the-percent-of-people-in-each-category-who-are-men.-show-the-results-for-a-country-of-your-choice-and-briefly-discuss-what-it-means-when-the-percentages-in-each-category-are-not-roughly-50-percent.-recall-that-the-coding-for-the-marital-variable-is-1-married-2-living-together-as-married-3-divorced-4-separated-5-widowed-6-single."><i class="fa fa-check"></i><b>2.5.5</b> Group by marital status and country and show the percent of people in each category who are men. Show the results for a country of your choice and briefly discuss what it means when the percentages in each category are not roughly 50 percent. Recall that the coding for the <em>Marital</em> variable is 1 = Married 2 = Living together as married 3 = Divorced 4 = Separated 5 = Widowed 6 = Single.</a></li>
+<li class="chapter" data-level="2.5.6" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html#come-up-with-your-own-alternatives-think-about-some-possible-subset-of-people-and-some-information-we-have-about-them-and-see-if-you-can-write-code-to-capture-that-information."><i class="fa fa-check"></i><b>2.5.6</b> Come up with your own alternatives: think about some possible subset of people and some information we have about them and see if you can write code to capture that information.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="lab-ii-dummy-variables-career-data.html"><a href="lab-ii-dummy-variables-career-data.html"><i class="fa fa-check"></i><b>3</b> 9/30 | Lab II: Dummy Variables &amp; Career Data</a>
+<ul>
+<li class="chapter" data-level="3.0.1" data-path="lab-ii-dummy-variables-career-data.html"><a href="lab-ii-dummy-variables-career-data.html#use-ols-to-estimate-the-difference-in-happiness-the-happy-variable-for-married-versus-unmarried-people.-then-use-the-t-test-function-to-assess-the-difference-in-happiness-by-gender-see-the-computing-corner-in-chapter-6-of-the-book.-discuss-similarities-and-differences-in-ols-model-and-t-test-function-results"><i class="fa fa-check"></i><b>3.0.1</b> Use OLS to estimate the difference in happiness (the “happy” variable) for married versus unmarried people. Then use the t test function to assess the difference in happiness by gender (see the Computing Corner in Chapter 6 of the book). Discuss similarities and differences in OLS model and t test function results</a></li>
+<li class="chapter" data-level="3.0.2" data-path="lab-ii-dummy-variables-career-data.html"><a href="lab-ii-dummy-variables-career-data.html#use-ols-with-robust-standard-errors-to-estimate-the-difference-in-happiness-for-married-and-unmarried-people.-then-use-the-t-test-function-with-unequal-variances-to-assess-the-difference-in-happiness-by-marital-status.-discuss-similarities-and-differences-in-ols-model-and-t-test-function-results."><i class="fa fa-check"></i><b>3.0.2</b> Use OLS with robust standard errors to estimate the difference in happiness for married and unmarried people. Then use the t test function with unequal variances to assess the difference in happiness by marital status. Discuss similarities and differences in OLS model and t test function results.</a></li>
+<li class="chapter" data-level="3.0.3" data-path="lab-ii-dummy-variables-career-data.html"><a href="lab-ii-dummy-variables-career-data.html#create-an-interaction-between-married-and-age.-estimate-a-model-that-explains-happiness-as-a-function-of-age-and-marital-status-allowing-for-the-age-effect-to-differ-according-to-marital-status.-for-simplicity-we-use-only-married-and-unmarried-for-marital-status.-what-is-the-effect-of-age-for-unmarried-people-for-married-people"><i class="fa fa-check"></i><b>3.0.3</b> Create an interaction between married and age. Estimate a model that explains happiness as a function of age and marital status, allowing for the age effect to differ according to marital status. (For simplicity, we use only married and unmarried for marital status.) What is the effect of age for unmarried people? For married people?</a></li>
+<li class="chapter" data-level="3.0.4" data-path="lab-ii-dummy-variables-career-data.html"><a href="lab-ii-dummy-variables-career-data.html#estimate-separate-models-explaining-happiness-in-terms-of-age-for-married-and-unmarried-people.-comment-on-similarities-and-differences-compared-to-results-immediately-above-for-i-the-estimated-effect-of-age-and-ii-the-intercept."><i class="fa fa-check"></i><b>3.0.4</b> Estimate separate models explaining happiness in terms of age for married and unmarried people. Comment on similarities and differences compared to results immediately above for (i) the estimated effect of age and (ii) the intercept.</a></li>
+<li class="chapter" data-level="3.0.5" data-path="lab-ii-dummy-variables-career-data.html"><a href="lab-ii-dummy-variables-career-data.html#marianne-bertrand-wrote-an-article-called-work-on-womens-work-is-never-done-career-family-and-the-well-being-of-college-educated-women-published-in-the-american-economic-review-papers-proceedings-2013-1033-244250.-she-analyzed-the-effect-of-careers-and-family-on-college-educated-women.-she-defines-a-career-variable-that-is-1-if-someones-earnings-are-above-the-twenty-fifth-percentile-in-the-relevant-year-and-age-group.-estimate-a-model-in-which-happiness-is-a-function-of-career-being-married-and-an-interaction-of-career-and-married-careermarried.-to-match-betrands-analysis-limit-the-data-to-only-to-college-educated-dtaeducat4-women-dtasex2.-interpret-the-estimated-average-happiness-for-the-four-types-of-women-implied-by-this-analysis."><i class="fa fa-check"></i><b>3.0.5</b> Marianne Bertrand wrote an article called ``Work on Women’s Work is Never Done: Career, Family, and the Well-Being of College-Educated Women’’ published in the <em>American Economic Review: Papers &amp; Proceedings</em> 2013, 103(3): 244–250. She analyzed the effect of careers and family on college-educated women. She defines a career variable that is 1 if someone’s earnings are above the twenty-fifth percentile in the relevant year and age group. Estimate a model in which happiness is a function of career, being married and an interaction of career and married (“careermarried”). To match Betrand’s analysis, limit the data to only to college educated (dta$educat==4) women (dta$sex==2). Interpret the estimated average happiness for the four types of women implied by this analysis.</a></li>
+<li class="chapter" data-level="3.0.6" data-path="lab-ii-dummy-variables-career-data.html"><a href="lab-ii-dummy-variables-career-data.html#the-gss-provides-a-race-variable-dtarace.-the-variable-equals-1-for-white-respondents-2-for-black-respondents-and-3-for-everyone-else.-add-race-to-the-above-model-and-interpret-the-coefficients-related-to-race.-estimate-another-model-with-a-different-reference-category-and-explain-coefficients-across-the-two-models."><i class="fa fa-check"></i><b>3.0.6</b> The GSS provides a race variable (dta$race). The variable equals 1 for white respondents, 2 for black respondents and 3 for everyone else. Add race to the above model and interpret the coefficients related to race. Estimate another model with a different reference category and explain coefficients across the two models.</a></li>
+<li class="chapter" data-level="3.0.7" data-path="lab-ii-dummy-variables-career-data.html"><a href="lab-ii-dummy-variables-career-data.html#estimate-a-model-similar-to-the-above-but-for-a-different-group-of-your-choice-e.g.-limit-by-race-or-gender-or-education-and-feel-free-to-include-different-covariates."><i class="fa fa-check"></i><b>3.0.7</b> Estimate a model similar to the above, but for a different group of your choice (e.g., limit by race or gender or education) and feel free to include different covariates.</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">GOVT 8002 Shared Working Book</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="lab-ii-dummy-variables-career-data" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">3</span> 9/30 | Lab II: Dummy Variables &amp; Career Data<a href="lab-ii-dummy-variables-career-data.html#lab-ii-dummy-variables-career-data" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><img src="lab2_image.png" width="672" /></p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="lab-ii-dummy-variables-career-data.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Packages</span></span>
+<span id="cb36-2"><a href="lab-ii-dummy-variables-career-data.html#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb36-3"><a href="lab-ii-dummy-variables-career-data.html#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb36-4"><a href="lab-ii-dummy-variables-career-data.html#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(AER)</span>
+<span id="cb36-5"><a href="lab-ii-dummy-variables-career-data.html#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stargazer)</span>
+<span id="cb36-6"><a href="lab-ii-dummy-variables-career-data.html#cb36-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-7"><a href="lab-ii-dummy-variables-career-data.html#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Data</span></span>
+<span id="cb36-8"><a href="lab-ii-dummy-variables-career-data.html#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;~/GOVT702/Data/Ch6_Lab_CareerHappiness.RData&quot;</span>)</span></code></pre></div>
+<p>We will use General Social Survey data for this lab.
+The key variables we will use are</p>
+<ul>
+<li>happy: 3 very happy, 2 pretty happy, 1 not too happy</li>
+<li>married: 1 for currently married (based on dta$marital, which is 1 for married, 2 for widowed, 3 for divorced, 4 for separated, 5 for never married)</li>
+<li>sex: 1 for men, 2 for women</li>
+<li>edcat: 1 for less than high school, 2 for high school, 3 for some college and 4 for college graduate</li>
+<li>race: 1 for white, 2 for black, 3 for other races (self-identified, first race mentioned)</li>
+</ul>
+<div id="use-ols-to-estimate-the-difference-in-happiness-the-happy-variable-for-married-versus-unmarried-people.-then-use-the-t-test-function-to-assess-the-difference-in-happiness-by-gender-see-the-computing-corner-in-chapter-6-of-the-book.-discuss-similarities-and-differences-in-ols-model-and-t-test-function-results" class="section level3 hasAnchor" number="3.0.1">
+<h3><span class="header-section-number">3.0.1</span> Use OLS to estimate the difference in happiness (the “happy” variable) for married versus unmarried people. Then use the t test function to assess the difference in happiness by gender (see the Computing Corner in Chapter 6 of the book). Discuss similarities and differences in OLS model and t test function results<a href="lab-ii-dummy-variables-career-data.html#use-ols-to-estimate-the-difference-in-happiness-the-happy-variable-for-married-versus-unmarried-people.-then-use-the-t-test-function-to-assess-the-difference-in-happiness-by-gender-see-the-computing-corner-in-chapter-6-of-the-book.-discuss-similarities-and-differences-in-ols-model-and-t-test-function-results" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="lab-ii-dummy-variables-career-data.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Difference in Happiness with OLS</span></span>
+<span id="cb37-2"><a href="lab-ii-dummy-variables-career-data.html#cb37-2" aria-hidden="true" tabindex="-1"></a>model_1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(happy<span class="sc">~</span>married, <span class="at">data=</span>dta)</span>
+<span id="cb37-3"><a href="lab-ii-dummy-variables-career-data.html#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_1)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = happy ~ married, data = dta)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -1.3227 -0.3227 -0.0249  0.6773  0.9751 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 2.024903   0.006033  335.64   &lt;2e-16 ***
+## married     0.297810   0.007621   39.08   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.5984 on 26346 degrees of freedom
+##   (2442 observations deleted due to missingness)
+## Multiple R-squared:  0.05478,    Adjusted R-squared:  0.05475 
+## F-statistic:  1527 on 1 and 26346 DF,  p-value: &lt; 2.2e-16</code></pre>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="lab-ii-dummy-variables-career-data.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(model_1)</span></code></pre></div>
+<pre><code>##                2.5 %    97.5 %
+## (Intercept) 2.013079 2.0367282
+## married     0.282872 0.3127481</code></pre>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="lab-ii-dummy-variables-career-data.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="do">## With t.test()</span></span>
+<span id="cb41-2"><a href="lab-ii-dummy-variables-career-data.html#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(dta<span class="sc">$</span>happy[dta<span class="sc">$</span>married<span class="sc">==</span><span class="dv">1</span>], dta<span class="sc">$</span>happy[dta<span class="sc">$</span>married<span class="sc">==</span><span class="dv">0</span>])</span></code></pre></div>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  dta$happy[dta$married == 1] and dta$happy[dta$married == 0]
+## t = 38.977, df = 20513, p-value &lt; 2.2e-16
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  0.2828336 0.3127865
+## sample estimates:
+## mean of x mean of y 
+##  2.322714  2.024903</code></pre>
+</div>
+<div id="use-ols-with-robust-standard-errors-to-estimate-the-difference-in-happiness-for-married-and-unmarried-people.-then-use-the-t-test-function-with-unequal-variances-to-assess-the-difference-in-happiness-by-marital-status.-discuss-similarities-and-differences-in-ols-model-and-t-test-function-results." class="section level3 hasAnchor" number="3.0.2">
+<h3><span class="header-section-number">3.0.2</span> Use OLS with robust standard errors to estimate the difference in happiness for married and unmarried people. Then use the t test function with unequal variances to assess the difference in happiness by marital status. Discuss similarities and differences in OLS model and t test function results.<a href="lab-ii-dummy-variables-career-data.html#use-ols-with-robust-standard-errors-to-estimate-the-difference-in-happiness-for-married-and-unmarried-people.-then-use-the-t-test-function-with-unequal-variances-to-assess-the-difference-in-happiness-by-marital-status.-discuss-similarities-and-differences-in-ols-model-and-t-test-function-results." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="lab-ii-dummy-variables-career-data.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="do">## model_1 with Robust Standard Errors</span></span>
+<span id="cb43-2"><a href="lab-ii-dummy-variables-career-data.html#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coeftest</span>(model_1, <span class="at">vcov. =</span> <span class="fu">vcovHC</span>(model_1, <span class="at">type =</span> <span class="st">&quot;HC1&quot;</span>))</span></code></pre></div>
+<pre><code>## 
+## t test of coefficients:
+## 
+##              Estimate Std. Error t value  Pr(&gt;|t|)    
+## (Intercept) 2.0249034  0.0060709 333.541 &lt; 2.2e-16 ***
+## married     0.2978101  0.0076407  38.977 &lt; 2.2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="lab-ii-dummy-variables-career-data.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># t-test, without assuming equal variance</span></span>
+<span id="cb45-2"><a href="lab-ii-dummy-variables-career-data.html#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(dta<span class="sc">$</span>happy[dta<span class="sc">$</span>married<span class="sc">==</span><span class="dv">1</span>], dta<span class="sc">$</span>happy[dta<span class="sc">$</span>married<span class="sc">==</span><span class="dv">0</span>], <span class="at">var.equal =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  dta$happy[dta$married == 1] and dta$happy[dta$married == 0]
+## t = 38.977, df = 20513, p-value &lt; 2.2e-16
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  0.2828336 0.3127865
+## sample estimates:
+## mean of x mean of y 
+##  2.322714  2.024903</code></pre>
+</div>
+<div id="create-an-interaction-between-married-and-age.-estimate-a-model-that-explains-happiness-as-a-function-of-age-and-marital-status-allowing-for-the-age-effect-to-differ-according-to-marital-status.-for-simplicity-we-use-only-married-and-unmarried-for-marital-status.-what-is-the-effect-of-age-for-unmarried-people-for-married-people" class="section level3 hasAnchor" number="3.0.3">
+<h3><span class="header-section-number">3.0.3</span> Create an interaction between married and age. Estimate a model that explains happiness as a function of age and marital status, allowing for the age effect to differ according to marital status. (For simplicity, we use only married and unmarried for marital status.) What is the effect of age for unmarried people? For married people?<a href="lab-ii-dummy-variables-career-data.html#create-an-interaction-between-married-and-age.-estimate-a-model-that-explains-happiness-as-a-function-of-age-and-marital-status-allowing-for-the-age-effect-to-differ-according-to-marital-status.-for-simplicity-we-use-only-married-and-unmarried-for-marital-status.-what-is-the-effect-of-age-for-unmarried-people-for-married-people" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="lab-ii-dummy-variables-career-data.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Interaction Term</span></span>
+<span id="cb47-2"><a href="lab-ii-dummy-variables-career-data.html#cb47-2" aria-hidden="true" tabindex="-1"></a>dum_interact <span class="ot">&lt;-</span> dta<span class="sc">$</span>married<span class="sc">*</span>dta<span class="sc">$</span>age</span>
+<span id="cb47-3"><a href="lab-ii-dummy-variables-career-data.html#cb47-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-4"><a href="lab-ii-dummy-variables-career-data.html#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Model 2</span></span>
+<span id="cb47-5"><a href="lab-ii-dummy-variables-career-data.html#cb47-5" aria-hidden="true" tabindex="-1"></a>model_2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(happy<span class="sc">~</span>age <span class="sc">+</span> married <span class="sc">+</span> dum_interact, <span class="at">data=</span>dta)</span>
+<span id="cb47-6"><a href="lab-ii-dummy-variables-career-data.html#cb47-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_2)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = happy ~ age + married + dum_interact, data = dta)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -1.32925 -0.32408 -0.04825  0.67451  1.02224 
+## 
+## Coefficients:
+##                Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   2.1300310  0.0270265  78.813  &lt; 2e-16 ***
+## age          -0.0028199  0.0007067  -3.990 6.61e-05 ***
+## married       0.2109524  0.0351041   6.009 1.89e-09 ***
+## dum_interact  0.0023504  0.0009036   2.601   0.0093 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.5982 on 26344 degrees of freedom
+##   (2442 observations deleted due to missingness)
+## Multiple R-squared:  0.05538,    Adjusted R-squared:  0.05527 
+## F-statistic: 514.8 on 3 and 26344 DF,  p-value: &lt; 2.2e-16</code></pre>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="lab-ii-dummy-variables-career-data.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="do">## or</span></span>
+<span id="cb49-2"><a href="lab-ii-dummy-variables-career-data.html#cb49-2" aria-hidden="true" tabindex="-1"></a>model_2b <span class="ot">&lt;-</span> <span class="fu">lm</span>(happy<span class="sc">~</span>married<span class="sc">*</span>age, <span class="at">data=</span>dta)</span>
+<span id="cb49-3"><a href="lab-ii-dummy-variables-career-data.html#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_2b)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = happy ~ married * age, data = dta)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -1.32925 -0.32408 -0.04825  0.67451  1.02224 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  2.1300310  0.0270265  78.813  &lt; 2e-16 ***
+## married      0.2109524  0.0351041   6.009 1.89e-09 ***
+## age         -0.0028199  0.0007067  -3.990 6.61e-05 ***
+## married:age  0.0023504  0.0009036   2.601   0.0093 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.5982 on 26344 degrees of freedom
+##   (2442 observations deleted due to missingness)
+## Multiple R-squared:  0.05538,    Adjusted R-squared:  0.05527 
+## F-statistic: 514.8 on 3 and 26344 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>The effect of age is <span class="math inline">\(-0.00281\)</span> for unmarried people and <span class="math inline">\(-0.00281 + 0.002350 = -0.0004699\)</span> for married people. The intercept is <span class="math inline">\(2.13\)</span> for unmarried people and <span class="math inline">\(2.13 + 0.2109 = 2.3409\)</span> for married people.</p>
+</div>
+<div id="estimate-separate-models-explaining-happiness-in-terms-of-age-for-married-and-unmarried-people.-comment-on-similarities-and-differences-compared-to-results-immediately-above-for-i-the-estimated-effect-of-age-and-ii-the-intercept." class="section level3 hasAnchor" number="3.0.4">
+<h3><span class="header-section-number">3.0.4</span> Estimate separate models explaining happiness in terms of age for married and unmarried people. Comment on similarities and differences compared to results immediately above for (i) the estimated effect of age and (ii) the intercept.<a href="lab-ii-dummy-variables-career-data.html#estimate-separate-models-explaining-happiness-in-terms-of-age-for-married-and-unmarried-people.-comment-on-similarities-and-differences-compared-to-results-immediately-above-for-i-the-estimated-effect-of-age-and-ii-the-intercept." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="lab-ii-dummy-variables-career-data.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Model 3a</span></span>
+<span id="cb51-2"><a href="lab-ii-dummy-variables-career-data.html#cb51-2" aria-hidden="true" tabindex="-1"></a>model_3a <span class="ot">&lt;-</span> <span class="fu">lm</span>(happy<span class="sc">~</span>age, <span class="at">data=</span><span class="fu">subset</span>(dta, married<span class="sc">==</span><span class="dv">1</span>))</span>
+<span id="cb51-3"><a href="lab-ii-dummy-variables-career-data.html#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_3a)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = happy ~ age, data = subset(dta, married == 1))
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -1.3293 -0.3250 -0.3189  0.6754  0.6844 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  2.3409834  0.0223240 104.864   &lt;2e-16 ***
+## age         -0.0004695  0.0005612  -0.837    0.403    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.5961 on 16508 degrees of freedom
+##   (1385 observations deleted due to missingness)
+## Multiple R-squared:  4.24e-05,   Adjusted R-squared:  -1.817e-05 
+## F-statistic:   0.7 on 1 and 16508 DF,  p-value: 0.4028</code></pre>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="lab-ii-dummy-variables-career-data.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="do">## and</span></span>
+<span id="cb53-2"><a href="lab-ii-dummy-variables-career-data.html#cb53-2" aria-hidden="true" tabindex="-1"></a>model_3b <span class="ot">&lt;-</span> <span class="fu">lm</span>(happy<span class="sc">~</span>age, <span class="at">data=</span><span class="fu">subset</span>(dta, married<span class="sc">==</span><span class="dv">0</span>))</span>
+<span id="cb53-3"><a href="lab-ii-dummy-variables-career-data.html#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_3b)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = happy ~ age, data = subset(dta, married == 0))
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -1.05953 -0.05389 -0.02570  0.01096  1.02224 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  2.1300310  0.0271844  78.355  &lt; 2e-16 ***
+## age         -0.0028199  0.0007108  -3.967 7.32e-05 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.6017 on 9836 degrees of freedom
+##   (1053 observations deleted due to missingness)
+## Multiple R-squared:  0.001598,   Adjusted R-squared:  0.001496 
+## F-statistic: 15.74 on 1 and 9836 DF,  p-value: 7.322e-05</code></pre>
+<p>The results here are the same as above: for unmarried people, the effect of age is <span class="math inline">\(-0.00281\)</span> and the intercept is <span class="math inline">\(2.130\)</span>.</p>
+<p>The effect of age for married people also the same: <span class="math inline">\(-0.000469\)</span>, with an intercept of <span class="math inline">\(2.3409\)</span>.</p>
+</div>
+<div id="marianne-bertrand-wrote-an-article-called-work-on-womens-work-is-never-done-career-family-and-the-well-being-of-college-educated-women-published-in-the-american-economic-review-papers-proceedings-2013-1033-244250.-she-analyzed-the-effect-of-careers-and-family-on-college-educated-women.-she-defines-a-career-variable-that-is-1-if-someones-earnings-are-above-the-twenty-fifth-percentile-in-the-relevant-year-and-age-group.-estimate-a-model-in-which-happiness-is-a-function-of-career-being-married-and-an-interaction-of-career-and-married-careermarried.-to-match-betrands-analysis-limit-the-data-to-only-to-college-educated-dtaeducat4-women-dtasex2.-interpret-the-estimated-average-happiness-for-the-four-types-of-women-implied-by-this-analysis." class="section level3 hasAnchor" number="3.0.5">
+<h3><span class="header-section-number">3.0.5</span> Marianne Bertrand wrote an article called ``Work on Women’s Work is Never Done: Career, Family, and the Well-Being of College-Educated Women’’ published in the <em>American Economic Review: Papers &amp; Proceedings</em> 2013, 103(3): 244–250. She analyzed the effect of careers and family on college-educated women. She defines a career variable that is 1 if someone’s earnings are above the twenty-fifth percentile in the relevant year and age group. Estimate a model in which happiness is a function of career, being married and an interaction of career and married (“careermarried”). To match Betrand’s analysis, limit the data to only to college educated (dta$educat==4) women (dta$sex==2). Interpret the estimated average happiness for the four types of women implied by this analysis.<a href="lab-ii-dummy-variables-career-data.html#marianne-bertrand-wrote-an-article-called-work-on-womens-work-is-never-done-career-family-and-the-well-being-of-college-educated-women-published-in-the-american-economic-review-papers-proceedings-2013-1033-244250.-she-analyzed-the-effect-of-careers-and-family-on-college-educated-women.-she-defines-a-career-variable-that-is-1-if-someones-earnings-are-above-the-twenty-fifth-percentile-in-the-relevant-year-and-age-group.-estimate-a-model-in-which-happiness-is-a-function-of-career-being-married-and-an-interaction-of-career-and-married-careermarried.-to-match-betrands-analysis-limit-the-data-to-only-to-college-educated-dtaeducat4-women-dtasex2.-interpret-the-estimated-average-happiness-for-the-four-types-of-women-implied-by-this-analysis." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="lab-ii-dummy-variables-career-data.html#cb55-1" aria-hidden="true" tabindex="-1"></a>model_4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(happy <span class="sc">~</span> career<span class="sc">*</span>married, <span class="at">data=</span>dta[dta<span class="sc">$</span>sex<span class="sc">==</span><span class="dv">2</span> <span class="sc">&amp;</span> dta<span class="sc">$</span>educat<span class="sc">==</span><span class="dv">4</span>,])</span>
+<span id="cb55-2"><a href="lab-ii-dummy-variables-career-data.html#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_4)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = happy ~ career * married, data = dta[dta$sex == 
+##     2 &amp; dta$educat == 4, ])
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -1.4215 -0.4214 -0.1247  0.5786  0.8753 
+## 
+## Coefficients:
+##                Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)     2.12470    0.01997 106.406  &lt; 2e-16 ***
+## career          0.09204    0.02985   3.084  0.00206 ** 
+## married         0.29676    0.02503  11.855  &lt; 2e-16 ***
+## career:married -0.09923    0.04023  -2.466  0.01369 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.5739 on 3595 degrees of freedom
+##   (400 observations deleted due to missingness)
+## Multiple R-squared:  0.04765,    Adjusted R-squared:  0.04685 
+## F-statistic: 59.96 on 3 and 3595 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>The four groups are unmarried women without careers, married women with careers, married women without
+careers, and unmarried women without careers.</p>
+<p>College-educated women that have no careers and are not married have an average happiness of <span class="math inline">\(2.12\)</span>.</p>
+<p>College-educated women with careers but not married have an average happiness of <span class="math inline">\(2.12 + 0.09 = 2.21\)</span>.</p>
+<p>College-educated women with no career but are married have average happiness of <span class="math inline">\(2.12 + 0.29 = 2.41\)</span>.</p>
+<p>College-educated women that are both married and have careers have average happiness of <span class="math inline">\(2.12 + 0.092 + 0.29 -0.099 = 2.4\)</span>.</p>
+</div>
+<div id="the-gss-provides-a-race-variable-dtarace.-the-variable-equals-1-for-white-respondents-2-for-black-respondents-and-3-for-everyone-else.-add-race-to-the-above-model-and-interpret-the-coefficients-related-to-race.-estimate-another-model-with-a-different-reference-category-and-explain-coefficients-across-the-two-models." class="section level3 hasAnchor" number="3.0.6">
+<h3><span class="header-section-number">3.0.6</span> The GSS provides a race variable (dta$race). The variable equals 1 for white respondents, 2 for black respondents and 3 for everyone else. Add race to the above model and interpret the coefficients related to race. Estimate another model with a different reference category and explain coefficients across the two models.<a href="lab-ii-dummy-variables-career-data.html#the-gss-provides-a-race-variable-dtarace.-the-variable-equals-1-for-white-respondents-2-for-black-respondents-and-3-for-everyone-else.-add-race-to-the-above-model-and-interpret-the-coefficients-related-to-race.-estimate-another-model-with-a-different-reference-category-and-explain-coefficients-across-the-two-models." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="lab-ii-dummy-variables-career-data.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="do">## First Race Model with White as Reference</span></span>
+<span id="cb57-2"><a href="lab-ii-dummy-variables-career-data.html#cb57-2" aria-hidden="true" tabindex="-1"></a>model_5 <span class="ot">&lt;-</span> <span class="fu">lm</span>(happy <span class="sc">~</span> career<span class="sc">*</span>married <span class="sc">+</span> <span class="fu">factor</span>(race),</span>
+<span id="cb57-3"><a href="lab-ii-dummy-variables-career-data.html#cb57-3" aria-hidden="true" tabindex="-1"></a><span class="at">data=</span>dta[dta<span class="sc">$</span>sex<span class="sc">==</span><span class="dv">2</span> <span class="sc">&amp;</span> dta<span class="sc">$</span>educat<span class="sc">==</span><span class="dv">4</span>,])</span>
+<span id="cb57-4"><a href="lab-ii-dummy-variables-career-data.html#cb57-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_5)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = happy ~ career * married + factor(race), data = dta[dta$sex == 
+##     2 &amp; dta$educat == 4, ])
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -1.4359 -0.4329 -0.1575  0.5641  1.0085 
+## 
+## Coefficients:
+##                Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)     2.15746    0.02077 103.867  &lt; 2e-16 ***
+## career          0.08830    0.02974   2.969  0.00301 ** 
+## married         0.27847    0.02518  11.060  &lt; 2e-16 ***
+## factor(race)2  -0.16593    0.03267  -5.079 3.98e-07 ***
+## factor(race)3  -0.10051    0.04036  -2.491  0.01280 *  
+## career:married -0.09132    0.04010  -2.277  0.02283 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.5717 on 3593 degrees of freedom
+##   (400 observations deleted due to missingness)
+## Multiple R-squared:  0.05555,    Adjusted R-squared:  0.05424 
+## F-statistic: 42.27 on 5 and 3593 DF,  p-value: &lt; 2.2e-16</code></pre>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="lab-ii-dummy-variables-career-data.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Second Race Model with Other as the Reference Category</span></span>
+<span id="cb59-2"><a href="lab-ii-dummy-variables-career-data.html#cb59-2" aria-hidden="true" tabindex="-1"></a>model_5b <span class="ot">&lt;-</span> <span class="fu">lm</span>(happy <span class="sc">~</span> career<span class="sc">*</span>married <span class="sc">+</span> <span class="fu">relevel</span>(<span class="fu">factor</span>(race), <span class="at">ref =</span> <span class="st">&quot;3&quot;</span>),</span>
+<span id="cb59-3"><a href="lab-ii-dummy-variables-career-data.html#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="at">data=</span>dta[dta<span class="sc">$</span>sex<span class="sc">==</span><span class="dv">2</span> <span class="sc">&amp;</span> dta<span class="sc">$</span>educat<span class="sc">==</span><span class="dv">4</span>,])</span>
+<span id="cb59-4"><a href="lab-ii-dummy-variables-career-data.html#cb59-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_5b)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = happy ~ career * married + relevel(factor(race), 
+##     ref = &quot;3&quot;), data = dta[dta$sex == 2 &amp; dta$educat == 4, ])
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -1.4359 -0.4329 -0.1575  0.5641  1.0085 
+## 
+## Coefficients:
+##                                   Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)                        2.05695    0.04261  48.273  &lt; 2e-16 ***
+## career                             0.08830    0.02974   2.969  0.00301 ** 
+## married                            0.27847    0.02518  11.060  &lt; 2e-16 ***
+## relevel(factor(race), ref = &quot;3&quot;)1  0.10051    0.04036   2.491  0.01280 *  
+## relevel(factor(race), ref = &quot;3&quot;)2 -0.06542    0.04972  -1.316  0.18835    
+## career:married                    -0.09132    0.04010  -2.277  0.02283 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.5717 on 3593 degrees of freedom
+##   (400 observations deleted due to missingness)
+## Multiple R-squared:  0.05555,    Adjusted R-squared:  0.05424 
+## F-statistic: 42.27 on 5 and 3593 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>Both results indicated white college-educated women are both <span class="math inline">\(0.16\)</span> higher on the happiness variable than African-American college-educated women and <span class="math inline">\(0.10\)</span> higher than other college-educated women of other races. Even though the coefficient on the other race variables change across specifications, our interpretation of the results does not change; the change is due solely to the change in reference category.</p>
+</div>
+<div id="estimate-a-model-similar-to-the-above-but-for-a-different-group-of-your-choice-e.g.-limit-by-race-or-gender-or-education-and-feel-free-to-include-different-covariates." class="section level3 hasAnchor" number="3.0.7">
+<h3><span class="header-section-number">3.0.7</span> Estimate a model similar to the above, but for a different group of your choice (e.g., limit by race or gender or education) and feel free to include different covariates.<a href="lab-ii-dummy-variables-career-data.html#estimate-a-model-similar-to-the-above-but-for-a-different-group-of-your-choice-e.g.-limit-by-race-or-gender-or-education-and-feel-free-to-include-different-covariates." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>No wrong answers here (mostly)</p>
+<p>This model explores the how commute times affect happiness. I specifically think that time commuting will - conditionally - lower a person’s happiness if it means they are away from their families. Because of this, I create an interaction term between commuting and marriage and estimate the effects.</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="lab-ii-dummy-variables-career-data.html#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Commuting Model on Adults</span></span>
+<span id="cb61-2"><a href="lab-ii-dummy-variables-career-data.html#cb61-2" aria-hidden="true" tabindex="-1"></a>model_6 <span class="ot">&lt;-</span> <span class="fu">lm</span>(happy <span class="sc">~</span> commute<span class="sc">*</span>married, <span class="at">data=</span>dta[dta<span class="sc">$</span>age<span class="sc">&gt;</span><span class="dv">18</span>,])</span>
+<span id="cb61-3"><a href="lab-ii-dummy-variables-career-data.html#cb61-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_6)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = happy ~ commute * married, data = dta[dta$age &gt; 
+##     18, ])
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -1.30339 -0.29480 -0.05136  0.69947  0.98484 
+## 
+## Coefficients:
+##                   Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)      2.0513587  0.0553465  37.064  &lt; 2e-16 ***
+## commute         -0.0003732  0.0020973  -0.178 0.858816    
+## married          0.2520331  0.0681019   3.701 0.000231 ***
+## commute:married -0.0001996  0.0026100  -0.076 0.939047    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.5647 on 726 degrees of freedom
+##   (28060 observations deleted due to missingness)
+## Multiple R-squared:  0.04227,    Adjusted R-squared:  0.03831 
+## F-statistic: 10.68 on 3 and 726 DF,  p-value: 7.076e-07</code></pre>
+<p>My theory is not supported by this model. I found no significant effect for those who commute longer and no significant conditional effect of happiness for those who commute long hours and are married. I did find support that marriage in general makes a person happier, though this should not be considered a causal effect.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="lab-i-tidyverse-ols-review.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
