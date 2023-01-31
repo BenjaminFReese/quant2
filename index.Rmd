@@ -336,7 +336,7 @@ wv %>%
 knitr::include_graphics("lab2_image.png")
 ```
 
-```{r}
+```{r, warning=FALSE,message=FALSE}
 ## Packages
 library(knitr)
 library(car)
