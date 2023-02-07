@@ -466,7 +466,7 @@ My theory is not supported by this model. I found no significant effect for thos
 
 # 2/6 | Lab III: Panel Data
 
-```{r}
+```{r, echo=FALSE}
 knitr::include_graphics("lab3_image.jpg")
 ```
 
