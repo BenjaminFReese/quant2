@@ -545,7 +545,7 @@ The model is:
 $$confirmed\_cases_{it} = \beta_0 + \beta_1average\_response\_index_{it} + \epsilon_{it}$$
 
 ```{r}
-## Model 1
+## Pooled Model
 pooled_covid_model <- lm(ConfirmedCases~GovernmentResponseIndex, data = df3)
 summary(pooled_covid_model)
 ```
@@ -561,7 +561,6 @@ $$confirmed\_cases_{it} = \beta_0 + \beta_1average\_response\_index_{it} + \alph
 ## One-Way Model
 one_way <- feols(ConfirmedCases~GovernmentResponseIndex | RegionCode, data = df3,
                      vcov = "iid")
-
 summary(one_way)
 ```
 
@@ -579,6 +578,7 @@ summary(two_way)
 ## Test a model with robust-clustered standard errors. Do the results change at all?
 
 ```{r}
+## Two-way FE with robust-clustered se
 two_way_robust <- feols(ConfirmedCases~GovernmentResponseIndex | RegionCode + Date, data = df3,
                      vcov = "twoway")
 summary(two_way_robust)
