@@ -21,3 +21,17 @@ estimate-separate-models-explaining-happiness-in-terms-of-age-for-married-and-un
 marianne-bertrand-wrote-an-article-called-work-on-womens-work-is-never-done-career-family-and-the-well-being-of-college-educated-women-published-in-the-american-economic-review-papers-proceedings-2013-1033-244250.-she-analyzed-the-effect-of-careers-and-family-on-college-educated-women.-she-defines-a-career-variable-that-is-1-if-someones-earnings-are-above-the-twenty-fifth-percentile-in-the-relevant-year-and-age-group.-estimate-a-model-in-which-happiness-is-a-function-of-career-being-married-and-an-interaction-of-career-and-married-careermarried.-to-match-betrands-analysis-limit-the-data-to-only-to-college-educated-dtaeducat4-women-dtasex2.-interpret-the-estimated-average-happiness-for-the-four-types-of-women-implied-by-this-analysis.
 the-gss-provides-a-race-variable-dtarace.-the-variable-equals-1-for-white-respondents-2-for-black-respondents-and-3-for-everyone-else.-add-race-to-the-above-model-and-interpret-the-coefficients-related-to-race.-estimate-another-model-with-a-different-reference-category-and-explain-coefficients-across-the-two-models.
 estimate-a-model-similar-to-the-above-but-for-a-different-group-of-your-choice-e.g.-limit-by-race-or-gender-or-education-and-feel-free-to-include-different-covariates.
+lab-iii-panel-data
+a-load-the-data-from-oxcgrt_latest.csv
+b-data-organization
+use-the-lag-function-in-dplyr-to-create-lagged-variables-for-cases-and-deaths.-also-create-difference-e.g.-dcases-that-is-the-change-in-cases-for-each-state-by-date.-check-to-make-sure-it-worked.
+merge-the-above-data-frame-to-data-in-usstates.xlsx
+write-in-notation-and-estimate-a-pooled-model-of-total-cases-as-a-function-of-state-policy.-discuss-possible-bias.
+write-in-notation-and-estimate-a-one-way-fixed-effect-model-where-the-fixed-effect-is-state.-are-you-still-worried-about-bias
+a-write-in-notation-and-estimate-a-two-way-fixed-effect-model-where-the-fixed-effects-are-state-and-date.-does-this-model-address-the-source-of-bias-identified-earlier
+b-test-a-model-with-robust-clustered-standard-errors.-do-the-results-change-at-all
+this-is-an-initial-analysis.-we-would-also-want-to
+load-in-the-texas-school-board-data-and-take-a-look-at-the-variables.-the-next-few-questions-are-from-exercise-5-in-bailey-2021.-the-basic-thoery-of-the-paper-is-that-teachers-unions-will-have-less-influence-on-school-board-members-when-turnout-is-greater-since-a-wider-swath-of-voters-non-teachers-will-be-voting.-you-can-read-the-abstract-below.
+paper-abstract-many-governments-in-the-united-states-hold-elections-on-days-other-than-national-election-day.-recent-studies-have-argued-that-the-low-voter-turnout-that-accompanies-such-off-cycle-elections-could-create-an-advantage-for-interest-groups.-however-the-endogeneity-of-election-timing-makes-it-difficult-to-estimate-its-causal-effect-on-political-outcomes.-in-this-paper-i-develop-a-theoretical-framework-that-explains-how-changes-to-election-timing-affect-the-electoral-fortunes-of-organized-interest-groups.-i-test-the-theory-examining-the-effects-of-a-2006-texas-law-that-forced-approximately-20-percent-of-the-states-school-by-districts-to-move-their-elections-to-the-same-day-as-national-elections.
+write-in-notation-and-estimate-the-pooled-model-of-the-effect-of-oncycle-on-lnavgsalary.
+write-in-notation-and-estimate-a-difference-in-difference-model-of-the-effect-of-oncycle-on-lnavgsalary.-what-is-the-key-coefficient-that-we-are-interested-in

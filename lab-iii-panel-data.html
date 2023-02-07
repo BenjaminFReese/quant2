@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4 2/6 | Lab III: Panel Data | GOVT 8002 Shared Working Book</title>
+  <meta name="description" content="4 2/6 | Lab III: Panel Data | GOVT 8002 Shared Working Book" />
+  <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4 2/6 | Lab III: Panel Data | GOVT 8002 Shared Working Book" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4 2/6 | Lab III: Panel Data | GOVT 8002 Shared Working Book" />
+  
+  
+  
+
+<meta name="author" content="Zoom Link for Office Hours | bfr11@georgetown.edu" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="lab-ii-dummy-variables-career-data.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#purpose-of-this-site"><i class="fa fa-check"></i><b>1.1</b> Purpose of This Site</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#loading-data"><i class="fa fa-check"></i><b>1.2</b> Loading Data</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html"><i class="fa fa-check"></i><b>2</b> 9/23 | Lab I: Tidyverse &amp; OLS Review</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html#join-the-data-sets."><i class="fa fa-check"></i><b>2.1</b> Join the data sets.</a></li>
+<li class="chapter" data-level="2.2" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html#create-and-add-the-following-variables-to-your-dataframe-density-deaths-per-capita-cases-per-capita-and-vaccinated-percent."><i class="fa fa-check"></i><b>2.2</b> Create and add the following variables to your dataframe density, deaths per capita, cases per capita and vaccinated percent.</a></li>
+<li class="chapter" data-level="2.3" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html#estimate-three-regression-models-with-deaths-per-capita-on-your-selected-day-as-the-dependent-variable."><i class="fa fa-check"></i><b>2.3</b> Estimate three regression models with deaths per capita on your selected day as the dependent variable.</a></li>
+<li class="chapter" data-level="2.4" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html#assess-specific-vaccines"><i class="fa fa-check"></i><b>2.4</b> Assess specific vaccines</a></li>
+<li class="chapter" data-level="2.5" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html#optional-lab-1b"><i class="fa fa-check"></i><b>2.5</b> Optional Lab 1b</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html#load-the-world-values-survey-data-from-datawv7_small.csv-and-the-countrycode-data-from-datacountry-codes-for-wvs-wave-7.csv."><i class="fa fa-check"></i><b>2.5.1</b> Load the World Values Survey data from “Data/WV7_small.csv” and the CountryCode data from “Data/Country codes for WVS wave 7.csv”.</a></li>
+<li class="chapter" data-level="2.5.2" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html#join-the-country-name-from-the-countrycode-data-to-the-world-values-data.-the-country-code-is-v2-in-countrycode-and-b_country-in-the-world-values-data.-create-two-data-objects-of-the-countries-in-and-not-in-the-world-values-data.-display-the-first-10-countries-for-each-list."><i class="fa fa-check"></i><b>2.5.2</b> Join the country name from the CountryCode data to the World Values data. The country code is <em>V2</em> in CountryCode and <em>B_Country</em> in the World Values data. Create two data objects of the countries in and not in the World Values data. Display the first 10 countries for each list.</a></li>
+<li class="chapter" data-level="2.5.3" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html#using-pipes-calculate-the-percent-immigrant-in-every-country.-show-the-highest-10-and-lowest-10-countries.-be-sure-to-think-through-what-the-variable-in-the-data-set-means."><i class="fa fa-check"></i><b>2.5.3</b> Using pipes, calculate the percent immigrant in every country. Show the highest 10 and lowest 10 countries. (Be sure to think through what the variable in the data set means.)</a></li>
+<li class="chapter" data-level="2.5.4" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html#were-now-going-to-give-some-examples-of-the-kind-of-data-we-can-calculate.-think-about-how-you-would-do-this-in-excel-but-dont-actually-do-it-and-then-calculate-in-r.-calculate-the-percent-of-immigrants-who-are-men-by-country-and-show-the-highest-and-lowest-10-countries."><i class="fa fa-check"></i><b>2.5.4</b> We’re now going to give some examples of the kind of data we can calculate. Think about how you would do this in Excel (but don’t actually do it!) and then calculate in R. Calculate the percent of immigrants who are men, by country and show the highest and lowest 10 countries.</a></li>
+<li class="chapter" data-level="2.5.5" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html#group-by-marital-status-and-country-and-show-the-percent-of-people-in-each-category-who-are-men.-show-the-results-for-a-country-of-your-choice-and-briefly-discuss-what-it-means-when-the-percentages-in-each-category-are-not-roughly-50-percent.-recall-that-the-coding-for-the-marital-variable-is-1-married-2-living-together-as-married-3-divorced-4-separated-5-widowed-6-single."><i class="fa fa-check"></i><b>2.5.5</b> Group by marital status and country and show the percent of people in each category who are men. Show the results for a country of your choice and briefly discuss what it means when the percentages in each category are not roughly 50 percent. Recall that the coding for the <em>Marital</em> variable is 1 = Married 2 = Living together as married 3 = Divorced 4 = Separated 5 = Widowed 6 = Single.</a></li>
+<li class="chapter" data-level="2.5.6" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html#come-up-with-your-own-alternatives-think-about-some-possible-subset-of-people-and-some-information-we-have-about-them-and-see-if-you-can-write-code-to-capture-that-information."><i class="fa fa-check"></i><b>2.5.6</b> Come up with your own alternatives: think about some possible subset of people and some information we have about them and see if you can write code to capture that information.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="lab-ii-dummy-variables-career-data.html"><a href="lab-ii-dummy-variables-career-data.html"><i class="fa fa-check"></i><b>3</b> 9/30 | Lab II: Dummy Variables &amp; Career Data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="lab-ii-dummy-variables-career-data.html"><a href="lab-ii-dummy-variables-career-data.html#use-ols-to-estimate-the-difference-in-happiness-the-happy-variable-for-married-versus-unmarried-people.-then-use-the-t-test-function-to-assess-the-difference-in-happiness-by-gender-see-the-computing-corner-in-chapter-6-of-the-book.-discuss-similarities-and-differences-in-ols-model-and-t-test-function-results"><i class="fa fa-check"></i><b>3.1</b> Use OLS to estimate the difference in happiness (the “happy” variable) for married versus unmarried people. Then use the t test function to assess the difference in happiness by gender (see the Computing Corner in Chapter 6 of the book). Discuss similarities and differences in OLS model and t test function results</a></li>
+<li class="chapter" data-level="3.2" data-path="lab-ii-dummy-variables-career-data.html"><a href="lab-ii-dummy-variables-career-data.html#use-ols-with-robust-standard-errors-to-estimate-the-difference-in-happiness-for-married-and-unmarried-people.-then-use-the-t-test-function-with-unequal-variances-to-assess-the-difference-in-happiness-by-marital-status.-discuss-similarities-and-differences-in-ols-model-and-t-test-function-results."><i class="fa fa-check"></i><b>3.2</b> Use OLS with robust standard errors to estimate the difference in happiness for married and unmarried people. Then use the t test function with unequal variances to assess the difference in happiness by marital status. Discuss similarities and differences in OLS model and t test function results.</a></li>
+<li class="chapter" data-level="3.3" data-path="lab-ii-dummy-variables-career-data.html"><a href="lab-ii-dummy-variables-career-data.html#create-an-interaction-between-married-and-age.-estimate-a-model-that-explains-happiness-as-a-function-of-age-and-marital-status-allowing-for-the-age-effect-to-differ-according-to-marital-status.-for-simplicity-we-use-only-married-and-unmarried-for-marital-status.-what-is-the-effect-of-age-for-unmarried-people-for-married-people"><i class="fa fa-check"></i><b>3.3</b> Create an interaction between married and age. Estimate a model that explains happiness as a function of age and marital status, allowing for the age effect to differ according to marital status. (For simplicity, we use only married and unmarried for marital status.) What is the effect of age for unmarried people? For married people?</a></li>
+<li class="chapter" data-level="3.4" data-path="lab-ii-dummy-variables-career-data.html"><a href="lab-ii-dummy-variables-career-data.html#estimate-separate-models-explaining-happiness-in-terms-of-age-for-married-and-unmarried-people.-comment-on-similarities-and-differences-compared-to-results-immediately-above-for-i-the-estimated-effect-of-age-and-ii-the-intercept."><i class="fa fa-check"></i><b>3.4</b> Estimate separate models explaining happiness in terms of age for married and unmarried people. Comment on similarities and differences compared to results immediately above for (i) the estimated effect of age and (ii) the intercept.</a></li>
+<li class="chapter" data-level="3.5" data-path="lab-ii-dummy-variables-career-data.html"><a href="lab-ii-dummy-variables-career-data.html#marianne-bertrand-wrote-an-article-called-work-on-womens-work-is-never-done-career-family-and-the-well-being-of-college-educated-women-published-in-the-american-economic-review-papers-proceedings-2013-1033-244250.-she-analyzed-the-effect-of-careers-and-family-on-college-educated-women.-she-defines-a-career-variable-that-is-1-if-someones-earnings-are-above-the-twenty-fifth-percentile-in-the-relevant-year-and-age-group.-estimate-a-model-in-which-happiness-is-a-function-of-career-being-married-and-an-interaction-of-career-and-married-careermarried.-to-match-betrands-analysis-limit-the-data-to-only-to-college-educated-dtaeducat4-women-dtasex2.-interpret-the-estimated-average-happiness-for-the-four-types-of-women-implied-by-this-analysis."><i class="fa fa-check"></i><b>3.5</b> Marianne Bertrand wrote an article called ``Work on Women’s Work is Never Done: Career, Family, and the Well-Being of College-Educated Women’’ published in the <em>American Economic Review: Papers &amp; Proceedings</em> 2013, 103(3): 244–250. She analyzed the effect of careers and family on college-educated women. She defines a career variable that is 1 if someone’s earnings are above the twenty-fifth percentile in the relevant year and age group. Estimate a model in which happiness is a function of career, being married and an interaction of career and married (“careermarried”). To match Betrand’s analysis, limit the data to only to college educated (dta$educat==4) women (dta$sex==2). Interpret the estimated average happiness for the four types of women implied by this analysis.</a></li>
+<li class="chapter" data-level="3.6" data-path="lab-ii-dummy-variables-career-data.html"><a href="lab-ii-dummy-variables-career-data.html#the-gss-provides-a-race-variable-dtarace.-the-variable-equals-1-for-white-respondents-2-for-black-respondents-and-3-for-everyone-else.-add-race-to-the-above-model-and-interpret-the-coefficients-related-to-race.-estimate-another-model-with-a-different-reference-category-and-explain-coefficients-across-the-two-models."><i class="fa fa-check"></i><b>3.6</b> The GSS provides a race variable (dta$race). The variable equals 1 for white respondents, 2 for black respondents and 3 for everyone else. Add race to the above model and interpret the coefficients related to race. Estimate another model with a different reference category and explain coefficients across the two models.</a></li>
+<li class="chapter" data-level="3.7" data-path="lab-ii-dummy-variables-career-data.html"><a href="lab-ii-dummy-variables-career-data.html#estimate-a-model-similar-to-the-above-but-for-a-different-group-of-your-choice-e.g.-limit-by-race-or-gender-or-education-and-feel-free-to-include-different-covariates."><i class="fa fa-check"></i><b>3.7</b> Estimate a model similar to the above, but for a different group of your choice (e.g., limit by race or gender or education) and feel free to include different covariates.</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="lab-iii-panel-data.html"><a href="lab-iii-panel-data.html"><i class="fa fa-check"></i><b>4</b> 2/6 | Lab III: Panel Data</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="lab-iii-panel-data.html"><a href="lab-iii-panel-data.html#a-load-the-data-from-oxcgrt_latest.csv"><i class="fa fa-check"></i><b>4.1</b> 1a) Load the data from OxCGRT_latest.csv</a></li>
+<li class="chapter" data-level="4.2" data-path="lab-iii-panel-data.html"><a href="lab-iii-panel-data.html#b-data-organization"><i class="fa fa-check"></i><b>4.2</b> 1b) Data organization</a></li>
+<li class="chapter" data-level="4.3" data-path="lab-iii-panel-data.html"><a href="lab-iii-panel-data.html#use-the-lag-function-in-dplyr-to-create-lagged-variables-for-cases-and-deaths.-also-create-difference-e.g.-dcases-that-is-the-change-in-cases-for-each-state-by-date.-check-to-make-sure-it-worked."><i class="fa fa-check"></i><b>4.3</b> 2) Use the lag function in dplyr to create lagged variables for cases and deaths. Also create “difference” (e.g., dCases) that is the change in cases for each state by date. Check to make sure it worked.</a></li>
+<li class="chapter" data-level="4.4" data-path="lab-iii-panel-data.html"><a href="lab-iii-panel-data.html#merge-the-above-data-frame-to-data-in-usstates.xlsx"><i class="fa fa-check"></i><b>4.4</b> 3) Merge the above data frame to data in <em>USstates.xlsx</em></a></li>
+<li class="chapter" data-level="4.5" data-path="lab-iii-panel-data.html"><a href="lab-iii-panel-data.html#write-in-notation-and-estimate-a-pooled-model-of-total-cases-as-a-function-of-state-policy.-discuss-possible-bias."><i class="fa fa-check"></i><b>4.5</b> 4) Write in notation and estimate a pooled model of total cases as a function of state policy. Discuss possible bias.</a></li>
+<li class="chapter" data-level="4.6" data-path="lab-iii-panel-data.html"><a href="lab-iii-panel-data.html#write-in-notation-and-estimate-a-one-way-fixed-effect-model-where-the-fixed-effect-is-state.-are-you-still-worried-about-bias"><i class="fa fa-check"></i><b>4.6</b> 5) Write in notation and estimate a one-way fixed effect model where the fixed effect is state. Are you still worried about bias?</a></li>
+<li class="chapter" data-level="4.7" data-path="lab-iii-panel-data.html"><a href="lab-iii-panel-data.html#a-write-in-notation-and-estimate-a-two-way-fixed-effect-model-where-the-fixed-effects-are-state-and-date.-does-this-model-address-the-source-of-bias-identified-earlier"><i class="fa fa-check"></i><b>4.7</b> 6a) Write in notation and estimate a two-way fixed effect model where the fixed effects are state and date. Does this model address the source of bias identified earlier?</a></li>
+<li class="chapter" data-level="4.8" data-path="lab-iii-panel-data.html"><a href="lab-iii-panel-data.html#b-test-a-model-with-robust-clustered-standard-errors.-do-the-results-change-at-all"><i class="fa fa-check"></i><b>4.8</b> 6b) Test a model with robust-clustered standard errors. Do the results change at all?</a>
+<ul>
+<li class="chapter" data-level="4.8.1" data-path="lab-iii-panel-data.html"><a href="lab-iii-panel-data.html#this-is-an-initial-analysis.-we-would-also-want-to"><i class="fa fa-check"></i><b>4.8.1</b> This is an initial analysis. We would also want to</a></li>
+</ul></li>
+<li class="chapter" data-level="4.9" data-path="lab-iii-panel-data.html"><a href="lab-iii-panel-data.html#load-in-the-texas-school-board-data-and-take-a-look-at-the-variables.-the-next-few-questions-are-from-exercise-5-in-bailey-2021.-the-basic-thoery-of-the-paper-is-that-teachers-unions-will-have-less-influence-on-school-board-members-when-turnout-is-greater-since-a-wider-swath-of-voters-non-teachers-will-be-voting.-you-can-read-the-abstract-below."><i class="fa fa-check"></i><b>4.9</b> 7) Load in the Texas School Board Data and take a look at the variables. The next few questions are from exercise 5 in Bailey (2021). The basic thoery of the paper is that teachers unions will have less influence on school board members when turnout is greater since a wider swath of voters (non-teachers) will be voting. You can read the abstract below.</a>
+<ul>
+<li class="chapter" data-level="4.9.1" data-path="lab-iii-panel-data.html"><a href="lab-iii-panel-data.html#paper-abstract-many-governments-in-the-united-states-hold-elections-on-days-other-than-national-election-day.-recent-studies-have-argued-that-the-low-voter-turnout-that-accompanies-such-off-cycle-elections-could-create-an-advantage-for-interest-groups.-however-the-endogeneity-of-election-timing-makes-it-difficult-to-estimate-its-causal-effect-on-political-outcomes.-in-this-paper-i-develop-a-theoretical-framework-that-explains-how-changes-to-election-timing-affect-the-electoral-fortunes-of-organized-interest-groups.-i-test-the-theory-examining-the-effects-of-a-2006-texas-law-that-forced-approximately-20-percent-of-the-states-school-by-districts-to-move-their-elections-to-the-same-day-as-national-elections."><i class="fa fa-check"></i><b>4.9.1</b> Paper Abstract: Many governments in the United States hold elections on days other than national Election Day. Recent studies have argued that the low voter turnout that accompanies such off-cycle elections could create an advantage for interest groups. However, the endogeneity of election timing makes it difficult to estimate its causal effect on political outcomes. In this paper, I develop a theoretical framework that explains how changes to election timing affect the electoral fortunes of organized interest groups. I test the theory examining the effects of a 2006 Texas law that forced approximately 20 percent of the state’s school by districts to move their elections to the same day as national elections.</a></li>
+</ul></li>
+<li class="chapter" data-level="4.10" data-path="lab-iii-panel-data.html"><a href="lab-iii-panel-data.html#write-in-notation-and-estimate-the-pooled-model-of-the-effect-of-oncycle-on-lnavgsalary."><i class="fa fa-check"></i><b>4.10</b> 8) Write in notation and estimate the pooled model of the effect of OnCycle on LnAvgSalary.</a></li>
+<li class="chapter" data-level="4.11" data-path="lab-iii-panel-data.html"><a href="lab-iii-panel-data.html#write-in-notation-and-estimate-a-difference-in-difference-model-of-the-effect-of-oncycle-on-lnavgsalary.-what-is-the-key-coefficient-that-we-are-interested-in"><i class="fa fa-check"></i><b>4.11</b> 9) Write in notation and estimate a difference-in-difference model of the effect of OnCycle on LnAvgSalary. What is the key coefficient that we are interested in?</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">GOVT 8002 Shared Working Book</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="lab-iii-panel-data" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">4</span> 2/6 | Lab III: Panel Data<a href="lab-iii-panel-data.html#lab-iii-panel-data" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="lab-iii-panel-data.html#cb63-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;lab3_image.jpg&quot;</span>)</span></code></pre></div>
+<p><img src="lab3_image.jpg" width="600" /></p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="lab-iii-panel-data.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load packages used in this session of R</span></span>
+<span id="cb64-2"><a href="lab-iii-panel-data.html#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb64-3"><a href="lab-iii-panel-data.html#cb64-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb64-4"><a href="lab-iii-panel-data.html#cb64-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb64-5"><a href="lab-iii-panel-data.html#cb64-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fixest)</span>
+<span id="cb64-6"><a href="lab-iii-panel-data.html#cb64-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
+<span id="cb64-7"><a href="lab-iii-panel-data.html#cb64-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span></code></pre></div>
+<p>In this lab we will estimate standard panel data models on covid policy and cases/deaths in U.S. states. This is not a full-fledged analysis, but rather an initial exploration of the data that illustrates how fixed effects models work. We will also implement a difference-in-difference model to measure the effect of changing the time of an election on teacher salaries.</p>
+<div id="a-load-the-data-from-oxcgrt_latest.csv" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> 1a) Load the data from OxCGRT_latest.csv<a href="lab-iii-panel-data.html#a-load-the-data-from-oxcgrt_latest.csv" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Oxford provides data on covid deaths/cases and policy variables by day by state. For more background, see this <a href="https://www.bsg.ox.ac.uk/research/research-projects/coronavirus-government-response-tracker#data">data archive</a> or this <a href="https://www.nytimes.com/interactive/2020/11/18/us/covid-state-restrictions.html">story</a> that uses the data.</p>
+<p>We will use a variable called <em>GovernmentResponseIndex</em>. For details, see <a href="https://www.bsg.ox.ac.uk/sites/default/files/2020-08/2020-08-06%20Oxford%20COVID-19%20Government%20Response%20Tracker%20expanded%20to%20US%20states%20PRESS%20RELEASE.pdf">this</a>. (And feel free to experiment with the other measures.)</p>
+</div>
+<div id="b-data-organization" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> 1b) Data organization<a href="lab-iii-panel-data.html#b-data-organization" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Load the <em>OxCGRT_latest.csv</em> data</li>
+<li>Limit it to U.S. states and DC (<code>CountryName == "United States" &amp; RegionName!="NA" &amp; RegionCode!="US_VI"</code>)</li>
+<li>Select the following variables: RegionName, RegionCode, Date, GovernmentResponseIndex_Average, ConfirmedCases and ConfirmedDeaths</li>
+<li>Add a variable to this data frame using the following code (this variable will help us when merging below)</li>
+</ul>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="lab-iii-panel-data.html#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Loading Covid Data</span></span>
+<span id="cb65-2"><a href="lab-iii-panel-data.html#cb65-2" aria-hidden="true" tabindex="-1"></a>covid <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;Data/OxCGRT_USA_latest.csv&quot;</span>)</span>
+<span id="cb65-3"><a href="lab-iii-panel-data.html#cb65-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb65-4"><a href="lab-iii-panel-data.html#cb65-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Cleaning &amp; Wrangling Covid Data</span></span>
+<span id="cb65-5"><a href="lab-iii-panel-data.html#cb65-5" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> covid <span class="sc">%&gt;%</span></span>
+<span id="cb65-6"><a href="lab-iii-panel-data.html#cb65-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(CountryName <span class="sc">==</span> <span class="st">&quot;United States&quot;</span> <span class="sc">&amp;</span> RegionName<span class="sc">!=</span><span class="st">&quot;NA&quot;</span> <span class="sc">&amp;</span> RegionCode<span class="sc">!=</span><span class="st">&quot;US_VI&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb65-7"><a href="lab-iii-panel-data.html#cb65-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Date=</span><span class="fu">ymd</span>(Date), <span class="at">GovernmentResponseIndex =</span> GovernmentResponseIndex_Average) <span class="sc">%&gt;%</span></span>
+<span id="cb65-8"><a href="lab-iii-panel-data.html#cb65-8" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(RegionName, RegionCode, Date, GovernmentResponseIndex, ConfirmedCases, ConfirmedDeaths) <span class="sc">%&gt;%</span></span>
+<span id="cb65-9"><a href="lab-iii-panel-data.html#cb65-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="st">&quot;RegionCode&quot;</span> <span class="ot">=</span> <span class="fu">str_replace_all</span>(<span class="at">string =</span> RegionCode, <span class="at">pattern =</span> <span class="st">&quot;US_&quot;</span>, <span class="at">replacement =</span> <span class="st">&quot;&quot;</span> ))</span></code></pre></div>
+<ul>
+<li>Show the first three variables of the first three lines of this data frame.</li>
+</ul>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="lab-iii-panel-data.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>])</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 3
+##   RegionName RegionCode Date      
+##   &lt;chr&gt;      &lt;chr&gt;      &lt;date&gt;    
+## 1 Alaska     AK         2020-01-01
+## 2 Alaska     AK         2020-01-02
+## 3 Alaska     AK         2020-01-03</code></pre>
+</div>
+<div id="use-the-lag-function-in-dplyr-to-create-lagged-variables-for-cases-and-deaths.-also-create-difference-e.g.-dcases-that-is-the-change-in-cases-for-each-state-by-date.-check-to-make-sure-it-worked." class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> 2) Use the lag function in dplyr to create lagged variables for cases and deaths. Also create “difference” (e.g., dCases) that is the change in cases for each state by date. Check to make sure it worked.<a href="lab-iii-panel-data.html#use-the-lag-function-in-dplyr-to-create-lagged-variables-for-cases-and-deaths.-also-create-difference-e.g.-dcases-that-is-the-change-in-cases-for-each-state-by-date.-check-to-make-sure-it-worked." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="lab-iii-panel-data.html#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Creating lagged and change in cases</span></span>
+<span id="cb68-2"><a href="lab-iii-panel-data.html#cb68-2" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb68-3"><a href="lab-iii-panel-data.html#cb68-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(RegionCode) <span class="sc">%&gt;%</span></span>
+<span id="cb68-4"><a href="lab-iii-panel-data.html#cb68-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">laggedcase =</span> dplyr<span class="sc">::</span><span class="fu">lag</span>(ConfirmedCases, <span class="at">order_by =</span> Date),</span>
+<span id="cb68-5"><a href="lab-iii-panel-data.html#cb68-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">laggeddeaths =</span> dplyr<span class="sc">::</span><span class="fu">lag</span>(ConfirmedDeaths, <span class="at">order_by =</span> Date),</span>
+<span id="cb68-6"><a href="lab-iii-panel-data.html#cb68-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">dcases =</span> (ConfirmedCases<span class="sc">-</span>laggedcase),</span>
+<span id="cb68-7"><a href="lab-iii-panel-data.html#cb68-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">ddeaths =</span> (ConfirmedDeaths<span class="sc">-</span>laggeddeaths))</span></code></pre></div>
+</div>
+<div id="merge-the-above-data-frame-to-data-in-usstates.xlsx" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> 3) Merge the above data frame to data in <em>USstates.xlsx</em><a href="lab-iii-panel-data.html#merge-the-above-data-frame-to-data-in-usstates.xlsx" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Merge by state abbreviation</li>
+<li>Create percapita measures of change in deaths and cases (e.g. “deathsPC” = 10000*dDeaths/pop2019).</li>
+</ul>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="lab-iii-panel-data.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Reading in State Data</span></span>
+<span id="cb69-2"><a href="lab-iii-panel-data.html#cb69-2" aria-hidden="true" tabindex="-1"></a>states <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;Data/USstates.xlsx&quot;</span>)</span>
+<span id="cb69-3"><a href="lab-iii-panel-data.html#cb69-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-4"><a href="lab-iii-panel-data.html#cb69-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Joining and creating change in deaths and cases per capita</span></span>
+<span id="cb69-5"><a href="lab-iii-panel-data.html#cb69-5" aria-hidden="true" tabindex="-1"></a>df3 <span class="ot">&lt;-</span> df2 <span class="sc">%&gt;%</span></span>
+<span id="cb69-6"><a href="lab-iii-panel-data.html#cb69-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(states, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;RegionCode&quot;</span> <span class="ot">=</span> <span class="st">&quot;stateAbbr&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb69-7"><a href="lab-iii-panel-data.html#cb69-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">deaths_pc =</span> <span class="dv">10000</span><span class="sc">*</span>ddeaths<span class="sc">/</span>pop2019,</span>
+<span id="cb69-8"><a href="lab-iii-panel-data.html#cb69-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">cases_pc =</span> <span class="dv">10000</span><span class="sc">*</span>dcases<span class="sc">/</span>pop2019)</span></code></pre></div>
+</div>
+<div id="write-in-notation-and-estimate-a-pooled-model-of-total-cases-as-a-function-of-state-policy.-discuss-possible-bias." class="section level2 hasAnchor" number="4.5">
+<h2><span class="header-section-number">4.5</span> 4) Write in notation and estimate a pooled model of total cases as a function of state policy. Discuss possible bias.<a href="lab-iii-panel-data.html#write-in-notation-and-estimate-a-pooled-model-of-total-cases-as-a-function-of-state-policy.-discuss-possible-bias." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The model is:</p>
+<p><span class="math display">\[confirmed\_cases_{it} = \beta_0 + \beta_1average\_response\_index_{it} + \epsilon_{it}\]</span></p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="lab-iii-panel-data.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Model 1</span></span>
+<span id="cb70-2"><a href="lab-iii-panel-data.html#cb70-2" aria-hidden="true" tabindex="-1"></a>pooled_covid_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(ConfirmedCases<span class="sc">~</span>GovernmentResponseIndex, <span class="at">data =</span> df3)</span>
+<span id="cb70-3"><a href="lab-iii-panel-data.html#cb70-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pooled_covid_model)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = ConfirmedCases ~ GovernmentResponseIndex, data = df3)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -1632719  -624780  -388606   191235 10944694 
+## 
+## Coefficients:
+##                         Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)              1730790      20055    86.3   &lt;2e-16 ***
+## GovernmentResponseIndex   -18824        409   -46.0   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1370000 on 54823 degrees of freedom
+##   (1071 observations deleted due to missingness)
+## Multiple R-squared:  0.0372, Adjusted R-squared:  0.0372 
+## F-statistic: 2.12e+03 on 1 and 54823 DF,  p-value: &lt;2e-16</code></pre>
+</div>
+<div id="write-in-notation-and-estimate-a-one-way-fixed-effect-model-where-the-fixed-effect-is-state.-are-you-still-worried-about-bias" class="section level2 hasAnchor" number="4.6">
+<h2><span class="header-section-number">4.6</span> 5) Write in notation and estimate a one-way fixed effect model where the fixed effect is state. Are you still worried about bias?<a href="lab-iii-panel-data.html#write-in-notation-and-estimate-a-one-way-fixed-effect-model-where-the-fixed-effect-is-state.-are-you-still-worried-about-bias" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The model is:</p>
+<p><span class="math display">\[confirmed\_cases_{it} = \beta_0 + \beta_1average\_response\_index_{it} + \alpha_{i} + \epsilon_{it}\]</span></p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="lab-iii-panel-data.html#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="do">## One-Way Model</span></span>
+<span id="cb72-2"><a href="lab-iii-panel-data.html#cb72-2" aria-hidden="true" tabindex="-1"></a>one_way <span class="ot">&lt;-</span> <span class="fu">feols</span>(ConfirmedCases<span class="sc">~</span>GovernmentResponseIndex <span class="sc">|</span> RegionCode, <span class="at">data =</span> df3,</span>
+<span id="cb72-3"><a href="lab-iii-panel-data.html#cb72-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">vcov =</span> <span class="st">&quot;iid&quot;</span>)</span></code></pre></div>
+<pre><code>## NOTE: 1,071 observations removed because of NA values (LHS: 1,071, RHS: 1,071).</code></pre>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="lab-iii-panel-data.html#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(one_way)</span></code></pre></div>
+<pre><code>## OLS estimation, Dep. Var.: ConfirmedCases
+## Observations: 54,825 
+## Fixed-effects: RegionCode: 51
+## Standard-errors: IID 
+##                         Estimate Std. Error t value  Pr(&gt;|t|)    
+## GovernmentResponseIndex   -22866        298     -77 &lt; 2.2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## RMSE: 966,135.8     Adj. R2: 0.520077
+##                   Within R2: 0.097186</code></pre>
+</div>
+<div id="a-write-in-notation-and-estimate-a-two-way-fixed-effect-model-where-the-fixed-effects-are-state-and-date.-does-this-model-address-the-source-of-bias-identified-earlier" class="section level2 hasAnchor" number="4.7">
+<h2><span class="header-section-number">4.7</span> 6a) Write in notation and estimate a two-way fixed effect model where the fixed effects are state and date. Does this model address the source of bias identified earlier?<a href="lab-iii-panel-data.html#a-write-in-notation-and-estimate-a-two-way-fixed-effect-model-where-the-fixed-effects-are-state-and-date.-does-this-model-address-the-source-of-bias-identified-earlier" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><span class="math display">\[confirmed\_cases_{it} = \beta_0 + \beta_1average\_response\_index_{it} + \alpha_{i} + \tau_{t} + \epsilon_{it}\]</span></p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="lab-iii-panel-data.html#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Two-way Model</span></span>
+<span id="cb76-2"><a href="lab-iii-panel-data.html#cb76-2" aria-hidden="true" tabindex="-1"></a>two_way <span class="ot">&lt;-</span> <span class="fu">feols</span>(ConfirmedCases<span class="sc">~</span>GovernmentResponseIndex <span class="sc">|</span> RegionCode <span class="sc">+</span> Date, <span class="at">data =</span> df3,</span>
+<span id="cb76-3"><a href="lab-iii-panel-data.html#cb76-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">vcov =</span> <span class="st">&quot;iid&quot;</span>)</span></code></pre></div>
+<pre><code>## NOTE: 1,071 observations removed because of NA values (LHS: 1,071, RHS: 1,071).</code></pre>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="lab-iii-panel-data.html#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(two_way)</span></code></pre></div>
+<pre><code>## OLS estimation, Dep. Var.: ConfirmedCases
+## Observations: 54,825 
+## Fixed-effects: RegionCode: 51,  Date: 1,075
+## Standard-errors: IID 
+##                         Estimate Std. Error t value   Pr(&gt;|t|)    
+## GovernmentResponseIndex    -4525        746    -6.1 1.3079e-09 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## RMSE: 760,870.0     Adj. R2: 0.696389
+##                   Within R2: 6.851e-4</code></pre>
+</div>
+<div id="b-test-a-model-with-robust-clustered-standard-errors.-do-the-results-change-at-all" class="section level2 hasAnchor" number="4.8">
+<h2><span class="header-section-number">4.8</span> 6b) Test a model with robust-clustered standard errors. Do the results change at all?<a href="lab-iii-panel-data.html#b-test-a-model-with-robust-clustered-standard-errors.-do-the-results-change-at-all" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="lab-iii-panel-data.html#cb80-1" aria-hidden="true" tabindex="-1"></a>two_way_robust <span class="ot">&lt;-</span> <span class="fu">feols</span>(ConfirmedCases<span class="sc">~</span>GovernmentResponseIndex <span class="sc">|</span> RegionCode <span class="sc">+</span> Date, <span class="at">data =</span> df3,</span>
+<span id="cb80-2"><a href="lab-iii-panel-data.html#cb80-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">vcov =</span> <span class="st">&quot;twoway&quot;</span>)</span></code></pre></div>
+<pre><code>## NOTE: 1,071 observations removed because of NA values (LHS: 1,071, RHS: 1,071).</code></pre>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="lab-iii-panel-data.html#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(two_way_robust)</span></code></pre></div>
+<pre><code>## OLS estimation, Dep. Var.: ConfirmedCases
+## Observations: 54,825 
+## Fixed-effects: RegionCode: 51,  Date: 1,075
+## Standard-errors: Clustered (RegionCode &amp; Date) 
+##                         Estimate Std. Error t value Pr(&gt;|t|) 
+## GovernmentResponseIndex    -4525      13439   -0.34  0.73775 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## RMSE: 760,870.0     Adj. R2: 0.696389
+##                   Within R2: 6.851e-4</code></pre>
+<p>Yes, the standard errors are much larger.</p>
+<div id="this-is-an-initial-analysis.-we-would-also-want-to" class="section level3 hasAnchor" number="4.8.1">
+<h3><span class="header-section-number">4.8.1</span> This is an initial analysis. We would also want to<a href="lab-iii-panel-data.html#this-is-an-initial-analysis.-we-would-also-want-to" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li>think through whether it is useful to control for days of the week (there is a well-known pattern in reporting across days of the week)</li>
+<li>assess the data for outliers (e.g, <code>min(dfState$casesPC, na.rm = TRUE)</code>)</li>
+<li>consider a lagged dependent variable</li>
+<li>For more, read <a href="https://cdn.vanderbilt.edu/vu-my/wp-content/uploads/sites/2318/2020/05/11154933/Covid-DD_v2.pdf">this</a></li>
+</ul>
+</div>
+</div>
+<div id="load-in-the-texas-school-board-data-and-take-a-look-at-the-variables.-the-next-few-questions-are-from-exercise-5-in-bailey-2021.-the-basic-thoery-of-the-paper-is-that-teachers-unions-will-have-less-influence-on-school-board-members-when-turnout-is-greater-since-a-wider-swath-of-voters-non-teachers-will-be-voting.-you-can-read-the-abstract-below." class="section level2 hasAnchor" number="4.9">
+<h2><span class="header-section-number">4.9</span> 7) Load in the Texas School Board Data and take a look at the variables. The next few questions are from exercise 5 in Bailey (2021). The basic thoery of the paper is that teachers unions will have less influence on school board members when turnout is greater since a wider swath of voters (non-teachers) will be voting. You can read the abstract below.<a href="lab-iii-panel-data.html#load-in-the-texas-school-board-data-and-take-a-look-at-the-variables.-the-next-few-questions-are-from-exercise-5-in-bailey-2021.-the-basic-thoery-of-the-paper-is-that-teachers-unions-will-have-less-influence-on-school-board-members-when-turnout-is-greater-since-a-wider-swath-of-voters-non-teachers-will-be-voting.-you-can-read-the-abstract-below." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="paper-abstract-many-governments-in-the-united-states-hold-elections-on-days-other-than-national-election-day.-recent-studies-have-argued-that-the-low-voter-turnout-that-accompanies-such-off-cycle-elections-could-create-an-advantage-for-interest-groups.-however-the-endogeneity-of-election-timing-makes-it-difficult-to-estimate-its-causal-effect-on-political-outcomes.-in-this-paper-i-develop-a-theoretical-framework-that-explains-how-changes-to-election-timing-affect-the-electoral-fortunes-of-organized-interest-groups.-i-test-the-theory-examining-the-effects-of-a-2006-texas-law-that-forced-approximately-20-percent-of-the-states-school-by-districts-to-move-their-elections-to-the-same-day-as-national-elections." class="section level3 hasAnchor" number="4.9.1">
+<h3><span class="header-section-number">4.9.1</span> Paper Abstract: Many governments in the United States hold elections on days other than national Election Day. Recent studies have argued that the low voter turnout that accompanies such off-cycle elections could create an advantage for interest groups. However, the endogeneity of election timing makes it difficult to estimate its causal effect on political outcomes. In this paper, I develop a theoretical framework that explains how changes to election timing affect the electoral fortunes of organized interest groups. I test the theory examining the effects of a 2006 Texas law that forced approximately 20 percent of the state’s school by districts to move their elections to the same day as national elections.<a href="lab-iii-panel-data.html#paper-abstract-many-governments-in-the-united-states-hold-elections-on-days-other-than-national-election-day.-recent-studies-have-argued-that-the-low-voter-turnout-that-accompanies-such-off-cycle-elections-could-create-an-advantage-for-interest-groups.-however-the-endogeneity-of-election-timing-makes-it-difficult-to-estimate-its-causal-effect-on-political-outcomes.-in-this-paper-i-develop-a-theoretical-framework-that-explains-how-changes-to-election-timing-affect-the-electoral-fortunes-of-organized-interest-groups.-i-test-the-theory-examining-the-effects-of-a-2006-texas-law-that-forced-approximately-20-percent-of-the-states-school-by-districts-to-move-their-elections-to-the-same-day-as-national-elections." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="lab-iii-panel-data.html#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Loading Data</span></span>
+<span id="cb84-2"><a href="lab-iii-panel-data.html#cb84-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;Data/Texas_school_board.RData&quot;</span>)</span></code></pre></div>
+</div>
+</div>
+<div id="write-in-notation-and-estimate-the-pooled-model-of-the-effect-of-oncycle-on-lnavgsalary." class="section level2 hasAnchor" number="4.10">
+<h2><span class="header-section-number">4.10</span> 8) Write in notation and estimate the pooled model of the effect of OnCycle on LnAvgSalary.<a href="lab-iii-panel-data.html#write-in-notation-and-estimate-the-pooled-model-of-the-effect-of-oncycle-on-lnavgsalary." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The model is:</p>
+<p><span class="math display">\[LnAvgSalary_{it} = \beta_0 + \beta_1OnCycle_{it} + \epsilon_{it}\]</span></p>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="lab-iii-panel-data.html#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Pooled model</span></span>
+<span id="cb85-2"><a href="lab-iii-panel-data.html#cb85-2" aria-hidden="true" tabindex="-1"></a>dta <span class="sc">%&gt;%</span> </span>
+<span id="cb85-3"><a href="lab-iii-panel-data.html#cb85-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(LnAvgSalary <span class="sc">~</span> OnCycle, .) <span class="sc">%&gt;%</span></span>
+<span id="cb85-4"><a href="lab-iii-panel-data.html#cb85-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = LnAvgSalary ~ OnCycle, data = .)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -0.2891 -0.0553 -0.0065  0.0520  0.6522 
+## 
+## Coefficients:
+##             Estimate Std. Error  t value Pr(&gt;|t|)    
+## (Intercept) 10.67136    0.00102 10478.81   &lt;2e-16 ***
+## OnCycle     -0.03062    0.00377    -8.13    5e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.083 on 7137 degrees of freedom
+##   (64 observations deleted due to missingness)
+## Multiple R-squared:  0.00918,    Adjusted R-squared:  0.00904 
+## F-statistic: 66.1 on 1 and 7137 DF,  p-value: 5e-16</code></pre>
+</div>
+<div id="write-in-notation-and-estimate-a-difference-in-difference-model-of-the-effect-of-oncycle-on-lnavgsalary.-what-is-the-key-coefficient-that-we-are-interested-in" class="section level2 hasAnchor" number="4.11">
+<h2><span class="header-section-number">4.11</span> 9) Write in notation and estimate a difference-in-difference model of the effect of OnCycle on LnAvgSalary. What is the key coefficient that we are interested in?<a href="lab-iii-panel-data.html#write-in-notation-and-estimate-a-difference-in-difference-model-of-the-effect-of-oncycle-on-lnavgsalary.-what-is-the-key-coefficient-that-we-are-interested-in" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><span class="math display">\[LnAvgSalary_{it} = \beta_0 + \beta_1CycleSwitch_{i} + \beta_2AfterSwitch_{t} + \beta_3(CycleSwitch_{i}\times AfterSwitch_{t}) + \epsilon_{it}\]</span></p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="lab-iii-panel-data.html#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="do">## DiD model</span></span>
+<span id="cb87-2"><a href="lab-iii-panel-data.html#cb87-2" aria-hidden="true" tabindex="-1"></a>dta <span class="sc">%&gt;%</span> </span>
+<span id="cb87-3"><a href="lab-iii-panel-data.html#cb87-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(LnAvgSalary <span class="sc">~</span> CycleSwitch<span class="sc">*</span>AfterSwitch, .) <span class="sc">%&gt;%</span></span>
+<span id="cb87-4"><a href="lab-iii-panel-data.html#cb87-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = LnAvgSalary ~ CycleSwitch * AfterSwitch, data = .)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -0.2981 -0.0560 -0.0073  0.0528  0.6524 
+## 
+## Coefficients:
+##                         Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)             10.67107    0.00143 7447.60  &lt; 2e-16 ***
+## CycleSwitch             -0.02398    0.00340   -7.06  1.8e-12 ***
+## AfterSwitch              0.00930    0.00219    4.25  2.2e-05 ***
+## CycleSwitch:AfterSwitch -0.00859    0.00519   -1.66    0.098 .  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.083 on 7198 degrees of freedom
+##   (1 observation deleted due to missingness)
+## Multiple R-squared:  0.0183, Adjusted R-squared:  0.0179 
+## F-statistic: 44.7 on 3 and 7198 DF,  p-value: &lt;2e-16</code></pre>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="lab-ii-dummy-variables-career-data.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -30,7 +30,7 @@
   
   
 <link rel="prev" href="lab-i-tidyverse-ols-review.html"/>
-
+<link rel="next" href="lab-iii-panel-data.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -162,6 +162,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.6" data-path="lab-ii-dummy-variables-career-data.html"><a href="lab-ii-dummy-variables-career-data.html#the-gss-provides-a-race-variable-dtarace.-the-variable-equals-1-for-white-respondents-2-for-black-respondents-and-3-for-everyone-else.-add-race-to-the-above-model-and-interpret-the-coefficients-related-to-race.-estimate-another-model-with-a-different-reference-category-and-explain-coefficients-across-the-two-models."><i class="fa fa-check"></i><b>3.6</b> The GSS provides a race variable (dta$race). The variable equals 1 for white respondents, 2 for black respondents and 3 for everyone else. Add race to the above model and interpret the coefficients related to race. Estimate another model with a different reference category and explain coefficients across the two models.</a></li>
 <li class="chapter" data-level="3.7" data-path="lab-ii-dummy-variables-career-data.html"><a href="lab-ii-dummy-variables-career-data.html#estimate-a-model-similar-to-the-above-but-for-a-different-group-of-your-choice-e.g.-limit-by-race-or-gender-or-education-and-feel-free-to-include-different-covariates."><i class="fa fa-check"></i><b>3.7</b> Estimate a model similar to the above, but for a different group of your choice (e.g., limit by race or gender or education) and feel free to include different covariates.</a></li>
 </ul></li>
+<li class="chapter" data-level="4" data-path="lab-iii-panel-data.html"><a href="lab-iii-panel-data.html"><i class="fa fa-check"></i><b>4</b> 2/6 | Lab III: Panel Data</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="lab-iii-panel-data.html"><a href="lab-iii-panel-data.html#a-load-the-data-from-oxcgrt_latest.csv"><i class="fa fa-check"></i><b>4.1</b> 1a) Load the data from OxCGRT_latest.csv</a></li>
+<li class="chapter" data-level="4.2" data-path="lab-iii-panel-data.html"><a href="lab-iii-panel-data.html#b-data-organization"><i class="fa fa-check"></i><b>4.2</b> 1b) Data organization</a></li>
+<li class="chapter" data-level="4.3" data-path="lab-iii-panel-data.html"><a href="lab-iii-panel-data.html#use-the-lag-function-in-dplyr-to-create-lagged-variables-for-cases-and-deaths.-also-create-difference-e.g.-dcases-that-is-the-change-in-cases-for-each-state-by-date.-check-to-make-sure-it-worked."><i class="fa fa-check"></i><b>4.3</b> 2) Use the lag function in dplyr to create lagged variables for cases and deaths. Also create “difference” (e.g., dCases) that is the change in cases for each state by date. Check to make sure it worked.</a></li>
+<li class="chapter" data-level="4.4" data-path="lab-iii-panel-data.html"><a href="lab-iii-panel-data.html#merge-the-above-data-frame-to-data-in-usstates.xlsx"><i class="fa fa-check"></i><b>4.4</b> 3) Merge the above data frame to data in <em>USstates.xlsx</em></a></li>
+<li class="chapter" data-level="4.5" data-path="lab-iii-panel-data.html"><a href="lab-iii-panel-data.html#write-in-notation-and-estimate-a-pooled-model-of-total-cases-as-a-function-of-state-policy.-discuss-possible-bias."><i class="fa fa-check"></i><b>4.5</b> 4) Write in notation and estimate a pooled model of total cases as a function of state policy. Discuss possible bias.</a></li>
+<li class="chapter" data-level="4.6" data-path="lab-iii-panel-data.html"><a href="lab-iii-panel-data.html#write-in-notation-and-estimate-a-one-way-fixed-effect-model-where-the-fixed-effect-is-state.-are-you-still-worried-about-bias"><i class="fa fa-check"></i><b>4.6</b> 5) Write in notation and estimate a one-way fixed effect model where the fixed effect is state. Are you still worried about bias?</a></li>
+<li class="chapter" data-level="4.7" data-path="lab-iii-panel-data.html"><a href="lab-iii-panel-data.html#a-write-in-notation-and-estimate-a-two-way-fixed-effect-model-where-the-fixed-effects-are-state-and-date.-does-this-model-address-the-source-of-bias-identified-earlier"><i class="fa fa-check"></i><b>4.7</b> 6a) Write in notation and estimate a two-way fixed effect model where the fixed effects are state and date. Does this model address the source of bias identified earlier?</a></li>
+<li class="chapter" data-level="4.8" data-path="lab-iii-panel-data.html"><a href="lab-iii-panel-data.html#b-test-a-model-with-robust-clustered-standard-errors.-do-the-results-change-at-all"><i class="fa fa-check"></i><b>4.8</b> 6b) Test a model with robust-clustered standard errors. Do the results change at all?</a>
+<ul>
+<li class="chapter" data-level="4.8.1" data-path="lab-iii-panel-data.html"><a href="lab-iii-panel-data.html#this-is-an-initial-analysis.-we-would-also-want-to"><i class="fa fa-check"></i><b>4.8.1</b> This is an initial analysis. We would also want to</a></li>
+</ul></li>
+<li class="chapter" data-level="4.9" data-path="lab-iii-panel-data.html"><a href="lab-iii-panel-data.html#load-in-the-texas-school-board-data-and-take-a-look-at-the-variables.-the-next-few-questions-are-from-exercise-5-in-bailey-2021.-the-basic-thoery-of-the-paper-is-that-teachers-unions-will-have-less-influence-on-school-board-members-when-turnout-is-greater-since-a-wider-swath-of-voters-non-teachers-will-be-voting.-you-can-read-the-abstract-below."><i class="fa fa-check"></i><b>4.9</b> 7) Load in the Texas School Board Data and take a look at the variables. The next few questions are from exercise 5 in Bailey (2021). The basic thoery of the paper is that teachers unions will have less influence on school board members when turnout is greater since a wider swath of voters (non-teachers) will be voting. You can read the abstract below.</a>
+<ul>
+<li class="chapter" data-level="4.9.1" data-path="lab-iii-panel-data.html"><a href="lab-iii-panel-data.html#paper-abstract-many-governments-in-the-united-states-hold-elections-on-days-other-than-national-election-day.-recent-studies-have-argued-that-the-low-voter-turnout-that-accompanies-such-off-cycle-elections-could-create-an-advantage-for-interest-groups.-however-the-endogeneity-of-election-timing-makes-it-difficult-to-estimate-its-causal-effect-on-political-outcomes.-in-this-paper-i-develop-a-theoretical-framework-that-explains-how-changes-to-election-timing-affect-the-electoral-fortunes-of-organized-interest-groups.-i-test-the-theory-examining-the-effects-of-a-2006-texas-law-that-forced-approximately-20-percent-of-the-states-school-by-districts-to-move-their-elections-to-the-same-day-as-national-elections."><i class="fa fa-check"></i><b>4.9.1</b> Paper Abstract: Many governments in the United States hold elections on days other than national Election Day. Recent studies have argued that the low voter turnout that accompanies such off-cycle elections could create an advantage for interest groups. However, the endogeneity of election timing makes it difficult to estimate its causal effect on political outcomes. In this paper, I develop a theoretical framework that explains how changes to election timing affect the electoral fortunes of organized interest groups. I test the theory examining the effects of a 2006 Texas law that forced approximately 20 percent of the state’s school by districts to move their elections to the same day as national elections.</a></li>
+</ul></li>
+<li class="chapter" data-level="4.10" data-path="lab-iii-panel-data.html"><a href="lab-iii-panel-data.html#write-in-notation-and-estimate-the-pooled-model-of-the-effect-of-oncycle-on-lnavgsalary."><i class="fa fa-check"></i><b>4.10</b> 8) Write in notation and estimate the pooled model of the effect of OnCycle on LnAvgSalary.</a></li>
+<li class="chapter" data-level="4.11" data-path="lab-iii-panel-data.html"><a href="lab-iii-panel-data.html#write-in-notation-and-estimate-a-difference-in-difference-model-of-the-effect-of-oncycle-on-lnavgsalary.-what-is-the-key-coefficient-that-we-are-interested-in"><i class="fa fa-check"></i><b>4.11</b> 9) Write in notation and estimate a difference-in-difference model of the effect of OnCycle on LnAvgSalary. What is the key coefficient that we are interested in?</a></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -214,32 +234,32 @@ The key variables we will use are</p>
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) 2.024903   0.006033  335.64   &lt;2e-16 ***
-## married     0.297810   0.007621   39.08   &lt;2e-16 ***
+## (Intercept)  2.02490    0.00603   335.6   &lt;2e-16 ***
+## married      0.29781    0.00762    39.1   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 0.5984 on 26346 degrees of freedom
+## Residual standard error: 0.6 on 26346 degrees of freedom
 ##   (2442 observations deleted due to missingness)
-## Multiple R-squared:  0.05478,    Adjusted R-squared:  0.05475 
-## F-statistic:  1527 on 1 and 26346 DF,  p-value: &lt; 2.2e-16</code></pre>
+## Multiple R-squared:  0.0548, Adjusted R-squared:  0.0547 
+## F-statistic: 1.53e+03 on 1 and 26346 DF,  p-value: &lt;2e-16</code></pre>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="lab-ii-dummy-variables-career-data.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(model_1)</span></code></pre></div>
-<pre><code>##                2.5 %    97.5 %
-## (Intercept) 2.013079 2.0367282
-## married     0.282872 0.3127481</code></pre>
+<pre><code>##             2.5 % 97.5 %
+## (Intercept)  2.01   2.04
+## married      0.28   0.31</code></pre>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="lab-ii-dummy-variables-career-data.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="do">## With t.test()</span></span>
 <span id="cb41-2"><a href="lab-ii-dummy-variables-career-data.html#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(dta<span class="sc">$</span>happy[dta<span class="sc">$</span>married<span class="sc">==</span><span class="dv">1</span>], dta<span class="sc">$</span>happy[dta<span class="sc">$</span>married<span class="sc">==</span><span class="dv">0</span>])</span></code></pre></div>
 <pre><code>## 
 ##  Welch Two Sample t-test
 ## 
 ## data:  dta$happy[dta$married == 1] and dta$happy[dta$married == 0]
-## t = 38.977, df = 20513, p-value &lt; 2.2e-16
+## t = 39, df = 20513, p-value &lt;2e-16
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  0.2828336 0.3127865
+##  0.28 0.31
 ## sample estimates:
 ## mean of x mean of y 
-##  2.322714  2.024903</code></pre>
+##       2.3       2.0</code></pre>
 </div>
 <div id="use-ols-with-robust-standard-errors-to-estimate-the-difference-in-happiness-for-married-and-unmarried-people.-then-use-the-t-test-function-with-unequal-variances-to-assess-the-difference-in-happiness-by-marital-status.-discuss-similarities-and-differences-in-ols-model-and-t-test-function-results." class="section level2 hasAnchor" number="3.2">
 <h2><span class="header-section-number">3.2</span> Use OLS with robust standard errors to estimate the difference in happiness for married and unmarried people. Then use the t test function with unequal variances to assess the difference in happiness by marital status. Discuss similarities and differences in OLS model and t test function results.<a href="lab-ii-dummy-variables-career-data.html#use-ols-with-robust-standard-errors-to-estimate-the-difference-in-happiness-for-married-and-unmarried-people.-then-use-the-t-test-function-with-unequal-variances-to-assess-the-difference-in-happiness-by-marital-status.-discuss-similarities-and-differences-in-ols-model-and-t-test-function-results." class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -248,9 +268,9 @@ The key variables we will use are</p>
 <pre><code>## 
 ## t test of coefficients:
 ## 
-##              Estimate Std. Error t value  Pr(&gt;|t|)    
-## (Intercept) 2.0249034  0.0060709 333.541 &lt; 2.2e-16 ***
-## married     0.2978101  0.0076407  38.977 &lt; 2.2e-16 ***
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  2.02490    0.00607     334   &lt;2e-16 ***
+## married      0.29781    0.00764      39   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="lab-ii-dummy-variables-career-data.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># t-test, without assuming equal variance</span></span>
@@ -259,13 +279,13 @@ The key variables we will use are</p>
 ##  Welch Two Sample t-test
 ## 
 ## data:  dta$happy[dta$married == 1] and dta$happy[dta$married == 0]
-## t = 38.977, df = 20513, p-value &lt; 2.2e-16
+## t = 39, df = 20513, p-value &lt;2e-16
 ## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
-##  0.2828336 0.3127865
+##  0.28 0.31
 ## sample estimates:
 ## mean of x mean of y 
-##  2.322714  2.024903</code></pre>
+##       2.3       2.0</code></pre>
 </div>
 <div id="create-an-interaction-between-married-and-age.-estimate-a-model-that-explains-happiness-as-a-function-of-age-and-marital-status-allowing-for-the-age-effect-to-differ-according-to-marital-status.-for-simplicity-we-use-only-married-and-unmarried-for-marital-status.-what-is-the-effect-of-age-for-unmarried-people-for-married-people" class="section level2 hasAnchor" number="3.3">
 <h2><span class="header-section-number">3.3</span> Create an interaction between married and age. Estimate a model that explains happiness as a function of age and marital status, allowing for the age effect to differ according to marital status. (For simplicity, we use only married and unmarried for marital status.) What is the effect of age for unmarried people? For married people?<a href="lab-ii-dummy-variables-career-data.html#create-an-interaction-between-married-and-age.-estimate-a-model-that-explains-happiness-as-a-function-of-age-and-marital-status-allowing-for-the-age-effect-to-differ-according-to-marital-status.-for-simplicity-we-use-only-married-and-unmarried-for-marital-status.-what-is-the-effect-of-age-for-unmarried-people-for-married-people" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -280,22 +300,22 @@ The key variables we will use are</p>
 ## lm(formula = happy ~ age + married + dum_interact, data = dta)
 ## 
 ## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -1.32925 -0.32408 -0.04825  0.67451  1.02224 
+##     Min      1Q  Median      3Q     Max 
+## -1.3292 -0.3241 -0.0483  0.6745  1.0222 
 ## 
 ## Coefficients:
-##                Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)   2.1300310  0.0270265  78.813  &lt; 2e-16 ***
-## age          -0.0028199  0.0007067  -3.990 6.61e-05 ***
-## married       0.2109524  0.0351041   6.009 1.89e-09 ***
-## dum_interact  0.0023504  0.0009036   2.601   0.0093 ** 
+##               Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   2.130031   0.027026   78.81  &lt; 2e-16 ***
+## age          -0.002820   0.000707   -3.99  6.6e-05 ***
+## married       0.210952   0.035104    6.01  1.9e-09 ***
+## dum_interact  0.002350   0.000904    2.60   0.0093 ** 
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 0.5982 on 26344 degrees of freedom
+## Residual standard error: 0.6 on 26344 degrees of freedom
 ##   (2442 observations deleted due to missingness)
-## Multiple R-squared:  0.05538,    Adjusted R-squared:  0.05527 
-## F-statistic: 514.8 on 3 and 26344 DF,  p-value: &lt; 2.2e-16</code></pre>
+## Multiple R-squared:  0.0554, Adjusted R-squared:  0.0553 
+## F-statistic:  515 on 3 and 26344 DF,  p-value: &lt;2e-16</code></pre>
 <div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="lab-ii-dummy-variables-career-data.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="do">## or</span></span>
 <span id="cb49-2"><a href="lab-ii-dummy-variables-career-data.html#cb49-2" aria-hidden="true" tabindex="-1"></a>model_2b <span class="ot">&lt;-</span> <span class="fu">lm</span>(happy<span class="sc">~</span>married<span class="sc">*</span>age, <span class="at">data=</span>dta)</span>
 <span id="cb49-3"><a href="lab-ii-dummy-variables-career-data.html#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_2b)</span></code></pre></div>
@@ -304,22 +324,22 @@ The key variables we will use are</p>
 ## lm(formula = happy ~ married * age, data = dta)
 ## 
 ## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -1.32925 -0.32408 -0.04825  0.67451  1.02224 
+##     Min      1Q  Median      3Q     Max 
+## -1.3292 -0.3241 -0.0483  0.6745  1.0222 
 ## 
 ## Coefficients:
-##               Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)  2.1300310  0.0270265  78.813  &lt; 2e-16 ***
-## married      0.2109524  0.0351041   6.009 1.89e-09 ***
-## age         -0.0028199  0.0007067  -3.990 6.61e-05 ***
-## married:age  0.0023504  0.0009036   2.601   0.0093 ** 
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  2.130031   0.027026   78.81  &lt; 2e-16 ***
+## married      0.210952   0.035104    6.01  1.9e-09 ***
+## age         -0.002820   0.000707   -3.99  6.6e-05 ***
+## married:age  0.002350   0.000904    2.60   0.0093 ** 
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 0.5982 on 26344 degrees of freedom
+## Residual standard error: 0.6 on 26344 degrees of freedom
 ##   (2442 observations deleted due to missingness)
-## Multiple R-squared:  0.05538,    Adjusted R-squared:  0.05527 
-## F-statistic: 514.8 on 3 and 26344 DF,  p-value: &lt; 2.2e-16</code></pre>
+## Multiple R-squared:  0.0554, Adjusted R-squared:  0.0553 
+## F-statistic:  515 on 3 and 26344 DF,  p-value: &lt;2e-16</code></pre>
 <p>The effect of age is <span class="math inline">\(-0.00281\)</span> for unmarried people and <span class="math inline">\(-0.00281 + 0.002350 = -0.0004699\)</span> for married people. The intercept is <span class="math inline">\(2.13\)</span> for unmarried people and <span class="math inline">\(2.13 + 0.2109 = 2.3409\)</span> for married people.</p>
 </div>
 <div id="estimate-separate-models-explaining-happiness-in-terms-of-age-for-married-and-unmarried-people.-comment-on-similarities-and-differences-compared-to-results-immediately-above-for-i-the-estimated-effect-of-age-and-ii-the-intercept." class="section level2 hasAnchor" number="3.4">
@@ -332,20 +352,20 @@ The key variables we will use are</p>
 ## lm(formula = happy ~ age, data = subset(dta, married == 1))
 ## 
 ## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -1.3293 -0.3250 -0.3189  0.6754  0.6844 
+##    Min     1Q Median     3Q    Max 
+## -1.329 -0.325 -0.319  0.675  0.684 
 ## 
 ## Coefficients:
-##               Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)  2.3409834  0.0223240 104.864   &lt;2e-16 ***
-## age         -0.0004695  0.0005612  -0.837    0.403    
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  2.340983   0.022324  104.86   &lt;2e-16 ***
+## age         -0.000470   0.000561   -0.84      0.4    
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 0.5961 on 16508 degrees of freedom
+## Residual standard error: 0.6 on 16508 degrees of freedom
 ##   (1385 observations deleted due to missingness)
-## Multiple R-squared:  4.24e-05,   Adjusted R-squared:  -1.817e-05 
-## F-statistic:   0.7 on 1 and 16508 DF,  p-value: 0.4028</code></pre>
+## Multiple R-squared:  4.24e-05,   Adjusted R-squared:  -1.82e-05 
+## F-statistic:  0.7 on 1 and 16508 DF,  p-value: 0.403</code></pre>
 <div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="lab-ii-dummy-variables-career-data.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="do">## and</span></span>
 <span id="cb53-2"><a href="lab-ii-dummy-variables-career-data.html#cb53-2" aria-hidden="true" tabindex="-1"></a>model_3b <span class="ot">&lt;-</span> <span class="fu">lm</span>(happy<span class="sc">~</span>age, <span class="at">data=</span><span class="fu">subset</span>(dta, married<span class="sc">==</span><span class="dv">0</span>))</span>
 <span id="cb53-3"><a href="lab-ii-dummy-variables-career-data.html#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_3b)</span></code></pre></div>
@@ -354,20 +374,20 @@ The key variables we will use are</p>
 ## lm(formula = happy ~ age, data = subset(dta, married == 0))
 ## 
 ## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -1.05953 -0.05389 -0.02570  0.01096  1.02224 
+##     Min      1Q  Median      3Q     Max 
+## -1.0595 -0.0539 -0.0257  0.0110  1.0222 
 ## 
 ## Coefficients:
-##               Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)  2.1300310  0.0271844  78.355  &lt; 2e-16 ***
-## age         -0.0028199  0.0007108  -3.967 7.32e-05 ***
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  2.130031   0.027184   78.35  &lt; 2e-16 ***
+## age         -0.002820   0.000711   -3.97  7.3e-05 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 0.6017 on 9836 degrees of freedom
+## Residual standard error: 0.6 on 9836 degrees of freedom
 ##   (1053 observations deleted due to missingness)
-## Multiple R-squared:  0.001598,   Adjusted R-squared:  0.001496 
-## F-statistic: 15.74 on 1 and 9836 DF,  p-value: 7.322e-05</code></pre>
+## Multiple R-squared:  0.0016, Adjusted R-squared:  0.0015 
+## F-statistic: 15.7 on 1 and 9836 DF,  p-value: 7.32e-05</code></pre>
 <p>The results here are the same as above: for unmarried people, the effect of age is <span class="math inline">\(-0.00281\)</span> and the intercept is <span class="math inline">\(2.130\)</span>.</p>
 <p>The effect of age for married people also the same: <span class="math inline">\(-0.000469\)</span>, with an intercept of <span class="math inline">\(2.3409\)</span>.</p>
 </div>
@@ -381,22 +401,22 @@ The key variables we will use are</p>
 ##     2 &amp; dta$educat == 4, ])
 ## 
 ## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -1.4215 -0.4214 -0.1247  0.5786  0.8753 
+##    Min     1Q Median     3Q    Max 
+## -1.421 -0.421 -0.125  0.579  0.875 
 ## 
 ## Coefficients:
 ##                Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)     2.12470    0.01997 106.406  &lt; 2e-16 ***
-## career          0.09204    0.02985   3.084  0.00206 ** 
-## married         0.29676    0.02503  11.855  &lt; 2e-16 ***
-## career:married -0.09923    0.04023  -2.466  0.01369 *  
+## (Intercept)      2.1247     0.0200  106.41   &lt;2e-16 ***
+## career           0.0920     0.0298    3.08   0.0021 ** 
+## married          0.2968     0.0250   11.85   &lt;2e-16 ***
+## career:married  -0.0992     0.0402   -2.47   0.0137 *  
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 0.5739 on 3595 degrees of freedom
+## Residual standard error: 0.57 on 3595 degrees of freedom
 ##   (400 observations deleted due to missingness)
-## Multiple R-squared:  0.04765,    Adjusted R-squared:  0.04685 
-## F-statistic: 59.96 on 3 and 3595 DF,  p-value: &lt; 2.2e-16</code></pre>
+## Multiple R-squared:  0.0476, Adjusted R-squared:  0.0469 
+## F-statistic:   60 on 3 and 3595 DF,  p-value: &lt;2e-16</code></pre>
 <p>The four groups are unmarried women without careers, married women with careers, married women without
 careers, and unmarried women without careers.</p>
 <p>College-educated women that have no careers and are not married have an average happiness of <span class="math inline">\(2.12\)</span>.</p>
@@ -416,24 +436,24 @@ careers, and unmarried women without careers.</p>
 ##     2 &amp; dta$educat == 4, ])
 ## 
 ## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -1.4359 -0.4329 -0.1575  0.5641  1.0085 
+##    Min     1Q Median     3Q    Max 
+## -1.436 -0.433 -0.158  0.564  1.008 
 ## 
 ## Coefficients:
 ##                Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)     2.15746    0.02077 103.867  &lt; 2e-16 ***
-## career          0.08830    0.02974   2.969  0.00301 ** 
-## married         0.27847    0.02518  11.060  &lt; 2e-16 ***
-## factor(race)2  -0.16593    0.03267  -5.079 3.98e-07 ***
-## factor(race)3  -0.10051    0.04036  -2.491  0.01280 *  
-## career:married -0.09132    0.04010  -2.277  0.02283 *  
+## (Intercept)      2.1575     0.0208  103.87   &lt;2e-16 ***
+## career           0.0883     0.0297    2.97    0.003 ** 
+## married          0.2785     0.0252   11.06   &lt;2e-16 ***
+## factor(race)2   -0.1659     0.0327   -5.08    4e-07 ***
+## factor(race)3   -0.1005     0.0404   -2.49    0.013 *  
+## career:married  -0.0913     0.0401   -2.28    0.023 *  
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 0.5717 on 3593 degrees of freedom
+## Residual standard error: 0.57 on 3593 degrees of freedom
 ##   (400 observations deleted due to missingness)
-## Multiple R-squared:  0.05555,    Adjusted R-squared:  0.05424 
-## F-statistic: 42.27 on 5 and 3593 DF,  p-value: &lt; 2.2e-16</code></pre>
+## Multiple R-squared:  0.0556, Adjusted R-squared:  0.0542 
+## F-statistic: 42.3 on 5 and 3593 DF,  p-value: &lt;2e-16</code></pre>
 <div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="lab-ii-dummy-variables-career-data.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Second Race Model with Other as the Reference Category</span></span>
 <span id="cb59-2"><a href="lab-ii-dummy-variables-career-data.html#cb59-2" aria-hidden="true" tabindex="-1"></a>model_5b <span class="ot">&lt;-</span> <span class="fu">lm</span>(happy <span class="sc">~</span> career<span class="sc">*</span>married <span class="sc">+</span> <span class="fu">relevel</span>(<span class="fu">factor</span>(race), <span class="at">ref =</span> <span class="st">&quot;3&quot;</span>),</span>
 <span id="cb59-3"><a href="lab-ii-dummy-variables-career-data.html#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="at">data=</span>dta[dta<span class="sc">$</span>sex<span class="sc">==</span><span class="dv">2</span> <span class="sc">&amp;</span> dta<span class="sc">$</span>educat<span class="sc">==</span><span class="dv">4</span>,])</span>
@@ -444,24 +464,24 @@ careers, and unmarried women without careers.</p>
 ##     ref = &quot;3&quot;), data = dta[dta$sex == 2 &amp; dta$educat == 4, ])
 ## 
 ## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -1.4359 -0.4329 -0.1575  0.5641  1.0085 
+##    Min     1Q Median     3Q    Max 
+## -1.436 -0.433 -0.158  0.564  1.008 
 ## 
 ## Coefficients:
 ##                                   Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)                        2.05695    0.04261  48.273  &lt; 2e-16 ***
-## career                             0.08830    0.02974   2.969  0.00301 ** 
-## married                            0.27847    0.02518  11.060  &lt; 2e-16 ***
-## relevel(factor(race), ref = &quot;3&quot;)1  0.10051    0.04036   2.491  0.01280 *  
-## relevel(factor(race), ref = &quot;3&quot;)2 -0.06542    0.04972  -1.316  0.18835    
-## career:married                    -0.09132    0.04010  -2.277  0.02283 *  
+## (Intercept)                         2.0570     0.0426   48.27   &lt;2e-16 ***
+## career                              0.0883     0.0297    2.97    0.003 ** 
+## married                             0.2785     0.0252   11.06   &lt;2e-16 ***
+## relevel(factor(race), ref = &quot;3&quot;)1   0.1005     0.0404    2.49    0.013 *  
+## relevel(factor(race), ref = &quot;3&quot;)2  -0.0654     0.0497   -1.32    0.188    
+## career:married                     -0.0913     0.0401   -2.28    0.023 *  
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 0.5717 on 3593 degrees of freedom
+## Residual standard error: 0.57 on 3593 degrees of freedom
 ##   (400 observations deleted due to missingness)
-## Multiple R-squared:  0.05555,    Adjusted R-squared:  0.05424 
-## F-statistic: 42.27 on 5 and 3593 DF,  p-value: &lt; 2.2e-16</code></pre>
+## Multiple R-squared:  0.0556, Adjusted R-squared:  0.0542 
+## F-statistic: 42.3 on 5 and 3593 DF,  p-value: &lt;2e-16</code></pre>
 <p>Both results indicated white college-educated women are both <span class="math inline">\(0.16\)</span> higher on the happiness variable than African-American college-educated women and <span class="math inline">\(0.10\)</span> higher than other college-educated women of other races. Even though the coefficient on the other race variables change across specifications, our interpretation of the results does not change; the change is due solely to the change in reference category.</p>
 </div>
 <div id="estimate-a-model-similar-to-the-above-but-for-a-different-group-of-your-choice-e.g.-limit-by-race-or-gender-or-education-and-feel-free-to-include-different-covariates." class="section level2 hasAnchor" number="3.7">
@@ -477,24 +497,23 @@ careers, and unmarried women without careers.</p>
 ##     18, ])
 ## 
 ## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -1.30339 -0.29480 -0.05136  0.69947  0.98484 
+##     Min      1Q  Median      3Q     Max 
+## -1.3034 -0.2948 -0.0514  0.6995  0.9848 
 ## 
 ## Coefficients:
-##                   Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)      2.0513587  0.0553465  37.064  &lt; 2e-16 ***
-## commute         -0.0003732  0.0020973  -0.178 0.858816    
-## married          0.2520331  0.0681019   3.701 0.000231 ***
-## commute:married -0.0001996  0.0026100  -0.076 0.939047    
+##                  Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)      2.051359   0.055347   37.06  &lt; 2e-16 ***
+## commute         -0.000373   0.002097   -0.18  0.85882    
+## married          0.252033   0.068102    3.70  0.00023 ***
+## commute:married -0.000200   0.002610   -0.08  0.93905    
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 0.5647 on 726 degrees of freedom
+## Residual standard error: 0.56 on 726 degrees of freedom
 ##   (28060 observations deleted due to missingness)
-## Multiple R-squared:  0.04227,    Adjusted R-squared:  0.03831 
-## F-statistic: 10.68 on 3 and 726 DF,  p-value: 7.076e-07</code></pre>
+## Multiple R-squared:  0.0423, Adjusted R-squared:  0.0383 
+## F-statistic: 10.7 on 3 and 726 DF,  p-value: 7.08e-07</code></pre>
 <p>My theory is not supported by this model. I found no significant effect for those who commute longer and no significant conditional effect of happiness for those who commute long hours and are married. I did find support that marriage in general makes a person happier, though this should not be considered a causal effect.</p>
-
 </div>
 </div>
             </section>
@@ -502,8 +521,8 @@ careers, and unmarried women without careers.</p>
           </div>
         </div>
       </div>
-<a href="lab-i-tidyverse-ols-review.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="lab-i-tidyverse-ols-review.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="lab-iii-panel-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
