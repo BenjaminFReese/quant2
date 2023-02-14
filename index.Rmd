@@ -621,10 +621,9 @@ dta %>%
 
 # 2/13 Lab IV | Project Runway
 
-```{r}
+```{r, echo=FALSE}
 knitr::include_graphics("lab4_image.png")
 ```
-
 
 ```{r, echo=FALSE, message = FALSE, warning = FALSE}
 # Load packages used in this session of R
@@ -647,71 +646,28 @@ kable(df, caption = "Table: Population and Survey Percentages by Age Group")
 
 ## Base R Version
 
-```{r, echo=FALSE, eval=TRUE, warning=FALSE, message=FALSE}
-Age18to29 <- c(19, 29)
-Age36to50 <- c(21,21)
-Age51to64 <- c(32, 30)
-Over65 <- c(28, 20)
-age_groups <- cbind(Age18to29, Age36to50, Age51to64, Over65)
-barplot(age_groups, beside=T, xlab="Age Group", names.arg=
-          c("18 - 29", "36 - 50", "51 - 64", "65+"), ylab="Percent",
-        main = "Percent Surveyed and Percent in Population by Age Group",
-        ylim = c(0,35), las=1)
-legend("bottomleft",c("Surveyed %", "Population %"),
-       fill=c("black", "light gray"), horiz=FALSE, cex=0.73, bg="white")
+```{r, echo=FALSE}
+knitr::include_graphics("fig1.png")
 ```
 
 ## `library(ggplot)` Version 1 
 
-```{r, echo=FALSE, eval=TRUE, warning=FALSE, message=FALSE}
-
-df %>% 
-  mutate(Population = popPct, Survey = svyPct) %>%
-  dplyr::select(-popPct, -svyPct) %>%
-  pivot_longer(-age, names_to="Group", values_to="Percent") %>%
-  ggplot(aes(x=age, y=Percent, fill=Group)) +
-  geom_bar(stat="identity", position="dodge") +
-  scale_fill_grey() + 
-  theme_minimal() +
-  labs(x = "Age Group", y = "Percent",
-       title = "Population and Survey Sample Porportions by Age Group")
-
+```{r, echo=FALSE}
+knitr::include_graphics("fig2.png")
 ```
 
+
 ## `library(ggplot)` Version 2
-
-```{r, echo=FALSE, eval=TRUE, warning=FALSE, message=FALSE}
-df %>% 
-  mutate(Population = popPct, Survey = svyPct) %>%
-  dplyr::select(-popPct, -svyPct) %>%
-  pivot_longer(-age, names_to="Group", values_to="Percent") %>%
-  ggplot(aes(x=age, y=Percent, fill=Group)) +
-  geom_bar(stat="identity", position="dodge") +
-  coord_flip() +
-  scale_fill_grey() + 
-  theme_minimal() +
-  labs(x = "Age Group", y = "Percent",
-       title = "Population and Survey Sample Porportions by Age Group")
-
+```{r, echo=FALSE}
+knitr::include_graphics("fig3.png")
 ```
 
 ## Alternative Plot of Your Choice
 
-```{r, echo=FALSE, eval=TRUE, warning=FALSE, message=FALSE}
-library(apyramid)
-
-df %>% 
-  mutate(Population = popPct, Survey = svyPct) %>%
-  dplyr::select(-popPct, -svyPct) %>%
-  pivot_longer(-age, names_to="Group", values_to="Percent") %>%
-  mutate(age = as.factor(age)) %>%
-  age_pyramid(data = ., age_group = "age", split_by = "Group",  
-              count = "Percent", show_midpoint = FALSE) +
-  scale_fill_grey() +
-  theme_minimal() +
-  labs(x="Age Group", y="Percent", fill=NULL,
-       title = "Percent Surveyed and Percent in Population by Age Group")
+```{r, echo=FALSE}
+knitr::include_graphics("fig4.png")
 ```
+
 
 ## Code Appendix
 
