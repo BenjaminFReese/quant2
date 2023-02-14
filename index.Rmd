@@ -716,7 +716,7 @@ legend("bottomleft",c("Surveyed %", "Population %"),
 df %>% 
   mutate(Population = popPct, Survey = svyPct) %>%
   dplyr::select(-popPct, -svyPct) %>%
-    %>%
+  pivot_longer(-age, names_to="Group", values_to="Percent") %>%
   ggplot(aes(x=age, y=Percent, fill=Group)) +
   geom_bar(stat="identity", position="dodge") +
   scale_fill_grey() + 
