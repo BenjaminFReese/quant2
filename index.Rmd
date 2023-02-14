@@ -722,7 +722,7 @@ df %>%
   scale_fill_grey() + 
   theme_minimal() +
   labs(x = "Age Group", y = "Percent",
-       title = "Population and Survey Sample Porportions by Age Group")
+       title = "Population and Survey Sample Proportions by Age Group")
 
 ```
 
@@ -739,7 +739,7 @@ df %>%
   scale_fill_grey() + 
   theme_minimal() +
   labs(x = "Age Group", y = "Percent",
-       title = "Population and Survey Sample Porportions by Age Group")
+       title = "Population and Survey Sample Proportions by Age Group")
 
 ```
 
