@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>GOVT 8002 Shared Working Book</title>
-  <meta name="description" content="GOVT 8002 Shared Working Book" />
+  <title>5 2/13 Lab IV | Project Runway | GOVT 8002 Shared Working Book</title>
+  <meta name="description" content="5 2/13 Lab IV | Project Runway | GOVT 8002 Shared Working Book" />
   <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="GOVT 8002 Shared Working Book" />
+  <meta property="og:title" content="5 2/13 Lab IV | Project Runway | GOVT 8002 Shared Working Book" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="GOVT 8002 Shared Working Book" />
+  <meta name="twitter:title" content="5 2/13 Lab IV | Project Runway | GOVT 8002 Shared Working Book" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
+<link rel="prev" href="lab-iii-panel-data.html"/>
 
-<link rel="next" href="lab-i-tidyverse-ols-review.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -209,43 +209,136 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">GOVT 8002 Shared Working Book</h1>
-<h2 class="subtitle"><em>Benjamin Reese</em></h2>
-<p class="author"><em><a href="https://georgetown.zoom.us/j/91496732913">Zoom Link for Office Hours</a> | <a href="mailto:bfr11@georgetown.edu" class="email">bfr11@georgetown.edu</a></em></p>
+<div id="lab-iv-project-runway" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">5</span> 2/13 Lab IV | Project Runway<a href="lab-iv-project-runway.html#lab-iv-project-runway" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Our goal is to visualize the difference between the population percent (<em>popPct</em>) and the survey percent (<em>svyPct</em>) for various age groups. We’ll use the data in the table below (and of course, a full viz would include more subgroups). Create designs on how to present this information. Be ready to share concept and actual viz with the entire class. You can either work individually or in small groups. Do not include code with your visualizations. Instead, create an appendix that displays each code chunk at the end of the document. Make sure there are no warnings or messages displaying too.</p>
+<p>Use the simulated data to make at least two plots: one in Base R and one in <code>library(ggplot)</code>. Then you can use a dataset of your choice for the last two visualizations or keep working with the fake data.</p>
+<table>
+<caption><span id="tab:unnamed-chunk-38">Table 5.1: </span>Table: Population and Survey Percentages by Age Group</caption>
+<thead>
+<tr class="header">
+<th align="left">age</th>
+<th align="right">popPct</th>
+<th align="right">svyPct</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">18 to 29</td>
+<td align="right">29</td>
+<td align="right">19</td>
+</tr>
+<tr class="even">
+<td align="left">36 to 50</td>
+<td align="right">21</td>
+<td align="right">21</td>
+</tr>
+<tr class="odd">
+<td align="left">51 to 64</td>
+<td align="right">30</td>
+<td align="right">32</td>
+</tr>
+<tr class="even">
+<td align="left">65+</td>
+<td align="right">20</td>
+<td align="right">28</td>
+</tr>
+</tbody>
+</table>
+<div id="base-r-version" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Base R Version<a href="lab-iv-project-runway.html#base-r-version" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><img src="_main_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
 </div>
-<div id="introduction" class="section level1 hasAnchor" number="1">
-<h1><span class="header-section-number">1</span> Introduction<a href="index.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p><img src="intro_image.jpg" width="2860" /></p>
-<div id="purpose-of-this-site" class="section level2 hasAnchor" number="1.1">
-<h2><span class="header-section-number">1.1</span> Purpose of This Site<a href="index.html#purpose-of-this-site" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The goal of this site is to have a place where you can look for examples of code. Think of this site as a log of all of the topics we cover in class and in lab sessions. I will make updates throughout the semester as we cover more advanced material. I hope this proves to be a helpful and beneficial resource and offer an easier to access format than the Google Doc.</p>
-<p>Let me know if any of this code doesn’t run correctly or if you have any questions or issues!</p>
+<div id="libraryggplot-version-1" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> <code>library(ggplot)</code> Version 1<a href="lab-iv-project-runway.html#libraryggplot-version-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><img src="_main_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
 </div>
-<div id="loading-data" class="section level2 hasAnchor" number="1.2">
-<h2><span class="header-section-number">1.2</span> Loading Data<a href="index.html#loading-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The easiest way to load data into R and ensure you have the correct file path is to create a folder on your computer for each assignment and place the datasets directly into that folder.</p>
-<ol style="list-style-type: decimal">
-<li><p>Create a folder on your computer for each new analysis</p></li>
-<li><p>Download your Data and move the file to your newly created folder</p></li>
-<li><p>Then open RStudio</p></li>
-<li><p>Click the project button in the top right corner</p></li>
-<li><p>Click new project</p></li>
-<li><p>Click existing directory</p></li>
-<li><p>Click browse and find the folder that you created</p></li>
-<li><p>Click create project</p></li>
-<li><p>Once your new project opens, click the blank page with a green plus sign icon in the top left corner under the file option</p></li>
-<li><p>Click R script to open a new script</p></li>
-<li><p>You should also be able to see your data file in the bottom right window of RStudio, click the file and follow the options depending on the file type</p></li>
-<li><p>Once your data is imported into R, the code that R automatically ran will be in the console window on the bottom left, copy and paste it to your fresh R script</p></li>
-</ol>
-<ul>
-<li>For example, in Lab 1, my code looked like: <code>read_excel("Data/USstates.xlsx")</code></li>
-</ul>
-<ol start="13" style="list-style-type: decimal">
-<li><p>Run this copy and pasted line of code whenever you open the R Project and you will never have to worry about complicated file pathing commands</p></li>
-<li><p>I recommend using the assignment operator <code>&lt;-</code> to give your dataset a short and simple name like <code>df</code>, <code>dta</code>, or, if you are working with multiple datasets, name each something short and descriptive</p></li>
-</ol>
+<div id="libraryggplot-version-2" class="section level2 hasAnchor" number="5.3">
+<h2><span class="header-section-number">5.3</span> <code>library(ggplot)</code> Version 2<a href="lab-iv-project-runway.html#libraryggplot-version-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><img src="_main_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
+</div>
+<div id="alternative-plot-of-your-choice" class="section level2 hasAnchor" number="5.4">
+<h2><span class="header-section-number">5.4</span> Alternative Plot of Your Choice<a href="lab-iv-project-runway.html#alternative-plot-of-your-choice" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><img src="_main_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
+</div>
+<div id="code-appendix" class="section level2 hasAnchor" number="5.5">
+<h2><span class="header-section-number">5.5</span> Code Appendix<a href="lab-iv-project-runway.html#code-appendix" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="setup-code" class="section level3 hasAnchor" number="5.5.1">
+<h3><span class="header-section-number">5.5.1</span> Setup Code<a href="lab-iv-project-runway.html#setup-code" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="lab-iv-project-runway.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load packages used in this session of R</span></span>
+<span id="cb88-2"><a href="lab-iv-project-runway.html#cb88-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb88-3"><a href="lab-iv-project-runway.html#cb88-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb88-4"><a href="lab-iv-project-runway.html#cb88-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb88-5"><a href="lab-iv-project-runway.html#cb88-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb88-6"><a href="lab-iv-project-runway.html#cb88-6" aria-hidden="true" tabindex="-1"></a>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb88-7"><a href="lab-iv-project-runway.html#cb88-7" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span></code></pre></div>
+</div>
+<div id="preparation-code" class="section level3 hasAnchor" number="5.5.2">
+<h3><span class="header-section-number">5.5.2</span> Preparation Code<a href="lab-iv-project-runway.html#preparation-code" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="lab-iv-project-runway.html#cb89-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="st">&quot;age&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;18 to 29&quot;</span>, <span class="st">&quot;36 to 50&quot;</span>, <span class="st">&quot;51 to 64&quot;</span>, <span class="st">&quot;65+&quot;</span>),</span>
+<span id="cb89-2"><a href="lab-iv-project-runway.html#cb89-2" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;popPct&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">29</span>, <span class="dv">21</span>, <span class="dv">30</span>, <span class="dv">20</span>),</span>
+<span id="cb89-3"><a href="lab-iv-project-runway.html#cb89-3" aria-hidden="true" tabindex="-1"></a>                <span class="st">&quot;svyPct&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">19</span>, <span class="dv">21</span>, <span class="dv">32</span>, <span class="dv">28</span>))</span>
+<span id="cb89-4"><a href="lab-iv-project-runway.html#cb89-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-5"><a href="lab-iv-project-runway.html#cb89-5" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(df, <span class="at">caption =</span> <span class="st">&quot;Table: Population and survey percentages by age group&quot;</span>)</span></code></pre></div>
+</div>
+<div id="base-r-plot-code" class="section level3 hasAnchor" number="5.5.3">
+<h3><span class="header-section-number">5.5.3</span> Base R Plot Code<a href="lab-iv-project-runway.html#base-r-plot-code" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="lab-iv-project-runway.html#cb90-1" aria-hidden="true" tabindex="-1"></a>Age18to29 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">19</span>, <span class="dv">29</span>)</span>
+<span id="cb90-2"><a href="lab-iv-project-runway.html#cb90-2" aria-hidden="true" tabindex="-1"></a>Age36to50 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">21</span>,<span class="dv">21</span>)</span>
+<span id="cb90-3"><a href="lab-iv-project-runway.html#cb90-3" aria-hidden="true" tabindex="-1"></a>Age51to64 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">32</span>, <span class="dv">30</span>)</span>
+<span id="cb90-4"><a href="lab-iv-project-runway.html#cb90-4" aria-hidden="true" tabindex="-1"></a>Over65 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">28</span>, <span class="dv">20</span>)</span>
+<span id="cb90-5"><a href="lab-iv-project-runway.html#cb90-5" aria-hidden="true" tabindex="-1"></a>age_groups <span class="ot">&lt;-</span> <span class="fu">cbind</span>(Age18to29, Age36to50, Age51to64, Over65)</span>
+<span id="cb90-6"><a href="lab-iv-project-runway.html#cb90-6" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(age_groups, <span class="at">beside=</span>T, <span class="at">xlab=</span><span class="st">&quot;Age Group&quot;</span>, <span class="at">names.arg=</span></span>
+<span id="cb90-7"><a href="lab-iv-project-runway.html#cb90-7" aria-hidden="true" tabindex="-1"></a>          <span class="fu">c</span>(<span class="st">&quot;18 - 29&quot;</span>, <span class="st">&quot;36 - 50&quot;</span>, <span class="st">&quot;51 - 64&quot;</span>, <span class="st">&quot;65+&quot;</span>), <span class="at">ylab=</span><span class="st">&quot;Percent&quot;</span>,</span>
+<span id="cb90-8"><a href="lab-iv-project-runway.html#cb90-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">&quot;Percent Surveyed and Percent in Population by Age Group&quot;</span>,</span>
+<span id="cb90-9"><a href="lab-iv-project-runway.html#cb90-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">35</span>), <span class="at">las=</span><span class="dv">1</span>)</span>
+<span id="cb90-10"><a href="lab-iv-project-runway.html#cb90-10" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;bottomleft&quot;</span>,<span class="fu">c</span>(<span class="st">&quot;Surveyed %&quot;</span>, <span class="st">&quot;Population %&quot;</span>),</span>
+<span id="cb90-11"><a href="lab-iv-project-runway.html#cb90-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill=</span><span class="fu">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;light gray&quot;</span>), <span class="at">horiz=</span><span class="cn">FALSE</span>, <span class="at">cex=</span><span class="fl">0.73</span>, <span class="at">bg=</span><span class="st">&quot;white&quot;</span>)</span></code></pre></div>
+</div>
+<div id="libraryggplot-first-plot-code" class="section level3 hasAnchor" number="5.5.4">
+<h3><span class="header-section-number">5.5.4</span> <code>library(ggplot)</code> First Plot Code<a href="lab-iv-project-runway.html#libraryggplot-first-plot-code" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="lab-iv-project-runway.html#cb91-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb91-2"><a href="lab-iv-project-runway.html#cb91-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Population =</span> popPct, <span class="at">Survey =</span> svyPct) <span class="sc">%&gt;%</span></span>
+<span id="cb91-3"><a href="lab-iv-project-runway.html#cb91-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>popPct, <span class="sc">-</span>svyPct) <span class="sc">%&gt;%</span></span>
+<span id="cb91-4"><a href="lab-iv-project-runway.html#cb91-4" aria-hidden="true" tabindex="-1"></a>    <span class="sc">%&gt;%</span></span>
+<span id="cb91-5"><a href="lab-iv-project-runway.html#cb91-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>age, <span class="at">y=</span>Percent, <span class="at">fill=</span>Group)) <span class="sc">+</span></span>
+<span id="cb91-6"><a href="lab-iv-project-runway.html#cb91-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>, <span class="at">position=</span><span class="st">&quot;dodge&quot;</span>) <span class="sc">+</span></span>
+<span id="cb91-7"><a href="lab-iv-project-runway.html#cb91-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_grey</span>() <span class="sc">+</span> </span>
+<span id="cb91-8"><a href="lab-iv-project-runway.html#cb91-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb91-9"><a href="lab-iv-project-runway.html#cb91-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Age Group&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Percent&quot;</span>,</span>
+<span id="cb91-10"><a href="lab-iv-project-runway.html#cb91-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Population and Survey Sample Porportions by Age Group&quot;</span>)</span></code></pre></div>
+</div>
+<div id="libraryggplot-second-plot-code" class="section level3 hasAnchor" number="5.5.5">
+<h3><span class="header-section-number">5.5.5</span> <code>library(ggplot)</code> Second Plot Code<a href="lab-iv-project-runway.html#libraryggplot-second-plot-code" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="lab-iv-project-runway.html#cb92-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb92-2"><a href="lab-iv-project-runway.html#cb92-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Population =</span> popPct, <span class="at">Survey =</span> svyPct) <span class="sc">%&gt;%</span></span>
+<span id="cb92-3"><a href="lab-iv-project-runway.html#cb92-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>popPct, <span class="sc">-</span>svyPct) <span class="sc">%&gt;%</span></span>
+<span id="cb92-4"><a href="lab-iv-project-runway.html#cb92-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span>age, <span class="at">names_to=</span><span class="st">&quot;Group&quot;</span>, <span class="at">values_to=</span><span class="st">&quot;Percent&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb92-5"><a href="lab-iv-project-runway.html#cb92-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>age, <span class="at">y=</span>Percent, <span class="at">fill=</span>Group)) <span class="sc">+</span></span>
+<span id="cb92-6"><a href="lab-iv-project-runway.html#cb92-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat=</span><span class="st">&quot;identity&quot;</span>, <span class="at">position=</span><span class="st">&quot;dodge&quot;</span>) <span class="sc">+</span></span>
+<span id="cb92-7"><a href="lab-iv-project-runway.html#cb92-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb92-8"><a href="lab-iv-project-runway.html#cb92-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_grey</span>() <span class="sc">+</span> </span>
+<span id="cb92-9"><a href="lab-iv-project-runway.html#cb92-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb92-10"><a href="lab-iv-project-runway.html#cb92-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Age Group&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Percent&quot;</span>,</span>
+<span id="cb92-11"><a href="lab-iv-project-runway.html#cb92-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Population and Survey Sample Porportions by Age Group&quot;</span>)</span></code></pre></div>
+</div>
+<div id="alternative-plot-code" class="section level3 hasAnchor" number="5.5.6">
+<h3><span class="header-section-number">5.5.6</span> Alternative Plot Code<a href="lab-iv-project-runway.html#alternative-plot-code" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="lab-iv-project-runway.html#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(apyramid)</span>
+<span id="cb93-2"><a href="lab-iv-project-runway.html#cb93-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb93-3"><a href="lab-iv-project-runway.html#cb93-3" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> </span>
+<span id="cb93-4"><a href="lab-iv-project-runway.html#cb93-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Population =</span> popPct, <span class="at">Survey =</span> svyPct) <span class="sc">%&gt;%</span></span>
+<span id="cb93-5"><a href="lab-iv-project-runway.html#cb93-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>popPct, <span class="sc">-</span>svyPct) <span class="sc">%&gt;%</span></span>
+<span id="cb93-6"><a href="lab-iv-project-runway.html#cb93-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span>age, <span class="at">names_to=</span><span class="st">&quot;Group&quot;</span>, <span class="at">values_to=</span><span class="st">&quot;Percent&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb93-7"><a href="lab-iv-project-runway.html#cb93-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">age =</span> <span class="fu">as.factor</span>(age)) <span class="sc">%&gt;%</span></span>
+<span id="cb93-8"><a href="lab-iv-project-runway.html#cb93-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">age_pyramid</span>(<span class="at">data =</span> ., <span class="at">age_group =</span> <span class="st">&quot;age&quot;</span>, <span class="at">split_by =</span> <span class="st">&quot;Group&quot;</span>,  </span>
+<span id="cb93-9"><a href="lab-iv-project-runway.html#cb93-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">count =</span> <span class="st">&quot;Percent&quot;</span>, <span class="at">show_midpoint =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb93-10"><a href="lab-iv-project-runway.html#cb93-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_grey</span>() <span class="sc">+</span></span>
+<span id="cb93-11"><a href="lab-iv-project-runway.html#cb93-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb93-12"><a href="lab-iv-project-runway.html#cb93-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;Age Group&quot;</span>, <span class="at">y=</span><span class="st">&quot;Percent&quot;</span>, <span class="at">fill=</span><span class="cn">NULL</span>, </span>
+<span id="cb93-13"><a href="lab-iv-project-runway.html#cb93-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Percent Surveyed and Percent in Population by Age Group&quot;</span>)</span></code></pre></div>
+
+</div>
 </div>
 </div>
             </section>
@@ -253,8 +346,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
+<a href="lab-iii-panel-data.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
-<a href="lab-i-tidyverse-ols-review.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

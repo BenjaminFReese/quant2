@@ -619,3 +619,186 @@ dta %>%
   summary()
 ```
 
+# 2/13 Lab IV | Project Runway
+
+```{r setup, echo=FALSE, message = FALSE, warning = FALSE}
+# Load packages used in this session of R
+library(knitr)
+library(tidyverse)
+library(ggplot2)
+
+opts_chunk$set(echo = TRUE)
+options(digits = 2)
+```
+
+Our goal is to visualize the difference between the population percent (_popPct_) and the survey percent (_svyPct_) for various age groups. We'll use the data in the table below (and of course, a full viz would include more subgroups). Create designs on how to present this information. Be ready to share concept and actual viz with the entire class. You can either work individually or in small groups. Do not include code with your visualizations. Instead, create an appendix that displays each code chunk at the end of the document. Make sure there are no warnings or messages displaying too.
+
+Use the simulated data to make at least two plots: one in Base R and one in `library(ggplot)`. Then you can use a dataset of your choice for the last two visualizations or keep working with the fake data.
+
+```{r, echo=FALSE, eval=TRUE, warning=FALSE, message=FALSE}
+df <- data.frame("age" = c("18 to 29", "36 to 50", "51 to 64", "65+"),
+                "popPct" = c(29, 21, 30, 20),
+                "svyPct" = c(19, 21, 32, 28))
+
+kable(df, caption = "Table: Population and Survey Percentages by Age Group")
+```
+
+## Base R Version
+
+```{r, echo=FALSE, eval=TRUE, warning=FALSE, message=FALSE}
+Age18to29 <- c(19, 29)
+Age36to50 <- c(21,21)
+Age51to64 <- c(32, 30)
+Over65 <- c(28, 20)
+age_groups <- cbind(Age18to29, Age36to50, Age51to64, Over65)
+barplot(age_groups, beside=T, xlab="Age Group", names.arg=
+          c("18 - 29", "36 - 50", "51 - 64", "65+"), ylab="Percent",
+        main = "Percent Surveyed and Percent in Population by Age Group",
+        ylim = c(0,35), las=1)
+legend("bottomleft",c("Surveyed %", "Population %"),
+       fill=c("black", "light gray"), horiz=FALSE, cex=0.73, bg="white")
+```
+
+## `library(ggplot)` Version 1 
+
+```{r, echo=FALSE, eval=TRUE, warning=FALSE, message=FALSE}
+
+df %>% 
+  mutate(Population = popPct, Survey = svyPct) %>%
+  dplyr::select(-popPct, -svyPct) %>%
+  pivot_longer(-age, names_to="Group", values_to="Percent") %>%
+  ggplot(aes(x=age, y=Percent, fill=Group)) +
+  geom_bar(stat="identity", position="dodge") +
+  scale_fill_grey() + 
+  theme_minimal() +
+  labs(x = "Age Group", y = "Percent",
+       title = "Population and Survey Sample Porportions by Age Group")
+
+```
+
+## `library(ggplot)` Version 2
+
+```{r, echo=FALSE, eval=TRUE, warning=FALSE, message=FALSE}
+df %>% 
+  mutate(Population = popPct, Survey = svyPct) %>%
+  dplyr::select(-popPct, -svyPct) %>%
+  pivot_longer(-age, names_to="Group", values_to="Percent") %>%
+  ggplot(aes(x=age, y=Percent, fill=Group)) +
+  geom_bar(stat="identity", position="dodge") +
+  coord_flip() +
+  scale_fill_grey() + 
+  theme_minimal() +
+  labs(x = "Age Group", y = "Percent",
+       title = "Population and Survey Sample Porportions by Age Group")
+
+```
+
+## Alternative Plot of Your Choice
+
+```{r, echo=FALSE, eval=TRUE, warning=FALSE, message=FALSE}
+library(apyramid)
+
+df %>% 
+  mutate(Population = popPct, Survey = svyPct) %>%
+  dplyr::select(-popPct, -svyPct) %>%
+  pivot_longer(-age, names_to="Group", values_to="Percent") %>%
+  mutate(age = as.factor(age)) %>%
+  age_pyramid(data = ., age_group = "age", split_by = "Group",  
+              count = "Percent", show_midpoint = FALSE) +
+  scale_fill_grey() +
+  theme_minimal() +
+  labs(x="Age Group", y="Percent", fill=NULL,
+       title = "Percent Surveyed and Percent in Population by Age Group")
+```
+
+## Code Appendix
+
+### Setup Code
+
+```{r, echo=TRUE, eval=FALSE}
+# Load packages used in this session of R
+library(knitr)
+library(tidyverse)
+library(ggplot2)
+
+opts_chunk$set(echo = TRUE)
+options(digits = 2)
+```
+
+### Preparation Code
+
+```{r, echo=TRUE, eval=FALSE}
+df <- data.frame("age" = c("18 to 29", "36 to 50", "51 to 64", "65+"),
+                "popPct" = c(29, 21, 30, 20),
+                "svyPct" = c(19, 21, 32, 28))
+
+kable(df, caption = "Table: Population and survey percentages by age group")
+```
+
+### Base R Plot Code
+
+```{r, echo=TRUE, eval=FALSE}
+Age18to29 <- c(19, 29)
+Age36to50 <- c(21,21)
+Age51to64 <- c(32, 30)
+Over65 <- c(28, 20)
+age_groups <- cbind(Age18to29, Age36to50, Age51to64, Over65)
+barplot(age_groups, beside=T, xlab="Age Group", names.arg=
+          c("18 - 29", "36 - 50", "51 - 64", "65+"), ylab="Percent",
+        main = "Percent Surveyed and Percent in Population by Age Group",
+        ylim = c(0,35), las=1)
+legend("bottomleft",c("Surveyed %", "Population %"),
+       fill=c("black", "light gray"), horiz=FALSE, cex=0.73, bg="white")
+```
+
+### `library(ggplot)` First Plot Code
+
+```{r, echo=TRUE, eval=FALSE}
+
+df %>% 
+  mutate(Population = popPct, Survey = svyPct) %>%
+  dplyr::select(-popPct, -svyPct) %>%
+    %>%
+  ggplot(aes(x=age, y=Percent, fill=Group)) +
+  geom_bar(stat="identity", position="dodge") +
+  scale_fill_grey() + 
+  theme_minimal() +
+  labs(x = "Age Group", y = "Percent",
+       title = "Population and Survey Sample Porportions by Age Group")
+
+```
+
+### `library(ggplot)` Second Plot Code
+
+```{r, echo=TRUE, eval=FALSE}
+df %>% 
+  mutate(Population = popPct, Survey = svyPct) %>%
+  dplyr::select(-popPct, -svyPct) %>%
+  pivot_longer(-age, names_to="Group", values_to="Percent") %>%
+  ggplot(aes(x=age, y=Percent, fill=Group)) +
+  geom_bar(stat="identity", position="dodge") +
+  coord_flip() +
+  scale_fill_grey() + 
+  theme_minimal() +
+  labs(x = "Age Group", y = "Percent",
+       title = "Population and Survey Sample Porportions by Age Group")
+
+```
+
+### Alternative Plot Code
+
+```{r, echo=TRUE, eval=FALSE}
+library(apyramid)
+
+df %>% 
+  mutate(Population = popPct, Survey = svyPct) %>%
+  dplyr::select(-popPct, -svyPct) %>%
+  pivot_longer(-age, names_to="Group", values_to="Percent") %>%
+  mutate(age = as.factor(age)) %>%
+  age_pyramid(data = ., age_group = "age", split_by = "Group",  
+              count = "Percent", show_midpoint = FALSE) +
+  scale_fill_grey() +
+  theme_minimal() +
+  labs(x="Age Group", y="Percent", fill=NULL, 
+       title = "Percent Surveyed and Percent in Population by Age Group")
+```

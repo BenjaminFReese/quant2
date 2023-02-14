@@ -1,3 +1,4 @@
+tab:unnamed-chunk-38
 introduction
 purpose-of-this-site
 loading-data
@@ -33,3 +34,15 @@ test-a-model-with-robust-clustered-standard-errors.-do-the-results-change-at-all
 load-in-the-texas-school-board-data-and-take-a-look-at-the-variables.-the-next-few-questions-are-from-exercise-5-in-bailey-2021.-the-basic-thoery-of-the-paper-is-that-teachers-unions-will-have-less-influence-on-school-board-members-when-turnout-is-greater-since-a-wider-swath-of-voters-non-teachers-will-be-voting.-you-can-read-the-abstract-below.
 write-in-notation-and-estimate-the-pooled-model-of-the-effect-of-oncycle-on-lnavgsalary.
 write-in-notation-and-estimate-a-difference-in-difference-model-of-the-effect-of-oncycle-on-lnavgsalary.-what-is-the-key-coefficient-that-we-are-interested-in
+lab-iv-project-runway
+base-r-version
+libraryggplot-version-1
+libraryggplot-version-2
+alternative-plot-of-your-choice
+code-appendix
+setup-code
+preparation-code
+base-r-plot-code
+libraryggplot-first-plot-code
+libraryggplot-second-plot-code
+alternative-plot-code
