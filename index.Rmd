@@ -621,14 +621,16 @@ dta %>%
 
 # 2/13 Lab IV | Project Runway
 
-```{r setup, echo=FALSE, message = FALSE, warning = FALSE}
+```{r}
+knitr::include_graphics("lab4_image.png")
+```
+
+
+```{r, echo=FALSE, message = FALSE, warning = FALSE}
 # Load packages used in this session of R
 library(knitr)
 library(tidyverse)
 library(ggplot2)
-
-opts_chunk$set(echo = TRUE)
-options(digits = 2)
 ```
 
 Our goal is to visualize the difference between the population percent (_popPct_) and the survey percent (_svyPct_) for various age groups. We'll use the data in the table below (and of course, a full viz would include more subgroups). Create designs on how to present this information. Be ready to share concept and actual viz with the entire class. You can either work individually or in small groups. Do not include code with your visualizations. Instead, create an appendix that displays each code chunk at the end of the document. Make sure there are no warnings or messages displaying too.
