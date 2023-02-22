@@ -361,30 +361,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
 ## 1 (Intercept)     0.757    0.0169     44.9  1.09e-281
 ## 2 fit_hajj2006    0.101    0.0231      4.40 1.18e-  5</code></pre>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="sls-instrumental-variables.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Table Output</span></span>
-<span id="cb102-2"><a href="sls-instrumental-variables.html#cb102-2" aria-hidden="true" tabindex="-1"></a>hajj_public <span class="sc">%&gt;%</span></span>
-<span id="cb102-3"><a href="sls-instrumental-variables.html#cb102-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">feols</span>(x_s14aq10<span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> hajj2006<span class="sc">~</span>success, <span class="at">data=</span>., <span class="at">vcov =</span> <span class="st">&quot;iid&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb102-4"><a href="sls-instrumental-variables.html#cb102-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">etable</span>(<span class="at">title =</span> <span class="st">&quot;2SLS Pakistani Pilgrims Model&quot;</span>, <span class="at">stage =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)</span></code></pre></div>
-<pre><code>## NOTE: 64 observations removed because of NA values (LHS: 64).</code></pre>
-<pre><code>                           ..1                ..2</code></pre>
-<p>IV stages First Second
-Dependent Var.: hajj2006 x_s14aq10</p>
-<p>Constant 0.1421*** (0.0092) 0.7572*** (0.0169)
-success 0.8506*** (0.0126)<br />
-hajj2006 0.1014*** (0.0231)
-_______________ __________________ __________________
-S.E. type IID IID
-Observations 1,541 1,541
-R2 0.74803 0.01127
-Adj. R2 0.74787 0.01063
-—
-Signif. codes: 0 ‘<em><strong>’ 0.001 ’</strong>’ 0.01 ’</em>’ 0.05 ‘.’ 0.1 ’ ’ 1</p>
 </div>
 <div id="d-show-the-first-stage-from-the-2sls-model-above-with-lm.-explain-the-implications-of-the-results." class="section level3 hasAnchor" number="6.0.5">
 <h3><span class="header-section-number">6.0.5</span> (d) Show the first stage from the 2SLS model above with lm(). Explain the implications of the results.<a href="sls-instrumental-variables.html#d-show-the-first-stage-from-the-2sls-model-above-with-lm.-explain-the-implications-of-the-results." class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="sls-instrumental-variables.html#cb105-1" aria-hidden="true" tabindex="-1"></a>hajj_public <span class="sc">%&gt;%</span></span>
-<span id="cb105-2"><a href="sls-instrumental-variables.html#cb105-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(hajj2006<span class="sc">~</span>success, <span class="at">data=</span>.) <span class="sc">%&gt;%</span></span>
-<span id="cb105-3"><a href="sls-instrumental-variables.html#cb105-3" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="sls-instrumental-variables.html#cb102-1" aria-hidden="true" tabindex="-1"></a>hajj_public <span class="sc">%&gt;%</span></span>
+<span id="cb102-2"><a href="sls-instrumental-variables.html#cb102-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(hajj2006<span class="sc">~</span>success, <span class="at">data=</span>.) <span class="sc">%&gt;%</span></span>
+<span id="cb102-3"><a href="sls-instrumental-variables.html#cb102-3" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 5
 ##   term        estimate std.error statistic  p.value
 ##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
@@ -394,11 +376,11 @@ Signif. codes: 0 ‘<em><strong>’ 0.001 ’</strong>’ 0.01 ’</em>’ 0.05 
 </div>
 <div id="e-add-covariates-for-age-literacy-urban-group-size-and-gender-to-the-2sls-model-religious-as-a-function-of-hajj2006.-what-is-different-which-variables-are-included-in-the-first-stage" class="section level3 hasAnchor" number="6.0.6">
 <h3><span class="header-section-number">6.0.6</span> (e) Add covariates for age, literacy, urban, group size and gender to the 2SLS model <em>Religious</em> as a function of Hajj2006. What is different? Which variables are included in the first stage?<a href="sls-instrumental-variables.html#e-add-covariates-for-age-literacy-urban-group-size-and-gender-to-the-2sls-model-religious-as-a-function-of-hajj2006.-what-is-different-which-variables-are-included-in-the-first-stage" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="sls-instrumental-variables.html#cb107-1" aria-hidden="true" tabindex="-1"></a>hajj_public <span class="sc">%&gt;%</span></span>
-<span id="cb107-2"><a href="sls-instrumental-variables.html#cb107-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">feols</span>(x_s14aq10<span class="sc">~</span>age <span class="sc">+</span> literate <span class="sc">+</span> ptygrp <span class="sc">+</span> female <span class="sc">+</span> urban <span class="sc">|</span> </span>
-<span id="cb107-3"><a href="sls-instrumental-variables.html#cb107-3" aria-hidden="true" tabindex="-1"></a>          hajj2006 <span class="sc">~</span> success <span class="sc">+</span> age <span class="sc">+</span> literate <span class="sc">+</span> ptygrp <span class="sc">+</span> female <span class="sc">+</span> urban, </span>
-<span id="cb107-4"><a href="sls-instrumental-variables.html#cb107-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">data=</span>., <span class="at">vcov =</span> <span class="st">&quot;iid&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb107-5"><a href="sls-instrumental-variables.html#cb107-5" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="sls-instrumental-variables.html#cb104-1" aria-hidden="true" tabindex="-1"></a>hajj_public <span class="sc">%&gt;%</span></span>
+<span id="cb104-2"><a href="sls-instrumental-variables.html#cb104-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">feols</span>(x_s14aq10<span class="sc">~</span>age <span class="sc">+</span> literate <span class="sc">+</span> ptygrp <span class="sc">+</span> female <span class="sc">+</span> urban <span class="sc">|</span> </span>
+<span id="cb104-3"><a href="sls-instrumental-variables.html#cb104-3" aria-hidden="true" tabindex="-1"></a>          hajj2006 <span class="sc">~</span> success <span class="sc">+</span> age <span class="sc">+</span> literate <span class="sc">+</span> ptygrp <span class="sc">+</span> female <span class="sc">+</span> urban, </span>
+<span id="cb104-4"><a href="sls-instrumental-variables.html#cb104-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">data=</span>., <span class="at">vcov =</span> <span class="st">&quot;iid&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb104-5"><a href="sls-instrumental-variables.html#cb104-5" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code></pre></div>
 <pre><code>## NOTE: 64 observations removed because of NA values (LHS: 64).</code></pre>
 <pre><code>## The instruments &#39;age&#39;, &#39;literate&#39; and 3 others have been removed because of collinearity (see $collin.var).</code></pre>
 <pre><code>## # A tibble: 7 × 5
@@ -411,10 +393,10 @@ Signif. codes: 0 ‘<em><strong>’ 0.001 ’</strong>’ 0.01 ’</em>’ 0.05 
 ## 5 ptygrp       -0.000955  0.00642     -0.149 8.82e- 1
 ## 6 female        0.132     0.0217       6.06  1.69e- 9
 ## 7 urban         0.0674    0.0213       3.17  1.56e- 3</code></pre>
-<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="sls-instrumental-variables.html#cb111-1" aria-hidden="true" tabindex="-1"></a>hajj_public <span class="sc">%&gt;%</span></span>
-<span id="cb111-2"><a href="sls-instrumental-variables.html#cb111-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ivreg</span>(x_s14aq10<span class="sc">~</span>hajj2006 <span class="sc">+</span> age <span class="sc">+</span> literate <span class="sc">+</span> ptygrp <span class="sc">+</span> female <span class="sc">+</span> urban <span class="sc">|</span> </span>
-<span id="cb111-3"><a href="sls-instrumental-variables.html#cb111-3" aria-hidden="true" tabindex="-1"></a>          success <span class="sc">+</span> age <span class="sc">+</span> literate <span class="sc">+</span> ptygrp <span class="sc">+</span> female <span class="sc">+</span> urban, <span class="at">data=</span>.) <span class="sc">%&gt;%</span></span>
-<span id="cb111-4"><a href="sls-instrumental-variables.html#cb111-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>(<span class="at">diagnostics=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="sls-instrumental-variables.html#cb108-1" aria-hidden="true" tabindex="-1"></a>hajj_public <span class="sc">%&gt;%</span></span>
+<span id="cb108-2"><a href="sls-instrumental-variables.html#cb108-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ivreg</span>(x_s14aq10<span class="sc">~</span>hajj2006 <span class="sc">+</span> age <span class="sc">+</span> literate <span class="sc">+</span> ptygrp <span class="sc">+</span> female <span class="sc">+</span> urban <span class="sc">|</span> </span>
+<span id="cb108-3"><a href="sls-instrumental-variables.html#cb108-3" aria-hidden="true" tabindex="-1"></a>          success <span class="sc">+</span> age <span class="sc">+</span> literate <span class="sc">+</span> ptygrp <span class="sc">+</span> female <span class="sc">+</span> urban, <span class="at">data=</span>.) <span class="sc">%&gt;%</span></span>
+<span id="cb108-4"><a href="sls-instrumental-variables.html#cb108-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>(<span class="at">diagnostics=</span><span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## ivreg(formula = x_s14aq10 ~ hajj2006 + age + literate + ptygrp + 
@@ -449,55 +431,55 @@ Signif. codes: 0 ‘<em><strong>’ 0.001 ’</strong>’ 0.01 ’</em>’ 0.05 
 </div>
 <div id="f-run-multiple-2sls-models-with-ossamaincorrect-govtforce-natlinterest-happy-girlsschool-and-jobswomen-variables-as-dependent-variables.-use-the-list-of-covariates-from-earlier.-if-you-want-try-using-a-loop-but-not-necessary." class="section level3 hasAnchor" number="6.0.7">
 <h3><span class="header-section-number">6.0.7</span> (f) Run multiple 2SLS models with OssamaIncorrect, GovtForce, NatlInterest, Happy, GirlsSchool and JobsWomen variables as dependent variables. Use the list of covariates from earlier. If you want, try using a loop (but not necessary).<a href="sls-instrumental-variables.html#f-run-multiple-2sls-models-with-ossamaincorrect-govtforce-natlinterest-happy-girlsschool-and-jobswomen-variables-as-dependent-variables.-use-the-list-of-covariates-from-earlier.-if-you-want-try-using-a-loop-but-not-necessary." class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="sls-instrumental-variables.html#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="do">## OssamaIncorrect</span></span>
-<span id="cb113-2"><a href="sls-instrumental-variables.html#cb113-2" aria-hidden="true" tabindex="-1"></a>hajj_public <span class="sc">%&gt;%</span></span>
-<span id="cb113-3"><a href="sls-instrumental-variables.html#cb113-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ivreg</span>(x_s10bq4<span class="sc">~</span>hajj2006 <span class="sc">+</span> age <span class="sc">+</span> literate <span class="sc">+</span> ptygrp <span class="sc">+</span> female <span class="sc">+</span> urban <span class="sc">|</span> success <span class="sc">+</span></span>
-<span id="cb113-4"><a href="sls-instrumental-variables.html#cb113-4" aria-hidden="true" tabindex="-1"></a>                 age <span class="sc">+</span> literate <span class="sc">+</span> ptygrp <span class="sc">+</span> female <span class="sc">+</span> urban, <span class="at">data=</span>.) <span class="sc">%&gt;%</span></span>
-<span id="cb113-5"><a href="sls-instrumental-variables.html#cb113-5" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span>
-<span id="cb113-6"><a href="sls-instrumental-variables.html#cb113-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb113-7"><a href="sls-instrumental-variables.html#cb113-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb113-8"><a href="sls-instrumental-variables.html#cb113-8" aria-hidden="true" tabindex="-1"></a><span class="do">## GovtForce</span></span>
-<span id="cb113-9"><a href="sls-instrumental-variables.html#cb113-9" aria-hidden="true" tabindex="-1"></a>hajj_public <span class="sc">%&gt;%</span></span>
-<span id="cb113-10"><a href="sls-instrumental-variables.html#cb113-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ivreg</span>(x_s7q12a<span class="sc">~</span>hajj2006 <span class="sc">+</span> age <span class="sc">+</span> literate <span class="sc">+</span> ptygrp <span class="sc">+</span> female <span class="sc">+</span> urban <span class="sc">|</span> success <span class="sc">+</span> </span>
-<span id="cb113-11"><a href="sls-instrumental-variables.html#cb113-11" aria-hidden="true" tabindex="-1"></a>                 age <span class="sc">+</span> literate <span class="sc">+</span> ptygrp <span class="sc">+</span> female <span class="sc">+</span> urban, <span class="at">data=</span>.) <span class="sc">%&gt;%</span></span>
-<span id="cb113-12"><a href="sls-instrumental-variables.html#cb113-12" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span>
-<span id="cb113-13"><a href="sls-instrumental-variables.html#cb113-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb113-14"><a href="sls-instrumental-variables.html#cb113-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb113-15"><a href="sls-instrumental-variables.html#cb113-15" aria-hidden="true" tabindex="-1"></a><span class="do">## NatlInterest</span></span>
-<span id="cb113-16"><a href="sls-instrumental-variables.html#cb113-16" aria-hidden="true" tabindex="-1"></a>hajj_public <span class="sc">%&gt;%</span></span>
-<span id="cb113-17"><a href="sls-instrumental-variables.html#cb113-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ivreg</span>(x_s7q1<span class="sc">~</span>hajj2006 <span class="sc">+</span> age <span class="sc">+</span> literate <span class="sc">+</span> ptygrp <span class="sc">+</span> female <span class="sc">+</span> urban <span class="sc">|</span> success <span class="sc">+</span> </span>
-<span id="cb113-18"><a href="sls-instrumental-variables.html#cb113-18" aria-hidden="true" tabindex="-1"></a>                 age <span class="sc">+</span> literate <span class="sc">+</span> ptygrp <span class="sc">+</span> female <span class="sc">+</span> urban, <span class="at">data=</span>.) <span class="sc">%&gt;%</span></span>
-<span id="cb113-19"><a href="sls-instrumental-variables.html#cb113-19" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span>
-<span id="cb113-20"><a href="sls-instrumental-variables.html#cb113-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb113-21"><a href="sls-instrumental-variables.html#cb113-21" aria-hidden="true" tabindex="-1"></a><span class="do">## Happy</span></span>
-<span id="cb113-22"><a href="sls-instrumental-variables.html#cb113-22" aria-hidden="true" tabindex="-1"></a>hajj_public <span class="sc">%&gt;%</span></span>
-<span id="cb113-23"><a href="sls-instrumental-variables.html#cb113-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ivreg</span>(x_s3q3<span class="sc">~</span>hajj2006 <span class="sc">+</span> age <span class="sc">+</span> literate <span class="sc">+</span> ptygrp <span class="sc">+</span> female <span class="sc">+</span> urban <span class="sc">|</span> success <span class="sc">+</span> </span>
-<span id="cb113-24"><a href="sls-instrumental-variables.html#cb113-24" aria-hidden="true" tabindex="-1"></a>                 age <span class="sc">+</span> literate <span class="sc">+</span> ptygrp <span class="sc">+</span> female <span class="sc">+</span> urban, <span class="at">data=</span>.) <span class="sc">%&gt;%</span></span>
-<span id="cb113-25"><a href="sls-instrumental-variables.html#cb113-25" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span>
-<span id="cb113-26"><a href="sls-instrumental-variables.html#cb113-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb113-27"><a href="sls-instrumental-variables.html#cb113-27" aria-hidden="true" tabindex="-1"></a><span class="do">## Girl School</span></span>
-<span id="cb113-28"><a href="sls-instrumental-variables.html#cb113-28" aria-hidden="true" tabindex="-1"></a>hajj_public <span class="sc">%&gt;%</span></span>
-<span id="cb113-29"><a href="sls-instrumental-variables.html#cb113-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ivreg</span>(x_s10eq2<span class="sc">~</span>hajj2006 <span class="sc">+</span> age <span class="sc">+</span> literate <span class="sc">+</span> ptygrp <span class="sc">+</span> female <span class="sc">+</span> urban <span class="sc">|</span> success <span class="sc">+</span> </span>
-<span id="cb113-30"><a href="sls-instrumental-variables.html#cb113-30" aria-hidden="true" tabindex="-1"></a>                 age <span class="sc">+</span> literate <span class="sc">+</span> ptygrp <span class="sc">+</span> female, <span class="at">data=</span>.) <span class="sc">%&gt;%</span></span>
-<span id="cb113-31"><a href="sls-instrumental-variables.html#cb113-31" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span>
-<span id="cb113-32"><a href="sls-instrumental-variables.html#cb113-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb113-33"><a href="sls-instrumental-variables.html#cb113-33" aria-hidden="true" tabindex="-1"></a><span class="do">## Jobs Women</span></span>
-<span id="cb113-34"><a href="sls-instrumental-variables.html#cb113-34" aria-hidden="true" tabindex="-1"></a>hajj_public <span class="sc">%&gt;%</span></span>
-<span id="cb113-35"><a href="sls-instrumental-variables.html#cb113-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ivreg</span>(x_s10dq1<span class="sc">~</span>hajj2006 <span class="sc">+</span> age <span class="sc">+</span> literate <span class="sc">+</span> ptygrp <span class="sc">+</span> female <span class="sc">+</span> urban <span class="sc">|</span> success <span class="sc">+</span></span>
-<span id="cb113-36"><a href="sls-instrumental-variables.html#cb113-36" aria-hidden="true" tabindex="-1"></a>                  age <span class="sc">+</span> literate <span class="sc">+</span> ptygrp <span class="sc">+</span> female, <span class="at">data=</span>.) <span class="sc">%&gt;%</span></span>
-<span id="cb113-37"><a href="sls-instrumental-variables.html#cb113-37" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code></pre></div>
-<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="sls-instrumental-variables.html#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Loop</span></span>
-<span id="cb114-2"><a href="sls-instrumental-variables.html#cb114-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb114-3"><a href="sls-instrumental-variables.html#cb114-3" aria-hidden="true" tabindex="-1"></a><span class="do">## DVs </span></span>
-<span id="cb114-4"><a href="sls-instrumental-variables.html#cb114-4" aria-hidden="true" tabindex="-1"></a>dvs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;hajj_public$x_s10bq4&quot;</span>, <span class="st">&quot;hajj_public$x_s7q12a&quot;</span>, <span class="st">&quot;hajj_public$x_s7q1&quot;</span>, </span>
-<span id="cb114-5"><a href="sls-instrumental-variables.html#cb114-5" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;hajj_public$x_s3q3&quot;</span>, <span class="st">&quot;hajj_public$x_s10eq2&quot;</span>, <span class="st">&quot;hajj_public$x_s10dq1&quot;</span>)</span>
-<span id="cb114-6"><a href="sls-instrumental-variables.html#cb114-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb114-7"><a href="sls-instrumental-variables.html#cb114-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Loop</span></span>
-<span id="cb114-8"><a href="sls-instrumental-variables.html#cb114-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(dvs)){</span>
-<span id="cb114-9"><a href="sls-instrumental-variables.html#cb114-9" aria-hidden="true" tabindex="-1"></a>  model <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&quot;model&quot;</span>,i, <span class="at">sep=</span><span class="st">&quot;&quot;</span>)</span>
-<span id="cb114-10"><a href="sls-instrumental-variables.html#cb114-10" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">&lt;-</span> <span class="fu">ivreg</span>(<span class="fu">as.formula</span>(<span class="fu">paste</span>(dvs[i],<span class="st">&quot;~hajj2006 + age + literate + ptygrp +</span></span>
-<span id="cb114-11"><a href="sls-instrumental-variables.html#cb114-11" aria-hidden="true" tabindex="-1"></a><span class="st">  female + urban | success + age + literate + ptygrp + female + urban&quot;</span>)), <span class="at">data=</span>hajj_public)</span>
-<span id="cb114-12"><a href="sls-instrumental-variables.html#cb114-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">assign</span>(model,m)}</span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="sls-instrumental-variables.html#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="do">## OssamaIncorrect</span></span>
+<span id="cb110-2"><a href="sls-instrumental-variables.html#cb110-2" aria-hidden="true" tabindex="-1"></a>hajj_public <span class="sc">%&gt;%</span></span>
+<span id="cb110-3"><a href="sls-instrumental-variables.html#cb110-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ivreg</span>(x_s10bq4<span class="sc">~</span>hajj2006 <span class="sc">+</span> age <span class="sc">+</span> literate <span class="sc">+</span> ptygrp <span class="sc">+</span> female <span class="sc">+</span> urban <span class="sc">|</span> success <span class="sc">+</span></span>
+<span id="cb110-4"><a href="sls-instrumental-variables.html#cb110-4" aria-hidden="true" tabindex="-1"></a>                 age <span class="sc">+</span> literate <span class="sc">+</span> ptygrp <span class="sc">+</span> female <span class="sc">+</span> urban, <span class="at">data=</span>.) <span class="sc">%&gt;%</span></span>
+<span id="cb110-5"><a href="sls-instrumental-variables.html#cb110-5" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span>
+<span id="cb110-6"><a href="sls-instrumental-variables.html#cb110-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-7"><a href="sls-instrumental-variables.html#cb110-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-8"><a href="sls-instrumental-variables.html#cb110-8" aria-hidden="true" tabindex="-1"></a><span class="do">## GovtForce</span></span>
+<span id="cb110-9"><a href="sls-instrumental-variables.html#cb110-9" aria-hidden="true" tabindex="-1"></a>hajj_public <span class="sc">%&gt;%</span></span>
+<span id="cb110-10"><a href="sls-instrumental-variables.html#cb110-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ivreg</span>(x_s7q12a<span class="sc">~</span>hajj2006 <span class="sc">+</span> age <span class="sc">+</span> literate <span class="sc">+</span> ptygrp <span class="sc">+</span> female <span class="sc">+</span> urban <span class="sc">|</span> success <span class="sc">+</span> </span>
+<span id="cb110-11"><a href="sls-instrumental-variables.html#cb110-11" aria-hidden="true" tabindex="-1"></a>                 age <span class="sc">+</span> literate <span class="sc">+</span> ptygrp <span class="sc">+</span> female <span class="sc">+</span> urban, <span class="at">data=</span>.) <span class="sc">%&gt;%</span></span>
+<span id="cb110-12"><a href="sls-instrumental-variables.html#cb110-12" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span>
+<span id="cb110-13"><a href="sls-instrumental-variables.html#cb110-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-14"><a href="sls-instrumental-variables.html#cb110-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-15"><a href="sls-instrumental-variables.html#cb110-15" aria-hidden="true" tabindex="-1"></a><span class="do">## NatlInterest</span></span>
+<span id="cb110-16"><a href="sls-instrumental-variables.html#cb110-16" aria-hidden="true" tabindex="-1"></a>hajj_public <span class="sc">%&gt;%</span></span>
+<span id="cb110-17"><a href="sls-instrumental-variables.html#cb110-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ivreg</span>(x_s7q1<span class="sc">~</span>hajj2006 <span class="sc">+</span> age <span class="sc">+</span> literate <span class="sc">+</span> ptygrp <span class="sc">+</span> female <span class="sc">+</span> urban <span class="sc">|</span> success <span class="sc">+</span> </span>
+<span id="cb110-18"><a href="sls-instrumental-variables.html#cb110-18" aria-hidden="true" tabindex="-1"></a>                 age <span class="sc">+</span> literate <span class="sc">+</span> ptygrp <span class="sc">+</span> female <span class="sc">+</span> urban, <span class="at">data=</span>.) <span class="sc">%&gt;%</span></span>
+<span id="cb110-19"><a href="sls-instrumental-variables.html#cb110-19" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span>
+<span id="cb110-20"><a href="sls-instrumental-variables.html#cb110-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-21"><a href="sls-instrumental-variables.html#cb110-21" aria-hidden="true" tabindex="-1"></a><span class="do">## Happy</span></span>
+<span id="cb110-22"><a href="sls-instrumental-variables.html#cb110-22" aria-hidden="true" tabindex="-1"></a>hajj_public <span class="sc">%&gt;%</span></span>
+<span id="cb110-23"><a href="sls-instrumental-variables.html#cb110-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ivreg</span>(x_s3q3<span class="sc">~</span>hajj2006 <span class="sc">+</span> age <span class="sc">+</span> literate <span class="sc">+</span> ptygrp <span class="sc">+</span> female <span class="sc">+</span> urban <span class="sc">|</span> success <span class="sc">+</span> </span>
+<span id="cb110-24"><a href="sls-instrumental-variables.html#cb110-24" aria-hidden="true" tabindex="-1"></a>                 age <span class="sc">+</span> literate <span class="sc">+</span> ptygrp <span class="sc">+</span> female <span class="sc">+</span> urban, <span class="at">data=</span>.) <span class="sc">%&gt;%</span></span>
+<span id="cb110-25"><a href="sls-instrumental-variables.html#cb110-25" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span>
+<span id="cb110-26"><a href="sls-instrumental-variables.html#cb110-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-27"><a href="sls-instrumental-variables.html#cb110-27" aria-hidden="true" tabindex="-1"></a><span class="do">## Girl School</span></span>
+<span id="cb110-28"><a href="sls-instrumental-variables.html#cb110-28" aria-hidden="true" tabindex="-1"></a>hajj_public <span class="sc">%&gt;%</span></span>
+<span id="cb110-29"><a href="sls-instrumental-variables.html#cb110-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ivreg</span>(x_s10eq2<span class="sc">~</span>hajj2006 <span class="sc">+</span> age <span class="sc">+</span> literate <span class="sc">+</span> ptygrp <span class="sc">+</span> female <span class="sc">+</span> urban <span class="sc">|</span> success <span class="sc">+</span> </span>
+<span id="cb110-30"><a href="sls-instrumental-variables.html#cb110-30" aria-hidden="true" tabindex="-1"></a>                 age <span class="sc">+</span> literate <span class="sc">+</span> ptygrp <span class="sc">+</span> female, <span class="at">data=</span>.) <span class="sc">%&gt;%</span></span>
+<span id="cb110-31"><a href="sls-instrumental-variables.html#cb110-31" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span>
+<span id="cb110-32"><a href="sls-instrumental-variables.html#cb110-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-33"><a href="sls-instrumental-variables.html#cb110-33" aria-hidden="true" tabindex="-1"></a><span class="do">## Jobs Women</span></span>
+<span id="cb110-34"><a href="sls-instrumental-variables.html#cb110-34" aria-hidden="true" tabindex="-1"></a>hajj_public <span class="sc">%&gt;%</span></span>
+<span id="cb110-35"><a href="sls-instrumental-variables.html#cb110-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ivreg</span>(x_s10dq1<span class="sc">~</span>hajj2006 <span class="sc">+</span> age <span class="sc">+</span> literate <span class="sc">+</span> ptygrp <span class="sc">+</span> female <span class="sc">+</span> urban <span class="sc">|</span> success <span class="sc">+</span></span>
+<span id="cb110-36"><a href="sls-instrumental-variables.html#cb110-36" aria-hidden="true" tabindex="-1"></a>                  age <span class="sc">+</span> literate <span class="sc">+</span> ptygrp <span class="sc">+</span> female, <span class="at">data=</span>.) <span class="sc">%&gt;%</span></span>
+<span id="cb110-37"><a href="sls-instrumental-variables.html#cb110-37" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="sls-instrumental-variables.html#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Loop</span></span>
+<span id="cb111-2"><a href="sls-instrumental-variables.html#cb111-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb111-3"><a href="sls-instrumental-variables.html#cb111-3" aria-hidden="true" tabindex="-1"></a><span class="do">## DVs </span></span>
+<span id="cb111-4"><a href="sls-instrumental-variables.html#cb111-4" aria-hidden="true" tabindex="-1"></a>dvs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;hajj_public$x_s10bq4&quot;</span>, <span class="st">&quot;hajj_public$x_s7q12a&quot;</span>, <span class="st">&quot;hajj_public$x_s7q1&quot;</span>, </span>
+<span id="cb111-5"><a href="sls-instrumental-variables.html#cb111-5" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;hajj_public$x_s3q3&quot;</span>, <span class="st">&quot;hajj_public$x_s10eq2&quot;</span>, <span class="st">&quot;hajj_public$x_s10dq1&quot;</span>)</span>
+<span id="cb111-6"><a href="sls-instrumental-variables.html#cb111-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb111-7"><a href="sls-instrumental-variables.html#cb111-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Loop</span></span>
+<span id="cb111-8"><a href="sls-instrumental-variables.html#cb111-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(dvs)){</span>
+<span id="cb111-9"><a href="sls-instrumental-variables.html#cb111-9" aria-hidden="true" tabindex="-1"></a>  model <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&quot;model&quot;</span>,i, <span class="at">sep=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb111-10"><a href="sls-instrumental-variables.html#cb111-10" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">&lt;-</span> <span class="fu">ivreg</span>(<span class="fu">as.formula</span>(<span class="fu">paste</span>(dvs[i],<span class="st">&quot;~hajj2006 + age + literate + ptygrp +</span></span>
+<span id="cb111-11"><a href="sls-instrumental-variables.html#cb111-11" aria-hidden="true" tabindex="-1"></a><span class="st">  female + urban | success + age + literate + ptygrp + female + urban&quot;</span>)), <span class="at">data=</span>hajj_public)</span>
+<span id="cb111-12"><a href="sls-instrumental-variables.html#cb111-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">assign</span>(model,m)}</span></code></pre></div>
 
 </div>
 </div>

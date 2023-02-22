@@ -5,6 +5,7 @@ author: "[Zoom Link for Office Hours](https://georgetown.zoom.us/j/91496732913) 
 format: html
 theme: cosmo
 self-contained: true
+tables: true
 ---
 
 # Introduction
@@ -844,14 +845,6 @@ hajj_public %>%
   feols(x_s14aq10 ~ 1 | hajj2006~success, data=., vcov = "iid") %>%
   broom::tidy()
 ```
-
-```{r, results='asis'}
-## Table Output
-hajj_public %>%
-  feols(x_s14aq10~ 1 | hajj2006~success, data=., vcov = "iid") %>%
-  etable(title = "2SLS Pakistani Pilgrims Model", stage = 1:2)
-```
-
 
 ### (d) Show the first stage from the 2SLS model above with lm(). Explain the implications of the results.
 
