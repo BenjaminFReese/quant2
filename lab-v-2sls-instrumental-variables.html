@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>6 2/21 Lab V | 2SLS &amp; Instrumental Variables | GOVT 8002 Shared Working Book</title>
+  <meta name="description" content="6 2/21 Lab V | 2SLS &amp; Instrumental Variables | GOVT 8002 Shared Working Book" />
+  <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="6 2/21 Lab V | 2SLS &amp; Instrumental Variables | GOVT 8002 Shared Working Book" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="6 2/21 Lab V | 2SLS &amp; Instrumental Variables | GOVT 8002 Shared Working Book" />
+  
+  
+  
+
+<meta name="author" content="Zoom Link for Office Hours | bfr11@georgetown.edu" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="lab-iv-project-runway.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#purpose-of-this-site"><i class="fa fa-check"></i><b>1.1</b> Purpose of This Site</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#loading-data"><i class="fa fa-check"></i><b>1.2</b> Loading Data</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html"><i class="fa fa-check"></i><b>2</b> 9/23 | Lab I: Tidyverse &amp; OLS Review</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html#join-the-data-sets."><i class="fa fa-check"></i><b>2.1</b> Join the data sets.</a></li>
+<li class="chapter" data-level="2.2" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html#create-and-add-the-following-variables-to-your-dataframe-density-deaths-per-capita-cases-per-capita-and-vaccinated-percent."><i class="fa fa-check"></i><b>2.2</b> Create and add the following variables to your dataframe density, deaths per capita, cases per capita and vaccinated percent.</a></li>
+<li class="chapter" data-level="2.3" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html#estimate-three-regression-models-with-deaths-per-capita-on-your-selected-day-as-the-dependent-variable."><i class="fa fa-check"></i><b>2.3</b> Estimate three regression models with deaths per capita on your selected day as the dependent variable.</a></li>
+<li class="chapter" data-level="2.4" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html#assess-specific-vaccines"><i class="fa fa-check"></i><b>2.4</b> Assess specific vaccines</a></li>
+<li class="chapter" data-level="2.5" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html#optional-lab-1b"><i class="fa fa-check"></i><b>2.5</b> Optional Lab 1b</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html#load-the-world-values-survey-data-from-datawv7_small.csv-and-the-countrycode-data-from-datacountry-codes-for-wvs-wave-7.csv."><i class="fa fa-check"></i><b>2.5.1</b> Load the World Values Survey data from “Data/WV7_small.csv” and the CountryCode data from “Data/Country codes for WVS wave 7.csv”.</a></li>
+<li class="chapter" data-level="2.5.2" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html#join-the-country-name-from-the-countrycode-data-to-the-world-values-data.-the-country-code-is-v2-in-countrycode-and-b_country-in-the-world-values-data.-create-two-data-objects-of-the-countries-in-and-not-in-the-world-values-data.-display-the-first-10-countries-for-each-list."><i class="fa fa-check"></i><b>2.5.2</b> Join the country name from the CountryCode data to the World Values data. The country code is <em>V2</em> in CountryCode and <em>B_Country</em> in the World Values data. Create two data objects of the countries in and not in the World Values data. Display the first 10 countries for each list.</a></li>
+<li class="chapter" data-level="2.5.3" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html#using-pipes-calculate-the-percent-immigrant-in-every-country.-show-the-highest-10-and-lowest-10-countries.-be-sure-to-think-through-what-the-variable-in-the-data-set-means."><i class="fa fa-check"></i><b>2.5.3</b> Using pipes, calculate the percent immigrant in every country. Show the highest 10 and lowest 10 countries. (Be sure to think through what the variable in the data set means.)</a></li>
+<li class="chapter" data-level="2.5.4" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html#were-now-going-to-give-some-examples-of-the-kind-of-data-we-can-calculate.-think-about-how-you-would-do-this-in-excel-but-dont-actually-do-it-and-then-calculate-in-r.-calculate-the-percent-of-immigrants-who-are-men-by-country-and-show-the-highest-and-lowest-10-countries."><i class="fa fa-check"></i><b>2.5.4</b> We’re now going to give some examples of the kind of data we can calculate. Think about how you would do this in Excel (but don’t actually do it!) and then calculate in R. Calculate the percent of immigrants who are men, by country and show the highest and lowest 10 countries.</a></li>
+<li class="chapter" data-level="2.5.5" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html#group-by-marital-status-and-country-and-show-the-percent-of-people-in-each-category-who-are-men.-show-the-results-for-a-country-of-your-choice-and-briefly-discuss-what-it-means-when-the-percentages-in-each-category-are-not-roughly-50-percent.-recall-that-the-coding-for-the-marital-variable-is-1-married-2-living-together-as-married-3-divorced-4-separated-5-widowed-6-single."><i class="fa fa-check"></i><b>2.5.5</b> Group by marital status and country and show the percent of people in each category who are men. Show the results for a country of your choice and briefly discuss what it means when the percentages in each category are not roughly 50 percent. Recall that the coding for the <em>Marital</em> variable is 1 = Married 2 = Living together as married 3 = Divorced 4 = Separated 5 = Widowed 6 = Single.</a></li>
+<li class="chapter" data-level="2.5.6" data-path="lab-i-tidyverse-ols-review.html"><a href="lab-i-tidyverse-ols-review.html#come-up-with-your-own-alternatives-think-about-some-possible-subset-of-people-and-some-information-we-have-about-them-and-see-if-you-can-write-code-to-capture-that-information."><i class="fa fa-check"></i><b>2.5.6</b> Come up with your own alternatives: think about some possible subset of people and some information we have about them and see if you can write code to capture that information.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="lab-ii-dummy-variables-career-data.html"><a href="lab-ii-dummy-variables-career-data.html"><i class="fa fa-check"></i><b>3</b> 9/30 | Lab II: Dummy Variables &amp; Career Data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="lab-ii-dummy-variables-career-data.html"><a href="lab-ii-dummy-variables-career-data.html#use-ols-to-estimate-the-difference-in-happiness-the-happy-variable-for-married-versus-unmarried-people.-then-use-the-t-test-function-to-assess-the-difference-in-happiness-by-gender-see-the-computing-corner-in-chapter-6-of-the-book.-discuss-similarities-and-differences-in-ols-model-and-t-test-function-results"><i class="fa fa-check"></i><b>3.1</b> Use OLS to estimate the difference in happiness (the “happy” variable) for married versus unmarried people. Then use the t test function to assess the difference in happiness by gender (see the Computing Corner in Chapter 6 of the book). Discuss similarities and differences in OLS model and t test function results</a></li>
+<li class="chapter" data-level="3.2" data-path="lab-ii-dummy-variables-career-data.html"><a href="lab-ii-dummy-variables-career-data.html#use-ols-with-robust-standard-errors-to-estimate-the-difference-in-happiness-for-married-and-unmarried-people.-then-use-the-t-test-function-with-unequal-variances-to-assess-the-difference-in-happiness-by-marital-status.-discuss-similarities-and-differences-in-ols-model-and-t-test-function-results."><i class="fa fa-check"></i><b>3.2</b> Use OLS with robust standard errors to estimate the difference in happiness for married and unmarried people. Then use the t test function with unequal variances to assess the difference in happiness by marital status. Discuss similarities and differences in OLS model and t test function results.</a></li>
+<li class="chapter" data-level="3.3" data-path="lab-ii-dummy-variables-career-data.html"><a href="lab-ii-dummy-variables-career-data.html#create-an-interaction-between-married-and-age.-estimate-a-model-that-explains-happiness-as-a-function-of-age-and-marital-status-allowing-for-the-age-effect-to-differ-according-to-marital-status.-for-simplicity-we-use-only-married-and-unmarried-for-marital-status.-what-is-the-effect-of-age-for-unmarried-people-for-married-people"><i class="fa fa-check"></i><b>3.3</b> Create an interaction between married and age. Estimate a model that explains happiness as a function of age and marital status, allowing for the age effect to differ according to marital status. (For simplicity, we use only married and unmarried for marital status.) What is the effect of age for unmarried people? For married people?</a></li>
+<li class="chapter" data-level="3.4" data-path="lab-ii-dummy-variables-career-data.html"><a href="lab-ii-dummy-variables-career-data.html#estimate-separate-models-explaining-happiness-in-terms-of-age-for-married-and-unmarried-people.-comment-on-similarities-and-differences-compared-to-results-immediately-above-for-i-the-estimated-effect-of-age-and-ii-the-intercept."><i class="fa fa-check"></i><b>3.4</b> Estimate separate models explaining happiness in terms of age for married and unmarried people. Comment on similarities and differences compared to results immediately above for (i) the estimated effect of age and (ii) the intercept.</a></li>
+<li class="chapter" data-level="3.5" data-path="lab-ii-dummy-variables-career-data.html"><a href="lab-ii-dummy-variables-career-data.html#marianne-bertrand-wrote-an-article-called-work-on-womens-work-is-never-done-career-family-and-the-well-being-of-college-educated-women-published-in-the-american-economic-review-papers-proceedings-2013-1033-244250.-she-analyzed-the-effect-of-careers-and-family-on-college-educated-women.-she-defines-a-career-variable-that-is-1-if-someones-earnings-are-above-the-twenty-fifth-percentile-in-the-relevant-year-and-age-group.-estimate-a-model-in-which-happiness-is-a-function-of-career-being-married-and-an-interaction-of-career-and-married-careermarried.-to-match-betrands-analysis-limit-the-data-to-only-to-college-educated-dtaeducat4-women-dtasex2.-interpret-the-estimated-average-happiness-for-the-four-types-of-women-implied-by-this-analysis."><i class="fa fa-check"></i><b>3.5</b> Marianne Bertrand wrote an article called ``Work on Women’s Work is Never Done: Career, Family, and the Well-Being of College-Educated Women’’ published in the <em>American Economic Review: Papers &amp; Proceedings</em> 2013, 103(3): 244–250. She analyzed the effect of careers and family on college-educated women. She defines a career variable that is 1 if someone’s earnings are above the twenty-fifth percentile in the relevant year and age group. Estimate a model in which happiness is a function of career, being married and an interaction of career and married (“careermarried”). To match Betrand’s analysis, limit the data to only to college educated (dta$educat==4) women (dta$sex==2). Interpret the estimated average happiness for the four types of women implied by this analysis.</a></li>
+<li class="chapter" data-level="3.6" data-path="lab-ii-dummy-variables-career-data.html"><a href="lab-ii-dummy-variables-career-data.html#the-gss-provides-a-race-variable-dtarace.-the-variable-equals-1-for-white-respondents-2-for-black-respondents-and-3-for-everyone-else.-add-race-to-the-above-model-and-interpret-the-coefficients-related-to-race.-estimate-another-model-with-a-different-reference-category-and-explain-coefficients-across-the-two-models."><i class="fa fa-check"></i><b>3.6</b> The GSS provides a race variable (dta$race). The variable equals 1 for white respondents, 2 for black respondents and 3 for everyone else. Add race to the above model and interpret the coefficients related to race. Estimate another model with a different reference category and explain coefficients across the two models.</a></li>
+<li class="chapter" data-level="3.7" data-path="lab-ii-dummy-variables-career-data.html"><a href="lab-ii-dummy-variables-career-data.html#estimate-a-model-similar-to-the-above-but-for-a-different-group-of-your-choice-e.g.-limit-by-race-or-gender-or-education-and-feel-free-to-include-different-covariates."><i class="fa fa-check"></i><b>3.7</b> Estimate a model similar to the above, but for a different group of your choice (e.g., limit by race or gender or education) and feel free to include different covariates.</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="lab-iii-panel-data.html"><a href="lab-iii-panel-data.html"><i class="fa fa-check"></i><b>4</b> 2/6 | Lab III: Panel Data</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="lab-iii-panel-data.html"><a href="lab-iii-panel-data.html#load-the-data-from-oxcgrt_latest.csv"><i class="fa fa-check"></i><b>4.1</b> Load the data from OxCGRT_latest.csv</a></li>
+<li class="chapter" data-level="4.2" data-path="lab-iii-panel-data.html"><a href="lab-iii-panel-data.html#data-organization"><i class="fa fa-check"></i><b>4.2</b> Data Organization</a></li>
+<li class="chapter" data-level="4.3" data-path="lab-iii-panel-data.html"><a href="lab-iii-panel-data.html#use-the-lag-function-in-dplyr-to-create-lagged-variables-for-cases-and-deaths.-also-create-difference-e.g.-dcases-that-is-the-change-in-cases-for-each-state-by-date.-check-to-make-sure-it-worked."><i class="fa fa-check"></i><b>4.3</b> Use the lag function in dplyr to create lagged variables for cases and deaths. Also create “difference” (e.g., dCases) that is the change in cases for each state by date. Check to make sure it worked.</a></li>
+<li class="chapter" data-level="4.4" data-path="lab-iii-panel-data.html"><a href="lab-iii-panel-data.html#merge-the-above-data-frame-to-data-in-usstates.xlsx"><i class="fa fa-check"></i><b>4.4</b> Merge the above data frame to data in <em>USstates.xlsx</em></a></li>
+<li class="chapter" data-level="4.5" data-path="lab-iii-panel-data.html"><a href="lab-iii-panel-data.html#write-in-notation-and-estimate-a-pooled-model-of-total-cases-as-a-function-of-state-policy.-discuss-possible-bias."><i class="fa fa-check"></i><b>4.5</b> Write in notation and estimate a pooled model of total cases as a function of state policy. Discuss possible bias.</a></li>
+<li class="chapter" data-level="4.6" data-path="lab-iii-panel-data.html"><a href="lab-iii-panel-data.html#write-in-notation-and-estimate-a-one-way-fixed-effect-model-where-the-fixed-effect-is-state.-are-you-still-worried-about-bias"><i class="fa fa-check"></i><b>4.6</b> Write in notation and estimate a one-way fixed effect model where the fixed effect is state. Are you still worried about bias?</a></li>
+<li class="chapter" data-level="4.7" data-path="lab-iii-panel-data.html"><a href="lab-iii-panel-data.html#write-in-notation-and-estimate-a-two-way-fixed-effect-model-where-the-fixed-effects-are-state-and-date.-does-this-model-address-the-source-of-bias-identified-earlier"><i class="fa fa-check"></i><b>4.7</b> Write in notation and estimate a two-way fixed effect model where the fixed effects are state and date. Does this model address the source of bias identified earlier?</a></li>
+<li class="chapter" data-level="4.8" data-path="lab-iii-panel-data.html"><a href="lab-iii-panel-data.html#test-a-model-with-robust-clustered-standard-errors.-do-the-results-change-at-all"><i class="fa fa-check"></i><b>4.8</b> Test a model with robust-clustered standard errors. Do the results change at all?</a></li>
+<li class="chapter" data-level="4.9" data-path="lab-iii-panel-data.html"><a href="lab-iii-panel-data.html#load-in-the-texas-school-board-data-and-take-a-look-at-the-variables.-the-next-few-questions-are-from-exercise-5-in-bailey-2021.-the-basic-thoery-of-the-paper-is-that-teachers-unions-will-have-less-influence-on-school-board-members-when-turnout-is-greater-since-a-wider-swath-of-voters-non-teachers-will-be-voting.-you-can-read-the-abstract-below."><i class="fa fa-check"></i><b>4.9</b> Load in the Texas School Board Data and take a look at the variables. The next few questions are from exercise 5 in Bailey (2021). The basic thoery of the paper is that teachers unions will have less influence on school board members when turnout is greater since a wider swath of voters (non-teachers) will be voting. You can read the abstract below.</a></li>
+<li class="chapter" data-level="4.10" data-path="lab-iii-panel-data.html"><a href="lab-iii-panel-data.html#write-in-notation-and-estimate-the-pooled-model-of-the-effect-of-oncycle-on-lnavgsalary."><i class="fa fa-check"></i><b>4.10</b> Write in notation and estimate the pooled model of the effect of OnCycle on LnAvgSalary.</a></li>
+<li class="chapter" data-level="4.11" data-path="lab-iii-panel-data.html"><a href="lab-iii-panel-data.html#write-in-notation-and-estimate-a-difference-in-difference-model-of-the-effect-of-oncycle-on-lnavgsalary.-what-is-the-key-coefficient-that-we-are-interested-in"><i class="fa fa-check"></i><b>4.11</b> Write in notation and estimate a difference-in-difference model of the effect of OnCycle on LnAvgSalary. What is the key coefficient that we are interested in?</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="lab-iv-project-runway.html"><a href="lab-iv-project-runway.html"><i class="fa fa-check"></i><b>5</b> 2/13 Lab IV | Project Runway</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="lab-iv-project-runway.html"><a href="lab-iv-project-runway.html#base-r-version"><i class="fa fa-check"></i><b>5.1</b> Base R Version</a></li>
+<li class="chapter" data-level="5.2" data-path="lab-iv-project-runway.html"><a href="lab-iv-project-runway.html#libraryggplot-version-1"><i class="fa fa-check"></i><b>5.2</b> <code>library(ggplot)</code> Version 1</a></li>
+<li class="chapter" data-level="5.3" data-path="lab-iv-project-runway.html"><a href="lab-iv-project-runway.html#libraryggplot-version-2"><i class="fa fa-check"></i><b>5.3</b> <code>library(ggplot)</code> Version 2</a></li>
+<li class="chapter" data-level="5.4" data-path="lab-iv-project-runway.html"><a href="lab-iv-project-runway.html#alternative-plot-of-your-choice"><i class="fa fa-check"></i><b>5.4</b> Alternative Plot of Your Choice</a></li>
+<li class="chapter" data-level="5.5" data-path="lab-iv-project-runway.html"><a href="lab-iv-project-runway.html#code-appendix"><i class="fa fa-check"></i><b>5.5</b> Code Appendix</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="lab-iv-project-runway.html"><a href="lab-iv-project-runway.html#setup-code"><i class="fa fa-check"></i><b>5.5.1</b> Setup Code</a></li>
+<li class="chapter" data-level="5.5.2" data-path="lab-iv-project-runway.html"><a href="lab-iv-project-runway.html#preparation-code"><i class="fa fa-check"></i><b>5.5.2</b> Preparation Code</a></li>
+<li class="chapter" data-level="5.5.3" data-path="lab-iv-project-runway.html"><a href="lab-iv-project-runway.html#base-r-plot-code"><i class="fa fa-check"></i><b>5.5.3</b> Base R Plot Code</a></li>
+<li class="chapter" data-level="5.5.4" data-path="lab-iv-project-runway.html"><a href="lab-iv-project-runway.html#libraryggplot-first-plot-code"><i class="fa fa-check"></i><b>5.5.4</b> <code>library(ggplot)</code> First Plot Code</a></li>
+<li class="chapter" data-level="5.5.5" data-path="lab-iv-project-runway.html"><a href="lab-iv-project-runway.html#libraryggplot-second-plot-code"><i class="fa fa-check"></i><b>5.5.5</b> <code>library(ggplot)</code> Second Plot Code</a></li>
+<li class="chapter" data-level="5.5.6" data-path="lab-iv-project-runway.html"><a href="lab-iv-project-runway.html#alternative-plot-code"><i class="fa fa-check"></i><b>5.5.6</b> Alternative Plot Code</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="lab-v-2sls-instrumental-variables.html"><a href="lab-v-2sls-instrumental-variables.html"><i class="fa fa-check"></i><b>6</b> 2/21 Lab V | 2SLS &amp; Instrumental Variables</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="lab-v-2sls-instrumental-variables.html"><a href="lab-v-2sls-instrumental-variables.html#preparation"><i class="fa fa-check"></i><b>6.1</b> Preparation</a></li>
+<li class="chapter" data-level="6.2" data-path="lab-v-2sls-instrumental-variables.html"><a href="lab-v-2sls-instrumental-variables.html#estimate-a-basic-ols-model-with-do-others-regard-you-as-religious-as-the-dependent-variable-as-a-function-of-hajj2006.-explain-how-there-might-be-endogeneity."><i class="fa fa-check"></i><b>6.2</b> Estimate a basic OLS model with “Do others regard you as religious” as the dependent variable as a function of Hajj2006. Explain how there might be endogeneity.</a></li>
+<li class="chapter" data-level="6.3" data-path="lab-v-2sls-instrumental-variables.html"><a href="lab-v-2sls-instrumental-variables.html#state-the-requirements-of-a-good-instrument-and-xplain-how-the-success-variable-may-satisfy-these-conditions-for-a-good-instrumental-variable."><i class="fa fa-check"></i><b>6.3</b> State the requirements of a good instrument and xplain how the “success” variable may satisfy these conditions for a good instrumental variable.</a></li>
+<li class="chapter" data-level="6.4" data-path="lab-v-2sls-instrumental-variables.html"><a href="lab-v-2sls-instrumental-variables.html#use-two-different-packages-to-estimate-a-2sls-model-of-religious-as-a-function-of-hajj2006.-you-can-use-libraryaer-libraryivreg-libraryfixest-or-any-other-package-for-estimating-2sls-models."><i class="fa fa-check"></i><b>6.4</b> Use two different packages to estimate a 2SLS model of <em>Religious</em> as a function of Hajj2006. You can use <code>library(AER)</code>, <code>library(ivreg)</code>, <code>library(fixest)</code> or any other package for estimating 2SLS models.</a></li>
+<li class="chapter" data-level="6.5" data-path="lab-v-2sls-instrumental-variables.html"><a href="lab-v-2sls-instrumental-variables.html#show-the-first-stage-from-the-2sls-model-above-with-lm.-explain-the-implications-of-the-results."><i class="fa fa-check"></i><b>6.5</b> Show the first stage from the 2SLS model above with lm(). Explain the implications of the results.</a></li>
+<li class="chapter" data-level="6.6" data-path="lab-v-2sls-instrumental-variables.html"><a href="lab-v-2sls-instrumental-variables.html#add-covariates-for-age-literacy-urban-group-size-and-gender-to-the-2sls-model-religious-as-a-function-of-hajj2006.-what-is-different-which-variables-are-included-in-the-first-stage"><i class="fa fa-check"></i><b>6.6</b> Add covariates for age, literacy, urban, group size and gender to the 2SLS model <em>Religious</em> as a function of Hajj2006. What is different? Which variables are included in the first stage?</a></li>
+<li class="chapter" data-level="6.7" data-path="lab-v-2sls-instrumental-variables.html"><a href="lab-v-2sls-instrumental-variables.html#run-multiple-2sls-models-with-ossamaincorrect-govtforce-natlinterest-happy-girlsschool-and-jobswomen-variables-as-dependent-variables.-use-the-list-of-covariates-from-earlier.-if-you-want-try-using-a-loop-but-not-necessary."><i class="fa fa-check"></i><b>6.7</b> Run multiple 2SLS models with OssamaIncorrect, GovtForce, NatlInterest, Happy, GirlsSchool and JobsWomen variables as dependent variables. Use the list of covariates from earlier. If you want, try using a loop (but not necessary).</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">GOVT 8002 Shared Working Book</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="lab-v-2sls-instrumental-variables" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">6</span> 2/21 Lab V | 2SLS &amp; Instrumental Variables<a href="lab-v-2sls-instrumental-variables.html#lab-v-2sls-instrumental-variables" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><img src="lab5_image.png" width="600" /></p>
+<div id="preparation" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Preparation<a href="lab-v-2sls-instrumental-variables.html#preparation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="lab-v-2sls-instrumental-variables.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Setup</span></span>
+<span id="cb94-2"><a href="lab-v-2sls-instrumental-variables.html#cb94-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>(<span class="at">all =</span> <span class="cn">TRUE</span>))   <span class="co"># Removes objects from the previous session</span></span>
+<span id="cb94-3"><a href="lab-v-2sls-instrumental-variables.html#cb94-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-4"><a href="lab-v-2sls-instrumental-variables.html#cb94-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Packages</span></span>
+<span id="cb94-5"><a href="lab-v-2sls-instrumental-variables.html#cb94-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)  <span class="do">## Package to read Stata data</span></span>
+<span id="cb94-6"><a href="lab-v-2sls-instrumental-variables.html#cb94-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ivreg) <span class="do">## Package to run 2sls</span></span>
+<span id="cb94-7"><a href="lab-v-2sls-instrumental-variables.html#cb94-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fixest) <span class="do">## This package can also run 2SLS</span></span>
+<span id="cb94-8"><a href="lab-v-2sls-instrumental-variables.html#cb94-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="do">## For tidyverse commands</span></span>
+<span id="cb94-9"><a href="lab-v-2sls-instrumental-variables.html#cb94-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(memisc) <span class="do">## For table outputting</span></span>
+<span id="cb94-10"><a href="lab-v-2sls-instrumental-variables.html#cb94-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-11"><a href="lab-v-2sls-instrumental-variables.html#cb94-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-12"><a href="lab-v-2sls-instrumental-variables.html#cb94-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Loading Data</span></span>
+<span id="cb94-13"><a href="lab-v-2sls-instrumental-variables.html#cb94-13" aria-hidden="true" tabindex="-1"></a>hajj_public <span class="ot">&lt;-</span> <span class="fu">read_dta</span>(<span class="st">&quot;Data/hajj_public.dta&quot;</span>)</span></code></pre></div>
+<p>Do important life experiences influence political and social views? In particular, does performing the Hajj pilgrimage to Mecca affect the views of pilgrims? David Clingingsmith, Asim Ijaz Khwaja, and Michael Kremer (2009) analyze this question by using two-stage least squares to compare successful and unsuccessful applicants in a lottery used by Pakistan to allocate Hajj visas.</p>
+<p>We will conduct pared-down models. The paper creates indices and implements additional statistical procedures to produce a broader and clearer picture. It is not a bad idea to read this paper to see how we can extend the methods we learn in class to your own work. I posted the paper on Canvas for your convenience.</p>
+<p>Data description</p>
+<table>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>hajj2006</td>
+<td>Went on Hajj trip in 2006</td>
+</tr>
+<tr class="even">
+<td>success</td>
+<td>Won the lottery to have expenses covered for Hajj</td>
+</tr>
+<tr class="odd">
+<td>ptygrp</td>
+<td>Categorical variable indicating size of party for Hajj trip</td>
+</tr>
+<tr class="even">
+<td>smallpty</td>
+<td>1 if small party group, 0 otherwise</td>
+</tr>
+<tr class="odd">
+<td>urban</td>
+<td>1 if live in urban area, 0 otherwise</td>
+</tr>
+<tr class="even">
+<td>age</td>
+<td>Age</td>
+</tr>
+<tr class="odd">
+<td>female</td>
+<td>1 if female, 0 otherwise</td>
+</tr>
+<tr class="even">
+<td>literate</td>
+<td>1 if literate, 0 otherwise</td>
+</tr>
+<tr class="odd">
+<td>x_s7q10</td>
+<td><em>Natl affairs</em>: How often do you follow national affairs in the news on television or on the radio? Binary: 0=Twice a week or less, 1=Several times a week or more</td>
+</tr>
+<tr class="even">
+<td>x_s14aq10</td>
+<td><em>Religious</em>: Do others regard you as religious? Binary: 1=Religious, 0=Not Religious</td>
+</tr>
+<tr class="odd">
+<td>x_s10bq4</td>
+<td><em>OssamaIncorrect</em>: Do you believe goals Ossama is fighting for are correct? Binary: 1=Not Correct at All/Slightly Incorrect, 0=Correct/Absolutely Correct</td>
+</tr>
+<tr class="even">
+<td>x_s7q12a</td>
+<td><em>GovtForce</em>: Govt should force people to conform to Islamic injunctions. Binary: 1=Agree Strongly/Agree, 0=Neutral/Disagree/Strongly Disagree</td>
+</tr>
+<tr class="odd">
+<td>x_s7q1</td>
+<td><em>NatlInterest</em> How interested would you say you are in national affairs? Binary: 0=Not interested, 1=Interested</td>
+</tr>
+<tr class="even">
+<td>x_s3q3</td>
+<td><em>Happy</em>: how happy are you? From 1 (not at all happy) to 4 (very happy).</td>
+</tr>
+<tr class="odd">
+<td>x_s10eq2</td>
+<td><em>GirlsSchool</em>: In your opinion, girls should attend school. Binary: 0=Disagree, 1=Agree</td>
+</tr>
+<tr class="even">
+<td>s10dq1</td>
+<td><em>JobsWomen</em>: When jobs are scarce, men should always have more right to a job than women. Binary: 0=Generally agree, 1=Generally Disagree</td>
+</tr>
+</tbody>
+</table>
+<p>More details on these and other variables are available in Appendix 3 of the paper. If you cannot access the version, the SSRN version works as well.</p>
+</div>
+<div id="estimate-a-basic-ols-model-with-do-others-regard-you-as-religious-as-the-dependent-variable-as-a-function-of-hajj2006.-explain-how-there-might-be-endogeneity." class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> Estimate a basic OLS model with “Do others regard you as religious” as the dependent variable as a function of Hajj2006. Explain how there might be endogeneity.<a href="lab-v-2sls-instrumental-variables.html#estimate-a-basic-ols-model-with-do-others-regard-you-as-religious-as-the-dependent-variable-as-a-function-of-hajj2006.-explain-how-there-might-be-endogeneity." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="lab-v-2sls-instrumental-variables.html#cb95-1" aria-hidden="true" tabindex="-1"></a>hajj_public <span class="sc">%&gt;%</span></span>
+<span id="cb95-2"><a href="lab-v-2sls-instrumental-variables.html#cb95-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(x_s14aq10<span class="sc">~</span>hajj2006, <span class="at">data=</span>.) <span class="sc">%&gt;%</span></span>
+<span id="cb95-3"><a href="lab-v-2sls-instrumental-variables.html#cb95-3" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 5
+##   term        estimate std.error statistic   p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+## 1 (Intercept)   0.767     0.0154     49.8  5   e-323
+## 2 hajj2006      0.0851    0.0199      4.27 2.09e-  5</code></pre>
+<p>There may be endogeneity due to baseline bias caused by the religiosity of respondents. A more religious respondent may be more likely to go on a Hajj trip and be classified as religious by others. Going to church, like actually being religious, is also a factor that may be correlated with x and lurking in the error term.</p>
+</div>
+<div id="state-the-requirements-of-a-good-instrument-and-xplain-how-the-success-variable-may-satisfy-these-conditions-for-a-good-instrumental-variable." class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> State the requirements of a good instrument and xplain how the “success” variable may satisfy these conditions for a good instrumental variable.<a href="lab-v-2sls-instrumental-variables.html#state-the-requirements-of-a-good-instrument-and-xplain-how-the-success-variable-may-satisfy-these-conditions-for-a-good-instrumental-variable." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The two conditions, inclusion and exclusion, are:
+<span class="math display">\[Cov(X,Z)\ne0\]</span>
+&amp;
+<span class="math display">\[Cov(Z,\epsilon)=0\]</span></p>
+<p>The lottery is randomizes, which means it is not correlated with the error term, or anything else other than the treatment variable, in our model. Further, it meaningfully effects our key independent which is tested below.</p>
+</div>
+<div id="use-two-different-packages-to-estimate-a-2sls-model-of-religious-as-a-function-of-hajj2006.-you-can-use-libraryaer-libraryivreg-libraryfixest-or-any-other-package-for-estimating-2sls-models." class="section level2 hasAnchor" number="6.4">
+<h2><span class="header-section-number">6.4</span> Use two different packages to estimate a 2SLS model of <em>Religious</em> as a function of Hajj2006. You can use <code>library(AER)</code>, <code>library(ivreg)</code>, <code>library(fixest)</code> or any other package for estimating 2SLS models.<a href="lab-v-2sls-instrumental-variables.html#use-two-different-packages-to-estimate-a-2sls-model-of-religious-as-a-function-of-hajj2006.-you-can-use-libraryaer-libraryivreg-libraryfixest-or-any-other-package-for-estimating-2sls-models." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="lab-v-2sls-instrumental-variables.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="do">## With library(ivreg)</span></span>
+<span id="cb97-2"><a href="lab-v-2sls-instrumental-variables.html#cb97-2" aria-hidden="true" tabindex="-1"></a>hajj_public <span class="sc">%&gt;%</span></span>
+<span id="cb97-3"><a href="lab-v-2sls-instrumental-variables.html#cb97-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ivreg</span>(x_s14aq10<span class="sc">~</span>hajj2006 <span class="sc">|</span> success, <span class="at">data=</span>.) <span class="sc">%&gt;%</span></span>
+<span id="cb97-4"><a href="lab-v-2sls-instrumental-variables.html#cb97-4" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 5
+##   term        estimate std.error statistic   p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+## 1 (Intercept)    0.757    0.0169     44.9  1.09e-281
+## 2 hajj2006       0.101    0.0231      4.40 1.18e-  5</code></pre>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="lab-v-2sls-instrumental-variables.html#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="do">## With library(fixest)</span></span>
+<span id="cb99-2"><a href="lab-v-2sls-instrumental-variables.html#cb99-2" aria-hidden="true" tabindex="-1"></a>hajj_public <span class="sc">%&gt;%</span></span>
+<span id="cb99-3"><a href="lab-v-2sls-instrumental-variables.html#cb99-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">feols</span>(x_s14aq10 <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> hajj2006<span class="sc">~</span>success, <span class="at">data=</span>., <span class="at">vcov =</span> <span class="st">&quot;iid&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb99-4"><a href="lab-v-2sls-instrumental-variables.html#cb99-4" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code></pre></div>
+<pre><code>## NOTE: 64 observations removed because of NA values (LHS: 64).</code></pre>
+<pre><code>## # A tibble: 2 × 5
+##   term         estimate std.error statistic   p.value
+##   &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+## 1 (Intercept)     0.757    0.0169     44.9  1.09e-281
+## 2 fit_hajj2006    0.101    0.0231      4.40 1.18e-  5</code></pre>
+</div>
+<div id="show-the-first-stage-from-the-2sls-model-above-with-lm.-explain-the-implications-of-the-results." class="section level2 hasAnchor" number="6.5">
+<h2><span class="header-section-number">6.5</span> Show the first stage from the 2SLS model above with lm(). Explain the implications of the results.<a href="lab-v-2sls-instrumental-variables.html#show-the-first-stage-from-the-2sls-model-above-with-lm.-explain-the-implications-of-the-results." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="lab-v-2sls-instrumental-variables.html#cb102-1" aria-hidden="true" tabindex="-1"></a>hajj_public <span class="sc">%&gt;%</span></span>
+<span id="cb102-2"><a href="lab-v-2sls-instrumental-variables.html#cb102-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(hajj2006<span class="sc">~</span>success, <span class="at">data=</span>.) <span class="sc">%&gt;%</span></span>
+<span id="cb102-3"><a href="lab-v-2sls-instrumental-variables.html#cb102-3" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 5
+##   term        estimate std.error statistic  p.value
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 (Intercept)    0.137   0.00893      15.4 6.35e-50
+## 2 success        0.854   0.0122       69.9 0</code></pre>
+<p>The t-score is 69.8663143 which is much higher than the 3 threshold. Our instrument meets in the inclusion condition.</p>
+</div>
+<div id="add-covariates-for-age-literacy-urban-group-size-and-gender-to-the-2sls-model-religious-as-a-function-of-hajj2006.-what-is-different-which-variables-are-included-in-the-first-stage" class="section level2 hasAnchor" number="6.6">
+<h2><span class="header-section-number">6.6</span> Add covariates for age, literacy, urban, group size and gender to the 2SLS model <em>Religious</em> as a function of Hajj2006. What is different? Which variables are included in the first stage?<a href="lab-v-2sls-instrumental-variables.html#add-covariates-for-age-literacy-urban-group-size-and-gender-to-the-2sls-model-religious-as-a-function-of-hajj2006.-what-is-different-which-variables-are-included-in-the-first-stage" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="lab-v-2sls-instrumental-variables.html#cb104-1" aria-hidden="true" tabindex="-1"></a>hajj_public <span class="sc">%&gt;%</span></span>
+<span id="cb104-2"><a href="lab-v-2sls-instrumental-variables.html#cb104-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">feols</span>(x_s14aq10<span class="sc">~</span>age <span class="sc">+</span> literate <span class="sc">+</span> ptygrp <span class="sc">+</span> female <span class="sc">+</span> urban <span class="sc">|</span> </span>
+<span id="cb104-3"><a href="lab-v-2sls-instrumental-variables.html#cb104-3" aria-hidden="true" tabindex="-1"></a>          hajj2006 <span class="sc">~</span> success <span class="sc">+</span> age <span class="sc">+</span> literate <span class="sc">+</span> ptygrp <span class="sc">+</span> female <span class="sc">+</span> urban, </span>
+<span id="cb104-4"><a href="lab-v-2sls-instrumental-variables.html#cb104-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">data=</span>., <span class="at">vcov =</span> <span class="st">&quot;iid&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb104-5"><a href="lab-v-2sls-instrumental-variables.html#cb104-5" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code></pre></div>
+<pre><code>## NOTE: 64 observations removed because of NA values (LHS: 64).</code></pre>
+<pre><code>## The instruments &#39;age&#39;, &#39;literate&#39; and 3 others have been removed because of collinearity (see $collin.var).</code></pre>
+<pre><code>## # A tibble: 7 × 5
+##   term          estimate std.error statistic  p.value
+##   &lt;chr&gt;            &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 (Intercept)   0.493     0.0623       7.92  4.41e-15
+## 2 fit_hajj2006  0.101     0.0227       4.46  8.71e- 6
+## 3 age           0.00269   0.000800     3.36  7.97e- 4
+## 4 literate      0.0146    0.0238       0.616 5.38e- 1
+## 5 ptygrp       -0.000955  0.00642     -0.149 8.82e- 1
+## 6 female        0.132     0.0217       6.06  1.69e- 9
+## 7 urban         0.0674    0.0213       3.17  1.56e- 3</code></pre>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="lab-v-2sls-instrumental-variables.html#cb108-1" aria-hidden="true" tabindex="-1"></a>hajj_public <span class="sc">%&gt;%</span></span>
+<span id="cb108-2"><a href="lab-v-2sls-instrumental-variables.html#cb108-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ivreg</span>(x_s14aq10<span class="sc">~</span>hajj2006 <span class="sc">+</span> age <span class="sc">+</span> literate <span class="sc">+</span> ptygrp <span class="sc">+</span> female <span class="sc">+</span> urban <span class="sc">|</span> </span>
+<span id="cb108-3"><a href="lab-v-2sls-instrumental-variables.html#cb108-3" aria-hidden="true" tabindex="-1"></a>          success <span class="sc">+</span> age <span class="sc">+</span> literate <span class="sc">+</span> ptygrp <span class="sc">+</span> female <span class="sc">+</span> urban, <span class="at">data=</span>.) <span class="sc">%&gt;%</span></span>
+<span id="cb108-4"><a href="lab-v-2sls-instrumental-variables.html#cb108-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>(<span class="at">diagnostics=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## ivreg(formula = x_s14aq10 ~ hajj2006 + age + literate + ptygrp + 
+##     female + urban | success + age + literate + ptygrp + female + 
+##     urban, data = .)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -0.9971  0.0486  0.1494  0.2186  0.4310 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  0.4934864  0.0622823   7.923 4.41e-15 ***
+## hajj2006     0.1012173  0.0226841   4.462 8.71e-06 ***
+## age          0.0026874  0.0007997   3.361 0.000797 ***
+## literate     0.0146344  0.0237657   0.616 0.538131    
+## ptygrp      -0.0009545  0.0064199  -0.149 0.881821    
+## female       0.1316934  0.0217261   6.062 1.69e-09 ***
+## urban        0.0673979  0.0212624   3.170 0.001556 ** 
+## 
+## Diagnostic tests:
+##                   df1  df2 statistic p-value    
+## Weak instruments    1 1534  4594.635  &lt;2e-16 ***
+## Wu-Hausman          1 1533     1.787   0.182    
+## Sargan              0   NA        NA      NA    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.3776 on 1534 degrees of freedom
+## Multiple R-Squared: 0.04825, Adjusted R-squared: 0.04453 
+## Wald test: 13.18 on 6 and 1534 DF,  p-value: 1.349e-14</code></pre>
+</div>
+<div id="run-multiple-2sls-models-with-ossamaincorrect-govtforce-natlinterest-happy-girlsschool-and-jobswomen-variables-as-dependent-variables.-use-the-list-of-covariates-from-earlier.-if-you-want-try-using-a-loop-but-not-necessary." class="section level2 hasAnchor" number="6.7">
+<h2><span class="header-section-number">6.7</span> Run multiple 2SLS models with OssamaIncorrect, GovtForce, NatlInterest, Happy, GirlsSchool and JobsWomen variables as dependent variables. Use the list of covariates from earlier. If you want, try using a loop (but not necessary).<a href="lab-v-2sls-instrumental-variables.html#run-multiple-2sls-models-with-ossamaincorrect-govtforce-natlinterest-happy-girlsschool-and-jobswomen-variables-as-dependent-variables.-use-the-list-of-covariates-from-earlier.-if-you-want-try-using-a-loop-but-not-necessary." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="lab-v-2sls-instrumental-variables.html#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="do">## OssamaIncorrect</span></span>
+<span id="cb110-2"><a href="lab-v-2sls-instrumental-variables.html#cb110-2" aria-hidden="true" tabindex="-1"></a>hajj_public <span class="sc">%&gt;%</span></span>
+<span id="cb110-3"><a href="lab-v-2sls-instrumental-variables.html#cb110-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ivreg</span>(x_s10bq4<span class="sc">~</span>hajj2006 <span class="sc">+</span> age <span class="sc">+</span> literate <span class="sc">+</span> ptygrp <span class="sc">+</span> female <span class="sc">+</span> urban <span class="sc">|</span> success <span class="sc">+</span></span>
+<span id="cb110-4"><a href="lab-v-2sls-instrumental-variables.html#cb110-4" aria-hidden="true" tabindex="-1"></a>                 age <span class="sc">+</span> literate <span class="sc">+</span> ptygrp <span class="sc">+</span> female <span class="sc">+</span> urban, <span class="at">data=</span>.) <span class="sc">%&gt;%</span></span>
+<span id="cb110-5"><a href="lab-v-2sls-instrumental-variables.html#cb110-5" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span>
+<span id="cb110-6"><a href="lab-v-2sls-instrumental-variables.html#cb110-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-7"><a href="lab-v-2sls-instrumental-variables.html#cb110-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-8"><a href="lab-v-2sls-instrumental-variables.html#cb110-8" aria-hidden="true" tabindex="-1"></a><span class="do">## GovtForce</span></span>
+<span id="cb110-9"><a href="lab-v-2sls-instrumental-variables.html#cb110-9" aria-hidden="true" tabindex="-1"></a>hajj_public <span class="sc">%&gt;%</span></span>
+<span id="cb110-10"><a href="lab-v-2sls-instrumental-variables.html#cb110-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ivreg</span>(x_s7q12a<span class="sc">~</span>hajj2006 <span class="sc">+</span> age <span class="sc">+</span> literate <span class="sc">+</span> ptygrp <span class="sc">+</span> female <span class="sc">+</span> urban <span class="sc">|</span> success <span class="sc">+</span> </span>
+<span id="cb110-11"><a href="lab-v-2sls-instrumental-variables.html#cb110-11" aria-hidden="true" tabindex="-1"></a>                 age <span class="sc">+</span> literate <span class="sc">+</span> ptygrp <span class="sc">+</span> female <span class="sc">+</span> urban, <span class="at">data=</span>.) <span class="sc">%&gt;%</span></span>
+<span id="cb110-12"><a href="lab-v-2sls-instrumental-variables.html#cb110-12" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span>
+<span id="cb110-13"><a href="lab-v-2sls-instrumental-variables.html#cb110-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-14"><a href="lab-v-2sls-instrumental-variables.html#cb110-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-15"><a href="lab-v-2sls-instrumental-variables.html#cb110-15" aria-hidden="true" tabindex="-1"></a><span class="do">## NatlInterest</span></span>
+<span id="cb110-16"><a href="lab-v-2sls-instrumental-variables.html#cb110-16" aria-hidden="true" tabindex="-1"></a>hajj_public <span class="sc">%&gt;%</span></span>
+<span id="cb110-17"><a href="lab-v-2sls-instrumental-variables.html#cb110-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ivreg</span>(x_s7q1<span class="sc">~</span>hajj2006 <span class="sc">+</span> age <span class="sc">+</span> literate <span class="sc">+</span> ptygrp <span class="sc">+</span> female <span class="sc">+</span> urban <span class="sc">|</span> success <span class="sc">+</span> </span>
+<span id="cb110-18"><a href="lab-v-2sls-instrumental-variables.html#cb110-18" aria-hidden="true" tabindex="-1"></a>                 age <span class="sc">+</span> literate <span class="sc">+</span> ptygrp <span class="sc">+</span> female <span class="sc">+</span> urban, <span class="at">data=</span>.) <span class="sc">%&gt;%</span></span>
+<span id="cb110-19"><a href="lab-v-2sls-instrumental-variables.html#cb110-19" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span>
+<span id="cb110-20"><a href="lab-v-2sls-instrumental-variables.html#cb110-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-21"><a href="lab-v-2sls-instrumental-variables.html#cb110-21" aria-hidden="true" tabindex="-1"></a><span class="do">## Happy</span></span>
+<span id="cb110-22"><a href="lab-v-2sls-instrumental-variables.html#cb110-22" aria-hidden="true" tabindex="-1"></a>hajj_public <span class="sc">%&gt;%</span></span>
+<span id="cb110-23"><a href="lab-v-2sls-instrumental-variables.html#cb110-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ivreg</span>(x_s3q3<span class="sc">~</span>hajj2006 <span class="sc">+</span> age <span class="sc">+</span> literate <span class="sc">+</span> ptygrp <span class="sc">+</span> female <span class="sc">+</span> urban <span class="sc">|</span> success <span class="sc">+</span> </span>
+<span id="cb110-24"><a href="lab-v-2sls-instrumental-variables.html#cb110-24" aria-hidden="true" tabindex="-1"></a>                 age <span class="sc">+</span> literate <span class="sc">+</span> ptygrp <span class="sc">+</span> female <span class="sc">+</span> urban, <span class="at">data=</span>.) <span class="sc">%&gt;%</span></span>
+<span id="cb110-25"><a href="lab-v-2sls-instrumental-variables.html#cb110-25" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span>
+<span id="cb110-26"><a href="lab-v-2sls-instrumental-variables.html#cb110-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-27"><a href="lab-v-2sls-instrumental-variables.html#cb110-27" aria-hidden="true" tabindex="-1"></a><span class="do">## Girl School</span></span>
+<span id="cb110-28"><a href="lab-v-2sls-instrumental-variables.html#cb110-28" aria-hidden="true" tabindex="-1"></a>hajj_public <span class="sc">%&gt;%</span></span>
+<span id="cb110-29"><a href="lab-v-2sls-instrumental-variables.html#cb110-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ivreg</span>(x_s10eq2<span class="sc">~</span>hajj2006 <span class="sc">+</span> age <span class="sc">+</span> literate <span class="sc">+</span> ptygrp <span class="sc">+</span> female <span class="sc">+</span> urban <span class="sc">|</span> success <span class="sc">+</span> </span>
+<span id="cb110-30"><a href="lab-v-2sls-instrumental-variables.html#cb110-30" aria-hidden="true" tabindex="-1"></a>                 age <span class="sc">+</span> literate <span class="sc">+</span> ptygrp <span class="sc">+</span> female, <span class="at">data=</span>.) <span class="sc">%&gt;%</span></span>
+<span id="cb110-31"><a href="lab-v-2sls-instrumental-variables.html#cb110-31" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span>
+<span id="cb110-32"><a href="lab-v-2sls-instrumental-variables.html#cb110-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb110-33"><a href="lab-v-2sls-instrumental-variables.html#cb110-33" aria-hidden="true" tabindex="-1"></a><span class="do">## Jobs Women</span></span>
+<span id="cb110-34"><a href="lab-v-2sls-instrumental-variables.html#cb110-34" aria-hidden="true" tabindex="-1"></a>hajj_public <span class="sc">%&gt;%</span></span>
+<span id="cb110-35"><a href="lab-v-2sls-instrumental-variables.html#cb110-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ivreg</span>(x_s10dq1<span class="sc">~</span>hajj2006 <span class="sc">+</span> age <span class="sc">+</span> literate <span class="sc">+</span> ptygrp <span class="sc">+</span> female <span class="sc">+</span> urban <span class="sc">|</span> success <span class="sc">+</span></span>
+<span id="cb110-36"><a href="lab-v-2sls-instrumental-variables.html#cb110-36" aria-hidden="true" tabindex="-1"></a>                  age <span class="sc">+</span> literate <span class="sc">+</span> ptygrp <span class="sc">+</span> female, <span class="at">data=</span>.) <span class="sc">%&gt;%</span></span>
+<span id="cb110-37"><a href="lab-v-2sls-instrumental-variables.html#cb110-37" aria-hidden="true" tabindex="-1"></a>  broom<span class="sc">::</span><span class="fu">tidy</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="lab-v-2sls-instrumental-variables.html#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Loop</span></span>
+<span id="cb111-2"><a href="lab-v-2sls-instrumental-variables.html#cb111-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb111-3"><a href="lab-v-2sls-instrumental-variables.html#cb111-3" aria-hidden="true" tabindex="-1"></a><span class="do">## DVs </span></span>
+<span id="cb111-4"><a href="lab-v-2sls-instrumental-variables.html#cb111-4" aria-hidden="true" tabindex="-1"></a>dvs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;hajj_public$x_s10bq4&quot;</span>, <span class="st">&quot;hajj_public$x_s7q12a&quot;</span>, <span class="st">&quot;hajj_public$x_s7q1&quot;</span>, </span>
+<span id="cb111-5"><a href="lab-v-2sls-instrumental-variables.html#cb111-5" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;hajj_public$x_s3q3&quot;</span>, <span class="st">&quot;hajj_public$x_s10eq2&quot;</span>, <span class="st">&quot;hajj_public$x_s10dq1&quot;</span>)</span>
+<span id="cb111-6"><a href="lab-v-2sls-instrumental-variables.html#cb111-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb111-7"><a href="lab-v-2sls-instrumental-variables.html#cb111-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Loop</span></span>
+<span id="cb111-8"><a href="lab-v-2sls-instrumental-variables.html#cb111-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(dvs)){</span>
+<span id="cb111-9"><a href="lab-v-2sls-instrumental-variables.html#cb111-9" aria-hidden="true" tabindex="-1"></a>  model <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&quot;model&quot;</span>,i, <span class="at">sep=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb111-10"><a href="lab-v-2sls-instrumental-variables.html#cb111-10" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">&lt;-</span> <span class="fu">ivreg</span>(<span class="fu">as.formula</span>(<span class="fu">paste</span>(dvs[i],<span class="st">&quot;~hajj2006 + age + literate + ptygrp +</span></span>
+<span id="cb111-11"><a href="lab-v-2sls-instrumental-variables.html#cb111-11" aria-hidden="true" tabindex="-1"></a><span class="st">  female + urban | success + age + literate + ptygrp + female + urban&quot;</span>)), <span class="at">data=</span>hajj_public)</span>
+<span id="cb111-12"><a href="lab-v-2sls-instrumental-variables.html#cb111-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">assign</span>(model,m)}</span></code></pre></div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="lab-iv-project-runway.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

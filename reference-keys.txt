@@ -46,7 +46,7 @@ base-r-plot-code
 libraryggplot-first-plot-code
 libraryggplot-second-plot-code
 alternative-plot-code
-sls-instrumental-variables
+lab-v-2sls-instrumental-variables
 preparation
 estimate-a-basic-ols-model-with-do-others-regard-you-as-religious-as-the-dependent-variable-as-a-function-of-hajj2006.-explain-how-there-might-be-endogeneity.
 state-the-requirements-of-a-good-instrument-and-xplain-how-the-success-variable-may-satisfy-these-conditions-for-a-good-instrumental-variable.

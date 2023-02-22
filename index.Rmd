@@ -762,7 +762,7 @@ df %>%
        title = "Percent Surveyed and Percent in Population by Age Group")
 ```
 
-# 2SLS & Instrumental Variables
+# 2/21 Lab V | 2SLS & Instrumental Variables
 
 ```{r, echo=FALSE}
 knitr::include_graphics("lab5_image.png")
