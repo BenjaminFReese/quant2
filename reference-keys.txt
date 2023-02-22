@@ -1,4 +1,4 @@
-tab:unnamed-chunk-43
+tab:unnamed-chunk-41
 introduction
 purpose-of-this-site
 loading-data
@@ -46,6 +46,7 @@ base-r-plot-code
 libraryggplot-first-plot-code
 libraryggplot-second-plot-code
 alternative-plot-code
+sls-instrumental-variables
 preparation
 a-estimate-a-basic-ols-model-with-do-others-regard-you-as-religious-as-the-dependent-variable-as-a-function-of-hajj2006.-explain-how-there-might-be-endogeneity.
 b-state-the-requirements-of-a-good-instrument-and-xplain-how-the-success-variable-may-satisfy-these-conditions-for-a-good-instrumental-variable.

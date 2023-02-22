@@ -761,11 +761,13 @@ df %>%
        title = "Percent Surveyed and Percent in Population by Age Group")
 ```
 
+# 2SLS & Instrumental Variables
+
 ```{r, echo=FALSE}
 knitr::include_graphics("lab5_image.png")
 ```
 
-## Preparation
+### Preparation
 
 ```{r setup, echo=TRUE, message = FALSE, warning = FALSE}
 # Setup
@@ -776,6 +778,7 @@ library(haven)  ## Package to read Stata data
 library(ivreg) ## Package to run 2sls
 library(fixest) ## This package can also run 2SLS
 library(tidyverse) ## For tidyverse commands
+library(memisc) ## For table outputting
 
 
 ## Loading Data
@@ -838,7 +841,8 @@ hajj_public %>%
   
 ## With library(fixest)
 hajj_public %>%
-  feols(x_s14aq10 ~ 1 | hajj2006~success, data=., vcov = "iid")
+  feols(x_s14aq10 ~ 1 | hajj2006~success, data=., vcov = "iid") %>%
+  broom::tidy()
 ```
 
 ```{r, results='asis'}
@@ -866,16 +870,18 @@ The t-score is `r hajj_public %>% lm(hajj2006~success, data=.) %>% broom::tidy()
 hajj_public %>%
   feols(x_s14aq10~age + literate + ptygrp + female + urban | 
           hajj2006 ~ success + age + literate + ptygrp + female + urban, 
-        data=., vcov = "iid")
+        data=., vcov = "iid") %>%
+  broom::tidy()
 
 hajj_public %>%
   ivreg(x_s14aq10~hajj2006 + age + literate + ptygrp + female + urban | 
-          success + age + literate + ptygrp + female + urban, data=.)
+          success + age + literate + ptygrp + female + urban, data=.) %>%
+  summary(diagnostics=TRUE)
 ```
 
 ### (f) Run multiple 2SLS models with OssamaIncorrect, GovtForce, NatlInterest, Happy, GirlsSchool and JobsWomen variables as dependent variables. Use the list of covariates from earlier. If you want, try using a loop (but not necessary).
 
-```{r}
+```{r, eval=FALSE}
 ## OssamaIncorrect
 hajj_public %>%
   ivreg(x_s10bq4~hajj2006 + age + literate + ptygrp + female + urban | success +
@@ -914,7 +920,6 @@ hajj_public %>%
                   age + literate + ptygrp + female, data=.) %>%
   broom::tidy()
 ```
-
 
 ```{r}
 ## Loop
