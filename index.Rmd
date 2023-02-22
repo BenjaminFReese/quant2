@@ -768,7 +768,7 @@ df %>%
 knitr::include_graphics("lab5_image.png")
 ```
 
-### Preparation
+## Preparation
 
 ```{r setup, echo=TRUE, message = FALSE, warning = FALSE}
 # Setup
@@ -813,7 +813,7 @@ s10dq1 | _JobsWomen_: When jobs are scarce, men should always have more right to
 
 More details on these and other variables are available in Appendix 3 of the paper. If you cannot access the \emph{Quarterly Journal of Economics} version, the SSRN version works as well.
 
-### Estimate a basic OLS model with "Do others regard you as religious" as the dependent variable as a function of Hajj2006. Explain how there might be endogeneity.
+## Estimate a basic OLS model with "Do others regard you as religious" as the dependent variable as a function of Hajj2006. Explain how there might be endogeneity.
 
 ```{r}
 hajj_public %>%
@@ -823,7 +823,7 @@ hajj_public %>%
 
 There may be endogeneity due to baseline bias caused by the religiosity of respondents. A more religious respondent may be more likely to go on a Hajj trip and be classified as religious by others. Going to church, like actually being religious, is also a factor that may be correlated with x and lurking in the error term.
 
-### State the requirements of a good instrument and xplain how the "success" variable may satisfy these conditions for a good instrumental variable.
+## State the requirements of a good instrument and xplain how the "success" variable may satisfy these conditions for a good instrumental variable.
 
 The two conditions, inclusion and exclusion, are:
 $$Cov(X,Z)\ne0$$
@@ -832,7 +832,7 @@ $$Cov(Z,\epsilon)=0$$
 
 The lottery is randomizes, which means it is not correlated with the error term, or anything else other than the treatment variable, in our model. Further, it meaningfully effects our key independent which is tested below.
 
-### Use two different packages to estimate a 2SLS model of _Religious_ as a function of Hajj2006. You can use `library(AER)`, `library(ivreg)`, `library(fixest)` or any other package for estimating 2SLS models.
+## Use two different packages to estimate a 2SLS model of _Religious_ as a function of Hajj2006. You can use `library(AER)`, `library(ivreg)`, `library(fixest)` or any other package for estimating 2SLS models.
 
 ```{r}
 ## With library(ivreg)
@@ -846,7 +846,7 @@ hajj_public %>%
   broom::tidy()
 ```
 
-### Show the first stage from the 2SLS model above with lm(). Explain the implications of the results.
+## Show the first stage from the 2SLS model above with lm(). Explain the implications of the results.
 
 ```{r}
 hajj_public %>%
@@ -857,7 +857,7 @@ hajj_public %>%
 
 The t-score is `r hajj_public %>% lm(hajj2006~success, data=.) %>% broom::tidy() %>% filter(term=="success") %>% dplyr::select(statistic)` which is much higher than the 3 threshold. Our instrument meets in the inclusion condition.
 
-### Add covariates for age, literacy, urban, group size and gender to the 2SLS model _Religious_ as a function of Hajj2006. What is different?  Which variables are included in the first stage?
+## Add covariates for age, literacy, urban, group size and gender to the 2SLS model _Religious_ as a function of Hajj2006. What is different?  Which variables are included in the first stage?
 
 ```{r}
 hajj_public %>%
@@ -872,7 +872,7 @@ hajj_public %>%
   summary(diagnostics=TRUE)
 ```
 
-### Run multiple 2SLS models with OssamaIncorrect, GovtForce, NatlInterest, Happy, GirlsSchool and JobsWomen variables as dependent variables. Use the list of covariates from earlier. If you want, try using a loop (but not necessary).
+## Run multiple 2SLS models with OssamaIncorrect, GovtForce, NatlInterest, Happy, GirlsSchool and JobsWomen variables as dependent variables. Use the list of covariates from earlier. If you want, try using a loop (but not necessary).
 
 ```{r, eval=FALSE}
 ## OssamaIncorrect
