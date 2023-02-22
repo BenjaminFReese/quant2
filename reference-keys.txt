@@ -1,4 +1,4 @@
-tab:unnamed-chunk-91
+tab:unnamed-chunk-43
 introduction
 purpose-of-this-site
 loading-data
@@ -46,3 +46,10 @@ base-r-plot-code
 libraryggplot-first-plot-code
 libraryggplot-second-plot-code
 alternative-plot-code
+preparation
+a-estimate-a-basic-ols-model-with-do-others-regard-you-as-religious-as-the-dependent-variable-as-a-function-of-hajj2006.-explain-how-there-might-be-endogeneity.
+b-state-the-requirements-of-a-good-instrument-and-xplain-how-the-success-variable-may-satisfy-these-conditions-for-a-good-instrumental-variable.
+c-use-two-different-packages-to-estimate-a-2sls-model-of-religious-as-a-function-of-hajj2006.-you-can-use-libraryaer-libraryivreg-libraryfixest-or-any-other-package-for-estimating-2sls-models.
+d-show-the-first-stage-from-the-2sls-model-above-with-lm.-explain-the-implications-of-the-results.
+e-add-covariates-for-age-literacy-urban-group-size-and-gender-to-the-2sls-model-religious-as-a-function-of-hajj2006.-what-is-different-which-variables-are-included-in-the-first-stage
+f-run-multiple-2sls-models-with-ossamaincorrect-govtforce-natlinterest-happy-girlsschool-and-jobswomen-variables-as-dependent-variables.-use-the-list-of-covariates-from-earlier.-if-you-want-try-using-a-loop-but-not-necessary.
