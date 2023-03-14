@@ -985,11 +985,11 @@ age_cat | age categories: 1 is less than 35, 2 is 35 to 50 and 3 is over 50.
 
 [Draft version of the paper](https://static1.squarespace.com/static/5b23cff07c9327b8cde5c995/t/5d5c3f1bc49f210001338d1f/1566326555630/Contesting+Repression+-+Website.pdf)
 
-## (a) Why is an experiment useful in this context?
+## Why is an experiment useful in this context?
 
 Simply asking respondents if they agree or disagree with the police does not answer if and how different messages work.  If respondents were simply asked if they agree with the either the pro-police or human rights messages it may be difficult to separate out whether the message was persuasive or whether the respondent was predisposed to approve of the argument. 
 
-## (b) Is there evidence of balance in the treatment?  Why is this relevant? Check for balance of each treatment with respect to age category, gender, education, income, voting for Sisi and not voting for non-boycott reasons. Use two different procedures to conduct your balance tests. You do not need to use TOST!
+## Is there evidence of balance in the treatment?  Why is this relevant? Check for balance of each treatment with respect to age category, gender, education, income, voting for Sisi and not voting for non-boycott reasons. Use two different procedures to conduct your balance tests. You do not need to use TOST!
 
 ```{r}
 ## Removing NAs
@@ -1032,7 +1032,7 @@ mtable(model1, model2, model3, model4, model5, model6)
 
 There is some evidence of imbalance.
 
-## (c) What is the effect of the treatments on whether respondents viewed the police tactics as justified? Run one model with only the treatment variables and another that includes controls for age category, gender, education, income, voting for Sisi and not voting for non-boycott reasons.
+## What is the effect of the treatments on whether respondents viewed the police tactics as justified? Run one model with only the treatment variables and another that includes controls for age category, gender, education, income, voting for Sisi and not voting for non-boycott reasons.
 
 ```{r}
 ## Without Controls
@@ -1047,7 +1047,7 @@ dta %>%
   summary()
 ```
 
-## (d) Test whether the effects of treatment 1 (police-favorable message) are the same as treatment 3 (both sides) for each dependent variable. Feel free to use the linearHypothesis function in the car package.
+## Test whether the effects of treatment 1 (police-favorable message) are the same as treatment 3 (both sides) for each dependent variable. Feel free to use the linearHypothesis function in the car package.
 
 ```{r}
 reg.1 <- lm(just_binary_main~treat_b1 + treat_b2 + treat_b3 +
@@ -1057,7 +1057,7 @@ reg.1 <- lm(just_binary_main~treat_b1 + treat_b2 + treat_b3 +
 linearHypothesis(reg.1, "treat_b1=treat_b3")
 ```
 
-## (e) In some political contexts, messages have a different effect on people with less engagement in politics.  Are there heterogeneous treatment effects by those who did not vote for reasons other than to boycott the election and those who did not? Feel free to explore multiple other ways there could be heterogeneous effects (e.g., perhaps there are different effects on Sisi supporters), but you only need to report on possible differential effects of the treatments on the "not-accountable" dependent variable. 
+## In some political contexts, messages have a different effect on people with less engagement in politics.  Are there heterogeneous treatment effects by those who did not vote for reasons other than to boycott the election and those who did not? Feel free to explore multiple other ways there could be heterogeneous effects (e.g., perhaps there are different effects on Sisi supporters), but you only need to report on possible differential effects of the treatments on the "not-accountable" dependent variable. 
 
 ```{r}
 dta %>%
