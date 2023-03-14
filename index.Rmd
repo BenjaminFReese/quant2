@@ -770,9 +770,7 @@ knitr::include_graphics("lab5_image.png")
 
 ## Preparation
 
-```{r setup, echo=TRUE, message = FALSE, warning = FALSE}
-# Setup
-rm(list = ls(all = TRUE))   # Removes objects from the previous session
+```{r, echo=TRUE, message = FALSE, warning = FALSE}
 
 ## Packages
 library(haven)  ## Package to read Stata data
@@ -928,4 +926,143 @@ for(i in 1:length(dvs)){
   female + urban | success + age + literate + ptygrp + female + urban")), data=hajj_public)
   assign(model,m)}
 
+```
+
+# 3/13 Lab VI | Experiments
+
+```{r, echo=FALSE}
+knitr::include_graphics("lab6_image.jpg")
+```
+
+## Preparation
+
+```{r, include=TRUE, message = FALSE, warning = FALSE}
+library(knitr)
+library(haven)
+library(tidyverse)
+library(car)
+library(memisc)
+load("~/GOVT702/Data/EgyptProtests.RData")
+```
+
+Williamson and Malik (2020) used a survey experiment to examine the public response to how Egyptians responded to different framings regarding a protest in which protesters were killed by police.
+
+All respondents were given the following statement: "Last year, police raided an apartment in 6 October City. During the raid, they killed 9 members of the Muslim Brotherhood." 
+
+Respondents were assigned with equal probability to a control group that got no more information or one of three treatment groups that received additional information.
+
+- Respondents in the first treatment group were provided a paragraph that justified the killings from the security forces perspective.
+
+- Respondents in the second treatment group were provided a paragraph that criticized the killings from a human rights perspective.
+
+- Respondents in the third treatment group were provided both the security forces and human rights perspectives.
+
+
+Two outcomes were measured: 
+
+- if respondents thought the police tactics were justified, and
+
+- if the police should the police be held accountable for killing the nine men. So that both variables are coded in same direction, this variable is coded as 1 if the respondent gave a pro-police answer (saying the police did not need to be held accountable).
+
+Data description
+
+Variable  | 	Description
+------------- | -------------
+just_binary_main | 1 if the respondent said the police tactics were justified; 0 otherwise.
+not_acc_binary_main | 1 if the respondent said the police should definitely or probably not be held accountable;  0 otherwise. We call this variable no-accountability
+treat_b1  | 1 if respondent was given the pro-police paragraph
+treat_b2  | 1 if respondent was given the human rights paragraph
+treat_b3  | 1 if respondent was given both the pro-police and human rights paragraphs
+sisi_vote | 1 if the respondent voted for Sisi
+not_voteboycott | 1 if the respondent did not vote for some other reason than boycotting the election
+opposition_vote_boycott | 1 if the respondent either voted for the opposition candidate or boycotted the election
+education  | from 1 (no formal education) to 8 (graduate degree). Values from 6 to 8 went to college.
+income | 1 = Less than 500 pounds per month, 2 = 500 to 1000 pounds per month, 3 = 1000 to 4000 pounds per month, 4 = 4000 to 10000 pounds per month, 5 = More than 10000 pounds per month
+male| 1 for men, 0 otherwise
+age_cat | age categories: 1 is less than 35, 2 is 35 to 50 and 3 is over 50.
+
+[Published paper](https://journals.sagepub.com/doi/abs/10.1177/0022343320961835?journalCode=jpra) (paywalled) 
+
+[Draft version of the paper](https://static1.squarespace.com/static/5b23cff07c9327b8cde5c995/t/5d5c3f1bc49f210001338d1f/1566326555630/Contesting+Repression+-+Website.pdf)
+
+## (a) Why is an experiment useful in this context?
+
+Simply asking respondents if they agree or disagree with the police does not answer if and how different messages work.  If respondents were simply asked if they agree with the either the pro-police or human rights messages it may be difficult to separate out whether the message was persuasive or whether the respondent was predisposed to approve of the argument. 
+
+## (b) Is there evidence of balance in the treatment?  Why is this relevant? Check for balance of each treatment with respect to age category, gender, education, income, voting for Sisi and not voting for non-boycott reasons. Use two different procedures to conduct your balance tests. You do not need to use TOST!
+
+```{r}
+## Removing NAs
+dta <- dta[is.na(dta$just_binary_main)==0 & is.na(dta$not_acc_binary_main)==0,]
+
+dep_vars <- dta %>% 
+  dplyr::select(age_cat, male, education, sisi_vote, not_voteboycott, income)
+
+b_test <- lapply(dep_vars, function(bal) { 
+  lm(bal ~ dta$treat_b1 + dta$treat_b2 + dta$treat_b3)})
+
+## Extracting Slopes and P Values
+slopes  <- round(sapply(b_test, function(x) x$coefficients), 2)
+p <- round(sapply(b_test, function(x) {
+            summary(x)$coefficients[,4]}), 2)
+
+## Showing Results
+balance_results = data.frame(b1= slopes[2,], b1.p = p[2,], 
+                            b2= slopes[3,], b2.p = p[3,],
+                            b3= slopes[4,], b3.p = p[4,]) 
+balance_results
+```
+
+We can do the same with a loop.
+
+```{r, eval=FALSE}
+## DV Creation
+dvs <- c("dta$age_cat", "dta$male", "dta$education", "dta$income",
+         "dta$sisi_vote", "dta$not_voteboycott")
+
+## Loop for Treatments
+for(i in 1:length(dvs)){
+  model <- paste("model",i, sep="")
+  m <- lm(as.formula(paste(dvs[i],"~treat_b1 + treat_b2 + treat_b3")), 
+          data=dta)
+  assign(model,m)}
+mtable(model1, model2, model3, model4, model5, model6)
+
+```
+
+There is some evidence of imbalance.
+
+## (c) What is the effect of the treatments on whether respondents viewed the police tactics as justified? Run one model with only the treatment variables and another that includes controls for age category, gender, education, income, voting for Sisi and not voting for non-boycott reasons.
+
+```{r}
+## Without Controls
+dta %>%
+  lm(just_binary_main~treat_b1 + treat_b2 + treat_b3, data=.) %>%
+  summary()
+
+## With Controls
+dta %>%
+  lm(just_binary_main~treat_b1 + treat_b2 + treat_b3 + factor(age_cat) + 
+       male + education + income + sisi_vote + not_voteboycott, data=.) %>%
+  summary()
+```
+
+## (d) Test whether the effects of treatment 1 (police-favorable message) are the same as treatment 3 (both sides) for each dependent variable. Feel free to use the linearHypothesis function in the car package.
+
+```{r}
+reg.1 <- lm(just_binary_main~treat_b1 + treat_b2 + treat_b3 +
+               factor(age_cat) + male + education + income +
+               sisi_vote + not_voteboycott, data=dta)
+
+linearHypothesis(reg.1, "treat_b1=treat_b3")
+```
+
+## (e) In some political contexts, messages have a different effect on people with less engagement in politics.  Are there heterogeneous treatment effects by those who did not vote for reasons other than to boycott the election and those who did not? Feel free to explore multiple other ways there could be heterogeneous effects (e.g., perhaps there are different effects on Sisi supporters), but you only need to report on possible differential effects of the treatments on the "not-accountable" dependent variable. 
+
+```{r}
+dta %>%
+  lm(not_acc_binary_main ~ not_voteboycott*treat_b1 + not_voteboycott*treat_b2 + 
+                          not_voteboycott*treat_b3 +factor(age_cat) + male + 
+                          education + income + sisi_vote, data = .) %>%
+  summary()
 ```

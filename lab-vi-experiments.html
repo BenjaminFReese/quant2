@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3 9/30 | Lab II: Dummy Variables &amp; Career Data | GOVT 8002 Shared Working Book</title>
-  <meta name="description" content="3 9/30 | Lab II: Dummy Variables &amp; Career Data | GOVT 8002 Shared Working Book" />
+  <title>7 3/13 Lab VI | Experiments | GOVT 8002 Shared Working Book</title>
+  <meta name="description" content="7 3/13 Lab VI | Experiments | GOVT 8002 Shared Working Book" />
   <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3 9/30 | Lab II: Dummy Variables &amp; Career Data | GOVT 8002 Shared Working Book" />
+  <meta property="og:title" content="7 3/13 Lab VI | Experiments | GOVT 8002 Shared Working Book" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3 9/30 | Lab II: Dummy Variables &amp; Career Data | GOVT 8002 Shared Working Book" />
+  <meta name="twitter:title" content="7 3/13 Lab VI | Experiments | GOVT 8002 Shared Working Book" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="lab-i-tidyverse-ols-review.html"/>
-<link rel="next" href="lab-iii-panel-data.html"/>
+<link rel="prev" href="lab-v-2sls-instrumental-variables.html"/>
+
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -228,321 +228,269 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="lab-ii-dummy-variables-career-data" class="section level1 hasAnchor" number="3">
-<h1><span class="header-section-number">3</span> 9/30 | Lab II: Dummy Variables &amp; Career Data<a href="lab-ii-dummy-variables-career-data.html#lab-ii-dummy-variables-career-data" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p><img src="lab2_image.png" width="672" /></p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="lab-ii-dummy-variables-career-data.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Packages</span></span>
-<span id="cb36-2"><a href="lab-ii-dummy-variables-career-data.html#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
-<span id="cb36-3"><a href="lab-ii-dummy-variables-career-data.html#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
-<span id="cb36-4"><a href="lab-ii-dummy-variables-career-data.html#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(AER)</span>
-<span id="cb36-5"><a href="lab-ii-dummy-variables-career-data.html#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stargazer)</span>
-<span id="cb36-6"><a href="lab-ii-dummy-variables-career-data.html#cb36-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-7"><a href="lab-ii-dummy-variables-career-data.html#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Data</span></span>
-<span id="cb36-8"><a href="lab-ii-dummy-variables-career-data.html#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;~/GOVT702/Data/Ch6_Lab_CareerHappiness.RData&quot;</span>)</span></code></pre></div>
-<p>We will use General Social Survey data for this lab.
-The key variables we will use are</p>
+<div id="lab-vi-experiments" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">7</span> 3/13 Lab VI | Experiments<a href="lab-vi-experiments.html#lab-vi-experiments" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><img src="lab6_image.jpg" width="512" /></p>
+<div id="preparation-1" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> Preparation<a href="lab-vi-experiments.html#preparation-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="lab-vi-experiments.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb112-2"><a href="lab-vi-experiments.html#cb112-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
+<span id="cb112-3"><a href="lab-vi-experiments.html#cb112-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb112-4"><a href="lab-vi-experiments.html#cb112-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb112-5"><a href="lab-vi-experiments.html#cb112-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(memisc)</span>
+<span id="cb112-6"><a href="lab-vi-experiments.html#cb112-6" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;~/GOVT702/Data/EgyptProtests.RData&quot;</span>)</span></code></pre></div>
+<p>Williamson and Malik (2020) used a survey experiment to examine the public response to how Egyptians responded to different framings regarding a protest in which protesters were killed by police.</p>
+<p>All respondents were given the following statement: “Last year, police raided an apartment in 6 October City. During the raid, they killed 9 members of the Muslim Brotherhood.”</p>
+<p>Respondents were assigned with equal probability to a control group that got no more information or one of three treatment groups that received additional information.</p>
 <ul>
-<li>happy: 3 very happy, 2 pretty happy, 1 not too happy</li>
-<li>married: 1 for currently married (based on dta$marital, which is 1 for married, 2 for widowed, 3 for divorced, 4 for separated, 5 for never married)</li>
-<li>sex: 1 for men, 2 for women</li>
-<li>edcat: 1 for less than high school, 2 for high school, 3 for some college and 4 for college graduate</li>
-<li>race: 1 for white, 2 for black, 3 for other races (self-identified, first race mentioned)</li>
+<li><p>Respondents in the first treatment group were provided a paragraph that justified the killings from the security forces perspective.</p></li>
+<li><p>Respondents in the second treatment group were provided a paragraph that criticized the killings from a human rights perspective.</p></li>
+<li><p>Respondents in the third treatment group were provided both the security forces and human rights perspectives.</p></li>
 </ul>
-<div id="use-ols-to-estimate-the-difference-in-happiness-the-happy-variable-for-married-versus-unmarried-people.-then-use-the-t-test-function-to-assess-the-difference-in-happiness-by-gender-see-the-computing-corner-in-chapter-6-of-the-book.-discuss-similarities-and-differences-in-ols-model-and-t-test-function-results" class="section level2 hasAnchor" number="3.1">
-<h2><span class="header-section-number">3.1</span> Use OLS to estimate the difference in happiness (the “happy” variable) for married versus unmarried people. Then use the t test function to assess the difference in happiness by gender (see the Computing Corner in Chapter 6 of the book). Discuss similarities and differences in OLS model and t test function results<a href="lab-ii-dummy-variables-career-data.html#use-ols-to-estimate-the-difference-in-happiness-the-happy-variable-for-married-versus-unmarried-people.-then-use-the-t-test-function-to-assess-the-difference-in-happiness-by-gender-see-the-computing-corner-in-chapter-6-of-the-book.-discuss-similarities-and-differences-in-ols-model-and-t-test-function-results" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="lab-ii-dummy-variables-career-data.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Difference in Happiness with OLS</span></span>
-<span id="cb37-2"><a href="lab-ii-dummy-variables-career-data.html#cb37-2" aria-hidden="true" tabindex="-1"></a>model_1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(happy<span class="sc">~</span>married, <span class="at">data=</span>dta)</span>
-<span id="cb37-3"><a href="lab-ii-dummy-variables-career-data.html#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_1)</span></code></pre></div>
+<p>Two outcomes were measured:</p>
+<ul>
+<li><p>if respondents thought the police tactics were justified, and</p></li>
+<li><p>if the police should the police be held accountable for killing the nine men. So that both variables are coded in same direction, this variable is coded as 1 if the respondent gave a pro-police answer (saying the police did not need to be held accountable).</p></li>
+</ul>
+<p>Data description</p>
+<table>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>just_binary_main</td>
+<td>1 if the respondent said the police tactics were justified; 0 otherwise.</td>
+</tr>
+<tr class="even">
+<td>not_acc_binary_main</td>
+<td>1 if the respondent said the police should definitely or probably not be held accountable; 0 otherwise. We call this variable no-accountability</td>
+</tr>
+<tr class="odd">
+<td>treat_b1</td>
+<td>1 if respondent was given the pro-police paragraph</td>
+</tr>
+<tr class="even">
+<td>treat_b2</td>
+<td>1 if respondent was given the human rights paragraph</td>
+</tr>
+<tr class="odd">
+<td>treat_b3</td>
+<td>1 if respondent was given both the pro-police and human rights paragraphs</td>
+</tr>
+<tr class="even">
+<td>sisi_vote</td>
+<td>1 if the respondent voted for Sisi</td>
+</tr>
+<tr class="odd">
+<td>not_voteboycott</td>
+<td>1 if the respondent did not vote for some other reason than boycotting the election</td>
+</tr>
+<tr class="even">
+<td>opposition_vote_boycott</td>
+<td>1 if the respondent either voted for the opposition candidate or boycotted the election</td>
+</tr>
+<tr class="odd">
+<td>education</td>
+<td>from 1 (no formal education) to 8 (graduate degree). Values from 6 to 8 went to college.</td>
+</tr>
+<tr class="even">
+<td>income</td>
+<td>1 = Less than 500 pounds per month, 2 = 500 to 1000 pounds per month, 3 = 1000 to 4000 pounds per month, 4 = 4000 to 10000 pounds per month, 5 = More than 10000 pounds per month</td>
+</tr>
+<tr class="odd">
+<td>male</td>
+<td>1 for men, 0 otherwise</td>
+</tr>
+<tr class="even">
+<td>age_cat</td>
+<td>age categories: 1 is less than 35, 2 is 35 to 50 and 3 is over 50.</td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://journals.sagepub.com/doi/abs/10.1177/0022343320961835?journalCode=jpra">Published paper</a> (paywalled)</p>
+<p><a href="https://static1.squarespace.com/static/5b23cff07c9327b8cde5c995/t/5d5c3f1bc49f210001338d1f/1566326555630/Contesting+Repression+-+Website.pdf">Draft version of the paper</a></p>
+</div>
+<div id="a-why-is-an-experiment-useful-in-this-context" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> (a) Why is an experiment useful in this context?<a href="lab-vi-experiments.html#a-why-is-an-experiment-useful-in-this-context" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Simply asking respondents if they agree or disagree with the police does not answer if and how different messages work. If respondents were simply asked if they agree with the either the pro-police or human rights messages it may be difficult to separate out whether the message was persuasive or whether the respondent was predisposed to approve of the argument.</p>
+</div>
+<div id="b-is-there-evidence-of-balance-in-the-treatment-why-is-this-relevant-check-for-balance-of-each-treatment-with-respect-to-age-category-gender-education-income-voting-for-sisi-and-not-voting-for-non-boycott-reasons.-use-two-different-procedures-to-conduct-your-balance-tests.-you-do-not-need-to-use-tost" class="section level2 hasAnchor" number="7.3">
+<h2><span class="header-section-number">7.3</span> (b) Is there evidence of balance in the treatment? Why is this relevant? Check for balance of each treatment with respect to age category, gender, education, income, voting for Sisi and not voting for non-boycott reasons. Use two different procedures to conduct your balance tests. You do not need to use TOST!<a href="lab-vi-experiments.html#b-is-there-evidence-of-balance-in-the-treatment-why-is-this-relevant-check-for-balance-of-each-treatment-with-respect-to-age-category-gender-education-income-voting-for-sisi-and-not-voting-for-non-boycott-reasons.-use-two-different-procedures-to-conduct-your-balance-tests.-you-do-not-need-to-use-tost" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="lab-vi-experiments.html#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Removing NAs</span></span>
+<span id="cb113-2"><a href="lab-vi-experiments.html#cb113-2" aria-hidden="true" tabindex="-1"></a>dta <span class="ot">&lt;-</span> dta[<span class="fu">is.na</span>(dta<span class="sc">$</span>just_binary_main)<span class="sc">==</span><span class="dv">0</span> <span class="sc">&amp;</span> <span class="fu">is.na</span>(dta<span class="sc">$</span>not_acc_binary_main)<span class="sc">==</span><span class="dv">0</span>,]</span>
+<span id="cb113-3"><a href="lab-vi-experiments.html#cb113-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-4"><a href="lab-vi-experiments.html#cb113-4" aria-hidden="true" tabindex="-1"></a>dep_vars <span class="ot">&lt;-</span> dta <span class="sc">%&gt;%</span> </span>
+<span id="cb113-5"><a href="lab-vi-experiments.html#cb113-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(age_cat, male, education, sisi_vote, not_voteboycott, income)</span>
+<span id="cb113-6"><a href="lab-vi-experiments.html#cb113-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-7"><a href="lab-vi-experiments.html#cb113-7" aria-hidden="true" tabindex="-1"></a>b_test <span class="ot">&lt;-</span> <span class="fu">lapply</span>(dep_vars, <span class="cf">function</span>(bal) { </span>
+<span id="cb113-8"><a href="lab-vi-experiments.html#cb113-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(bal <span class="sc">~</span> dta<span class="sc">$</span>treat_b1 <span class="sc">+</span> dta<span class="sc">$</span>treat_b2 <span class="sc">+</span> dta<span class="sc">$</span>treat_b3)})</span>
+<span id="cb113-9"><a href="lab-vi-experiments.html#cb113-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-10"><a href="lab-vi-experiments.html#cb113-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Extracting Slopes and P Values</span></span>
+<span id="cb113-11"><a href="lab-vi-experiments.html#cb113-11" aria-hidden="true" tabindex="-1"></a>slopes  <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">sapply</span>(b_test, <span class="cf">function</span>(x) x<span class="sc">$</span>coefficients), <span class="dv">2</span>)</span>
+<span id="cb113-12"><a href="lab-vi-experiments.html#cb113-12" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">sapply</span>(b_test, <span class="cf">function</span>(x) {</span>
+<span id="cb113-13"><a href="lab-vi-experiments.html#cb113-13" aria-hidden="true" tabindex="-1"></a>            <span class="fu">summary</span>(x)<span class="sc">$</span>coefficients[,<span class="dv">4</span>]}), <span class="dv">2</span>)</span>
+<span id="cb113-14"><a href="lab-vi-experiments.html#cb113-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb113-15"><a href="lab-vi-experiments.html#cb113-15" aria-hidden="true" tabindex="-1"></a><span class="do">## Showing Results</span></span>
+<span id="cb113-16"><a href="lab-vi-experiments.html#cb113-16" aria-hidden="true" tabindex="-1"></a>balance_results <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">b1=</span> slopes[<span class="dv">2</span>,], <span class="at">b1.p =</span> p[<span class="dv">2</span>,], </span>
+<span id="cb113-17"><a href="lab-vi-experiments.html#cb113-17" aria-hidden="true" tabindex="-1"></a>                            <span class="at">b2=</span> slopes[<span class="dv">3</span>,], <span class="at">b2.p =</span> p[<span class="dv">3</span>,],</span>
+<span id="cb113-18"><a href="lab-vi-experiments.html#cb113-18" aria-hidden="true" tabindex="-1"></a>                            <span class="at">b3=</span> slopes[<span class="dv">4</span>,], <span class="at">b3.p =</span> p[<span class="dv">4</span>,]) </span>
+<span id="cb113-19"><a href="lab-vi-experiments.html#cb113-19" aria-hidden="true" tabindex="-1"></a>balance_results</span></code></pre></div>
+<pre><code>##                    b1 b1.p    b2 b2.p    b3 b3.p
+## age_cat          0.05 0.60  0.01 0.89 -0.01 0.89
+## male             0.01 0.77  0.00 0.90  0.05 0.18
+## education        0.45 0.01  0.27 0.12  0.04 0.82
+## sisi_vote        0.02 0.74  0.05 0.36  0.09 0.12
+## not_voteboycott -0.02 0.71 -0.02 0.76 -0.05 0.37
+## income           0.18 0.10  0.06 0.55  0.24 0.03</code></pre>
+<p>We can do the same with a loop.</p>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="lab-vi-experiments.html#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="do">## DV Creation</span></span>
+<span id="cb115-2"><a href="lab-vi-experiments.html#cb115-2" aria-hidden="true" tabindex="-1"></a>dvs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;dta$age_cat&quot;</span>, <span class="st">&quot;dta$male&quot;</span>, <span class="st">&quot;dta$education&quot;</span>, <span class="st">&quot;dta$income&quot;</span>,</span>
+<span id="cb115-3"><a href="lab-vi-experiments.html#cb115-3" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;dta$sisi_vote&quot;</span>, <span class="st">&quot;dta$not_voteboycott&quot;</span>)</span>
+<span id="cb115-4"><a href="lab-vi-experiments.html#cb115-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb115-5"><a href="lab-vi-experiments.html#cb115-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Loop for Treatments</span></span>
+<span id="cb115-6"><a href="lab-vi-experiments.html#cb115-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(dvs)){</span>
+<span id="cb115-7"><a href="lab-vi-experiments.html#cb115-7" aria-hidden="true" tabindex="-1"></a>  model <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&quot;model&quot;</span>,i, <span class="at">sep=</span><span class="st">&quot;&quot;</span>)</span>
+<span id="cb115-8"><a href="lab-vi-experiments.html#cb115-8" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">as.formula</span>(<span class="fu">paste</span>(dvs[i],<span class="st">&quot;~treat_b1 + treat_b2 + treat_b3&quot;</span>)), </span>
+<span id="cb115-9"><a href="lab-vi-experiments.html#cb115-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">data=</span>dta)</span>
+<span id="cb115-10"><a href="lab-vi-experiments.html#cb115-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">assign</span>(model,m)}</span>
+<span id="cb115-11"><a href="lab-vi-experiments.html#cb115-11" aria-hidden="true" tabindex="-1"></a><span class="fu">mtable</span>(model1, model2, model3, model4, model5, model6)</span></code></pre></div>
+<p>There is some evidence of imbalance.</p>
+</div>
+<div id="c-what-is-the-effect-of-the-treatments-on-whether-respondents-viewed-the-police-tactics-as-justified-run-one-model-with-only-the-treatment-variables-and-another-that-includes-controls-for-age-category-gender-education-income-voting-for-sisi-and-not-voting-for-non-boycott-reasons." class="section level2 hasAnchor" number="7.4">
+<h2><span class="header-section-number">7.4</span> (c) What is the effect of the treatments on whether respondents viewed the police tactics as justified? Run one model with only the treatment variables and another that includes controls for age category, gender, education, income, voting for Sisi and not voting for non-boycott reasons.<a href="lab-vi-experiments.html#c-what-is-the-effect-of-the-treatments-on-whether-respondents-viewed-the-police-tactics-as-justified-run-one-model-with-only-the-treatment-variables-and-another-that-includes-controls-for-age-category-gender-education-income-voting-for-sisi-and-not-voting-for-non-boycott-reasons." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="lab-vi-experiments.html#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Without Controls</span></span>
+<span id="cb116-2"><a href="lab-vi-experiments.html#cb116-2" aria-hidden="true" tabindex="-1"></a>dta <span class="sc">%&gt;%</span></span>
+<span id="cb116-3"><a href="lab-vi-experiments.html#cb116-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(just_binary_main<span class="sc">~</span>treat_b1 <span class="sc">+</span> treat_b2 <span class="sc">+</span> treat_b3, <span class="at">data=</span>.) <span class="sc">%&gt;%</span></span>
+<span id="cb116-4"><a href="lab-vi-experiments.html#cb116-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code></pre></div>
 <pre><code>## 
 ## Call:
-## lm(formula = happy ~ married, data = dta)
+## lm(formula = just_binary_main ~ treat_b1 + treat_b2 + treat_b3, 
+##     data = .)
 ## 
 ## Residuals:
 ##     Min      1Q  Median      3Q     Max 
-## -1.3227 -0.3227 -0.0249  0.6773  0.9751 
+## -0.4589 -0.3453 -0.3154  0.5411  0.6846 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) 2.024903   0.006033  335.64   &lt;2e-16 ***
-## married     0.297810   0.007621   39.08   &lt;2e-16 ***
+## (Intercept)  0.31544    0.03923   8.042 5.02e-15 ***
+## treat_b1     0.14347    0.05576   2.573   0.0103 *  
+## treat_b2     0.01342    0.05547   0.242   0.8089    
+## treat_b3     0.02989    0.05646   0.529   0.5968    
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 0.5984 on 26346 degrees of freedom
-##   (2442 observations deleted due to missingness)
-## Multiple R-squared:  0.05478,    Adjusted R-squared:  0.05475 
-## F-statistic:  1527 on 1 and 26346 DF,  p-value: &lt; 2.2e-16</code></pre>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="lab-ii-dummy-variables-career-data.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(model_1)</span></code></pre></div>
-<pre><code>##                2.5 %    97.5 %
-## (Intercept) 2.013079 2.0367282
-## married     0.282872 0.3127481</code></pre>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="lab-ii-dummy-variables-career-data.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="do">## With t.test()</span></span>
-<span id="cb41-2"><a href="lab-ii-dummy-variables-career-data.html#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(dta<span class="sc">$</span>happy[dta<span class="sc">$</span>married<span class="sc">==</span><span class="dv">1</span>], dta<span class="sc">$</span>happy[dta<span class="sc">$</span>married<span class="sc">==</span><span class="dv">0</span>])</span></code></pre></div>
+## Residual standard error: 0.4788 on 579 degrees of freedom
+## Multiple R-squared:  0.01409,    Adjusted R-squared:  0.008977 
+## F-statistic: 2.757 on 3 and 579 DF,  p-value: 0.04167</code></pre>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="lab-vi-experiments.html#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="do">## With Controls</span></span>
+<span id="cb118-2"><a href="lab-vi-experiments.html#cb118-2" aria-hidden="true" tabindex="-1"></a>dta <span class="sc">%&gt;%</span></span>
+<span id="cb118-3"><a href="lab-vi-experiments.html#cb118-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(just_binary_main<span class="sc">~</span>treat_b1 <span class="sc">+</span> treat_b2 <span class="sc">+</span> treat_b3 <span class="sc">+</span> <span class="fu">factor</span>(age_cat) <span class="sc">+</span> </span>
+<span id="cb118-4"><a href="lab-vi-experiments.html#cb118-4" aria-hidden="true" tabindex="-1"></a>       male <span class="sc">+</span> education <span class="sc">+</span> income <span class="sc">+</span> sisi_vote <span class="sc">+</span> not_voteboycott, <span class="at">data=</span>.) <span class="sc">%&gt;%</span></span>
+<span id="cb118-5"><a href="lab-vi-experiments.html#cb118-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code></pre></div>
 <pre><code>## 
-##  Welch Two Sample t-test
+## Call:
+## lm(formula = just_binary_main ~ treat_b1 + treat_b2 + treat_b3 + 
+##     factor(age_cat) + male + education + income + sisi_vote + 
+##     not_voteboycott, data = .)
 ## 
-## data:  dta$happy[dta$married == 1] and dta$happy[dta$married == 0]
-## t = 38.977, df = 20513, p-value &lt; 2.2e-16
-## alternative hypothesis: true difference in means is not equal to 0
-## 95 percent confidence interval:
-##  0.2828336 0.3127865
-## sample estimates:
-## mean of x mean of y 
-##  2.322714  2.024903</code></pre>
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -0.7901 -0.1992 -0.1011  0.3328  0.9448 
+## 
+## Coefficients:
+##                       Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)          0.0771076  0.1015603   0.759   0.4481    
+## treat_b1             0.1189739  0.0499768   2.381   0.0176 *  
+## treat_b2            -0.0249841  0.0496725  -0.503   0.6152    
+## treat_b3            -0.0169674  0.0506942  -0.335   0.7380    
+## factor(age_cat)2    -0.0362495  0.0425449  -0.852   0.3946    
+## factor(age_cat)3     0.0005895  0.0471999   0.012   0.9900    
+## male                 0.0494751  0.0534350   0.926   0.3549    
+## education           -0.0007622  0.0125688  -0.061   0.9517    
+## income              -0.0010071  0.0209086  -0.048   0.9616    
+## sisi_voteTRUE        0.5494024  0.0414417  13.257   &lt;2e-16 ***
+## not_voteboycottTRUE  0.0806941  0.0453807   1.778   0.0760 .  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.4036 on 516 degrees of freedom
+##   (56 observations deleted due to missingness)
+## Multiple R-squared:  0.2926, Adjusted R-squared:  0.2789 
+## F-statistic: 21.34 on 10 and 516 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
-<div id="use-ols-with-robust-standard-errors-to-estimate-the-difference-in-happiness-for-married-and-unmarried-people.-then-use-the-t-test-function-with-unequal-variances-to-assess-the-difference-in-happiness-by-marital-status.-discuss-similarities-and-differences-in-ols-model-and-t-test-function-results." class="section level2 hasAnchor" number="3.2">
-<h2><span class="header-section-number">3.2</span> Use OLS with robust standard errors to estimate the difference in happiness for married and unmarried people. Then use the t test function with unequal variances to assess the difference in happiness by marital status. Discuss similarities and differences in OLS model and t test function results.<a href="lab-ii-dummy-variables-career-data.html#use-ols-with-robust-standard-errors-to-estimate-the-difference-in-happiness-for-married-and-unmarried-people.-then-use-the-t-test-function-with-unequal-variances-to-assess-the-difference-in-happiness-by-marital-status.-discuss-similarities-and-differences-in-ols-model-and-t-test-function-results." class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="lab-ii-dummy-variables-career-data.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="do">## model_1 with Robust Standard Errors</span></span>
-<span id="cb43-2"><a href="lab-ii-dummy-variables-career-data.html#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coeftest</span>(model_1, <span class="at">vcov. =</span> <span class="fu">vcovHC</span>(model_1, <span class="at">type =</span> <span class="st">&quot;HC1&quot;</span>))</span></code></pre></div>
-<pre><code>## 
-## t test of coefficients:
+<div id="d-test-whether-the-effects-of-treatment-1-police-favorable-message-are-the-same-as-treatment-3-both-sides-for-each-dependent-variable.-feel-free-to-use-the-linearhypothesis-function-in-the-car-package." class="section level2 hasAnchor" number="7.5">
+<h2><span class="header-section-number">7.5</span> (d) Test whether the effects of treatment 1 (police-favorable message) are the same as treatment 3 (both sides) for each dependent variable. Feel free to use the linearHypothesis function in the car package.<a href="lab-vi-experiments.html#d-test-whether-the-effects-of-treatment-1-police-favorable-message-are-the-same-as-treatment-3-both-sides-for-each-dependent-variable.-feel-free-to-use-the-linearhypothesis-function-in-the-car-package." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="lab-vi-experiments.html#cb120-1" aria-hidden="true" tabindex="-1"></a>reg<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">lm</span>(just_binary_main<span class="sc">~</span>treat_b1 <span class="sc">+</span> treat_b2 <span class="sc">+</span> treat_b3 <span class="sc">+</span></span>
+<span id="cb120-2"><a href="lab-vi-experiments.html#cb120-2" aria-hidden="true" tabindex="-1"></a>               <span class="fu">factor</span>(age_cat) <span class="sc">+</span> male <span class="sc">+</span> education <span class="sc">+</span> income <span class="sc">+</span></span>
+<span id="cb120-3"><a href="lab-vi-experiments.html#cb120-3" aria-hidden="true" tabindex="-1"></a>               sisi_vote <span class="sc">+</span> not_voteboycott, <span class="at">data=</span>dta)</span>
+<span id="cb120-4"><a href="lab-vi-experiments.html#cb120-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb120-5"><a href="lab-vi-experiments.html#cb120-5" aria-hidden="true" tabindex="-1"></a><span class="fu">linearHypothesis</span>(reg<span class="fl">.1</span>, <span class="st">&quot;treat_b1=treat_b3&quot;</span>)</span></code></pre></div>
+<pre><code>## Linear hypothesis test
 ## 
-##              Estimate Std. Error t value  Pr(&gt;|t|)    
-## (Intercept) 2.0249034  0.0060709 333.541 &lt; 2.2e-16 ***
-## married     0.2978101  0.0076407  38.977 &lt; 2.2e-16 ***
+## Hypothesis:
+## treat_b1 - treat_b3 = 0
+## 
+## Model 1: restricted model
+## Model 2: just_binary_main ~ treat_b1 + treat_b2 + treat_b3 + factor(age_cat) + 
+##     male + education + income + sisi_vote + not_voteboycott
+## 
+##   Res.Df    RSS Df Sum of Sq      F   Pr(&gt;F)   
+## 1    517 85.236                                
+## 2    516 84.062  1    1.1742 7.2075 0.007494 **
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="lab-ii-dummy-variables-career-data.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># t-test, without assuming equal variance</span></span>
-<span id="cb45-2"><a href="lab-ii-dummy-variables-career-data.html#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(dta<span class="sc">$</span>happy[dta<span class="sc">$</span>married<span class="sc">==</span><span class="dv">1</span>], dta<span class="sc">$</span>happy[dta<span class="sc">$</span>married<span class="sc">==</span><span class="dv">0</span>], <span class="at">var.equal =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<pre><code>## 
-##  Welch Two Sample t-test
-## 
-## data:  dta$happy[dta$married == 1] and dta$happy[dta$married == 0]
-## t = 38.977, df = 20513, p-value &lt; 2.2e-16
-## alternative hypothesis: true difference in means is not equal to 0
-## 95 percent confidence interval:
-##  0.2828336 0.3127865
-## sample estimates:
-## mean of x mean of y 
-##  2.322714  2.024903</code></pre>
 </div>
-<div id="create-an-interaction-between-married-and-age.-estimate-a-model-that-explains-happiness-as-a-function-of-age-and-marital-status-allowing-for-the-age-effect-to-differ-according-to-marital-status.-for-simplicity-we-use-only-married-and-unmarried-for-marital-status.-what-is-the-effect-of-age-for-unmarried-people-for-married-people" class="section level2 hasAnchor" number="3.3">
-<h2><span class="header-section-number">3.3</span> Create an interaction between married and age. Estimate a model that explains happiness as a function of age and marital status, allowing for the age effect to differ according to marital status. (For simplicity, we use only married and unmarried for marital status.) What is the effect of age for unmarried people? For married people?<a href="lab-ii-dummy-variables-career-data.html#create-an-interaction-between-married-and-age.-estimate-a-model-that-explains-happiness-as-a-function-of-age-and-marital-status-allowing-for-the-age-effect-to-differ-according-to-marital-status.-for-simplicity-we-use-only-married-and-unmarried-for-marital-status.-what-is-the-effect-of-age-for-unmarried-people-for-married-people" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="lab-ii-dummy-variables-career-data.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Interaction Term</span></span>
-<span id="cb47-2"><a href="lab-ii-dummy-variables-career-data.html#cb47-2" aria-hidden="true" tabindex="-1"></a>dum_interact <span class="ot">&lt;-</span> dta<span class="sc">$</span>married<span class="sc">*</span>dta<span class="sc">$</span>age</span>
-<span id="cb47-3"><a href="lab-ii-dummy-variables-career-data.html#cb47-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-4"><a href="lab-ii-dummy-variables-career-data.html#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Model 2</span></span>
-<span id="cb47-5"><a href="lab-ii-dummy-variables-career-data.html#cb47-5" aria-hidden="true" tabindex="-1"></a>model_2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(happy<span class="sc">~</span>age <span class="sc">+</span> married <span class="sc">+</span> dum_interact, <span class="at">data=</span>dta)</span>
-<span id="cb47-6"><a href="lab-ii-dummy-variables-career-data.html#cb47-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_2)</span></code></pre></div>
+<div id="e-in-some-political-contexts-messages-have-a-different-effect-on-people-with-less-engagement-in-politics.-are-there-heterogeneous-treatment-effects-by-those-who-did-not-vote-for-reasons-other-than-to-boycott-the-election-and-those-who-did-not-feel-free-to-explore-multiple-other-ways-there-could-be-heterogeneous-effects-e.g.-perhaps-there-are-different-effects-on-sisi-supporters-but-you-only-need-to-report-on-possible-differential-effects-of-the-treatments-on-the-not-accountable-dependent-variable." class="section level2 hasAnchor" number="7.6">
+<h2><span class="header-section-number">7.6</span> (e) In some political contexts, messages have a different effect on people with less engagement in politics. Are there heterogeneous treatment effects by those who did not vote for reasons other than to boycott the election and those who did not? Feel free to explore multiple other ways there could be heterogeneous effects (e.g., perhaps there are different effects on Sisi supporters), but you only need to report on possible differential effects of the treatments on the “not-accountable” dependent variable.<a href="lab-vi-experiments.html#e-in-some-political-contexts-messages-have-a-different-effect-on-people-with-less-engagement-in-politics.-are-there-heterogeneous-treatment-effects-by-those-who-did-not-vote-for-reasons-other-than-to-boycott-the-election-and-those-who-did-not-feel-free-to-explore-multiple-other-ways-there-could-be-heterogeneous-effects-e.g.-perhaps-there-are-different-effects-on-sisi-supporters-but-you-only-need-to-report-on-possible-differential-effects-of-the-treatments-on-the-not-accountable-dependent-variable." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="lab-vi-experiments.html#cb122-1" aria-hidden="true" tabindex="-1"></a>dta <span class="sc">%&gt;%</span></span>
+<span id="cb122-2"><a href="lab-vi-experiments.html#cb122-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(not_acc_binary_main <span class="sc">~</span> not_voteboycott<span class="sc">*</span>treat_b1 <span class="sc">+</span> not_voteboycott<span class="sc">*</span>treat_b2 <span class="sc">+</span> </span>
+<span id="cb122-3"><a href="lab-vi-experiments.html#cb122-3" aria-hidden="true" tabindex="-1"></a>                          not_voteboycott<span class="sc">*</span>treat_b3 <span class="sc">+</span><span class="fu">factor</span>(age_cat) <span class="sc">+</span> male <span class="sc">+</span> </span>
+<span id="cb122-4"><a href="lab-vi-experiments.html#cb122-4" aria-hidden="true" tabindex="-1"></a>                          education <span class="sc">+</span> income <span class="sc">+</span> sisi_vote, <span class="at">data =</span> .) <span class="sc">%&gt;%</span></span>
+<span id="cb122-5"><a href="lab-vi-experiments.html#cb122-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code></pre></div>
 <pre><code>## 
 ## Call:
-## lm(formula = happy ~ age + married + dum_interact, data = dta)
+## lm(formula = not_acc_binary_main ~ not_voteboycott * treat_b1 + 
+##     not_voteboycott * treat_b2 + not_voteboycott * treat_b3 + 
+##     factor(age_cat) + male + education + income + sisi_vote, 
+##     data = .)
 ## 
 ## Residuals:
 ##      Min       1Q   Median       3Q      Max 
-## -1.32925 -0.32408 -0.04825  0.67451  1.02224 
+## -0.58236 -0.22916 -0.05162  0.03384  0.99812 
 ## 
 ## Coefficients:
-##                Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)   2.1300310  0.0270265  78.813  &lt; 2e-16 ***
-## age          -0.0028199  0.0007067  -3.990 6.61e-05 ***
-## married       0.2109524  0.0351041   6.009 1.89e-09 ***
-## dum_interact  0.0023504  0.0009036   2.601   0.0093 ** 
+##                               Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)                   0.022268   0.095838   0.232  0.81636    
+## not_voteboycottTRUE           0.250014   0.075859   3.296  0.00105 ** 
+## treat_b1                      0.105574   0.053546   1.972  0.04919 *  
+## treat_b2                      0.038517   0.053542   0.719  0.47223    
+## treat_b3                      0.144074   0.054048   2.666  0.00793 ** 
+## factor(age_cat)2              0.009428   0.039361   0.240  0.81078    
+## factor(age_cat)3              0.015627   0.043724   0.357  0.72094    
+## male                         -0.017692   0.049679  -0.356  0.72189    
+## education                    -0.007508   0.011635  -0.645  0.51902    
+## income                        0.006283   0.019388   0.324  0.74602    
+## sisi_voteTRUE                 0.434241   0.038357  11.321  &lt; 2e-16 ***
+## not_voteboycottTRUE:treat_b1 -0.091467   0.105260  -0.869  0.38527    
+## not_voteboycottTRUE:treat_b2 -0.212318   0.104539  -2.031  0.04277 *  
+## not_voteboycottTRUE:treat_b3 -0.337778   0.108394  -3.116  0.00193 ** 
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 0.5982 on 26344 degrees of freedom
-##   (2442 observations deleted due to missingness)
-## Multiple R-squared:  0.05538,    Adjusted R-squared:  0.05527 
-## F-statistic: 514.8 on 3 and 26344 DF,  p-value: &lt; 2.2e-16</code></pre>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="lab-ii-dummy-variables-career-data.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="do">## or</span></span>
-<span id="cb49-2"><a href="lab-ii-dummy-variables-career-data.html#cb49-2" aria-hidden="true" tabindex="-1"></a>model_2b <span class="ot">&lt;-</span> <span class="fu">lm</span>(happy<span class="sc">~</span>married<span class="sc">*</span>age, <span class="at">data=</span>dta)</span>
-<span id="cb49-3"><a href="lab-ii-dummy-variables-career-data.html#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_2b)</span></code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = happy ~ married * age, data = dta)
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -1.32925 -0.32408 -0.04825  0.67451  1.02224 
-## 
-## Coefficients:
-##               Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)  2.1300310  0.0270265  78.813  &lt; 2e-16 ***
-## married      0.2109524  0.0351041   6.009 1.89e-09 ***
-## age         -0.0028199  0.0007067  -3.990 6.61e-05 ***
-## married:age  0.0023504  0.0009036   2.601   0.0093 ** 
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 0.5982 on 26344 degrees of freedom
-##   (2442 observations deleted due to missingness)
-## Multiple R-squared:  0.05538,    Adjusted R-squared:  0.05527 
-## F-statistic: 514.8 on 3 and 26344 DF,  p-value: &lt; 2.2e-16</code></pre>
-<p>The effect of age is <span class="math inline">\(-0.00281\)</span> for unmarried people and <span class="math inline">\(-0.00281 + 0.002350 = -0.0004699\)</span> for married people. The intercept is <span class="math inline">\(2.13\)</span> for unmarried people and <span class="math inline">\(2.13 + 0.2109 = 2.3409\)</span> for married people.</p>
-</div>
-<div id="estimate-separate-models-explaining-happiness-in-terms-of-age-for-married-and-unmarried-people.-comment-on-similarities-and-differences-compared-to-results-immediately-above-for-i-the-estimated-effect-of-age-and-ii-the-intercept." class="section level2 hasAnchor" number="3.4">
-<h2><span class="header-section-number">3.4</span> Estimate separate models explaining happiness in terms of age for married and unmarried people. Comment on similarities and differences compared to results immediately above for (i) the estimated effect of age and (ii) the intercept.<a href="lab-ii-dummy-variables-career-data.html#estimate-separate-models-explaining-happiness-in-terms-of-age-for-married-and-unmarried-people.-comment-on-similarities-and-differences-compared-to-results-immediately-above-for-i-the-estimated-effect-of-age-and-ii-the-intercept." class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="lab-ii-dummy-variables-career-data.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Model 3a</span></span>
-<span id="cb51-2"><a href="lab-ii-dummy-variables-career-data.html#cb51-2" aria-hidden="true" tabindex="-1"></a>model_3a <span class="ot">&lt;-</span> <span class="fu">lm</span>(happy<span class="sc">~</span>age, <span class="at">data=</span><span class="fu">subset</span>(dta, married<span class="sc">==</span><span class="dv">1</span>))</span>
-<span id="cb51-3"><a href="lab-ii-dummy-variables-career-data.html#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_3a)</span></code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = happy ~ age, data = subset(dta, married == 1))
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -1.3293 -0.3250 -0.3189  0.6754  0.6844 
-## 
-## Coefficients:
-##               Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)  2.3409834  0.0223240 104.864   &lt;2e-16 ***
-## age         -0.0004695  0.0005612  -0.837    0.403    
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 0.5961 on 16508 degrees of freedom
-##   (1385 observations deleted due to missingness)
-## Multiple R-squared:  4.24e-05,   Adjusted R-squared:  -1.817e-05 
-## F-statistic:   0.7 on 1 and 16508 DF,  p-value: 0.4028</code></pre>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="lab-ii-dummy-variables-career-data.html#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="do">## and</span></span>
-<span id="cb53-2"><a href="lab-ii-dummy-variables-career-data.html#cb53-2" aria-hidden="true" tabindex="-1"></a>model_3b <span class="ot">&lt;-</span> <span class="fu">lm</span>(happy<span class="sc">~</span>age, <span class="at">data=</span><span class="fu">subset</span>(dta, married<span class="sc">==</span><span class="dv">0</span>))</span>
-<span id="cb53-3"><a href="lab-ii-dummy-variables-career-data.html#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_3b)</span></code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = happy ~ age, data = subset(dta, married == 0))
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -1.05953 -0.05389 -0.02570  0.01096  1.02224 
-## 
-## Coefficients:
-##               Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)  2.1300310  0.0271844  78.355  &lt; 2e-16 ***
-## age         -0.0028199  0.0007108  -3.967 7.32e-05 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 0.6017 on 9836 degrees of freedom
-##   (1053 observations deleted due to missingness)
-## Multiple R-squared:  0.001598,   Adjusted R-squared:  0.001496 
-## F-statistic: 15.74 on 1 and 9836 DF,  p-value: 7.322e-05</code></pre>
-<p>The results here are the same as above: for unmarried people, the effect of age is <span class="math inline">\(-0.00281\)</span> and the intercept is <span class="math inline">\(2.130\)</span>.</p>
-<p>The effect of age for married people also the same: <span class="math inline">\(-0.000469\)</span>, with an intercept of <span class="math inline">\(2.3409\)</span>.</p>
-</div>
-<div id="marianne-bertrand-wrote-an-article-called-work-on-womens-work-is-never-done-career-family-and-the-well-being-of-college-educated-women-published-in-the-american-economic-review-papers-proceedings-2013-1033-244250.-she-analyzed-the-effect-of-careers-and-family-on-college-educated-women.-she-defines-a-career-variable-that-is-1-if-someones-earnings-are-above-the-twenty-fifth-percentile-in-the-relevant-year-and-age-group.-estimate-a-model-in-which-happiness-is-a-function-of-career-being-married-and-an-interaction-of-career-and-married-careermarried.-to-match-betrands-analysis-limit-the-data-to-only-to-college-educated-dtaeducat4-women-dtasex2.-interpret-the-estimated-average-happiness-for-the-four-types-of-women-implied-by-this-analysis." class="section level2 hasAnchor" number="3.5">
-<h2><span class="header-section-number">3.5</span> Marianne Bertrand wrote an article called ``Work on Women’s Work is Never Done: Career, Family, and the Well-Being of College-Educated Women’’ published in the <em>American Economic Review: Papers &amp; Proceedings</em> 2013, 103(3): 244–250. She analyzed the effect of careers and family on college-educated women. She defines a career variable that is 1 if someone’s earnings are above the twenty-fifth percentile in the relevant year and age group. Estimate a model in which happiness is a function of career, being married and an interaction of career and married (“careermarried”). To match Betrand’s analysis, limit the data to only to college educated (dta$educat==4) women (dta$sex==2). Interpret the estimated average happiness for the four types of women implied by this analysis.<a href="lab-ii-dummy-variables-career-data.html#marianne-bertrand-wrote-an-article-called-work-on-womens-work-is-never-done-career-family-and-the-well-being-of-college-educated-women-published-in-the-american-economic-review-papers-proceedings-2013-1033-244250.-she-analyzed-the-effect-of-careers-and-family-on-college-educated-women.-she-defines-a-career-variable-that-is-1-if-someones-earnings-are-above-the-twenty-fifth-percentile-in-the-relevant-year-and-age-group.-estimate-a-model-in-which-happiness-is-a-function-of-career-being-married-and-an-interaction-of-career-and-married-careermarried.-to-match-betrands-analysis-limit-the-data-to-only-to-college-educated-dtaeducat4-women-dtasex2.-interpret-the-estimated-average-happiness-for-the-four-types-of-women-implied-by-this-analysis." class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="lab-ii-dummy-variables-career-data.html#cb55-1" aria-hidden="true" tabindex="-1"></a>model_4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(happy <span class="sc">~</span> career<span class="sc">*</span>married, <span class="at">data=</span>dta[dta<span class="sc">$</span>sex<span class="sc">==</span><span class="dv">2</span> <span class="sc">&amp;</span> dta<span class="sc">$</span>educat<span class="sc">==</span><span class="dv">4</span>,])</span>
-<span id="cb55-2"><a href="lab-ii-dummy-variables-career-data.html#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_4)</span></code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = happy ~ career * married, data = dta[dta$sex == 
-##     2 &amp; dta$educat == 4, ])
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -1.4215 -0.4214 -0.1247  0.5786  0.8753 
-## 
-## Coefficients:
-##                Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)     2.12470    0.01997 106.406  &lt; 2e-16 ***
-## career          0.09204    0.02985   3.084  0.00206 ** 
-## married         0.29676    0.02503  11.855  &lt; 2e-16 ***
-## career:married -0.09923    0.04023  -2.466  0.01369 *  
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 0.5739 on 3595 degrees of freedom
-##   (400 observations deleted due to missingness)
-## Multiple R-squared:  0.04765,    Adjusted R-squared:  0.04685 
-## F-statistic: 59.96 on 3 and 3595 DF,  p-value: &lt; 2.2e-16</code></pre>
-<p>The four groups are unmarried women without careers, married women with careers, married women without
-careers, and unmarried women without careers.</p>
-<p>College-educated women that have no careers and are not married have an average happiness of <span class="math inline">\(2.12\)</span>.</p>
-<p>College-educated women with careers but not married have an average happiness of <span class="math inline">\(2.12 + 0.09 = 2.21\)</span>.</p>
-<p>College-educated women with no career but are married have average happiness of <span class="math inline">\(2.12 + 0.29 = 2.41\)</span>.</p>
-<p>College-educated women that are both married and have careers have average happiness of <span class="math inline">\(2.12 + 0.092 + 0.29 -0.099 = 2.4\)</span>.</p>
-</div>
-<div id="the-gss-provides-a-race-variable-dtarace.-the-variable-equals-1-for-white-respondents-2-for-black-respondents-and-3-for-everyone-else.-add-race-to-the-above-model-and-interpret-the-coefficients-related-to-race.-estimate-another-model-with-a-different-reference-category-and-explain-coefficients-across-the-two-models." class="section level2 hasAnchor" number="3.6">
-<h2><span class="header-section-number">3.6</span> The GSS provides a race variable (dta$race). The variable equals 1 for white respondents, 2 for black respondents and 3 for everyone else. Add race to the above model and interpret the coefficients related to race. Estimate another model with a different reference category and explain coefficients across the two models.<a href="lab-ii-dummy-variables-career-data.html#the-gss-provides-a-race-variable-dtarace.-the-variable-equals-1-for-white-respondents-2-for-black-respondents-and-3-for-everyone-else.-add-race-to-the-above-model-and-interpret-the-coefficients-related-to-race.-estimate-another-model-with-a-different-reference-category-and-explain-coefficients-across-the-two-models." class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="lab-ii-dummy-variables-career-data.html#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="do">## First Race Model with White as Reference</span></span>
-<span id="cb57-2"><a href="lab-ii-dummy-variables-career-data.html#cb57-2" aria-hidden="true" tabindex="-1"></a>model_5 <span class="ot">&lt;-</span> <span class="fu">lm</span>(happy <span class="sc">~</span> career<span class="sc">*</span>married <span class="sc">+</span> <span class="fu">factor</span>(race),</span>
-<span id="cb57-3"><a href="lab-ii-dummy-variables-career-data.html#cb57-3" aria-hidden="true" tabindex="-1"></a><span class="at">data=</span>dta[dta<span class="sc">$</span>sex<span class="sc">==</span><span class="dv">2</span> <span class="sc">&amp;</span> dta<span class="sc">$</span>educat<span class="sc">==</span><span class="dv">4</span>,])</span>
-<span id="cb57-4"><a href="lab-ii-dummy-variables-career-data.html#cb57-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_5)</span></code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = happy ~ career * married + factor(race), data = dta[dta$sex == 
-##     2 &amp; dta$educat == 4, ])
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -1.4359 -0.4329 -0.1575  0.5641  1.0085 
-## 
-## Coefficients:
-##                Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)     2.15746    0.02077 103.867  &lt; 2e-16 ***
-## career          0.08830    0.02974   2.969  0.00301 ** 
-## married         0.27847    0.02518  11.060  &lt; 2e-16 ***
-## factor(race)2  -0.16593    0.03267  -5.079 3.98e-07 ***
-## factor(race)3  -0.10051    0.04036  -2.491  0.01280 *  
-## career:married -0.09132    0.04010  -2.277  0.02283 *  
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 0.5717 on 3593 degrees of freedom
-##   (400 observations deleted due to missingness)
-## Multiple R-squared:  0.05555,    Adjusted R-squared:  0.05424 
-## F-statistic: 42.27 on 5 and 3593 DF,  p-value: &lt; 2.2e-16</code></pre>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="lab-ii-dummy-variables-career-data.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Second Race Model with Other as the Reference Category</span></span>
-<span id="cb59-2"><a href="lab-ii-dummy-variables-career-data.html#cb59-2" aria-hidden="true" tabindex="-1"></a>model_5b <span class="ot">&lt;-</span> <span class="fu">lm</span>(happy <span class="sc">~</span> career<span class="sc">*</span>married <span class="sc">+</span> <span class="fu">relevel</span>(<span class="fu">factor</span>(race), <span class="at">ref =</span> <span class="st">&quot;3&quot;</span>),</span>
-<span id="cb59-3"><a href="lab-ii-dummy-variables-career-data.html#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="at">data=</span>dta[dta<span class="sc">$</span>sex<span class="sc">==</span><span class="dv">2</span> <span class="sc">&amp;</span> dta<span class="sc">$</span>educat<span class="sc">==</span><span class="dv">4</span>,])</span>
-<span id="cb59-4"><a href="lab-ii-dummy-variables-career-data.html#cb59-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_5b)</span></code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = happy ~ career * married + relevel(factor(race), 
-##     ref = &quot;3&quot;), data = dta[dta$sex == 2 &amp; dta$educat == 4, ])
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -1.4359 -0.4329 -0.1575  0.5641  1.0085 
-## 
-## Coefficients:
-##                                   Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)                        2.05695    0.04261  48.273  &lt; 2e-16 ***
-## career                             0.08830    0.02974   2.969  0.00301 ** 
-## married                            0.27847    0.02518  11.060  &lt; 2e-16 ***
-## relevel(factor(race), ref = &quot;3&quot;)1  0.10051    0.04036   2.491  0.01280 *  
-## relevel(factor(race), ref = &quot;3&quot;)2 -0.06542    0.04972  -1.316  0.18835    
-## career:married                    -0.09132    0.04010  -2.277  0.02283 *  
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 0.5717 on 3593 degrees of freedom
-##   (400 observations deleted due to missingness)
-## Multiple R-squared:  0.05555,    Adjusted R-squared:  0.05424 
-## F-statistic: 42.27 on 5 and 3593 DF,  p-value: &lt; 2.2e-16</code></pre>
-<p>Both results indicated white college-educated women are both <span class="math inline">\(0.16\)</span> higher on the happiness variable than African-American college-educated women and <span class="math inline">\(0.10\)</span> higher than other college-educated women of other races. Even though the coefficient on the other race variables change across specifications, our interpretation of the results does not change; the change is due solely to the change in reference category.</p>
-</div>
-<div id="estimate-a-model-similar-to-the-above-but-for-a-different-group-of-your-choice-e.g.-limit-by-race-or-gender-or-education-and-feel-free-to-include-different-covariates." class="section level2 hasAnchor" number="3.7">
-<h2><span class="header-section-number">3.7</span> Estimate a model similar to the above, but for a different group of your choice (e.g., limit by race or gender or education) and feel free to include different covariates.<a href="lab-ii-dummy-variables-career-data.html#estimate-a-model-similar-to-the-above-but-for-a-different-group-of-your-choice-e.g.-limit-by-race-or-gender-or-education-and-feel-free-to-include-different-covariates." class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>No wrong answers here (mostly)</p>
-<p>This model explores the how commute times affect happiness. I specifically think that time commuting will - conditionally - lower a person’s happiness if it means they are away from their families. Because of this, I create an interaction term between commuting and marriage and estimate the effects.</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="lab-ii-dummy-variables-career-data.html#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Commuting Model on Adults</span></span>
-<span id="cb61-2"><a href="lab-ii-dummy-variables-career-data.html#cb61-2" aria-hidden="true" tabindex="-1"></a>model_6 <span class="ot">&lt;-</span> <span class="fu">lm</span>(happy <span class="sc">~</span> commute<span class="sc">*</span>married, <span class="at">data=</span>dta[dta<span class="sc">$</span>age<span class="sc">&gt;</span><span class="dv">18</span>,])</span>
-<span id="cb61-3"><a href="lab-ii-dummy-variables-career-data.html#cb61-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_6)</span></code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = happy ~ commute * married, data = dta[dta$age &gt; 
-##     18, ])
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -1.30339 -0.29480 -0.05136  0.69947  0.98484 
-## 
-## Coefficients:
-##                   Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)      2.0513587  0.0553465  37.064  &lt; 2e-16 ***
-## commute         -0.0003732  0.0020973  -0.178 0.858816    
-## married          0.2520331  0.0681019   3.701 0.000231 ***
-## commute:married -0.0001996  0.0026100  -0.076 0.939047    
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 0.5647 on 726 degrees of freedom
-##   (28060 observations deleted due to missingness)
-## Multiple R-squared:  0.04227,    Adjusted R-squared:  0.03831 
-## F-statistic: 10.68 on 3 and 726 DF,  p-value: 7.076e-07</code></pre>
-<p>My theory is not supported by this model. I found no significant effect for those who commute longer and no significant conditional effect of happiness for those who commute long hours and are married. I did find support that marriage in general makes a person happier, though this should not be considered a causal effect.</p>
+## Residual standard error: 0.3733 on 513 degrees of freedom
+##   (56 observations deleted due to missingness)
+## Multiple R-squared:  0.2461, Adjusted R-squared:  0.2269 
+## F-statistic: 12.88 on 13 and 513 DF,  p-value: &lt; 2.2e-16</code></pre>
+
 </div>
 </div>
             </section>
@@ -550,8 +498,8 @@ careers, and unmarried women without careers.</p>
           </div>
         </div>
       </div>
-<a href="lab-i-tidyverse-ols-review.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="lab-iii-panel-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="lab-v-2sls-instrumental-variables.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

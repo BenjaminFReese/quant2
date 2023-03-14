@@ -30,7 +30,7 @@
   
   
 <link rel="prev" href="lab-iv-project-runway.html"/>
-
+<link rel="next" href="lab-vi-experiments.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -202,6 +202,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.6" data-path="lab-v-2sls-instrumental-variables.html"><a href="lab-v-2sls-instrumental-variables.html#add-covariates-for-age-literacy-urban-group-size-and-gender-to-the-2sls-model-religious-as-a-function-of-hajj2006.-what-is-different-which-variables-are-included-in-the-first-stage"><i class="fa fa-check"></i><b>6.6</b> Add covariates for age, literacy, urban, group size and gender to the 2SLS model <em>Religious</em> as a function of Hajj2006. What is different? Which variables are included in the first stage?</a></li>
 <li class="chapter" data-level="6.7" data-path="lab-v-2sls-instrumental-variables.html"><a href="lab-v-2sls-instrumental-variables.html#run-multiple-2sls-models-with-ossamaincorrect-govtforce-natlinterest-happy-girlsschool-and-jobswomen-variables-as-dependent-variables.-use-the-list-of-covariates-from-earlier.-if-you-want-try-using-a-loop-but-not-necessary."><i class="fa fa-check"></i><b>6.7</b> Run multiple 2SLS models with OssamaIncorrect, GovtForce, NatlInterest, Happy, GirlsSchool and JobsWomen variables as dependent variables. Use the list of covariates from earlier. If you want, try using a loop (but not necessary).</a></li>
 </ul></li>
+<li class="chapter" data-level="7" data-path="lab-vi-experiments.html"><a href="lab-vi-experiments.html"><i class="fa fa-check"></i><b>7</b> 3/13 Lab VI | Experiments</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="lab-vi-experiments.html"><a href="lab-vi-experiments.html#preparation-1"><i class="fa fa-check"></i><b>7.1</b> Preparation</a></li>
+<li class="chapter" data-level="7.2" data-path="lab-vi-experiments.html"><a href="lab-vi-experiments.html#a-why-is-an-experiment-useful-in-this-context"><i class="fa fa-check"></i><b>7.2</b> (a) Why is an experiment useful in this context?</a></li>
+<li class="chapter" data-level="7.3" data-path="lab-vi-experiments.html"><a href="lab-vi-experiments.html#b-is-there-evidence-of-balance-in-the-treatment-why-is-this-relevant-check-for-balance-of-each-treatment-with-respect-to-age-category-gender-education-income-voting-for-sisi-and-not-voting-for-non-boycott-reasons.-use-two-different-procedures-to-conduct-your-balance-tests.-you-do-not-need-to-use-tost"><i class="fa fa-check"></i><b>7.3</b> (b) Is there evidence of balance in the treatment? Why is this relevant? Check for balance of each treatment with respect to age category, gender, education, income, voting for Sisi and not voting for non-boycott reasons. Use two different procedures to conduct your balance tests. You do not need to use TOST!</a></li>
+<li class="chapter" data-level="7.4" data-path="lab-vi-experiments.html"><a href="lab-vi-experiments.html#c-what-is-the-effect-of-the-treatments-on-whether-respondents-viewed-the-police-tactics-as-justified-run-one-model-with-only-the-treatment-variables-and-another-that-includes-controls-for-age-category-gender-education-income-voting-for-sisi-and-not-voting-for-non-boycott-reasons."><i class="fa fa-check"></i><b>7.4</b> (c) What is the effect of the treatments on whether respondents viewed the police tactics as justified? Run one model with only the treatment variables and another that includes controls for age category, gender, education, income, voting for Sisi and not voting for non-boycott reasons.</a></li>
+<li class="chapter" data-level="7.5" data-path="lab-vi-experiments.html"><a href="lab-vi-experiments.html#d-test-whether-the-effects-of-treatment-1-police-favorable-message-are-the-same-as-treatment-3-both-sides-for-each-dependent-variable.-feel-free-to-use-the-linearhypothesis-function-in-the-car-package."><i class="fa fa-check"></i><b>7.5</b> (d) Test whether the effects of treatment 1 (police-favorable message) are the same as treatment 3 (both sides) for each dependent variable. Feel free to use the linearHypothesis function in the car package.</a></li>
+<li class="chapter" data-level="7.6" data-path="lab-vi-experiments.html"><a href="lab-vi-experiments.html#e-in-some-political-contexts-messages-have-a-different-effect-on-people-with-less-engagement-in-politics.-are-there-heterogeneous-treatment-effects-by-those-who-did-not-vote-for-reasons-other-than-to-boycott-the-election-and-those-who-did-not-feel-free-to-explore-multiple-other-ways-there-could-be-heterogeneous-effects-e.g.-perhaps-there-are-different-effects-on-sisi-supporters-but-you-only-need-to-report-on-possible-differential-effects-of-the-treatments-on-the-not-accountable-dependent-variable."><i class="fa fa-check"></i><b>7.6</b> (e) In some political contexts, messages have a different effect on people with less engagement in politics. Are there heterogeneous treatment effects by those who did not vote for reasons other than to boycott the election and those who did not? Feel free to explore multiple other ways there could be heterogeneous effects (e.g., perhaps there are different effects on Sisi supporters), but you only need to report on possible differential effects of the treatments on the “not-accountable” dependent variable.</a></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -224,19 +233,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="lab5_image.png" width="600" /></p>
 <div id="preparation" class="section level2 hasAnchor" number="6.1">
 <h2><span class="header-section-number">6.1</span> Preparation<a href="lab-v-2sls-instrumental-variables.html#preparation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="lab-v-2sls-instrumental-variables.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Setup</span></span>
-<span id="cb94-2"><a href="lab-v-2sls-instrumental-variables.html#cb94-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>(<span class="at">all =</span> <span class="cn">TRUE</span>))   <span class="co"># Removes objects from the previous session</span></span>
-<span id="cb94-3"><a href="lab-v-2sls-instrumental-variables.html#cb94-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb94-4"><a href="lab-v-2sls-instrumental-variables.html#cb94-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Packages</span></span>
-<span id="cb94-5"><a href="lab-v-2sls-instrumental-variables.html#cb94-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)  <span class="do">## Package to read Stata data</span></span>
-<span id="cb94-6"><a href="lab-v-2sls-instrumental-variables.html#cb94-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ivreg) <span class="do">## Package to run 2sls</span></span>
-<span id="cb94-7"><a href="lab-v-2sls-instrumental-variables.html#cb94-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fixest) <span class="do">## This package can also run 2SLS</span></span>
-<span id="cb94-8"><a href="lab-v-2sls-instrumental-variables.html#cb94-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="do">## For tidyverse commands</span></span>
-<span id="cb94-9"><a href="lab-v-2sls-instrumental-variables.html#cb94-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(memisc) <span class="do">## For table outputting</span></span>
-<span id="cb94-10"><a href="lab-v-2sls-instrumental-variables.html#cb94-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb94-11"><a href="lab-v-2sls-instrumental-variables.html#cb94-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb94-12"><a href="lab-v-2sls-instrumental-variables.html#cb94-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Loading Data</span></span>
-<span id="cb94-13"><a href="lab-v-2sls-instrumental-variables.html#cb94-13" aria-hidden="true" tabindex="-1"></a>hajj_public <span class="ot">&lt;-</span> <span class="fu">read_dta</span>(<span class="st">&quot;Data/hajj_public.dta&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="lab-v-2sls-instrumental-variables.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Packages</span></span>
+<span id="cb94-2"><a href="lab-v-2sls-instrumental-variables.html#cb94-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)  <span class="do">## Package to read Stata data</span></span>
+<span id="cb94-3"><a href="lab-v-2sls-instrumental-variables.html#cb94-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ivreg) <span class="do">## Package to run 2sls</span></span>
+<span id="cb94-4"><a href="lab-v-2sls-instrumental-variables.html#cb94-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fixest) <span class="do">## This package can also run 2SLS</span></span>
+<span id="cb94-5"><a href="lab-v-2sls-instrumental-variables.html#cb94-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="do">## For tidyverse commands</span></span>
+<span id="cb94-6"><a href="lab-v-2sls-instrumental-variables.html#cb94-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(memisc) <span class="do">## For table outputting</span></span>
+<span id="cb94-7"><a href="lab-v-2sls-instrumental-variables.html#cb94-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-8"><a href="lab-v-2sls-instrumental-variables.html#cb94-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb94-9"><a href="lab-v-2sls-instrumental-variables.html#cb94-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Loading Data</span></span>
+<span id="cb94-10"><a href="lab-v-2sls-instrumental-variables.html#cb94-10" aria-hidden="true" tabindex="-1"></a>hajj_public <span class="ot">&lt;-</span> <span class="fu">read_dta</span>(<span class="st">&quot;Data/hajj_public.dta&quot;</span>)</span></code></pre></div>
 <p>Do important life experiences influence political and social views? In particular, does performing the Hajj pilgrimage to Mecca affect the views of pilgrims? David Clingingsmith, Asim Ijaz Khwaja, and Michael Kremer (2009) analyze this question by using two-stage least squares to compare successful and unsuccessful applicants in a lottery used by Pakistan to allocate Hajj visas.</p>
 <p>We will conduct pared-down models. The paper creates indices and implements additional statistical procedures to produce a broader and clearer picture. It is not a bad idea to read this paper to see how we can extend the methods we learn in class to your own work. I posted the paper on Canvas for your convenience.</p>
 <p>Data description</p>
@@ -480,7 +486,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb111-10"><a href="lab-v-2sls-instrumental-variables.html#cb111-10" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">&lt;-</span> <span class="fu">ivreg</span>(<span class="fu">as.formula</span>(<span class="fu">paste</span>(dvs[i],<span class="st">&quot;~hajj2006 + age + literate + ptygrp +</span></span>
 <span id="cb111-11"><a href="lab-v-2sls-instrumental-variables.html#cb111-11" aria-hidden="true" tabindex="-1"></a><span class="st">  female + urban | success + age + literate + ptygrp + female + urban&quot;</span>)), <span class="at">data=</span>hajj_public)</span>
 <span id="cb111-12"><a href="lab-v-2sls-instrumental-variables.html#cb111-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">assign</span>(model,m)}</span></code></pre></div>
-
 </div>
 </div>
             </section>
@@ -488,8 +493,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="lab-iv-project-runway.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="lab-iv-project-runway.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="lab-vi-experiments.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
