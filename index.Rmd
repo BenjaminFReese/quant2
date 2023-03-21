@@ -1066,3 +1066,234 @@ dta %>%
                           education + income + sisi_vote, data = .) %>%
   summary()
 ```
+
+# 3/20 Lab VII | Lists, Loops, & Functions in R
+
+```{r}
+knitr::include_graphics("lab7_image.png")
+
+```
+
+## Preparation
+
+```{r, warning=FALSE, message=FALSE}
+## Packages
+library(plyr)
+library(tidyverse)
+library(readxl)
+library(readr)
+library(lubridate)
+library(knitr)
+
+```
+
+Differences in policies and personnel associated with presidential candidates could affect the profitability of firms in different ways, with stocks potentially rising and falling with the expected outlooks for political candidates. In this report we analyze stocks that have been identified as potentially responsive to the political fortunes of [Donald Trump](https://www.kiplinger.com/investing/stocks/stocks-to-buy/601637/best-stocks-to-buy-president-donald-trump-re-election) and [Joe Biden](https://www.kiplinger.com/investing/stocks/stocks-to-buy/601691/best-stocks-to-buy-for-the-joe-biden-presidency).  
+
+### Data
+
+Our stock market data consists of daily closing prices of 31 stocks that were identified by Kiplinger as being politically exposed.  These stocks cover a broad range of sectors potentially influenced by politics, including tech stocks, energy (both oil and renewable oriented firms), health care, marijuana, gold and foreign-oriented ETFs.
+
+Our measure of political expectations comes from the PredictIt betting market in which investors buy shares in (among other things) presidential candidates.  Share are worth \$1 if the candidate wins the general election.  The price for a candidate on a given day is taken to be the market's estimate of the probability of victory for that candidate.
+
+## Load data. Stock price data is in stocks2020.csv.  Presidential prices are in  USPres_2020_Price History By Market -Bulk.xlsx. Think about renaming Data, Contract Name and Close Share Price for ease of use.
+
+```{r, warning=FALSE, message=FALSE}
+## Reading in stock data
+stk <- read_csv("Data/stocks2020.csv",  col_names = TRUE)
+
+## Reading in presidential market data
+pres_mkt <- read_xlsx("Data/USPres_2020_Price History By Market -Bulk.xlsx", col_names = TRUE) %>%   
+  mutate(date = `Date (ET)`, 
+         name = `Contract Name`, 
+         price = `Close Share Price`) %>%
+  dplyr::select(-`Date (ET)`, -`Contract Name`, -`Close Share Price`)
+
+```
+
+## Create data frame with daily price data for Trump in 2020
+
+```{r, warning=FALSE, message=FALSE}
+## Creating daily price data for Trump
+trump2020 <- pres_mkt %>%
+  filter(year(date) > 2019 & name == "Donald Trump") %>%
+  dplyr::select(c(date, "Trump" = price))
+
+```
+
+## Merge the stock price and Trump price data
+
+```{r, warning=FALSE, message=FALSE}
+## Joining the two datasets
+stk_pres <- left_join(stk, trump2020, by = "date")
+
+```
+
+## Create a list of stock ticker names (do not include DJI as a ticker)
+
+```{r, warning=FALSE, message=FALSE}
+## Creating list of ticker names
+stk_tickers <- 
+  c(names(stk)[!names(stk) %in% c("date", "DJI")])
+
+## Creating number of stocks
+stk_num <- length(stk_tickers)
+
+```
+
+## Create a function that calculates daily percent change.  Use the lag function and the mutate_at function. Make sure to check that your function worked.
+
+```{r, warning=FALSE, message=FALSE}
+## Price Change Function
+pct_change <- function(x){
+  
+(x - lag(x))/lag(x)
+  
+}
+
+## Daily Change Dataset
+daily_df <- stk_pres %>% 
+  mutate_at(c("DJI", "Trump", stk_tickers), pct_change) %>% 
+  dplyr::select(c(date, c("DJI", "Trump", stk_tickers)))
+
+```
+
+## Loop thru list of tickers and run regressions in which daily change in stock price is a function of change in DJIA and change in Trump price.  Create a data frame that stores the coefficient, standard error and t-stat for the Trump variable for each stock.  Include a column that has the stock ticker in that data frame as well.
+
+```{r, warning=FALSE, message=FALSE}
+## Preparing Data Frame to store results
+ols_results <- data.frame("row" = 1:stk_num,
+                         "ticker" = NA, 
+                         "coef" = NA, 
+                         "se" = NA,
+                         "tStat" = NA)
+
+## Looping Though Regressions
+for(i in 1:stk_num){
+  daily_df$temp <- unlist(daily_df[, i + 3])
+  ols.1 <- lm(temp ~ DJI + Trump, data = daily_df)
+  ols_results[i, "ticker"] <- stk_tickers[i]
+  ols_results[i, 3:5] <- round(summary(ols.1)$coefficients["Trump", 1:3], 3)
+}
+
+## Showing results
+head(ols_results)
+```
+
+## The questions below are not required for full credit but I encourage you to try!
+
+### Use list apply - lapply() - to regress stock price on Trump.
+
+```{r, warning=FALSE, message=FALSE}
+## Now with lapply()
+ols_results2 <- lapply(stk_tickers, function(x){
+  daily_df$temp = unlist(daily_df[, which(names(daily_df) == x)])
+  ols.1 <- lm(temp ~ DJI + Trump, data = daily_df)
+})
+
+## Showing Results
+head(ols_results2)
+
+```
+
+### Use tapply to find the average price of each presidential candidate over the course of the campaign.
+
+```{r, warning=FALSE, message=FALSE}
+## With tapply()
+tapply(pres_mkt$price, pres_mkt$name, mean)
+
+```
+
+### Now use map() in `library(purrr)` to regress stock price on Trump.
+
+```{r, warning=FALSE, message=FALSE}
+## The function from above
+func_stock <- function(x){
+  daily_df$temp = unlist(daily_df[, which(names(daily_df) == x)])
+  ols.1 <- lm(temp ~ DJI + Trump, data = daily_df)
+}
+
+## Now with map()
+map(.x=stk_tickers, .f=func_stock)
+
+```
+
+### Create your own simple regression function. To avoid issues of NAs, simulate some data and see if it worked!
+
+```{r, warning=FALSE, message=FALSE}
+## Creating constituent functions
+
+## Beta Hat Function
+beta_hat <- function(x,y) {
+  
+  (sum((x-mean(x))*(y-mean(y))))/
+    (sum((x-mean(x))^2))
+  
+}
+
+## Intercept Function
+constant <- function(x,y,b){
+  
+  mean(y) - b*mean(x)
+  
+}
+
+## Fitted Values Function
+fit_val <- function(x, y, b) {
+  constant(x=x,y=y,b=b) + beta_hat(x,y) * x
+}
+
+## R squared Function
+r2 <- function(fitted, y) {
+  sum((fitted - mean(y))^2)/
+    sum((y-mean(y))^2)
+}
+
+## Standard Error Function
+se <- function(fitted, x, y) {
+  sqrt(sum((fitted-y)^2)/length(y)/
+         sum((x-mean(x))^2))
+  
+}
+
+## T Stat Function
+t <- function(beta, null=0, se) {
+  (beta-null)/
+    se
+}
+
+## P-Value Function
+pval <- function(t,df) {
+  
+  pt(q=t, df, lower.tail = F)*2
+  
+}
+
+## OLS Function
+ols <- function(X,Y) {
+  
+  b <- beta_hat(X, Y)
+  
+  constant <- constant(x=X, y=Y, b)
+  
+  fitted <- fit_val(x=X,y=Y,b=b)
+  
+  r_squared <- r2(fitted, y=Y)
+  
+  stand_err <- se(fitted=fitted, x=X, y=Y)
+  
+  t_stat <- t(beta=b, se=stand_err)
+  
+  p <- pval(t=t_stat, df=(length(X)-1))
+  
+  tibble(b, stand_err, t_stat, p)
+  
+}
+
+## Creating Data
+x <- rnorm(1000, 15, 2)
+y <- x*17 + rnorm(1000, 15, 12)
+
+## Testing
+ols(x, y)
+summary(lm(y~x))
+```
