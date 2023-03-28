@@ -30,7 +30,7 @@
   
   
 <link rel="prev" href="lab-vi-experiments.html"/>
-
+<link rel="next" href="lab-viii-regression-discontinuity-designs.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -231,6 +231,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.8.4" data-path="lab-vii-lists-loops-functions-in-r.html"><a href="lab-vii-lists-loops-functions-in-r.html#create-your-own-simple-regression-function.-to-avoid-issues-of-nas-simulate-some-data-and-see-if-it-worked"><i class="fa fa-check"></i><b>8.8.4</b> Create your own simple regression function. To avoid issues of NAs, simulate some data and see if it worked!</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="9" data-path="lab-viii-regression-discontinuity-designs.html"><a href="lab-viii-regression-discontinuity-designs.html"><i class="fa fa-check"></i><b>9</b> 3/27 Lab VIII | Regression Discontinuity Designs</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="lab-viii-regression-discontinuity-designs.html"><a href="lab-viii-regression-discontinuity-designs.html#preparation-3"><i class="fa fa-check"></i><b>9.1</b> Preparation</a></li>
+<li class="chapter" data-level="9.2" data-path="lab-viii-regression-discontinuity-designs.html"><a href="lab-viii-regression-discontinuity-designs.html#run-the-most-basic-rdd-model-and-then-replicate-the-main-result-using-the-specification-for-table-1.-in-this-model-the-rd-allows-for-differential-quadratic-models-above-and-below-the-threshold-and-also-has-dummy-variables-for-birthdays.-the-data-is-limited-to-observations-within-2-years-of-21.-do-this-with-lm.-finally-run-a-diagnostic-plot-to-test-for-sorting-just-beyond-the-cutoff."><i class="fa fa-check"></i><b>9.2</b> Run the most basic RDD model and then replicate the main result using the specification for Table 1. In this model, the RD allows for differential quadratic models above and below the threshold and also has dummy variables for birthdays. The data is limited to observations within 2 years of 21. Do this with <code>lm()</code>. Finally, run a diagnostic plot to test for sorting just beyond the cutoff.</a></li>
+<li class="chapter" data-level="9.3" data-path="lab-viii-regression-discontinuity-designs.html"><a href="lab-viii-regression-discontinuity-designs.html#run-the-basic-rd-model-and-the-model-with-covariates-with-libraryrdrobust.-what-is-different"><i class="fa fa-check"></i><b>9.3</b> Run the basic rd model and the model with covariates with <code>library(rdrobust)</code>. What is different?</a></li>
+<li class="chapter" data-level="9.4" data-path="lab-viii-regression-discontinuity-designs.html"><a href="lab-viii-regression-discontinuity-designs.html#estimate-a-series-of-models-with-lm-that-have-slightly-different-specifications.-first-try-the-above-specification-with-only-linear-age-variable-first-fixing-slope-to-be-the-same-above-and-below-the-threshhold-and-then-allowing-slope-to-vary-above-and-below-the-threshhold."><i class="fa fa-check"></i><b>9.4</b> Estimate a series of models with <code>lm()</code> that have slightly different specifications. First, try the above specification with only linear age variable, first fixing slope to be the same above and below the threshhold and then allowing slope to vary above and below the threshhold.</a></li>
+<li class="chapter" data-level="9.5" data-path="lab-viii-regression-discontinuity-designs.html"><a href="lab-viii-regression-discontinuity-designs.html#now-see-what-happens-when-you-use-a-different-window-sizes.-feel-free-to-experiment-but-only-need-to-report-one-specification.-just-include-the-treatment-and-running-variables-and-allow-the-slopes-to-differ."><i class="fa fa-check"></i><b>9.5</b> Now see what happens when you use a different window sizes. Feel free to experiment (but only need to report one specification.) Just include the treatment and running variables and allow the slopes to differ.</a></li>
+<li class="chapter" data-level="9.6" data-path="lab-viii-regression-discontinuity-designs.html"><a href="lab-viii-regression-discontinuity-designs.html#now-create-some-rdd-figures.-i-suggest-using-rdplot-in-libraryrdrobust-and-experimenting-with-different-arguments."><i class="fa fa-check"></i><b>9.6</b> Now create some RDD figures. I suggest using <code>rdplot()</code> in <code>library(rdrobust)</code> and experimenting with different arguments.</a></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -253,13 +262,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="lab7_image.png" width="355" /></p>
 <div id="preparation-2" class="section level2 hasAnchor" number="8.1">
 <h2><span class="header-section-number">8.1</span> Preparation<a href="lab-vii-lists-loops-functions-in-r.html#preparation-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="lab-vii-lists-loops-functions-in-r.html#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Packages</span></span>
-<span id="cb115-2"><a href="lab-vii-lists-loops-functions-in-r.html#cb115-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plyr)</span>
-<span id="cb115-3"><a href="lab-vii-lists-loops-functions-in-r.html#cb115-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb115-4"><a href="lab-vii-lists-loops-functions-in-r.html#cb115-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb115-5"><a href="lab-vii-lists-loops-functions-in-r.html#cb115-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb115-6"><a href="lab-vii-lists-loops-functions-in-r.html#cb115-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
-<span id="cb115-7"><a href="lab-vii-lists-loops-functions-in-r.html#cb115-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="lab-vii-lists-loops-functions-in-r.html#cb124-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Packages</span></span>
+<span id="cb124-2"><a href="lab-vii-lists-loops-functions-in-r.html#cb124-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plyr)</span>
+<span id="cb124-3"><a href="lab-vii-lists-loops-functions-in-r.html#cb124-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb124-4"><a href="lab-vii-lists-loops-functions-in-r.html#cb124-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb124-5"><a href="lab-vii-lists-loops-functions-in-r.html#cb124-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb124-6"><a href="lab-vii-lists-loops-functions-in-r.html#cb124-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb124-7"><a href="lab-vii-lists-loops-functions-in-r.html#cb124-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span></code></pre></div>
 <p>Differences in policies and personnel associated with presidential candidates could affect the profitability of firms in different ways, with stocks potentially rising and falling with the expected outlooks for political candidates. In this report we analyze stocks that have been identified as potentially responsive to the political fortunes of <a href="https://www.kiplinger.com/investing/stocks/stocks-to-buy/601637/best-stocks-to-buy-president-donald-trump-re-election">Donald Trump</a> and <a href="https://www.kiplinger.com/investing/stocks/stocks-to-buy/601691/best-stocks-to-buy-for-the-joe-biden-presidency">Joe Biden</a>.</p>
 <div id="data" class="section level3 hasAnchor" number="8.1.1">
 <h3><span class="header-section-number">8.1.1</span> Data<a href="lab-vii-lists-loops-functions-in-r.html#data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -269,70 +278,70 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="load-data.-stock-price-data-is-in-stocks2020.csv.-presidential-prices-are-in-uspres_2020_price-history-by-market--bulk.xlsx.-think-about-renaming-data-contract-name-and-close-share-price-for-ease-of-use." class="section level2 hasAnchor" number="8.2">
 <h2><span class="header-section-number">8.2</span> Load data. Stock price data is in stocks2020.csv. Presidential prices are in USPres_2020_Price History By Market -Bulk.xlsx. Think about renaming Data, Contract Name and Close Share Price for ease of use.<a href="lab-vii-lists-loops-functions-in-r.html#load-data.-stock-price-data-is-in-stocks2020.csv.-presidential-prices-are-in-uspres_2020_price-history-by-market--bulk.xlsx.-think-about-renaming-data-contract-name-and-close-share-price-for-ease-of-use." class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="lab-vii-lists-loops-functions-in-r.html#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Reading in stock data</span></span>
-<span id="cb116-2"><a href="lab-vii-lists-loops-functions-in-r.html#cb116-2" aria-hidden="true" tabindex="-1"></a>stk <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;Data/stocks2020.csv&quot;</span>,  <span class="at">col_names =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb116-3"><a href="lab-vii-lists-loops-functions-in-r.html#cb116-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb116-4"><a href="lab-vii-lists-loops-functions-in-r.html#cb116-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Reading in presidential market data</span></span>
-<span id="cb116-5"><a href="lab-vii-lists-loops-functions-in-r.html#cb116-5" aria-hidden="true" tabindex="-1"></a>pres_mkt <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">&quot;Data/USPres_2020_Price History By Market -Bulk.xlsx&quot;</span>, <span class="at">col_names =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span>   </span>
-<span id="cb116-6"><a href="lab-vii-lists-loops-functions-in-r.html#cb116-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">date =</span> <span class="st">`</span><span class="at">Date (ET)</span><span class="st">`</span>, </span>
-<span id="cb116-7"><a href="lab-vii-lists-loops-functions-in-r.html#cb116-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">name =</span> <span class="st">`</span><span class="at">Contract Name</span><span class="st">`</span>, </span>
-<span id="cb116-8"><a href="lab-vii-lists-loops-functions-in-r.html#cb116-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">price =</span> <span class="st">`</span><span class="at">Close Share Price</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb116-9"><a href="lab-vii-lists-loops-functions-in-r.html#cb116-9" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span><span class="st">`</span><span class="at">Date (ET)</span><span class="st">`</span>, <span class="sc">-</span><span class="st">`</span><span class="at">Contract Name</span><span class="st">`</span>, <span class="sc">-</span><span class="st">`</span><span class="at">Close Share Price</span><span class="st">`</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="lab-vii-lists-loops-functions-in-r.html#cb125-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Reading in stock data</span></span>
+<span id="cb125-2"><a href="lab-vii-lists-loops-functions-in-r.html#cb125-2" aria-hidden="true" tabindex="-1"></a>stk <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;Data/stocks2020.csv&quot;</span>,  <span class="at">col_names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb125-3"><a href="lab-vii-lists-loops-functions-in-r.html#cb125-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb125-4"><a href="lab-vii-lists-loops-functions-in-r.html#cb125-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Reading in presidential market data</span></span>
+<span id="cb125-5"><a href="lab-vii-lists-loops-functions-in-r.html#cb125-5" aria-hidden="true" tabindex="-1"></a>pres_mkt <span class="ot">&lt;-</span> <span class="fu">read_xlsx</span>(<span class="st">&quot;Data/USPres_2020_Price History By Market -Bulk.xlsx&quot;</span>, <span class="at">col_names =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span>   </span>
+<span id="cb125-6"><a href="lab-vii-lists-loops-functions-in-r.html#cb125-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">date =</span> <span class="st">`</span><span class="at">Date (ET)</span><span class="st">`</span>, </span>
+<span id="cb125-7"><a href="lab-vii-lists-loops-functions-in-r.html#cb125-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">name =</span> <span class="st">`</span><span class="at">Contract Name</span><span class="st">`</span>, </span>
+<span id="cb125-8"><a href="lab-vii-lists-loops-functions-in-r.html#cb125-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">price =</span> <span class="st">`</span><span class="at">Close Share Price</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb125-9"><a href="lab-vii-lists-loops-functions-in-r.html#cb125-9" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span><span class="st">`</span><span class="at">Date (ET)</span><span class="st">`</span>, <span class="sc">-</span><span class="st">`</span><span class="at">Contract Name</span><span class="st">`</span>, <span class="sc">-</span><span class="st">`</span><span class="at">Close Share Price</span><span class="st">`</span>)</span></code></pre></div>
 </div>
 <div id="create-data-frame-with-daily-price-data-for-trump-in-2020" class="section level2 hasAnchor" number="8.3">
 <h2><span class="header-section-number">8.3</span> Create data frame with daily price data for Trump in 2020<a href="lab-vii-lists-loops-functions-in-r.html#create-data-frame-with-daily-price-data-for-trump-in-2020" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="lab-vii-lists-loops-functions-in-r.html#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Creating daily price data for Trump</span></span>
-<span id="cb117-2"><a href="lab-vii-lists-loops-functions-in-r.html#cb117-2" aria-hidden="true" tabindex="-1"></a>trump2020 <span class="ot">&lt;-</span> pres_mkt <span class="sc">%&gt;%</span></span>
-<span id="cb117-3"><a href="lab-vii-lists-loops-functions-in-r.html#cb117-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">year</span>(date) <span class="sc">&gt;</span> <span class="dv">2019</span> <span class="sc">&amp;</span> name <span class="sc">==</span> <span class="st">&quot;Donald Trump&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb117-4"><a href="lab-vii-lists-loops-functions-in-r.html#cb117-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">c</span>(date, <span class="st">&quot;Trump&quot;</span> <span class="ot">=</span> price))</span></code></pre></div>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="lab-vii-lists-loops-functions-in-r.html#cb126-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Creating daily price data for Trump</span></span>
+<span id="cb126-2"><a href="lab-vii-lists-loops-functions-in-r.html#cb126-2" aria-hidden="true" tabindex="-1"></a>trump2020 <span class="ot">&lt;-</span> pres_mkt <span class="sc">%&gt;%</span></span>
+<span id="cb126-3"><a href="lab-vii-lists-loops-functions-in-r.html#cb126-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">year</span>(date) <span class="sc">&gt;</span> <span class="dv">2019</span> <span class="sc">&amp;</span> name <span class="sc">==</span> <span class="st">&quot;Donald Trump&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb126-4"><a href="lab-vii-lists-loops-functions-in-r.html#cb126-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">c</span>(date, <span class="st">&quot;Trump&quot;</span> <span class="ot">=</span> price))</span></code></pre></div>
 </div>
 <div id="merge-the-stock-price-and-trump-price-data" class="section level2 hasAnchor" number="8.4">
 <h2><span class="header-section-number">8.4</span> Merge the stock price and Trump price data<a href="lab-vii-lists-loops-functions-in-r.html#merge-the-stock-price-and-trump-price-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="lab-vii-lists-loops-functions-in-r.html#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Joining the two datasets</span></span>
-<span id="cb118-2"><a href="lab-vii-lists-loops-functions-in-r.html#cb118-2" aria-hidden="true" tabindex="-1"></a>stk_pres <span class="ot">&lt;-</span> <span class="fu">left_join</span>(stk, trump2020, <span class="at">by =</span> <span class="st">&quot;date&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="lab-vii-lists-loops-functions-in-r.html#cb127-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Joining the two datasets</span></span>
+<span id="cb127-2"><a href="lab-vii-lists-loops-functions-in-r.html#cb127-2" aria-hidden="true" tabindex="-1"></a>stk_pres <span class="ot">&lt;-</span> <span class="fu">left_join</span>(stk, trump2020, <span class="at">by =</span> <span class="st">&quot;date&quot;</span>)</span></code></pre></div>
 </div>
 <div id="create-a-list-of-stock-ticker-names-do-not-include-dji-as-a-ticker" class="section level2 hasAnchor" number="8.5">
 <h2><span class="header-section-number">8.5</span> Create a list of stock ticker names (do not include DJI as a ticker)<a href="lab-vii-lists-loops-functions-in-r.html#create-a-list-of-stock-ticker-names-do-not-include-dji-as-a-ticker" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="lab-vii-lists-loops-functions-in-r.html#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Creating list of ticker names</span></span>
-<span id="cb119-2"><a href="lab-vii-lists-loops-functions-in-r.html#cb119-2" aria-hidden="true" tabindex="-1"></a>stk_tickers <span class="ot">&lt;-</span> </span>
-<span id="cb119-3"><a href="lab-vii-lists-loops-functions-in-r.html#cb119-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="fu">names</span>(stk)[<span class="sc">!</span><span class="fu">names</span>(stk) <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;date&quot;</span>, <span class="st">&quot;DJI&quot;</span>)])</span>
-<span id="cb119-4"><a href="lab-vii-lists-loops-functions-in-r.html#cb119-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb119-5"><a href="lab-vii-lists-loops-functions-in-r.html#cb119-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Creating number of stocks</span></span>
-<span id="cb119-6"><a href="lab-vii-lists-loops-functions-in-r.html#cb119-6" aria-hidden="true" tabindex="-1"></a>stk_num <span class="ot">&lt;-</span> <span class="fu">length</span>(stk_tickers)</span></code></pre></div>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="lab-vii-lists-loops-functions-in-r.html#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Creating list of ticker names</span></span>
+<span id="cb128-2"><a href="lab-vii-lists-loops-functions-in-r.html#cb128-2" aria-hidden="true" tabindex="-1"></a>stk_tickers <span class="ot">&lt;-</span> </span>
+<span id="cb128-3"><a href="lab-vii-lists-loops-functions-in-r.html#cb128-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="fu">names</span>(stk)[<span class="sc">!</span><span class="fu">names</span>(stk) <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;date&quot;</span>, <span class="st">&quot;DJI&quot;</span>)])</span>
+<span id="cb128-4"><a href="lab-vii-lists-loops-functions-in-r.html#cb128-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb128-5"><a href="lab-vii-lists-loops-functions-in-r.html#cb128-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Creating number of stocks</span></span>
+<span id="cb128-6"><a href="lab-vii-lists-loops-functions-in-r.html#cb128-6" aria-hidden="true" tabindex="-1"></a>stk_num <span class="ot">&lt;-</span> <span class="fu">length</span>(stk_tickers)</span></code></pre></div>
 </div>
 <div id="create-a-function-that-calculates-daily-percent-change.-use-the-lag-function-and-the-mutate_at-function.-make-sure-to-check-that-your-function-worked." class="section level2 hasAnchor" number="8.6">
 <h2><span class="header-section-number">8.6</span> Create a function that calculates daily percent change. Use the lag function and the mutate_at function. Make sure to check that your function worked.<a href="lab-vii-lists-loops-functions-in-r.html#create-a-function-that-calculates-daily-percent-change.-use-the-lag-function-and-the-mutate_at-function.-make-sure-to-check-that-your-function-worked." class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="lab-vii-lists-loops-functions-in-r.html#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Price Change Function</span></span>
-<span id="cb120-2"><a href="lab-vii-lists-loops-functions-in-r.html#cb120-2" aria-hidden="true" tabindex="-1"></a>pct_change <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
-<span id="cb120-3"><a href="lab-vii-lists-loops-functions-in-r.html#cb120-3" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb120-4"><a href="lab-vii-lists-loops-functions-in-r.html#cb120-4" aria-hidden="true" tabindex="-1"></a>(x <span class="sc">-</span> <span class="fu">lag</span>(x))<span class="sc">/</span><span class="fu">lag</span>(x)</span>
-<span id="cb120-5"><a href="lab-vii-lists-loops-functions-in-r.html#cb120-5" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb120-6"><a href="lab-vii-lists-loops-functions-in-r.html#cb120-6" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb120-7"><a href="lab-vii-lists-loops-functions-in-r.html#cb120-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb120-8"><a href="lab-vii-lists-loops-functions-in-r.html#cb120-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Daily Change Dataset</span></span>
-<span id="cb120-9"><a href="lab-vii-lists-loops-functions-in-r.html#cb120-9" aria-hidden="true" tabindex="-1"></a>daily_df <span class="ot">&lt;-</span> stk_pres <span class="sc">%&gt;%</span> </span>
-<span id="cb120-10"><a href="lab-vii-lists-loops-functions-in-r.html#cb120-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_at</span>(<span class="fu">c</span>(<span class="st">&quot;DJI&quot;</span>, <span class="st">&quot;Trump&quot;</span>, stk_tickers), pct_change) <span class="sc">%&gt;%</span> </span>
-<span id="cb120-11"><a href="lab-vii-lists-loops-functions-in-r.html#cb120-11" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">c</span>(date, <span class="fu">c</span>(<span class="st">&quot;DJI&quot;</span>, <span class="st">&quot;Trump&quot;</span>, stk_tickers)))</span></code></pre></div>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Price Change Function</span></span>
+<span id="cb129-2"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-2" aria-hidden="true" tabindex="-1"></a>pct_change <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
+<span id="cb129-3"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb129-4"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-4" aria-hidden="true" tabindex="-1"></a>(x <span class="sc">-</span> <span class="fu">lag</span>(x))<span class="sc">/</span><span class="fu">lag</span>(x)</span>
+<span id="cb129-5"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb129-6"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb129-7"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb129-8"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Daily Change Dataset</span></span>
+<span id="cb129-9"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-9" aria-hidden="true" tabindex="-1"></a>daily_df <span class="ot">&lt;-</span> stk_pres <span class="sc">%&gt;%</span> </span>
+<span id="cb129-10"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate_at</span>(<span class="fu">c</span>(<span class="st">&quot;DJI&quot;</span>, <span class="st">&quot;Trump&quot;</span>, stk_tickers), pct_change) <span class="sc">%&gt;%</span> </span>
+<span id="cb129-11"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-11" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">c</span>(date, <span class="fu">c</span>(<span class="st">&quot;DJI&quot;</span>, <span class="st">&quot;Trump&quot;</span>, stk_tickers)))</span></code></pre></div>
 </div>
 <div id="loop-thru-list-of-tickers-and-run-regressions-in-which-daily-change-in-stock-price-is-a-function-of-change-in-djia-and-change-in-trump-price.-create-a-data-frame-that-stores-the-coefficient-standard-error-and-t-stat-for-the-trump-variable-for-each-stock.-include-a-column-that-has-the-stock-ticker-in-that-data-frame-as-well." class="section level2 hasAnchor" number="8.7">
 <h2><span class="header-section-number">8.7</span> Loop thru list of tickers and run regressions in which daily change in stock price is a function of change in DJIA and change in Trump price. Create a data frame that stores the coefficient, standard error and t-stat for the Trump variable for each stock. Include a column that has the stock ticker in that data frame as well.<a href="lab-vii-lists-loops-functions-in-r.html#loop-thru-list-of-tickers-and-run-regressions-in-which-daily-change-in-stock-price-is-a-function-of-change-in-djia-and-change-in-trump-price.-create-a-data-frame-that-stores-the-coefficient-standard-error-and-t-stat-for-the-trump-variable-for-each-stock.-include-a-column-that-has-the-stock-ticker-in-that-data-frame-as-well." class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="lab-vii-lists-loops-functions-in-r.html#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Preparing Data Frame to store results</span></span>
-<span id="cb121-2"><a href="lab-vii-lists-loops-functions-in-r.html#cb121-2" aria-hidden="true" tabindex="-1"></a>ols_results <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="st">&quot;row&quot;</span> <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span>stk_num,</span>
-<span id="cb121-3"><a href="lab-vii-lists-loops-functions-in-r.html#cb121-3" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&quot;ticker&quot;</span> <span class="ot">=</span> <span class="cn">NA</span>, </span>
-<span id="cb121-4"><a href="lab-vii-lists-loops-functions-in-r.html#cb121-4" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&quot;coef&quot;</span> <span class="ot">=</span> <span class="cn">NA</span>, </span>
-<span id="cb121-5"><a href="lab-vii-lists-loops-functions-in-r.html#cb121-5" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&quot;se&quot;</span> <span class="ot">=</span> <span class="cn">NA</span>,</span>
-<span id="cb121-6"><a href="lab-vii-lists-loops-functions-in-r.html#cb121-6" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&quot;tStat&quot;</span> <span class="ot">=</span> <span class="cn">NA</span>)</span>
-<span id="cb121-7"><a href="lab-vii-lists-loops-functions-in-r.html#cb121-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb121-8"><a href="lab-vii-lists-loops-functions-in-r.html#cb121-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Looping Though Regressions</span></span>
-<span id="cb121-9"><a href="lab-vii-lists-loops-functions-in-r.html#cb121-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>stk_num){</span>
-<span id="cb121-10"><a href="lab-vii-lists-loops-functions-in-r.html#cb121-10" aria-hidden="true" tabindex="-1"></a>  daily_df<span class="sc">$</span>temp <span class="ot">&lt;-</span> <span class="fu">unlist</span>(daily_df[, i <span class="sc">+</span> <span class="dv">3</span>])</span>
-<span id="cb121-11"><a href="lab-vii-lists-loops-functions-in-r.html#cb121-11" aria-hidden="true" tabindex="-1"></a>  ols<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">lm</span>(temp <span class="sc">~</span> DJI <span class="sc">+</span> Trump, <span class="at">data =</span> daily_df)</span>
-<span id="cb121-12"><a href="lab-vii-lists-loops-functions-in-r.html#cb121-12" aria-hidden="true" tabindex="-1"></a>  ols_results[i, <span class="st">&quot;ticker&quot;</span>] <span class="ot">&lt;-</span> stk_tickers[i]</span>
-<span id="cb121-13"><a href="lab-vii-lists-loops-functions-in-r.html#cb121-13" aria-hidden="true" tabindex="-1"></a>  ols_results[i, <span class="dv">3</span><span class="sc">:</span><span class="dv">5</span>] <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">summary</span>(ols<span class="fl">.1</span>)<span class="sc">$</span>coefficients[<span class="st">&quot;Trump&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>], <span class="dv">3</span>)</span>
-<span id="cb121-14"><a href="lab-vii-lists-loops-functions-in-r.html#cb121-14" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb121-15"><a href="lab-vii-lists-loops-functions-in-r.html#cb121-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb121-16"><a href="lab-vii-lists-loops-functions-in-r.html#cb121-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Showing results</span></span>
-<span id="cb121-17"><a href="lab-vii-lists-loops-functions-in-r.html#cb121-17" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ols_results)</span></code></pre></div>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="lab-vii-lists-loops-functions-in-r.html#cb130-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Preparing Data Frame to store results</span></span>
+<span id="cb130-2"><a href="lab-vii-lists-loops-functions-in-r.html#cb130-2" aria-hidden="true" tabindex="-1"></a>ols_results <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="st">&quot;row&quot;</span> <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span>stk_num,</span>
+<span id="cb130-3"><a href="lab-vii-lists-loops-functions-in-r.html#cb130-3" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&quot;ticker&quot;</span> <span class="ot">=</span> <span class="cn">NA</span>, </span>
+<span id="cb130-4"><a href="lab-vii-lists-loops-functions-in-r.html#cb130-4" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&quot;coef&quot;</span> <span class="ot">=</span> <span class="cn">NA</span>, </span>
+<span id="cb130-5"><a href="lab-vii-lists-loops-functions-in-r.html#cb130-5" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&quot;se&quot;</span> <span class="ot">=</span> <span class="cn">NA</span>,</span>
+<span id="cb130-6"><a href="lab-vii-lists-loops-functions-in-r.html#cb130-6" aria-hidden="true" tabindex="-1"></a>                         <span class="st">&quot;tStat&quot;</span> <span class="ot">=</span> <span class="cn">NA</span>)</span>
+<span id="cb130-7"><a href="lab-vii-lists-loops-functions-in-r.html#cb130-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb130-8"><a href="lab-vii-lists-loops-functions-in-r.html#cb130-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Looping Though Regressions</span></span>
+<span id="cb130-9"><a href="lab-vii-lists-loops-functions-in-r.html#cb130-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>stk_num){</span>
+<span id="cb130-10"><a href="lab-vii-lists-loops-functions-in-r.html#cb130-10" aria-hidden="true" tabindex="-1"></a>  daily_df<span class="sc">$</span>temp <span class="ot">&lt;-</span> <span class="fu">unlist</span>(daily_df[, i <span class="sc">+</span> <span class="dv">3</span>])</span>
+<span id="cb130-11"><a href="lab-vii-lists-loops-functions-in-r.html#cb130-11" aria-hidden="true" tabindex="-1"></a>  ols<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">lm</span>(temp <span class="sc">~</span> DJI <span class="sc">+</span> Trump, <span class="at">data =</span> daily_df)</span>
+<span id="cb130-12"><a href="lab-vii-lists-loops-functions-in-r.html#cb130-12" aria-hidden="true" tabindex="-1"></a>  ols_results[i, <span class="st">&quot;ticker&quot;</span>] <span class="ot">&lt;-</span> stk_tickers[i]</span>
+<span id="cb130-13"><a href="lab-vii-lists-loops-functions-in-r.html#cb130-13" aria-hidden="true" tabindex="-1"></a>  ols_results[i, <span class="dv">3</span><span class="sc">:</span><span class="dv">5</span>] <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">summary</span>(ols<span class="fl">.1</span>)<span class="sc">$</span>coefficients[<span class="st">&quot;Trump&quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>], <span class="dv">3</span>)</span>
+<span id="cb130-14"><a href="lab-vii-lists-loops-functions-in-r.html#cb130-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb130-15"><a href="lab-vii-lists-loops-functions-in-r.html#cb130-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb130-16"><a href="lab-vii-lists-loops-functions-in-r.html#cb130-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Showing results</span></span>
+<span id="cb130-17"><a href="lab-vii-lists-loops-functions-in-r.html#cb130-17" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ols_results)</span></code></pre></div>
 <pre><code>##   row ticker   coef    se  tStat
 ## 1   1   AAPL -0.015 0.011 -1.304
 ## 2   2   NFLX -0.036 0.016 -2.208
@@ -345,14 +354,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">8.8</span> The questions below are not required for full credit but I encourage you to try!<a href="lab-vii-lists-loops-functions-in-r.html#the-questions-below-are-not-required-for-full-credit-but-i-encourage-you-to-try" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="use-list-apply---lapply---to-regress-stock-price-on-trump." class="section level3 hasAnchor" number="8.8.1">
 <h3><span class="header-section-number">8.8.1</span> Use list apply - lapply() - to regress stock price on Trump.<a href="lab-vii-lists-loops-functions-in-r.html#use-list-apply---lapply---to-regress-stock-price-on-trump." class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="lab-vii-lists-loops-functions-in-r.html#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Now with lapply()</span></span>
-<span id="cb123-2"><a href="lab-vii-lists-loops-functions-in-r.html#cb123-2" aria-hidden="true" tabindex="-1"></a>ols_results2 <span class="ot">&lt;-</span> <span class="fu">lapply</span>(stk_tickers, <span class="cf">function</span>(x){</span>
-<span id="cb123-3"><a href="lab-vii-lists-loops-functions-in-r.html#cb123-3" aria-hidden="true" tabindex="-1"></a>  daily_df<span class="sc">$</span>temp <span class="ot">=</span> <span class="fu">unlist</span>(daily_df[, <span class="fu">which</span>(<span class="fu">names</span>(daily_df) <span class="sc">==</span> x)])</span>
-<span id="cb123-4"><a href="lab-vii-lists-loops-functions-in-r.html#cb123-4" aria-hidden="true" tabindex="-1"></a>  ols<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">lm</span>(temp <span class="sc">~</span> DJI <span class="sc">+</span> Trump, <span class="at">data =</span> daily_df)</span>
-<span id="cb123-5"><a href="lab-vii-lists-loops-functions-in-r.html#cb123-5" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb123-6"><a href="lab-vii-lists-loops-functions-in-r.html#cb123-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb123-7"><a href="lab-vii-lists-loops-functions-in-r.html#cb123-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Showing Results</span></span>
-<span id="cb123-8"><a href="lab-vii-lists-loops-functions-in-r.html#cb123-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ols_results2)</span></code></pre></div>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="lab-vii-lists-loops-functions-in-r.html#cb132-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Now with lapply()</span></span>
+<span id="cb132-2"><a href="lab-vii-lists-loops-functions-in-r.html#cb132-2" aria-hidden="true" tabindex="-1"></a>ols_results2 <span class="ot">&lt;-</span> <span class="fu">lapply</span>(stk_tickers, <span class="cf">function</span>(x){</span>
+<span id="cb132-3"><a href="lab-vii-lists-loops-functions-in-r.html#cb132-3" aria-hidden="true" tabindex="-1"></a>  daily_df<span class="sc">$</span>temp <span class="ot">=</span> <span class="fu">unlist</span>(daily_df[, <span class="fu">which</span>(<span class="fu">names</span>(daily_df) <span class="sc">==</span> x)])</span>
+<span id="cb132-4"><a href="lab-vii-lists-loops-functions-in-r.html#cb132-4" aria-hidden="true" tabindex="-1"></a>  ols<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">lm</span>(temp <span class="sc">~</span> DJI <span class="sc">+</span> Trump, <span class="at">data =</span> daily_df)</span>
+<span id="cb132-5"><a href="lab-vii-lists-loops-functions-in-r.html#cb132-5" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb132-6"><a href="lab-vii-lists-loops-functions-in-r.html#cb132-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb132-7"><a href="lab-vii-lists-loops-functions-in-r.html#cb132-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Showing Results</span></span>
+<span id="cb132-8"><a href="lab-vii-lists-loops-functions-in-r.html#cb132-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(ols_results2)</span></code></pre></div>
 <pre><code>## [[1]]
 ## 
 ## Call:
@@ -414,8 +423,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="use-tapply-to-find-the-average-price-of-each-presidential-candidate-over-the-course-of-the-campaign." class="section level3 hasAnchor" number="8.8.2">
 <h3><span class="header-section-number">8.8.2</span> Use tapply to find the average price of each presidential candidate over the course of the campaign.<a href="lab-vii-lists-loops-functions-in-r.html#use-tapply-to-find-the-average-price-of-each-presidential-candidate-over-the-course-of-the-campaign." class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="lab-vii-lists-loops-functions-in-r.html#cb125-1" aria-hidden="true" tabindex="-1"></a><span class="do">## With tapply()</span></span>
-<span id="cb125-2"><a href="lab-vii-lists-loops-functions-in-r.html#cb125-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tapply</span>(pres_mkt<span class="sc">$</span>price, pres_mkt<span class="sc">$</span>name, mean)</span></code></pre></div>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="lab-vii-lists-loops-functions-in-r.html#cb134-1" aria-hidden="true" tabindex="-1"></a><span class="do">## With tapply()</span></span>
+<span id="cb134-2"><a href="lab-vii-lists-loops-functions-in-r.html#cb134-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tapply</span>(pres_mkt<span class="sc">$</span>price, pres_mkt<span class="sc">$</span>name, mean)</span></code></pre></div>
 <pre><code>##      Amy Klobuchar       Andrew Cuomo        Andrew Yang     Bernie Sanders      Beto O&#39;Rourke        Cory Booker 
 ##         0.02166512         0.01606446         0.03927786         0.09528414         0.03062162         0.03407125 
 ##       Donald Trump   Elizabeth Warren    Hillary Clinton      Howie Hawkins       Jo Jorgensen          Joe Biden 
@@ -429,14 +438,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="now-use-map-in-librarypurrr-to-regress-stock-price-on-trump." class="section level3 hasAnchor" number="8.8.3">
 <h3><span class="header-section-number">8.8.3</span> Now use map() in <code>library(purrr)</code> to regress stock price on Trump.<a href="lab-vii-lists-loops-functions-in-r.html#now-use-map-in-librarypurrr-to-regress-stock-price-on-trump." class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="lab-vii-lists-loops-functions-in-r.html#cb127-1" aria-hidden="true" tabindex="-1"></a><span class="do">## The function from above</span></span>
-<span id="cb127-2"><a href="lab-vii-lists-loops-functions-in-r.html#cb127-2" aria-hidden="true" tabindex="-1"></a>func_stock <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
-<span id="cb127-3"><a href="lab-vii-lists-loops-functions-in-r.html#cb127-3" aria-hidden="true" tabindex="-1"></a>  daily_df<span class="sc">$</span>temp <span class="ot">=</span> <span class="fu">unlist</span>(daily_df[, <span class="fu">which</span>(<span class="fu">names</span>(daily_df) <span class="sc">==</span> x)])</span>
-<span id="cb127-4"><a href="lab-vii-lists-loops-functions-in-r.html#cb127-4" aria-hidden="true" tabindex="-1"></a>  ols<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">lm</span>(temp <span class="sc">~</span> DJI <span class="sc">+</span> Trump, <span class="at">data =</span> daily_df)</span>
-<span id="cb127-5"><a href="lab-vii-lists-loops-functions-in-r.html#cb127-5" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb127-6"><a href="lab-vii-lists-loops-functions-in-r.html#cb127-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb127-7"><a href="lab-vii-lists-loops-functions-in-r.html#cb127-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Now with map()</span></span>
-<span id="cb127-8"><a href="lab-vii-lists-loops-functions-in-r.html#cb127-8" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(<span class="at">.x=</span>stk_tickers, <span class="at">.f=</span>func_stock)</span></code></pre></div>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="lab-vii-lists-loops-functions-in-r.html#cb136-1" aria-hidden="true" tabindex="-1"></a><span class="do">## The function from above</span></span>
+<span id="cb136-2"><a href="lab-vii-lists-loops-functions-in-r.html#cb136-2" aria-hidden="true" tabindex="-1"></a>func_stock <span class="ot">&lt;-</span> <span class="cf">function</span>(x){</span>
+<span id="cb136-3"><a href="lab-vii-lists-loops-functions-in-r.html#cb136-3" aria-hidden="true" tabindex="-1"></a>  daily_df<span class="sc">$</span>temp <span class="ot">=</span> <span class="fu">unlist</span>(daily_df[, <span class="fu">which</span>(<span class="fu">names</span>(daily_df) <span class="sc">==</span> x)])</span>
+<span id="cb136-4"><a href="lab-vii-lists-loops-functions-in-r.html#cb136-4" aria-hidden="true" tabindex="-1"></a>  ols<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">lm</span>(temp <span class="sc">~</span> DJI <span class="sc">+</span> Trump, <span class="at">data =</span> daily_df)</span>
+<span id="cb136-5"><a href="lab-vii-lists-loops-functions-in-r.html#cb136-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb136-6"><a href="lab-vii-lists-loops-functions-in-r.html#cb136-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb136-7"><a href="lab-vii-lists-loops-functions-in-r.html#cb136-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Now with map()</span></span>
+<span id="cb136-8"><a href="lab-vii-lists-loops-functions-in-r.html#cb136-8" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(<span class="at">.x=</span>stk_tickers, <span class="at">.f=</span>func_stock)</span></code></pre></div>
 <pre><code>## [[1]]
 ## 
 ## Call:
@@ -748,105 +757,104 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="create-your-own-simple-regression-function.-to-avoid-issues-of-nas-simulate-some-data-and-see-if-it-worked" class="section level3 hasAnchor" number="8.8.4">
 <h3><span class="header-section-number">8.8.4</span> Create your own simple regression function. To avoid issues of NAs, simulate some data and see if it worked!<a href="lab-vii-lists-loops-functions-in-r.html#create-your-own-simple-regression-function.-to-avoid-issues-of-nas-simulate-some-data-and-see-if-it-worked" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Creating constituent functions</span></span>
-<span id="cb129-2"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb129-3"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Beta Hat Function</span></span>
-<span id="cb129-4"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-4" aria-hidden="true" tabindex="-1"></a>beta_hat <span class="ot">&lt;-</span> <span class="cf">function</span>(x,y) {</span>
-<span id="cb129-5"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-5" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb129-6"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-6" aria-hidden="true" tabindex="-1"></a>  (<span class="fu">sum</span>((x<span class="sc">-</span><span class="fu">mean</span>(x))<span class="sc">*</span>(y<span class="sc">-</span><span class="fu">mean</span>(y))))<span class="sc">/</span></span>
-<span id="cb129-7"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-7" aria-hidden="true" tabindex="-1"></a>    (<span class="fu">sum</span>((x<span class="sc">-</span><span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">2</span>))</span>
-<span id="cb129-8"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb129-9"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-9" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb129-10"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb129-11"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Intercept Function</span></span>
-<span id="cb129-12"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-12" aria-hidden="true" tabindex="-1"></a>constant <span class="ot">&lt;-</span> <span class="cf">function</span>(x,y,b){</span>
-<span id="cb129-13"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-13" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb129-14"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>(y) <span class="sc">-</span> b<span class="sc">*</span><span class="fu">mean</span>(x)</span>
-<span id="cb129-15"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-15" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb129-16"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-16" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb129-17"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb129-18"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-18" aria-hidden="true" tabindex="-1"></a><span class="do">## Fitted Values Function</span></span>
-<span id="cb129-19"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-19" aria-hidden="true" tabindex="-1"></a>fit_val <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y, b) {</span>
-<span id="cb129-20"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">constant</span>(<span class="at">x=</span>x,<span class="at">y=</span>y,<span class="at">b=</span>b) <span class="sc">+</span> <span class="fu">beta_hat</span>(x,y) <span class="sc">*</span> x</span>
-<span id="cb129-21"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-21" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb129-22"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb129-23"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-23" aria-hidden="true" tabindex="-1"></a><span class="do">## R squared Function</span></span>
-<span id="cb129-24"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-24" aria-hidden="true" tabindex="-1"></a>r2 <span class="ot">&lt;-</span> <span class="cf">function</span>(fitted, y) {</span>
-<span id="cb129-25"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>((fitted <span class="sc">-</span> <span class="fu">mean</span>(y))<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span></span>
-<span id="cb129-26"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sum</span>((y<span class="sc">-</span><span class="fu">mean</span>(y))<span class="sc">^</span><span class="dv">2</span>)</span>
-<span id="cb129-27"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-27" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb129-28"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb129-29"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-29" aria-hidden="true" tabindex="-1"></a><span class="do">## Standard Error Function</span></span>
-<span id="cb129-30"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-30" aria-hidden="true" tabindex="-1"></a>se <span class="ot">&lt;-</span> <span class="cf">function</span>(fitted, x, y) {</span>
-<span id="cb129-31"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>(<span class="fu">sum</span>((fitted<span class="sc">-</span>y)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span><span class="fu">length</span>(y)<span class="sc">/</span></span>
-<span id="cb129-32"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-32" aria-hidden="true" tabindex="-1"></a>         <span class="fu">sum</span>((x<span class="sc">-</span><span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">2</span>))</span>
-<span id="cb129-33"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-33" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb129-34"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-34" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb129-35"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb129-36"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-36" aria-hidden="true" tabindex="-1"></a><span class="do">## T Stat Function</span></span>
-<span id="cb129-37"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-37" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="cf">function</span>(beta, <span class="at">null=</span><span class="dv">0</span>, se) {</span>
-<span id="cb129-38"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-38" aria-hidden="true" tabindex="-1"></a>  (beta<span class="sc">-</span>null)<span class="sc">/</span></span>
-<span id="cb129-39"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-39" aria-hidden="true" tabindex="-1"></a>    se</span>
-<span id="cb129-40"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-40" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb129-41"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb129-42"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-42" aria-hidden="true" tabindex="-1"></a><span class="do">## P-Value Function</span></span>
-<span id="cb129-43"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-43" aria-hidden="true" tabindex="-1"></a>pval <span class="ot">&lt;-</span> <span class="cf">function</span>(t,df) {</span>
-<span id="cb129-44"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-44" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb129-45"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pt</span>(<span class="at">q=</span>t, df, <span class="at">lower.tail =</span> F)<span class="sc">*</span><span class="dv">2</span></span>
-<span id="cb129-46"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-46" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb129-47"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-47" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb129-48"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb129-49"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-49" aria-hidden="true" tabindex="-1"></a><span class="do">## OLS Function</span></span>
-<span id="cb129-50"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-50" aria-hidden="true" tabindex="-1"></a>ols <span class="ot">&lt;-</span> <span class="cf">function</span>(X,Y) {</span>
-<span id="cb129-51"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-51" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb129-52"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-52" aria-hidden="true" tabindex="-1"></a>  b <span class="ot">&lt;-</span> <span class="fu">beta_hat</span>(X, Y)</span>
-<span id="cb129-53"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-53" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb129-54"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-54" aria-hidden="true" tabindex="-1"></a>  constant <span class="ot">&lt;-</span> <span class="fu">constant</span>(<span class="at">x=</span>X, <span class="at">y=</span>Y, b)</span>
-<span id="cb129-55"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-55" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb129-56"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-56" aria-hidden="true" tabindex="-1"></a>  fitted <span class="ot">&lt;-</span> <span class="fu">fit_val</span>(<span class="at">x=</span>X,<span class="at">y=</span>Y,<span class="at">b=</span>b)</span>
-<span id="cb129-57"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-57" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb129-58"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-58" aria-hidden="true" tabindex="-1"></a>  r_squared <span class="ot">&lt;-</span> <span class="fu">r2</span>(fitted, <span class="at">y=</span>Y)</span>
-<span id="cb129-59"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-59" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb129-60"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-60" aria-hidden="true" tabindex="-1"></a>  stand_err <span class="ot">&lt;-</span> <span class="fu">se</span>(<span class="at">fitted=</span>fitted, <span class="at">x=</span>X, <span class="at">y=</span>Y)</span>
-<span id="cb129-61"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-61" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb129-62"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-62" aria-hidden="true" tabindex="-1"></a>  t_stat <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="at">beta=</span>b, <span class="at">se=</span>stand_err)</span>
-<span id="cb129-63"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-63" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb129-64"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-64" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">pval</span>(<span class="at">t=</span>t_stat, <span class="at">df=</span>(<span class="fu">length</span>(X)<span class="sc">-</span><span class="dv">1</span>))</span>
-<span id="cb129-65"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-65" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb129-66"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(b, stand_err, t_stat, p)</span>
-<span id="cb129-67"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-67" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb129-68"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-68" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb129-69"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb129-70"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-70" aria-hidden="true" tabindex="-1"></a><span class="do">## Creating Data</span></span>
-<span id="cb129-71"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-71" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="dv">15</span>, <span class="dv">2</span>)</span>
-<span id="cb129-72"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-72" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> x<span class="sc">*</span><span class="dv">17</span> <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="dv">15</span>, <span class="dv">12</span>)</span>
-<span id="cb129-73"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb129-74"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-74" aria-hidden="true" tabindex="-1"></a><span class="do">## Testing</span></span>
-<span id="cb129-75"><a href="lab-vii-lists-loops-functions-in-r.html#cb129-75" aria-hidden="true" tabindex="-1"></a><span class="fu">ols</span>(x, y)</span></code></pre></div>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Creating constituent functions</span></span>
+<span id="cb138-2"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb138-3"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Beta Hat Function</span></span>
+<span id="cb138-4"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-4" aria-hidden="true" tabindex="-1"></a>beta_hat <span class="ot">&lt;-</span> <span class="cf">function</span>(x,y) {</span>
+<span id="cb138-5"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb138-6"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-6" aria-hidden="true" tabindex="-1"></a>  (<span class="fu">sum</span>((x<span class="sc">-</span><span class="fu">mean</span>(x))<span class="sc">*</span>(y<span class="sc">-</span><span class="fu">mean</span>(y))))<span class="sc">/</span></span>
+<span id="cb138-7"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-7" aria-hidden="true" tabindex="-1"></a>    (<span class="fu">sum</span>((x<span class="sc">-</span><span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb138-8"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb138-9"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb138-10"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb138-11"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Intercept Function</span></span>
+<span id="cb138-12"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-12" aria-hidden="true" tabindex="-1"></a>constant <span class="ot">&lt;-</span> <span class="cf">function</span>(x,y,b){</span>
+<span id="cb138-13"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb138-14"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>(y) <span class="sc">-</span> b<span class="sc">*</span><span class="fu">mean</span>(x)</span>
+<span id="cb138-15"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb138-16"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb138-17"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb138-18"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-18" aria-hidden="true" tabindex="-1"></a><span class="do">## Fitted Values Function</span></span>
+<span id="cb138-19"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-19" aria-hidden="true" tabindex="-1"></a>fit_val <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y, b) {</span>
+<span id="cb138-20"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">constant</span>(<span class="at">x=</span>x,<span class="at">y=</span>y,<span class="at">b=</span>b) <span class="sc">+</span> <span class="fu">beta_hat</span>(x,y) <span class="sc">*</span> x</span>
+<span id="cb138-21"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-21" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb138-22"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb138-23"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-23" aria-hidden="true" tabindex="-1"></a><span class="do">## R squared Function</span></span>
+<span id="cb138-24"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-24" aria-hidden="true" tabindex="-1"></a>r2 <span class="ot">&lt;-</span> <span class="cf">function</span>(fitted, y) {</span>
+<span id="cb138-25"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>((fitted <span class="sc">-</span> <span class="fu">mean</span>(y))<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span></span>
+<span id="cb138-26"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sum</span>((y<span class="sc">-</span><span class="fu">mean</span>(y))<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb138-27"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-27" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb138-28"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb138-29"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-29" aria-hidden="true" tabindex="-1"></a><span class="do">## Standard Error Function</span></span>
+<span id="cb138-30"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-30" aria-hidden="true" tabindex="-1"></a>se <span class="ot">&lt;-</span> <span class="cf">function</span>(fitted, x, y) {</span>
+<span id="cb138-31"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>(<span class="fu">sum</span>((fitted<span class="sc">-</span>y)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span><span class="fu">length</span>(y)<span class="sc">/</span></span>
+<span id="cb138-32"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-32" aria-hidden="true" tabindex="-1"></a>         <span class="fu">sum</span>((x<span class="sc">-</span><span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb138-33"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-33" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb138-34"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-34" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb138-35"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb138-36"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-36" aria-hidden="true" tabindex="-1"></a><span class="do">## T Stat Function</span></span>
+<span id="cb138-37"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-37" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="cf">function</span>(beta, <span class="at">null=</span><span class="dv">0</span>, se) {</span>
+<span id="cb138-38"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-38" aria-hidden="true" tabindex="-1"></a>  (beta<span class="sc">-</span>null)<span class="sc">/</span></span>
+<span id="cb138-39"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-39" aria-hidden="true" tabindex="-1"></a>    se</span>
+<span id="cb138-40"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-40" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb138-41"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb138-42"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-42" aria-hidden="true" tabindex="-1"></a><span class="do">## P-Value Function</span></span>
+<span id="cb138-43"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-43" aria-hidden="true" tabindex="-1"></a>pval <span class="ot">&lt;-</span> <span class="cf">function</span>(t,df) {</span>
+<span id="cb138-44"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-44" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb138-45"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pt</span>(<span class="at">q=</span>t, df, <span class="at">lower.tail =</span> F)<span class="sc">*</span><span class="dv">2</span></span>
+<span id="cb138-46"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-46" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb138-47"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-47" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb138-48"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb138-49"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-49" aria-hidden="true" tabindex="-1"></a><span class="do">## OLS Function</span></span>
+<span id="cb138-50"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-50" aria-hidden="true" tabindex="-1"></a>ols <span class="ot">&lt;-</span> <span class="cf">function</span>(X,Y) {</span>
+<span id="cb138-51"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-51" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb138-52"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-52" aria-hidden="true" tabindex="-1"></a>  b <span class="ot">&lt;-</span> <span class="fu">beta_hat</span>(X, Y)</span>
+<span id="cb138-53"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-53" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb138-54"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-54" aria-hidden="true" tabindex="-1"></a>  constant <span class="ot">&lt;-</span> <span class="fu">constant</span>(<span class="at">x=</span>X, <span class="at">y=</span>Y, b)</span>
+<span id="cb138-55"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-55" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb138-56"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-56" aria-hidden="true" tabindex="-1"></a>  fitted <span class="ot">&lt;-</span> <span class="fu">fit_val</span>(<span class="at">x=</span>X,<span class="at">y=</span>Y,<span class="at">b=</span>b)</span>
+<span id="cb138-57"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-57" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb138-58"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-58" aria-hidden="true" tabindex="-1"></a>  r_squared <span class="ot">&lt;-</span> <span class="fu">r2</span>(fitted, <span class="at">y=</span>Y)</span>
+<span id="cb138-59"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-59" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb138-60"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-60" aria-hidden="true" tabindex="-1"></a>  stand_err <span class="ot">&lt;-</span> <span class="fu">se</span>(<span class="at">fitted=</span>fitted, <span class="at">x=</span>X, <span class="at">y=</span>Y)</span>
+<span id="cb138-61"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-61" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb138-62"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-62" aria-hidden="true" tabindex="-1"></a>  t_stat <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="at">beta=</span>b, <span class="at">se=</span>stand_err)</span>
+<span id="cb138-63"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-63" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb138-64"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-64" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">pval</span>(<span class="at">t=</span>t_stat, <span class="at">df=</span>(<span class="fu">length</span>(X)<span class="sc">-</span><span class="dv">1</span>))</span>
+<span id="cb138-65"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-65" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb138-66"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tibble</span>(b, stand_err, t_stat, p)</span>
+<span id="cb138-67"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-67" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb138-68"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-68" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb138-69"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb138-70"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-70" aria-hidden="true" tabindex="-1"></a><span class="do">## Creating Data</span></span>
+<span id="cb138-71"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-71" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="dv">15</span>, <span class="dv">2</span>)</span>
+<span id="cb138-72"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-72" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> x<span class="sc">*</span><span class="dv">17</span> <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="dv">15</span>, <span class="dv">12</span>)</span>
+<span id="cb138-73"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb138-74"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-74" aria-hidden="true" tabindex="-1"></a><span class="do">## Testing</span></span>
+<span id="cb138-75"><a href="lab-vii-lists-loops-functions-in-r.html#cb138-75" aria-hidden="true" tabindex="-1"></a><span class="fu">ols</span>(x, y)</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 4
 ##       b stand_err t_stat     p
 ##   &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
-## 1  16.9     0.189   89.8     0</code></pre>
-<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="lab-vii-lists-loops-functions-in-r.html#cb131-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(y<span class="sc">~</span>x))</span></code></pre></div>
+## 1  17.0     0.197   86.4     0</code></pre>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="lab-vii-lists-loops-functions-in-r.html#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(y<span class="sc">~</span>x))</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = y ~ x)
 ## 
 ## Residuals:
 ##     Min      1Q  Median      3Q     Max 
-## -40.625  -8.231   0.078   7.724  39.065 
+## -40.785  -7.997   0.119   8.217  36.363 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)  16.0785     2.8686   5.605 2.69e-08 ***
-## x            16.9384     0.1887  89.756  &lt; 2e-16 ***
+## (Intercept)  15.1665     2.9657   5.114 3.78e-07 ***
+## x            16.9719     0.1967  86.267  &lt; 2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 11.88 on 998 degrees of freedom
-## Multiple R-squared:  0.8898, Adjusted R-squared:  0.8897 
-## F-statistic:  8056 on 1 and 998 DF,  p-value: &lt; 2.2e-16</code></pre>
-
+## Residual standard error: 11.96 on 998 degrees of freedom
+## Multiple R-squared:  0.8818, Adjusted R-squared:  0.8816 
+## F-statistic:  7442 on 1 and 998 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 </div>
@@ -855,8 +863,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="lab-vi-experiments.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="lab-vi-experiments.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="lab-viii-regression-discontinuity-designs.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

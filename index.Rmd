@@ -274,7 +274,7 @@ wv$Immigrant <- wv$Immigrant-1
 ## 10 Highest
 wv %>%
   group_by(country) %>%
-  summarize(pct_imm = mean(Immigrant, na.rm=T), n=n())%>%
+  dplyr::summarize(pct_imm = mean(Immigrant, na.rm=T), n=n())%>%
   arrange(desc(pct_imm)) %>%
   slice(1:10)
 
@@ -282,7 +282,7 @@ wv %>%
 ## Percent immigrant in each country
 wv %>%
   group_by(country) %>%
-  summarize(pct_imm = mean(Immigrant, na.rm=T), n=n())%>%
+  dplyr::summarize(pct_imm = mean(Immigrant, na.rm=T), n=n())%>%
   arrange(pct_imm) %>%
   slice(1:10)
 
@@ -296,7 +296,7 @@ wv %>%
 wv %>%
   filter(Male==1) %>%
   group_by(country) %>%
-  summarize(pct_imm = mean(Immigrant, na.rm=T), n=n()) %>%
+  dplyr::summarize(pct_imm = mean(Immigrant, na.rm=T), n=n()) %>%
   arrange(desc(pct_imm)) %>%
   slice(1:10)
 
@@ -304,7 +304,7 @@ wv %>%
 wv %>%
   filter(Male==1) %>%
   group_by(country) %>%
-  summarize(pct_imm = mean(Immigrant, na.rm=T), n=n()) %>%
+  dplyr::summarize(pct_imm = mean(Immigrant, na.rm=T), n=n()) %>%
   arrange(pct_imm) %>%
   slice(1:10)
 ```
@@ -315,7 +315,7 @@ wv %>%
 ```{r, message=FALSE, warning=FALSE}
 wv %>%
   group_by(country, Marital) %>%
-  summarize(male_pct = mean(Male, na.rm=T), n=n()) %>%
+  dplyr::summarize(male_pct = mean(Male, na.rm=T), n=n()) %>%
   filter(country == "United States")
 
 ```
@@ -326,7 +326,7 @@ wv %>%
 ```{r, warning=FALSE, message=FALSE}
 wv %>%
   group_by(country, Income) %>%
-  summarize(imm_pct = mean(Immigrant, na.rm=T), n=n()) %>%
+  dplyr::summarize(imm_pct = mean(Immigrant, na.rm=T), n=n()) %>%
   filter(country == "United States")
 
 ```
@@ -1296,4 +1296,146 @@ y <- x*17 + rnorm(1000, 15, 12)
 ## Testing
 ols(x, y)
 summary(lm(y~x))
+```
+
+# 3/27 Lab VIII | Regression Discontinuity Designs
+
+```{r, echo=FALSE}
+knitr::include_graphics("lab8_image.png")
+
+```
+
+## Preparation
+
+```{r, message = FALSE, warning = FALSE}
+## Packages
+library(knitr)
+library(haven)
+library(tidyverse)
+library(rdrobust)
+
+# Load data: data saved as object named "dta"
+load("~/GOVT702/Data/Ch11_Lab_AlcoholCrime.RData")
+ 
+```
+
+Carpenter and  Dobkin (2015) analyzes the relationship between alcohol and crime using a regression discontinuity design.
+
+In this lab we will replicate the results and then explore different specifications.  As you will see, some reasonable alternative specifications yield quite different results.  The goal here will be to see if we can make any progress in explaining why the results vary as we vary the specification.
+
+From the codebook: "The individual level arrest records are collapsed into arrest counts by age in days for each crime type  in the SAS program "P01 Estimate Age Profile of Crime Rates.sas". This program uses populations estimated from the census in "P00 Estimate Population Denominators.sas" to compute arrest rates per 10,000."
+
+The main variables are 
+
+- *all_r*: number of arrests across all categories.  Our main dependent variable. Arrest data is also broken down for *violent_r*, *property_r*, *ill_drugs_r* and *alcohol_r*
+- *post* a dumm variable indicating the individual is over 21 years of age
+- *linear*: the number of years from being age 21 (that is, *linear* = 1.0 indicates 22 year olds.  Negative values means the individual is under 21 and positive values indicate the individual is over than 21.
+- *square*: the squared value of linear
+- *linear_post*: interaction of linear and post
+- *square_post*: interaction of square and post
+- birthday dummies: e.g., birthday_19 is a dummy for a person's 19th birthday and birthday_19_1 is a dummy for the day after a person's 19th birthday. Use this code in your formula: + birthday_19  + birthday_19_1 + birthday_20  + birthday_20_1 + birthday_21  + birthday_21_1 + birthday_22 + birthday_22_1 + birthday_23 + birthday_23_1
+
+See Carpenter, Christopher and Carlos Dobkin. 2015. The Minimum Legal Drinking Age and Crime. *The Review of Economics and Statistics.* 97:2, 521-524.
+
+## Run the most basic RDD model and then replicate the main result using the specification for Table 1. In this model, the RD allows for differential quadratic models above and below the threshold and also has dummy variables for birthdays. The data is limited to observations within 2 years of 21. Do this with `lm()`. Finally, run a diagnostic plot to test for sorting just beyond the cutoff.
+
+```{r, message = FALSE, warning = FALSE}
+## Basic RD model
+rd_basic <- lm(all_r ~ post + linear,  data=dta[abs(dta$linear) <= 2, ])
+summary(rd_basic)
+
+## Differing Slopes
+rd_basic <- lm(all_r ~ post*linear,  data=dta[abs(dta$linear) <= 2, ])
+summary(rd_basic)
+
+## Model with covariates and vary
+rd_replicate <- lm(all_r ~ post + linear + square + linear_post + square_post + birthday_19  + birthday_20  + birthday_20_1 + birthday_21  + birthday_21_1 + birthday_22 + birthday_22_1,  data=dta[abs(dta$linear) <= 2, ])
+summary(rd_replicate)
+
+## Diagnostic plot
+hist(dta$linear, main = "Diagnostic Plot", xlab = "Age", las=1)
+
+```
+
+## Run the basic rd model and the model with covariates with `library(rdrobust)`. What is different?
+
+```{r, message = FALSE, warning = FALSE}
+## With RD robust
+rd_1 <- rdrobust(x = dta$linear, y = dta$all_r)
+summary(rd_1)
+
+summary(rdrobust(x = dta$linear, y = dta$all_r, covs = dta$birthday_19  + dta$birthday_20 + dta$birthday_20_1 + dta$birthday_21  + dta$birthday_21_1 + dta$birthday_22 + dta$birthday_22_1, p=1))
+
+```
+
+## Estimate a series of models with `lm()` that have slightly different specifications. First, try the above specification with only linear age variable, first fixing slope to be the same above and below the threshhold and then allowing slope to vary above and below the threshhold.
+
+```{r, message = FALSE, warning = FALSE}
+## Additional Models
+RD.1 <- lm(all_r ~ post + linear + birthday_19  + birthday_20  + birthday_20_1 + birthday_21  + birthday_21_1 + birthday_22 + birthday_22_1,  data=dta[abs(dta$linear) <= 2, ])
+summary(RD.1)
+
+RD.2 <- lm(all_r ~ post + linear + linear_post + birthday_19  + birthday_20  + birthday_20_1 + birthday_21  + birthday_21_1 + birthday_22 + birthday_22_1,  data=dta[abs(dta$linear) <= 2, ])
+summary(RD.2)
+
+
+```
+
+## Now see what happens when you use a different window sizes.  Feel free to experiment (but only need to report one specification.) Just include the treatment and running variables and allow the slopes to differ.
+
+```{r, message = FALSE, warning = FALSE}
+## Different window sizes
+RD.3 <- lm(all_r ~ post + linear + linear_post,  data=dta[abs(dta$linear) <= 1, ])
+summary(RD.3)
+
+RD.4 <- lm(all_r ~ post + linear + linear_post,  data=dta[abs(dta$linear) <= 3, ])
+summary(RD.4)
+
+```
+
+## Now create some RDD figures. I suggest using `rdplot()` in `library(rdrobust)` and experimenting with different arguments.
+
+```{r, message = FALSE, warning = FALSE}
+## With rdrobust
+rdplot(dta$all_r , dta$linear, c=0, kernel = "triangular", x.label = "Year from Age Cutoff", y.label
+= "Arrest Rate", title = "Effect of Alcohol on Crime", binselect = "es")
+
+# Create a dataframe that contains average crime rates grouped by bin, limited to the 
+# window set by the window parameter
+dta$age_fortnight = 21 + (14*floor(dta$days_to_21/14))/365
+
+# Create a variable placing each observation in a "bin"
+dta$bin  = rep(1:length(unique(dta$age_fortnight)), table(dta$age_fortnight))
+
+window <- 4
+
+dta_bin <-  dta %>% 
+  dplyr::select(days_to_21, all_r, property_r, age_fortnight, alcohol_r, bin) %>%
+  group_by(bin) %>%
+  summarise(property_r_bin = mean(property_r), 
+            all_r_bin = mean(all_r), 
+            alcohol_r_bin = mean(alcohol_r), 
+            age_fortnight_bin = mean(age_fortnight)) %>%
+  filter(age_fortnight_bin >= 21- window & age_fortnight_bin <= 21 + window)
+
+# Linear model with varying slopes below and above threshhold
+# ALCOHOL ARREST RATES
+rd_linear_left <- lm(all_r ~ linear, dta[dta$linear > -window & dta$linear <0, ])
+
+rd_linear_right <- lm(all_r ~ linear, dta[dta$linear  < window & dta$linear >0, ])
+
+# Create a scatter plot
+plot(dta_bin$age_fortnight_bin, dta_bin$all_r_bin,  type = "p", pch = 1, cex = 0.5, 
+     cex.main = 0.8, xlab = "Age at time of Arrest", ylab = "Arrest Rate", xaxt='n', yaxt='n')
+axis(2, las = 1, tick = T, cex.axis = .8, mgp = c(2,.7,0))
+axis(1, tick = T, at= seq(17, 25, by=1), labels =seq(17, 25, by=1),cex.axis = .8, mgp = c(2,.3,0))
+
+# Add fitted lines from "left" and "right" models
+points(seq(21 - window, 21, by = 0.1), coef(rd_linear_left) [1] + 
+         coef(rd_linear_left) [2]*seq(-window, 0, by = 0.1), lwd = 2, 
+       col = "darkblue", type = 'l')
+points(seq(21, 21 + window, by = 0.1), coef(rd_linear_right)[1] + 
+         coef(rd_linear_right)[2]*seq(0, window , by = 0.1), lwd = 2, 
+       col = "darkblue", type = 'l')
+
 ```

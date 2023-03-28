@@ -75,3 +75,10 @@ use-list-apply---lapply---to-regress-stock-price-on-trump.
 use-tapply-to-find-the-average-price-of-each-presidential-candidate-over-the-course-of-the-campaign.
 now-use-map-in-librarypurrr-to-regress-stock-price-on-trump.
 create-your-own-simple-regression-function.-to-avoid-issues-of-nas-simulate-some-data-and-see-if-it-worked
+lab-viii-regression-discontinuity-designs
+preparation-3
+run-the-most-basic-rdd-model-and-then-replicate-the-main-result-using-the-specification-for-table-1.-in-this-model-the-rd-allows-for-differential-quadratic-models-above-and-below-the-threshold-and-also-has-dummy-variables-for-birthdays.-the-data-is-limited-to-observations-within-2-years-of-21.-do-this-with-lm.-finally-run-a-diagnostic-plot-to-test-for-sorting-just-beyond-the-cutoff.
+run-the-basic-rd-model-and-the-model-with-covariates-with-libraryrdrobust.-what-is-different
+estimate-a-series-of-models-with-lm-that-have-slightly-different-specifications.-first-try-the-above-specification-with-only-linear-age-variable-first-fixing-slope-to-be-the-same-above-and-below-the-threshhold-and-then-allowing-slope-to-vary-above-and-below-the-threshhold.
+now-see-what-happens-when-you-use-a-different-window-sizes.-feel-free-to-experiment-but-only-need-to-report-one-specification.-just-include-the-treatment-and-running-variables-and-allow-the-slopes-to-differ.
+now-create-some-rdd-figures.-i-suggest-using-rdplot-in-libraryrdrobust-and-experimenting-with-different-arguments.
