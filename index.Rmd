@@ -1357,6 +1357,12 @@ hist(dta$linear, main = "Diagnostic Plot", xlab = "Age", las=1)
 
 ```
 
+```{r, echo=FALSE}
+knitr::include_graphics("rdd_1.png")
+
+```
+
+
 ## Run the basic rd model and the model with covariates with `library(rdrobust)`. What is different?
 
 ```{r, message = FALSE, warning = FALSE}
@@ -1395,11 +1401,18 @@ summary(RD.4)
 
 ## Now create some RDD figures. I suggest using `rdplot()` in `library(rdrobust)` and experimenting with different arguments.
 
-```{r, message = FALSE, warning = FALSE}
+```{r, eval=FALSE, message = FALSE, warning = FALSE}
 ## With rdrobust
 rdplot(dta$all_r , dta$linear, c=0, kernel = "triangular", x.label = "Year from Age Cutoff", y.label
 = "Arrest Rate", title = "Effect of Alcohol on Crime", binselect = "es")
+```
 
+```{r, echo=FALSE}
+knitr::include_graphics("rdd_2.png")
+
+```
+
+```{r, eval=FALSE, message = FALSE, warning = FALSE}
 # Create a dataframe that contains average crime rates grouped by bin, limited to the 
 # window set by the window parameter
 dta$age_fortnight = 21 + (14*floor(dta$days_to_21/14))/365
@@ -1410,7 +1423,7 @@ dta$bin  = rep(1:length(unique(dta$age_fortnight)), table(dta$age_fortnight))
 window <- 4
 
 dta_bin <-  dta %>% 
-  dplyr::select(days_to_21, all_r, property_r, age_fortnight, alcohol_r, bin) %>%
+  select(days_to_21, all_r, property_r, age_fortnight, alcohol_r, bin) %>%
   group_by(bin) %>%
   summarise(property_r_bin = mean(property_r), 
             all_r_bin = mean(all_r), 
@@ -1426,9 +1439,11 @@ rd_linear_right <- lm(all_r ~ linear, dta[dta$linear  < window & dta$linear >0, 
 
 # Create a scatter plot
 plot(dta_bin$age_fortnight_bin, dta_bin$all_r_bin,  type = "p", pch = 1, cex = 0.5, 
-     cex.main = 0.8, xlab = "Age at time of Arrest", ylab = "Arrest Rate", xaxt='n', yaxt='n')
+     cex.main = 0.8, xlab = "", ylab = "", xaxt='n', yaxt='n')
 axis(2, las = 1, tick = T, cex.axis = .8, mgp = c(2,.7,0))
 axis(1, tick = T, at= seq(17, 25, by=1), labels =seq(17, 25, by=1),cex.axis = .8, mgp = c(2,.3,0))
+mtext("Arrest rate", 	las = 1, side = 2, at = 520, line = -0.2, cex = 1)
+mtext("Age at time of arrest", 	side = 1, line = 1., cex = 0.8)
 
 # Add fitted lines from "left" and "right" models
 points(seq(21 - window, 21, by = 0.1), coef(rd_linear_left) [1] + 
@@ -1437,5 +1452,9 @@ points(seq(21 - window, 21, by = 0.1), coef(rd_linear_left) [1] +
 points(seq(21, 21 + window, by = 0.1), coef(rd_linear_right)[1] + 
          coef(rd_linear_right)[2]*seq(0, window , by = 0.1), lwd = 2, 
        col = "darkblue", type = 'l')
+```
+
+```{r, echo=FALSE}
+knitr::include_graphics("rdd_3.png")
 
 ```
