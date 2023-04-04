@@ -82,3 +82,9 @@ run-the-basic-rd-model-and-the-model-with-covariates-with-libraryrdrobust.-what-
 estimate-a-series-of-models-with-lm-that-have-slightly-different-specifications.-first-try-the-above-specification-with-only-linear-age-variable-first-fixing-slope-to-be-the-same-above-and-below-the-threshhold-and-then-allowing-slope-to-vary-above-and-below-the-threshhold.
 now-see-what-happens-when-you-use-a-different-window-sizes.-feel-free-to-experiment-but-only-need-to-report-one-specification.-just-include-the-treatment-and-running-variables-and-allow-the-slopes-to-differ.
 now-create-some-rdd-figures.-i-suggest-using-rdplot-in-libraryrdrobust-and-experimenting-with-different-arguments.
+start-by-registering-for-a-census-api-key-here
+lets-create-a-map-of-the-distribution-of-income-across-dc-at-the-census-tract-level.-we-will-use-the-2015-2019-acs.-edit-the-following-code-to-bring-in-the-data-with-get_acs-and-create-the-map
+do-the-same-for-two-different-states-and-cities.
+now-visualize-income-across-the-entire-county-at-the-state-level.-include-shift_geo-true-as-an-argument
+do-the-same-at-the-county-level
+now-use-get_idb-to-visualize-the-fertility-rate-around-the-world

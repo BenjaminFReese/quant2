@@ -1351,7 +1351,10 @@ summary(rd_basic)
 ## Model with covariates and vary
 rd_replicate <- lm(all_r ~ post + linear + square + linear_post + square_post + birthday_19  + birthday_20  + birthday_20_1 + birthday_21  + birthday_21_1 + birthday_22 + birthday_22_1,  data=dta[abs(dta$linear) <= 2, ])
 summary(rd_replicate)
+```
 
+
+```{r, message = FALSE, warning = FALSE, eval=FALSE}
 ## Diagnostic plot
 hist(dta$linear, main = "Diagnostic Plot", xlab = "Age", las=1)
 
@@ -1456,5 +1459,176 @@ points(seq(21, 21 + window, by = 0.1), coef(rd_linear_right)[1] +
 
 ```{r, echo=FALSE}
 knitr::include_graphics("rdd_3.png")
+
+```
+# 4/3 | Optional Lab I: Spatial Data Analysis
+
+```{r, echo=FALSE}
+knitr::include_graphics("opt_lab_image.jpg")
+
+```
+
+
+```{r, echo=TRUE, eval=FALSE}
+## Packages
+library(tidyverse)
+library(sf)
+library(tidycensus)
+library(idbr)
+
+```
+
+## Start by registering for a census API key [here](https://api.census.gov/data/key_signup.html)
+
+```{r, echo=TRUE, eval=FALSE}
+## Loading Census API Key
+census_api_key(" ")
+
+```
+
+## Let's create a map of the distribution of income across DC at the census tract level. We will use the 2015-2019 ACS. Edit the following code to bring in the data with `get_acs` and create the map
+
+```{r, echo=TRUE, eval=FALSE}
+dc_income <- get_acs(
+  geography = "tract", 
+  variables = "B19013_001E", 
+  state = 11,
+  geometry = TRUE, 
+  output = "wide", 
+  year = 2019,
+  progress = FALSE)
+
+dc_income %>%
+  ggplot() +
+  geom_sf(aes(fill = B19013_001E)) +
+  theme_void() +
+  labs(title = "DC Median Income Distribution", fill="Income $")
+
+```
+
+```{r, echo=FALSE}
+knitr::include_graphics("map_1.png")
+
+```
+
+## Do the same for two different states and cities. 
+
+```{r, echo=TRUE, eval=FALSE}
+la_income <- get_acs(
+  geography = "tract", 
+  variables = "B19013_001E", 
+  state = 6,
+  county = 37,
+  geometry = TRUE, 
+  output = "wide", 
+  year = 2019,
+  progress = FALSE)
+
+la_income %>%
+  ggplot() +
+  geom_sf(aes(fill = B19013_001E)) +
+  theme_void() +
+  labs(title = "LA Median Income Distribution", fill="Income $")
+```
+
+```{r, echo=FALSE}
+knitr::include_graphics("map_2.png")
+
+```
+
+```{r, echo=TRUE, eval=FALSE}
+balt_income <- get_acs(
+  geography = "tract", 
+  variables = "B19013_001E", 
+  state = 24,
+  county = 510,
+  geometry = TRUE, 
+  output = "wide", 
+  year = 2019,
+  progress = FALSE)
+
+balt_income %>%
+  ggplot() +
+  geom_sf(aes(fill = B19013_001E)) +
+  theme_void() +
+  labs(title = "Baltimore Median Income Distribution", fill="Income $")
+
+```
+
+```{r, echo=FALSE}
+knitr::include_graphics("map_3.png")
+
+```
+
+## Now visualize income across the entire county at the state level. Include shift_geo = TRUE as an argument
+
+```{r, echo=TRUE, eval=FALSE}
+us_income <- get_acs(
+  geography = "state", 
+  variables = "B19013_001", 
+  geometry = TRUE, 
+  output = "wide", 
+  year = 2019,
+  shift_geo = TRUE,
+  progress = FALSE)
+
+us_income %>%
+  ggplot() +
+  geom_sf(aes(fill = B19013_001E)) +
+  theme_void() +
+  labs(title = "US Median Income Distribution", fill="Income $")
+
+```
+
+```{r, echo=FALSE}
+knitr::include_graphics("map_4.png")
+
+```
+
+## Do the same at the county level
+
+```{r, echo=TRUE, eval=FALSE}
+us_income_county <- get_acs(
+  geography = "county", 
+  variables = "B19013_001", 
+  geometry = TRUE, 
+  output = "wide", 
+  year = 2019,
+  shift_geo = TRUE,
+  progress = FALSE)
+
+us_income_county %>%
+  ggplot() +
+  geom_sf(aes(fill = B19013_001E)) +
+  theme_void() +
+  labs(title = "US Median Income Distribution", fill="Income $")
+
+```
+
+```{r, echo=FALSE}
+knitr::include_graphics("map_5.png")
+
+```
+
+## Now use `get_idb()` to visualize the fertility rate around the world
+
+```{r, echo=TRUE, eval=FALSE}
+f_rate <- get_idb(
+  country = "all",
+  year = 2021,
+  variables = "tfr",
+  geometry = TRUE,
+)
+
+f_rate %>%
+  ggplot(aes(fill = tfr)) +
+  geom_sf() +
+  theme_void() +
+  labs(fill = "Fertility Rate")
+
+```
+
+```{r, echo=FALSE}
+knitr::include_graphics("map_6.png")
 
 ```

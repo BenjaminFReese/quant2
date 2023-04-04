@@ -239,6 +239,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.4" data-path="lab-viii-regression-discontinuity-designs.html"><a href="lab-viii-regression-discontinuity-designs.html#estimate-a-series-of-models-with-lm-that-have-slightly-different-specifications.-first-try-the-above-specification-with-only-linear-age-variable-first-fixing-slope-to-be-the-same-above-and-below-the-threshhold-and-then-allowing-slope-to-vary-above-and-below-the-threshhold."><i class="fa fa-check"></i><b>9.4</b> Estimate a series of models with <code>lm()</code> that have slightly different specifications. First, try the above specification with only linear age variable, first fixing slope to be the same above and below the threshhold and then allowing slope to vary above and below the threshhold.</a></li>
 <li class="chapter" data-level="9.5" data-path="lab-viii-regression-discontinuity-designs.html"><a href="lab-viii-regression-discontinuity-designs.html#now-see-what-happens-when-you-use-a-different-window-sizes.-feel-free-to-experiment-but-only-need-to-report-one-specification.-just-include-the-treatment-and-running-variables-and-allow-the-slopes-to-differ."><i class="fa fa-check"></i><b>9.5</b> Now see what happens when you use a different window sizes. Feel free to experiment (but only need to report one specification.) Just include the treatment and running variables and allow the slopes to differ.</a></li>
 <li class="chapter" data-level="9.6" data-path="lab-viii-regression-discontinuity-designs.html"><a href="lab-viii-regression-discontinuity-designs.html#now-create-some-rdd-figures.-i-suggest-using-rdplot-in-libraryrdrobust-and-experimenting-with-different-arguments."><i class="fa fa-check"></i><b>9.6</b> Now create some RDD figures. I suggest using <code>rdplot()</code> in <code>library(rdrobust)</code> and experimenting with different arguments.</a></li>
+<li class="chapter" data-level="9.7" data-path="lab-viii-regression-discontinuity-designs.html"><a href="lab-viii-regression-discontinuity-designs.html#start-by-registering-for-a-census-api-key-here"><i class="fa fa-check"></i><b>9.7</b> Start by registering for a census API key here</a></li>
+<li class="chapter" data-level="9.8" data-path="lab-viii-regression-discontinuity-designs.html"><a href="lab-viii-regression-discontinuity-designs.html#lets-create-a-map-of-the-distribution-of-income-across-dc-at-the-census-tract-level.-we-will-use-the-2015-2019-acs.-edit-the-following-code-to-bring-in-the-data-with-get_acs-and-create-the-map"><i class="fa fa-check"></i><b>9.8</b> Let’s create a map of the distribution of income across DC at the census tract level. We will use the 2015-2019 ACS. Edit the following code to bring in the data with <code>get_acs</code> and create the map</a></li>
+<li class="chapter" data-level="9.9" data-path="lab-viii-regression-discontinuity-designs.html"><a href="lab-viii-regression-discontinuity-designs.html#do-the-same-for-two-different-states-and-cities."><i class="fa fa-check"></i><b>9.9</b> Do the same for two different states and cities.</a></li>
+<li class="chapter" data-level="9.10" data-path="lab-viii-regression-discontinuity-designs.html"><a href="lab-viii-regression-discontinuity-designs.html#now-visualize-income-across-the-entire-county-at-the-state-level.-include-shift_geo-true-as-an-argument"><i class="fa fa-check"></i><b>9.10</b> Now visualize income across the entire county at the state level. Include shift_geo = TRUE as an argument</a></li>
+<li class="chapter" data-level="9.11" data-path="lab-viii-regression-discontinuity-designs.html"><a href="lab-viii-regression-discontinuity-designs.html#do-the-same-at-the-county-level"><i class="fa fa-check"></i><b>9.11</b> Do the same at the county level</a></li>
+<li class="chapter" data-level="9.12" data-path="lab-viii-regression-discontinuity-designs.html"><a href="lab-viii-regression-discontinuity-designs.html#now-use-get_idb-to-visualize-the-fertility-rate-around-the-world"><i class="fa fa-check"></i><b>9.12</b> Now use <code>get_idb()</code> to visualize the fertility rate around the world</a></li>
 </ul></li>
 </ul>
 
@@ -835,7 +841,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## # A tibble: 1 × 4
 ##       b stand_err t_stat     p
 ##   &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
-## 1  16.9     0.192   87.8     0</code></pre>
+## 1  17.1     0.191   89.3     0</code></pre>
 <div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="lab-vii-lists-loops-functions-in-r.html#cb140-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">lm</span>(y<span class="sc">~</span>x))</span></code></pre></div>
 <pre><code>## 
 ## Call:
@@ -843,18 +849,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## Residuals:
 ##     Min      1Q  Median      3Q     Max 
-## -40.409  -8.349  -0.158   7.829  38.288 
+## -42.072  -8.596  -0.056   8.244  42.300 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)  16.2516     2.9203   5.565 3.37e-08 ***
-## x            16.8963     0.1927  87.701  &lt; 2e-16 ***
+## (Intercept)  14.1188     2.8931    4.88 1.23e-06 ***
+## x            17.0711     0.1913   89.26  &lt; 2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 12.01 on 998 degrees of freedom
-## Multiple R-squared:  0.8851, Adjusted R-squared:  0.885 
-## F-statistic:  7691 on 1 and 998 DF,  p-value: &lt; 2.2e-16</code></pre>
+## Residual standard error: 11.81 on 998 degrees of freedom
+## Multiple R-squared:  0.8887, Adjusted R-squared:  0.8886 
+## F-statistic:  7967 on 1 and 998 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 </div>
