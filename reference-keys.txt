@@ -1,4 +1,4 @@
-tab:unnamed-chunk-46
+tab:unnamed-chunk-40
 introduction
 purpose-of-this-site
 loading-data
@@ -82,6 +82,7 @@ run-the-basic-rd-model-and-the-model-with-covariates-with-libraryrdrobust.-what-
 estimate-a-series-of-models-with-lm-that-have-slightly-different-specifications.-first-try-the-above-specification-with-only-linear-age-variable-first-fixing-slope-to-be-the-same-above-and-below-the-threshhold-and-then-allowing-slope-to-vary-above-and-below-the-threshhold.
 now-see-what-happens-when-you-use-a-different-window-sizes.-feel-free-to-experiment-but-only-need-to-report-one-specification.-just-include-the-treatment-and-running-variables-and-allow-the-slopes-to-differ.
 now-create-some-rdd-figures.-i-suggest-using-rdplot-in-libraryrdrobust-and-experimenting-with-different-arguments.
+optional-lab-i-spatial-data-analysis
 start-by-registering-for-a-census-api-key-here
 lets-create-a-map-of-the-distribution-of-income-across-dc-at-the-census-tract-level.-we-will-use-the-2015-2019-acs.-edit-the-following-code-to-bring-in-the-data-with-get_acs-and-create-the-map
 do-the-same-for-two-different-states-and-cities.
