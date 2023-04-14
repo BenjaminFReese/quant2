@@ -1462,6 +1462,347 @@ knitr::include_graphics("rdd_3.png")
 
 ```
 
+# 4/13 Lab IX | Time Series
+
+```{r, echo=FALSE}
+knitr::include_graphics("time.png")
+
+```
+
+```{r, message = FALSE, warning = FALSE}
+## Packages
+library(haven)
+library(AER)
+library(orcutt)
+library(tidyverse)
+library(lubridate)
+library(lmtest)
+library(sandwich)
+
+## Loading Data
+load("~/GOVT702/Data/Ch13_Lab_GasPrices.RData")
+
+```
+
+Data description:
+
+Variable  | 	Description
+------------- | -------------
+year	| Year
+month	| Month
+time	| Time identifier (1 for first observation, etc)
+logMilesNA	| Log of vehicle miles traveled (in millions) in the U.S., not seasonally adjusted
+logLightTruckSales 	| Log of retail sales of light weight trucks in the U.S. (in thousands)
+logGasReal	| Log of real price of gas
+unem	| Unemployment rate
+logPop 	| Log of U.S. population (in thousands) 
+
+## Estimate a model with the log of miles driven (use the unadjusted data: logMilesNA) as a function of log gas prices, unemployment and log of population.  (Don't account for autocorrelation.)  Is the effect of gas statistically significant?
+
+```{r, message = FALSE, warning = FALSE}
+## Model 1
+reg.1 <- dta %>%
+  lm(logMilesNA ~ logGasReal + unem + logPop, data = .)
+
+## Summary Output
+summary(reg.1)
+
+## 95% CI
+confint(reg.1)
+
+```
+
+## Do you think there is seasonality in driving?  Test by adding dummy variables for month to the above model. Is there evidence of monthly variation?  Is the effect of gas statistically significant? Now create a categorical variable for seasons and run the model without the month dummy variable.
+
+```{r, message = FALSE, warning = FALSE}
+## Removing NAs
+dta <- dta %>%
+  drop_na()
+
+## Creating a variable for seasons
+dta <- dta %>%
+  mutate(season = case_when(
+    month == 1 | month == 2 | month == 3 ~ "Winter",
+    month == 4 | month == 5 | month == 6 ~ "Spring",
+    month == 7 | month == 8 | month == 9 ~ "Summer",
+    month == 10 | month == 11 | month == 12 ~ "Fall")
+    )
+
+## Model 2 Months
+reg.2a <- dta %>%
+  lm(logMilesNA ~ logGasReal + unem + logPop + factor(month), data = .)
+
+## Summary Output
+summary(reg.2a)
+
+## 95% CI
+confint(reg.2a)
+
+## Model 2 Seasons
+reg.2b <- dta %>%
+  lm(logMilesNA ~ logGasReal + unem + logPop + factor(season), data = .)
+
+## Summary Output
+summary(reg.2b)
+
+## 95% CI
+confint(reg.2b)
+
+```
+
+## Briefly explain why there might be autocorrelation.
+
+With 50 years of data, there are certainly time trends and we can reasonably expect the error term of one year to be correlated with the error term of the previous year. For example, if more people began longer commutes in the 1990s, the longer commutes (more miles driven) will continue into the 2000s so the errors will be correlated year by year.
+
+## Create a figure that is useful to assess whether there is autocorrelation (you have two choices here).  Draw a sketch here.
+
+```{r, message = FALSE, warning = FALSE}
+## Saving the Residuals
+dta$residual_errors  <- resid(reg.2a)
+
+## Regressing Residuals
+lag_err <- c(NA, dta$residual_errors[1:(length(dta$residual_errors)-1)])
+```
+
+
+```{r, eval=FALSE, message = FALSE, warning = FALSE}
+plot(lag_err, dta$residual_errors, pch=20, xlab = "Lagged Residuals", 
+     ylab = "Residuals", bty="n", col="dark blue", las=1)
+abline(lm(dta$residual_errors ~ lag_err), lwd=2)
+```
+
+```{r, echo=FALSE, message = FALSE, warning = FALSE}
+knitr::include_graphics("time_1.png")
+
+```
+
+```{r, eval=FALSE, message = FALSE, warning = FALSE}
+## Plotting Over Time
+plot(dta$residual_errors, pch=20, xlab = "Time", las=1, 
+     ylab = "Residuals", bty="n", col="dark blue")
+```
+
+```{r, echo=FALSE, message = FALSE, warning = FALSE}
+knitr::include_graphics("time_2.png")
+
+```
+
+```{r, eval=FALSE, message = FALSE, warning = FALSE}
+# Creating season category and plotting residual error
+dta %>% 
+  ggplot() +
+  geom_line(aes(x=as.Date(date), y=residual_errors, col=season), size=.8) +
+  scale_color_manual(values=c("orange", "green", "red", "darkblue"))+
+  labs(x="Date", y="Residual Errors") +
+  theme_classic() +
+  theme(panel.grid.major.y=element_line(color="darkgrey", linetype="dotted"), panel.grid.minor.y=element_line(color="darkgrey", linetype="dotted")) %>%
+  labs(col="Season")
+```
+
+```{r, echo=FALSE, message = FALSE, warning = FALSE}
+knitr::include_graphics("time_3.png")
+
+```
+
+
+```{r, eval=FALSE, message = FALSE, warning = FALSE}
+# Creating season category and plotting residual error
+dta %>% 
+  ggplot() +
+  geom_point(aes(x=as.Date(date), y=residual_errors, col=season)) +
+  scale_color_manual(values=c("orange", "green", "red", "darkblue"))+
+  labs(x="Date", y="Residual Errors") +
+  theme_classic() +
+  theme(panel.grid.major.y=element_line(color="darkgrey", linetype="dotted"), panel.grid.minor.y=element_line(color="darkgrey", linetype="dotted")) %>%
+  labs(col="Season")
+
+```
+
+```{r, echo=FALSE, message = FALSE, warning = FALSE}
+knitr::include_graphics("time_4.png")
+
+```
+
+
+## Test whether there is first order autocorrelation.  Report the key statistic from this test. What would a coefficient of 1 indicate?
+
+```{r, message = FALSE, warning = FALSE}
+## Error on Lagged Error Regression
+reg.lag <- lm(dta$residual_errors ~ lag_err)
+summary(reg.lag)
+
+## Durbin-Watson
+dwtest(reg.2a)
+
+```
+
+## Use Newey-West standard errors to account for autocorrelation.  Use the same variables as in part (b).  Determine the t-stats and describe the similarities and difference with earlier results.
+
+```{r, message = FALSE, warning = FALSE}
+## Calculating Newey West Standard Errors
+sqrt(diag(NeweyWest(reg.2a, lag=4, prewhite=FALSE, adjust=TRUE)))
+
+## Checking t-stats
+coef(reg.2a) / sqrt(diag(NeweyWest(reg.2a, lag=4, prewhite=FALSE, adjust=TRUE)))
+
+```
+
+## Estimate a model that adjusts for autocorrelation.  Use the same variables as in part (b).  Describe similarities and difference with earlier results.
+
+```{r, message = FALSE, warning = FALSE}
+## Cochrane-Orcutt Model
+reg.orc <- cochrane.orcutt(reg.2a)
+summary(reg.orc)
+
+## "By Hand"
+reg.2a <- dta %>%
+  lm(logMilesNA ~ logGasReal + unem + logPop + factor(month), data = .)
+
+## Error on Lagged Error Regression
+reg.lag <- lm(dta$residual_errors ~ lag_err)
+rho <- summary(reg.lag)$coef[2]
+
+## Lagging Each Variable
+dta$lagmile <- dplyr::lag(dta$logMilesNA, ordered_by = dta$year)
+dta$lag_gas <- dplyr::lag(dta$logGasReal, ordered_by = dta$year)
+dta$lag_unem <- dplyr::lag(dta$unem, ordered_by = dta$year)
+dta$lag_pop <- dplyr::lag(dta$logPop, ordered_by = dta$year)
+dta$lag_month <- dplyr::lag(dta$month, ordered_by = dta$year)
+
+## Rho-transforming
+rho_mile <- dta$logMilesNA - rho*dta$lagmile
+rho_gas <- dta$logGasReal - rho*dta$lag_gas
+rho_unem <- dta$unem - rho*dta$lag_unem
+rho_pop <- dta$logPop - rho*dta$lag_pop
+rho_month <- dta$month - rho*dta$lag_month
+
+## Running rho-transformed model
+rho_trans_model <- lm(rho_mile ~ rho_gas + rho_unem + rho_pop + factor(rho_month))
+summary(rho_trans_model)
+
+```
+
+## Estimate a dynamic model of miles driven using control variables from above.  Discuss key differences.
+
+```{r, message = FALSE, warning = FALSE}
+## Distributed Lag Model
+## Creating lagged miles variable
+dta$lagmile <- dplyr::lag(dta$logMilesNA, ordered_by = dta$year)
+reg.2.dyn <- lm(logMilesNA ~ lagmile + logGasReal + unem + logPop + factor(month) , data=dta)
+summary(reg.2.dyn)
+
+## Saving the Residuals
+residual_errors  <- resid(reg.2.dyn)
+
+## Regressing Residuals
+lag_err <- c(NA, residual_errors[1:(length(residual_errors)-1)])
+```
+
+```{r, eval=FALSE, message = FALSE, warning = FALSE}
+## Residuals from Dynamic Model
+plot(lag_err, residual_errors, pch=20, xlab = "Lagged Residuals", 
+     ylab = "Residuals", bty="n", col="dark blue", las=1)
+
+
+```
+
+```{r, echo=FALSE, message = FALSE, warning = FALSE}
+knitr::include_graphics("time_5.png")
+
+```
+
+## Run an Augmented Dickey-Fuller Test on logMilesNA.
+
+```{r, message = FALSE, warning = FALSE}
+## Change in miles
+delta_miles <- dta$logMilesNA - dta$lagmile
+
+## Lagged Change in Miles
+lag_delta_miles <- c(NA, delta_miles[1:(length(dta$lagmile)-1)])
+
+## Augmented Dickey-Fuller Test
+aug_dickey_fuller <- lm(delta_miles ~ dta$lagmile + dta$year + lag_delta_miles)
+summary(aug_dickey_fuller)
+
+```
+
+## OPTIONAL QUESTION: Conduct the same analysis from a, b, d, and g using light truck sales as the dependent variable.  (Light truck sales use more gas than cars, so the question is whether gas prices affect the kind of car people buy which will affect gas consumption for the life of the car.)
+
+```{r, message = FALSE, warning = FALSE}
+## The Model
+reg.lt <- lm(lttrucksales~logGasReal + unem + logPop + factor(month) , data=dta)
+summary(reg.lt)
+
+## Saving the Residuals
+dta$residual_errors  <- resid(reg.lt)
+
+## Regressing Residuals
+lag_err <- c(NA, dta$residual_errors[1:(length(dta$residual_errors)-1)])
+```
+
+
+```{r, eval=FALSE, message = FALSE, warning = FALSE}
+plot(lag_err, dta$residual_errors, pch=20, xlab = "Lagged Residuals", 
+     ylab = "Residuals", bty="n", col="dark blue", las=1)
+abline(lm(dta$residual_errors ~ lag_err), lwd=2)
+```
+
+```{r, echo=FALSE, message = FALSE, warning = FALSE}
+knitr::include_graphics("time_6.png")
+
+```
+
+```{r, eval=FALSE, message = FALSE, warning = FALSE}
+## Plotting Over Time
+plot(dta$residual_errors, pch=20, xlab = "Time", las=1, 
+     ylab = "Residuals", bty="n", col="dark blue")
+```
+
+```{r, echo=FALSE, message = FALSE, warning = FALSE}
+knitr::include_graphics("time_7.png")
+
+```
+
+```{r, eval=FALSE, message = FALSE, warning = FALSE}
+# Creating season category and plotting residual error
+dta %>% 
+  ggplot() +
+  geom_line(aes(x=as.Date(date), y=residual_errors, col=season), size=.8) +
+  scale_color_manual(values=c("orange", "green", "red", "darkblue"))+
+  labs(x="Date", y="Residual Errors") +
+  theme_classic() +
+  theme(panel.grid.major.y=element_line(color="darkgrey", linetype="dotted"), panel.grid.minor.y=element_line(color="darkgrey", linetype="dotted")) %>%
+  labs(col="Season")
+```
+
+```{r, echo=FALSE, message = FALSE, warning = FALSE}
+knitr::include_graphics("time_8.png")
+
+```
+
+```{r, eval=FALSE, message = FALSE, warning = FALSE}
+# Creating season category and plotting residual error
+dta %>% 
+  ggplot() +
+  geom_point(aes(x=as.Date(date), y=residual_errors, col=season)) +
+  scale_color_manual(values=c("orange", "green", "red", "darkblue"))+
+  labs(x="Date", y="Residual Errors") +
+  theme_classic() +
+  theme(panel.grid.major.y=element_line(color="darkgrey", linetype="dotted"), panel.grid.minor.y=element_line(color="darkgrey", linetype="dotted")) %>%
+  labs(col="Season")
+```
+
+```{r, echo=FALSE, message = FALSE, warning = FALSE}
+knitr::include_graphics("time_9.png")
+
+```
+
+```{r, message = FALSE, warning = FALSE}
+## Cochrane-Orcutt Model
+reg.orc2 <- cochrane.orcutt(reg.lt)
+summary(reg.orc2)
+
+```
 
 # 4/3 | Optional Lab I: Spatial Data Analysis
 
@@ -1469,7 +1810,6 @@ knitr::include_graphics("rdd_3.png")
 knitr::include_graphics("opt_lab_image.jpg")
 
 ```
-
 
 ```{r, echo=TRUE, eval=FALSE}
 ## Packages

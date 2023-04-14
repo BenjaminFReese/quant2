@@ -1,4 +1,4 @@
-tab:unnamed-chunk-40
+tab:unnamed-chunk-42
 introduction
 purpose-of-this-site
 loading-data
@@ -82,6 +82,17 @@ run-the-basic-rd-model-and-the-model-with-covariates-with-libraryrdrobust.-what-
 estimate-a-series-of-models-with-lm-that-have-slightly-different-specifications.-first-try-the-above-specification-with-only-linear-age-variable-first-fixing-slope-to-be-the-same-above-and-below-the-threshhold-and-then-allowing-slope-to-vary-above-and-below-the-threshhold.
 now-see-what-happens-when-you-use-a-different-window-sizes.-feel-free-to-experiment-but-only-need-to-report-one-specification.-just-include-the-treatment-and-running-variables-and-allow-the-slopes-to-differ.
 now-create-some-rdd-figures.-i-suggest-using-rdplot-in-libraryrdrobust-and-experimenting-with-different-arguments.
+lab-ix-time-series
+estimate-a-model-with-the-log-of-miles-driven-use-the-unadjusted-data-logmilesna-as-a-function-of-log-gas-prices-unemployment-and-log-of-population.-dont-account-for-autocorrelation.-is-the-effect-of-gas-statistically-significant
+do-you-think-there-is-seasonality-in-driving-test-by-adding-dummy-variables-for-month-to-the-above-model.-is-there-evidence-of-monthly-variation-is-the-effect-of-gas-statistically-significant-now-create-a-categorical-variable-for-seasons-and-run-the-model-without-the-month-dummy-variable.
+briefly-explain-why-there-might-be-autocorrelation.
+create-a-figure-that-is-useful-to-assess-whether-there-is-autocorrelation-you-have-two-choices-here.-draw-a-sketch-here.
+test-whether-there-is-first-order-autocorrelation.-report-the-key-statistic-from-this-test.-what-would-a-coefficient-of-1-indicate
+use-newey-west-standard-errors-to-account-for-autocorrelation.-use-the-same-variables-as-in-part-b.-determine-the-t-stats-and-describe-the-similarities-and-difference-with-earlier-results.
+estimate-a-model-that-adjusts-for-autocorrelation.-use-the-same-variables-as-in-part-b.-describe-similarities-and-difference-with-earlier-results.
+estimate-a-dynamic-model-of-miles-driven-using-control-variables-from-above.-discuss-key-differences.
+run-an-augmented-dickey-fuller-test-on-logmilesna.
+optional-question-conduct-the-same-analysis-from-a-b-d-and-g-using-light-truck-sales-as-the-dependent-variable.-light-truck-sales-use-more-gas-than-cars-so-the-question-is-whether-gas-prices-affect-the-kind-of-car-people-buy-which-will-affect-gas-consumption-for-the-life-of-the-car.
 optional-lab-i-spatial-data-analysis
 start-by-registering-for-a-census-api-key-here
 lets-create-a-map-of-the-distribution-of-income-across-dc-at-the-census-tract-level.-we-will-use-the-2015-2019-acs.-edit-the-following-code-to-bring-in-the-data-with-get_acs-and-create-the-map
