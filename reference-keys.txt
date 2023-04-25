@@ -1,4 +1,4 @@
-tab:unnamed-chunk-42
+tab:unnamed-chunk-45
 introduction
 purpose-of-this-site
 loading-data
@@ -93,6 +93,19 @@ estimate-a-model-that-adjusts-for-autocorrelation.-use-the-same-variables-as-in-
 estimate-a-dynamic-model-of-miles-driven-using-control-variables-from-above.-discuss-key-differences.
 run-an-augmented-dickey-fuller-test-on-logmilesna.
 optional-question-conduct-the-same-analysis-from-a-b-d-and-g-using-light-truck-sales-as-the-dependent-variable.-light-truck-sales-use-more-gas-than-cars-so-the-question-is-whether-gas-prices-affect-the-kind-of-car-people-buy-which-will-affect-gas-consumption-for-the-life-of-the-car.
+lab-x-mle
+take-a-look-at-the-dataset.-once-you-have-an-idea-what-the-variables-are-use-a-lpm-to-estimate-the-effect-of-passenger-class-on-survival.
+assess-the-following-with-a-linear-probability-model-did-being-a-women-or-child-under-17-affected-survival-did-boarding-location-a-rough-proxy-for-country-of-origin-affect-survival-ireland-is-queenstown-q-france-is-cherbourg-c-and-the-englad-is-southampton-s.-treat-southampton-as-the-reference-category.-control-for-age-in-your-model.
+for-the-model-from-above-what-are-the-minimum-and-maximum-predicted-probabilities-of-survival
+what-is-the-name-age-gender-and-passenger-class-of-the-person-with-the-lowest-probability-of-surviving-first-though-make-a-prediction-about-the-gender-age-and-class-of-the-this-person.
+what-is-the-name-of-the-person-with-the-highest-probability-of-surviving-as-above-make-a-prediction-about-the-gender-age-and-class-of-the-this-person.
+estimate-a-probit-and-logit-model-where-survival-is-a-function-of-only-passenger-class.-treat-passenger-class-as-a-nominal-variable.-compare-statistical-significance-to-a-similar-lpm-model.-can-we-easily-interpret-these-coefficients
+estimate-a-probit-and-logit-model-where-survival-is-a-function-of-passenger-class-treated-as-a-nominal-variable-age-gender-child-and-embarkation-location.-what-is-the-minimum-and-maximum-fitted-value
+what-is-the-name-of-the-person-with-the-lowest-probability-of-surviving-use-the-probit-model-results-from-g.
+for-the-probit-model-from-part-g-what-is-the-effect-of-growing-one-year-older-for-an-adult-do-this-manually-using-the-observed-value-discrete-difference-method-described-in-the-booklecture.
+compare-the-probit-effect-of-age-to-the-lpm-effect-of-age-in-part-b
+what-is-the-effect-of-the-passenger-class-female-and-child-variables-in-the-above-probit-model-use-the-mfx-package-as-described-in-the-lecture.-compare-the-predicted-effects-of-these-variables-in-the-probit-and-the-logit-models-to-the-results-in-the-lpm-in-part-b.
+use-libraryggplot2-to-create-a-logitprobit-curve-depicting-the-relationship-between-the-cost-of-the-fare-and-survivability.-compare-this-with-a-plot-of-the-lpm.
 optional-lab-i-spatial-data-analysis
 start-by-registering-for-a-census-api-key-here
 lets-create-a-map-of-the-distribution-of-income-across-dc-at-the-census-tract-level.-we-will-use-the-2015-2019-acs.-edit-the-following-code-to-bring-in-the-data-with-get_acs-and-create-the-map

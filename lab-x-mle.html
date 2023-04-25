@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>7 3/13 Lab VI | Experiments | GOVT 8002 Shared Working Book</title>
-  <meta name="description" content="7 3/13 Lab VI | Experiments | GOVT 8002 Shared Working Book" />
+  <title>11 4/24 | Lab X: MLE | GOVT 8002 Shared Working Book</title>
+  <meta name="description" content="11 4/24 | Lab X: MLE | GOVT 8002 Shared Working Book" />
   <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="7 3/13 Lab VI | Experiments | GOVT 8002 Shared Working Book" />
+  <meta property="og:title" content="11 4/24 | Lab X: MLE | GOVT 8002 Shared Working Book" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="7 3/13 Lab VI | Experiments | GOVT 8002 Shared Working Book" />
+  <meta name="twitter:title" content="11 4/24 | Lab X: MLE | GOVT 8002 Shared Working Book" />
   
   
   
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="lab-v-2sls-instrumental-variables.html"/>
-<link rel="next" href="lab-vii-lists-loops-functions-in-r.html"/>
+<link rel="prev" href="lab-ix-time-series.html"/>
+<link rel="next" href="optional-lab-i-spatial-data-analysis.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -294,268 +294,366 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="lab-vi-experiments" class="section level1 hasAnchor" number="7">
-<h1><span class="header-section-number">7</span> 3/13 Lab VI | Experiments<a href="lab-vi-experiments.html#lab-vi-experiments" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p><img src="lab6_image.jpg" width="512" /></p>
-<div id="preparation-1" class="section level2 hasAnchor" number="7.1">
-<h2><span class="header-section-number">7.1</span> Preparation<a href="lab-vi-experiments.html#preparation-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="lab-vi-experiments.html#cb103-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
-<span id="cb103-2"><a href="lab-vi-experiments.html#cb103-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
-<span id="cb103-3"><a href="lab-vi-experiments.html#cb103-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb103-4"><a href="lab-vi-experiments.html#cb103-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
-<span id="cb103-5"><a href="lab-vi-experiments.html#cb103-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(memisc)</span>
-<span id="cb103-6"><a href="lab-vi-experiments.html#cb103-6" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;~/GOVT702/Data/EgyptProtests.RData&quot;</span>)</span></code></pre></div>
-<p>Williamson and Malik (2020) used a survey experiment to examine the public response to how Egyptians responded to different framings regarding a protest in which protesters were killed by police.</p>
-<p>All respondents were given the following statement: “Last year, police raided an apartment in 6 October City. During the raid, they killed 9 members of the Muslim Brotherhood.”</p>
-<p>Respondents were assigned with equal probability to a control group that got no more information or one of three treatment groups that received additional information.</p>
-<ul>
-<li><p>Respondents in the first treatment group were provided a paragraph that justified the killings from the security forces perspective.</p></li>
-<li><p>Respondents in the second treatment group were provided a paragraph that criticized the killings from a human rights perspective.</p></li>
-<li><p>Respondents in the third treatment group were provided both the security forces and human rights perspectives.</p></li>
-</ul>
-<p>Two outcomes were measured:</p>
-<ul>
-<li><p>if respondents thought the police tactics were justified, and</p></li>
-<li><p>if the police should the police be held accountable for killing the nine men. So that both variables are coded in same direction, this variable is coded as 1 if the respondent gave a pro-police answer (saying the police did not need to be held accountable).</p></li>
-</ul>
-<p>Data description</p>
-<table>
-<colgroup>
-<col width="50%" />
-<col width="50%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Variable</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>just_binary_main</td>
-<td>1 if the respondent said the police tactics were justified; 0 otherwise.</td>
-</tr>
-<tr class="even">
-<td>not_acc_binary_main</td>
-<td>1 if the respondent said the police should definitely or probably not be held accountable; 0 otherwise. We call this variable no-accountability</td>
-</tr>
-<tr class="odd">
-<td>treat_b1</td>
-<td>1 if respondent was given the pro-police paragraph</td>
-</tr>
-<tr class="even">
-<td>treat_b2</td>
-<td>1 if respondent was given the human rights paragraph</td>
-</tr>
-<tr class="odd">
-<td>treat_b3</td>
-<td>1 if respondent was given both the pro-police and human rights paragraphs</td>
-</tr>
-<tr class="even">
-<td>sisi_vote</td>
-<td>1 if the respondent voted for Sisi</td>
-</tr>
-<tr class="odd">
-<td>not_voteboycott</td>
-<td>1 if the respondent did not vote for some other reason than boycotting the election</td>
-</tr>
-<tr class="even">
-<td>opposition_vote_boycott</td>
-<td>1 if the respondent either voted for the opposition candidate or boycotted the election</td>
-</tr>
-<tr class="odd">
-<td>education</td>
-<td>from 1 (no formal education) to 8 (graduate degree). Values from 6 to 8 went to college.</td>
-</tr>
-<tr class="even">
-<td>income</td>
-<td>1 = Less than 500 pounds per month, 2 = 500 to 1000 pounds per month, 3 = 1000 to 4000 pounds per month, 4 = 4000 to 10000 pounds per month, 5 = More than 10000 pounds per month</td>
-</tr>
-<tr class="odd">
-<td>male</td>
-<td>1 for men, 0 otherwise</td>
-</tr>
-<tr class="even">
-<td>age_cat</td>
-<td>age categories: 1 is less than 35, 2 is 35 to 50 and 3 is over 50.</td>
-</tr>
-</tbody>
-</table>
-<p><a href="https://journals.sagepub.com/doi/abs/10.1177/0022343320961835?journalCode=jpra">Published paper</a> (paywalled)</p>
-<p><a href="https://static1.squarespace.com/static/5b23cff07c9327b8cde5c995/t/5d5c3f1bc49f210001338d1f/1566326555630/Contesting+Repression+-+Website.pdf">Draft version of the paper</a></p>
-</div>
-<div id="why-is-an-experiment-useful-in-this-context" class="section level2 hasAnchor" number="7.2">
-<h2><span class="header-section-number">7.2</span> Why is an experiment useful in this context?<a href="lab-vi-experiments.html#why-is-an-experiment-useful-in-this-context" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Simply asking respondents if they agree or disagree with the police does not answer if and how different messages work. If respondents were simply asked if they agree with the either the pro-police or human rights messages it may be difficult to separate out whether the message was persuasive or whether the respondent was predisposed to approve of the argument.</p>
-</div>
-<div id="is-there-evidence-of-balance-in-the-treatment-why-is-this-relevant-check-for-balance-of-each-treatment-with-respect-to-age-category-gender-education-income-voting-for-sisi-and-not-voting-for-non-boycott-reasons.-use-two-different-procedures-to-conduct-your-balance-tests.-you-do-not-need-to-use-tost" class="section level2 hasAnchor" number="7.3">
-<h2><span class="header-section-number">7.3</span> Is there evidence of balance in the treatment? Why is this relevant? Check for balance of each treatment with respect to age category, gender, education, income, voting for Sisi and not voting for non-boycott reasons. Use two different procedures to conduct your balance tests. You do not need to use TOST!<a href="lab-vi-experiments.html#is-there-evidence-of-balance-in-the-treatment-why-is-this-relevant-check-for-balance-of-each-treatment-with-respect-to-age-category-gender-education-income-voting-for-sisi-and-not-voting-for-non-boycott-reasons.-use-two-different-procedures-to-conduct-your-balance-tests.-you-do-not-need-to-use-tost" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="lab-vi-experiments.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Removing NAs</span></span>
-<span id="cb104-2"><a href="lab-vi-experiments.html#cb104-2" aria-hidden="true" tabindex="-1"></a>dta <span class="ot">&lt;-</span> dta[<span class="fu">is.na</span>(dta<span class="sc">$</span>just_binary_main)<span class="sc">==</span><span class="dv">0</span> <span class="sc">&amp;</span> <span class="fu">is.na</span>(dta<span class="sc">$</span>not_acc_binary_main)<span class="sc">==</span><span class="dv">0</span>,]</span>
-<span id="cb104-3"><a href="lab-vi-experiments.html#cb104-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb104-4"><a href="lab-vi-experiments.html#cb104-4" aria-hidden="true" tabindex="-1"></a>dep_vars <span class="ot">&lt;-</span> dta <span class="sc">%&gt;%</span> </span>
-<span id="cb104-5"><a href="lab-vi-experiments.html#cb104-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(age_cat, male, education, sisi_vote, not_voteboycott, income)</span>
-<span id="cb104-6"><a href="lab-vi-experiments.html#cb104-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb104-7"><a href="lab-vi-experiments.html#cb104-7" aria-hidden="true" tabindex="-1"></a>b_test <span class="ot">&lt;-</span> <span class="fu">lapply</span>(dep_vars, <span class="cf">function</span>(bal) { </span>
-<span id="cb104-8"><a href="lab-vi-experiments.html#cb104-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(bal <span class="sc">~</span> dta<span class="sc">$</span>treat_b1 <span class="sc">+</span> dta<span class="sc">$</span>treat_b2 <span class="sc">+</span> dta<span class="sc">$</span>treat_b3)})</span>
-<span id="cb104-9"><a href="lab-vi-experiments.html#cb104-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb104-10"><a href="lab-vi-experiments.html#cb104-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Extracting Slopes and P Values</span></span>
-<span id="cb104-11"><a href="lab-vi-experiments.html#cb104-11" aria-hidden="true" tabindex="-1"></a>slopes  <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">sapply</span>(b_test, <span class="cf">function</span>(x) x<span class="sc">$</span>coefficients), <span class="dv">2</span>)</span>
-<span id="cb104-12"><a href="lab-vi-experiments.html#cb104-12" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">sapply</span>(b_test, <span class="cf">function</span>(x) {</span>
-<span id="cb104-13"><a href="lab-vi-experiments.html#cb104-13" aria-hidden="true" tabindex="-1"></a>            <span class="fu">summary</span>(x)<span class="sc">$</span>coefficients[,<span class="dv">4</span>]}), <span class="dv">2</span>)</span>
-<span id="cb104-14"><a href="lab-vi-experiments.html#cb104-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb104-15"><a href="lab-vi-experiments.html#cb104-15" aria-hidden="true" tabindex="-1"></a><span class="do">## Showing Results</span></span>
-<span id="cb104-16"><a href="lab-vi-experiments.html#cb104-16" aria-hidden="true" tabindex="-1"></a>balance_results <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">b1=</span> slopes[<span class="dv">2</span>,], <span class="at">b1.p =</span> p[<span class="dv">2</span>,], </span>
-<span id="cb104-17"><a href="lab-vi-experiments.html#cb104-17" aria-hidden="true" tabindex="-1"></a>                            <span class="at">b2=</span> slopes[<span class="dv">3</span>,], <span class="at">b2.p =</span> p[<span class="dv">3</span>,],</span>
-<span id="cb104-18"><a href="lab-vi-experiments.html#cb104-18" aria-hidden="true" tabindex="-1"></a>                            <span class="at">b3=</span> slopes[<span class="dv">4</span>,], <span class="at">b3.p =</span> p[<span class="dv">4</span>,]) </span>
-<span id="cb104-19"><a href="lab-vi-experiments.html#cb104-19" aria-hidden="true" tabindex="-1"></a>balance_results</span></code></pre></div>
-<pre><code>##                    b1 b1.p    b2 b2.p    b3 b3.p
-## age_cat          0.05 0.60  0.01 0.89 -0.01 0.89
-## male             0.01 0.77  0.00 0.90  0.05 0.18
-## education        0.45 0.01  0.27 0.12  0.04 0.82
-## sisi_vote        0.02 0.74  0.05 0.36  0.09 0.12
-## not_voteboycott -0.02 0.71 -0.02 0.76 -0.05 0.37
-## income           0.18 0.10  0.06 0.55  0.24 0.03</code></pre>
-<p>We can do the same with a loop.</p>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="lab-vi-experiments.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="do">## DV Creation</span></span>
-<span id="cb106-2"><a href="lab-vi-experiments.html#cb106-2" aria-hidden="true" tabindex="-1"></a>dvs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;dta$age_cat&quot;</span>, <span class="st">&quot;dta$male&quot;</span>, <span class="st">&quot;dta$education&quot;</span>, <span class="st">&quot;dta$income&quot;</span>,</span>
-<span id="cb106-3"><a href="lab-vi-experiments.html#cb106-3" aria-hidden="true" tabindex="-1"></a>         <span class="st">&quot;dta$sisi_vote&quot;</span>, <span class="st">&quot;dta$not_voteboycott&quot;</span>)</span>
-<span id="cb106-4"><a href="lab-vi-experiments.html#cb106-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb106-5"><a href="lab-vi-experiments.html#cb106-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Loop for Treatments</span></span>
-<span id="cb106-6"><a href="lab-vi-experiments.html#cb106-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(dvs)){</span>
-<span id="cb106-7"><a href="lab-vi-experiments.html#cb106-7" aria-hidden="true" tabindex="-1"></a>  model <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&quot;model&quot;</span>,i, <span class="at">sep=</span><span class="st">&quot;&quot;</span>)</span>
-<span id="cb106-8"><a href="lab-vi-experiments.html#cb106-8" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">as.formula</span>(<span class="fu">paste</span>(dvs[i],<span class="st">&quot;~treat_b1 + treat_b2 + treat_b3&quot;</span>)), </span>
-<span id="cb106-9"><a href="lab-vi-experiments.html#cb106-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">data=</span>dta)</span>
-<span id="cb106-10"><a href="lab-vi-experiments.html#cb106-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">assign</span>(model,m)}</span>
-<span id="cb106-11"><a href="lab-vi-experiments.html#cb106-11" aria-hidden="true" tabindex="-1"></a><span class="fu">mtable</span>(model1, model2, model3, model4, model5, model6)</span></code></pre></div>
-<p>There is some evidence of imbalance.</p>
-</div>
-<div id="what-is-the-effect-of-the-treatments-on-whether-respondents-viewed-the-police-tactics-as-justified-run-one-model-with-only-the-treatment-variables-and-another-that-includes-controls-for-age-category-gender-education-income-voting-for-sisi-and-not-voting-for-non-boycott-reasons." class="section level2 hasAnchor" number="7.4">
-<h2><span class="header-section-number">7.4</span> What is the effect of the treatments on whether respondents viewed the police tactics as justified? Run one model with only the treatment variables and another that includes controls for age category, gender, education, income, voting for Sisi and not voting for non-boycott reasons.<a href="lab-vi-experiments.html#what-is-the-effect-of-the-treatments-on-whether-respondents-viewed-the-police-tactics-as-justified-run-one-model-with-only-the-treatment-variables-and-another-that-includes-controls-for-age-category-gender-education-income-voting-for-sisi-and-not-voting-for-non-boycott-reasons." class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="lab-vi-experiments.html#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Without Controls</span></span>
-<span id="cb107-2"><a href="lab-vi-experiments.html#cb107-2" aria-hidden="true" tabindex="-1"></a>dta <span class="sc">%&gt;%</span></span>
-<span id="cb107-3"><a href="lab-vi-experiments.html#cb107-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(just_binary_main<span class="sc">~</span>treat_b1 <span class="sc">+</span> treat_b2 <span class="sc">+</span> treat_b3, <span class="at">data=</span>.) <span class="sc">%&gt;%</span></span>
-<span id="cb107-4"><a href="lab-vi-experiments.html#cb107-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code></pre></div>
+<div id="lab-x-mle" class="section level1 hasAnchor" number="11">
+<h1><span class="header-section-number">11</span> 4/24 | Lab X: MLE<a href="lab-x-mle.html#lab-x-mle" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><img src="lab10_image.png" width="700" /></p>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="lab-x-mle.html#cb200-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Packages You May Need</span></span>
+<span id="cb200-2"><a href="lab-x-mle.html#cb200-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb200-3"><a href="lab-x-mle.html#cb200-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)  <span class="do">## install.packages(&quot;haven&quot;)</span></span>
+<span id="cb200-4"><a href="lab-x-mle.html#cb200-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)    <span class="do">## install.packages(&quot;car&quot;)</span></span>
+<span id="cb200-5"><a href="lab-x-mle.html#cb200-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(AER)    <span class="do">## install.packages(&quot;AER&quot;)</span></span>
+<span id="cb200-6"><a href="lab-x-mle.html#cb200-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Hmisc)  <span class="do">## use the describe command</span></span>
+<span id="cb200-7"><a href="lab-x-mle.html#cb200-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mfx)    <span class="do">## for marginal effects calculation</span></span>
+<span id="cb200-8"><a href="lab-x-mle.html#cb200-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb200-9"><a href="lab-x-mle.html#cb200-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb200-10"><a href="lab-x-mle.html#cb200-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Loading Data</span></span>
+<span id="cb200-11"><a href="lab-x-mle.html#cb200-11" aria-hidden="true" tabindex="-1"></a>dta <span class="ot">&lt;-</span> <span class="fu">read_dta</span>(<span class="st">&quot;Data/Ch12_Lab_Titanic.dta&quot;</span>)</span></code></pre></div>
+<div id="take-a-look-at-the-dataset.-once-you-have-an-idea-what-the-variables-are-use-a-lpm-to-estimate-the-effect-of-passenger-class-on-survival." class="section level2 hasAnchor" number="11.1">
+<h2><span class="header-section-number">11.1</span> Take a look at the dataset. Once you have an idea what the variables are, use a LPM to estimate the effect of passenger class on survival.<a href="lab-x-mle.html#take-a-look-at-the-dataset.-once-you-have-an-idea-what-the-variables-are-use-a-lpm-to-estimate-the-effect-of-passenger-class-on-survival." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="lab-x-mle.html#cb201-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Creating Variables</span></span>
+<span id="cb201-2"><a href="lab-x-mle.html#cb201-2" aria-hidden="true" tabindex="-1"></a>dta<span class="sc">$</span>pclass_2 <span class="ot">&lt;-</span> (dta<span class="sc">$</span>pclass <span class="sc">==</span> <span class="dv">2</span>)</span>
+<span id="cb201-3"><a href="lab-x-mle.html#cb201-3" aria-hidden="true" tabindex="-1"></a>dta<span class="sc">$</span>pclass_3 <span class="ot">&lt;-</span> (dta<span class="sc">$</span>pclass <span class="sc">==</span> <span class="dv">3</span>)</span>
+<span id="cb201-4"><a href="lab-x-mle.html#cb201-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb201-5"><a href="lab-x-mle.html#cb201-5" aria-hidden="true" tabindex="-1"></a><span class="do">## LPM Model</span></span>
+<span id="cb201-6"><a href="lab-x-mle.html#cb201-6" aria-hidden="true" tabindex="-1"></a>lpm_1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(survived <span class="sc">~</span> pclass_2 <span class="sc">+</span> pclass_3, <span class="at">data =</span> dta)</span>
+<span id="cb201-7"><a href="lab-x-mle.html#cb201-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lpm_1)</span></code></pre></div>
 <pre><code>## 
 ## Call:
-## lm(formula = just_binary_main ~ treat_b1 + treat_b2 + treat_b3, 
-##     data = .)
+## lm(formula = survived ~ pclass_2 + pclass_3, data = dta)
 ## 
 ## Residuals:
 ##     Min      1Q  Median      3Q     Max 
-## -0.4589 -0.3453 -0.3154  0.5411  0.6846 
+## -0.6192 -0.2553 -0.2553  0.3808  0.7447 
 ## 
 ## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)  0.31544    0.03923   8.042 5.02e-15 ***
-## treat_b1     0.14347    0.05576   2.573   0.0103 *  
-## treat_b2     0.01342    0.05547   0.242   0.8089    
-## treat_b3     0.02989    0.05646   0.529   0.5968    
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   0.61920    0.02571  24.084  &lt; 2e-16 ***
+## pclass_2TRUE -0.18959    0.03784  -5.011 6.17e-07 ***
+## pclass_3TRUE -0.36391    0.03102 -11.732  &lt; 2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 0.4788 on 579 degrees of freedom
-## Multiple R-squared:  0.01409,    Adjusted R-squared:  0.008977 
-## F-statistic: 2.757 on 3 and 579 DF,  p-value: 0.04167</code></pre>
-<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="lab-vi-experiments.html#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="do">## With Controls</span></span>
-<span id="cb109-2"><a href="lab-vi-experiments.html#cb109-2" aria-hidden="true" tabindex="-1"></a>dta <span class="sc">%&gt;%</span></span>
-<span id="cb109-3"><a href="lab-vi-experiments.html#cb109-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(just_binary_main<span class="sc">~</span>treat_b1 <span class="sc">+</span> treat_b2 <span class="sc">+</span> treat_b3 <span class="sc">+</span> <span class="fu">factor</span>(age_cat) <span class="sc">+</span> </span>
-<span id="cb109-4"><a href="lab-vi-experiments.html#cb109-4" aria-hidden="true" tabindex="-1"></a>       male <span class="sc">+</span> education <span class="sc">+</span> income <span class="sc">+</span> sisi_vote <span class="sc">+</span> not_voteboycott, <span class="at">data=</span>.) <span class="sc">%&gt;%</span></span>
-<span id="cb109-5"><a href="lab-vi-experiments.html#cb109-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code></pre></div>
+## Residual standard error: 0.4621 on 1306 degrees of freedom
+## Multiple R-squared:  0.09768,    Adjusted R-squared:  0.0963 
+## F-statistic: 70.69 on 2 and 1306 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div id="assess-the-following-with-a-linear-probability-model-did-being-a-women-or-child-under-17-affected-survival-did-boarding-location-a-rough-proxy-for-country-of-origin-affect-survival-ireland-is-queenstown-q-france-is-cherbourg-c-and-the-englad-is-southampton-s.-treat-southampton-as-the-reference-category.-control-for-age-in-your-model." class="section level2 hasAnchor" number="11.2">
+<h2><span class="header-section-number">11.2</span> Assess the following with a linear probability model: did being a women or child (under 17) affected survival? Did boarding location (a rough proxy for country of origin) affect survival? Ireland is Queenstown (“Q”), France is Cherbourg (“C”) and the Englad is Southampton (“S”). Treat Southampton as the reference category. Control for age in your model.<a href="lab-x-mle.html#assess-the-following-with-a-linear-probability-model-did-being-a-women-or-child-under-17-affected-survival-did-boarding-location-a-rough-proxy-for-country-of-origin-affect-survival-ireland-is-queenstown-q-france-is-cherbourg-c-and-the-englad-is-southampton-s.-treat-southampton-as-the-reference-category.-control-for-age-in-your-model." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="lab-x-mle.html#cb203-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Creating Variables</span></span>
+<span id="cb203-2"><a href="lab-x-mle.html#cb203-2" aria-hidden="true" tabindex="-1"></a>dta<span class="sc">$</span>female <span class="ot">&lt;-</span> (dta<span class="sc">$</span>sex <span class="sc">==</span> <span class="st">&quot;female&quot;</span>)</span>
+<span id="cb203-3"><a href="lab-x-mle.html#cb203-3" aria-hidden="true" tabindex="-1"></a>dta<span class="sc">$</span>child <span class="ot">&lt;-</span> (dta<span class="sc">$</span>age <span class="sc">&lt;</span> <span class="dv">17</span>)</span>
+<span id="cb203-4"><a href="lab-x-mle.html#cb203-4" aria-hidden="true" tabindex="-1"></a>dta<span class="sc">$</span>Queensland <span class="ot">&lt;-</span> (dta<span class="sc">$</span>embarked <span class="sc">==</span> <span class="st">&quot;Q&quot;</span>)</span>
+<span id="cb203-5"><a href="lab-x-mle.html#cb203-5" aria-hidden="true" tabindex="-1"></a>dta<span class="sc">$</span>Cherbourg <span class="ot">&lt;-</span> (dta<span class="sc">$</span>embarked <span class="sc">==</span> <span class="st">&quot;C&quot;</span>)</span>
+<span id="cb203-6"><a href="lab-x-mle.html#cb203-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb203-7"><a href="lab-x-mle.html#cb203-7" aria-hidden="true" tabindex="-1"></a><span class="do">## LPM Model</span></span>
+<span id="cb203-8"><a href="lab-x-mle.html#cb203-8" aria-hidden="true" tabindex="-1"></a>lpm_2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(survived <span class="sc">~</span> pclass_2 <span class="sc">+</span> pclass_3 <span class="sc">+</span> female <span class="sc">+</span> child <span class="sc">+</span> </span>
+<span id="cb203-9"><a href="lab-x-mle.html#cb203-9" aria-hidden="true" tabindex="-1"></a>              Queensland <span class="sc">+</span> Cherbourg <span class="sc">+</span> age, <span class="at">data =</span> dta)</span>
+<span id="cb203-10"><a href="lab-x-mle.html#cb203-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb203-11"><a href="lab-x-mle.html#cb203-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Summary Output</span></span>
+<span id="cb203-12"><a href="lab-x-mle.html#cb203-12" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lpm_2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
-## lm(formula = just_binary_main ~ treat_b1 + treat_b2 + treat_b3 + 
-##     factor(age_cat) + male + education + income + sisi_vote + 
-##     not_voteboycott, data = .)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -0.7901 -0.1992 -0.1011  0.3328  0.9448 
-## 
-## Coefficients:
-##                       Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)          0.0771076  0.1015603   0.759   0.4481    
-## treat_b1             0.1189739  0.0499768   2.381   0.0176 *  
-## treat_b2            -0.0249841  0.0496725  -0.503   0.6152    
-## treat_b3            -0.0169674  0.0506942  -0.335   0.7380    
-## factor(age_cat)2    -0.0362495  0.0425449  -0.852   0.3946    
-## factor(age_cat)3     0.0005895  0.0471999   0.012   0.9900    
-## male                 0.0494751  0.0534350   0.926   0.3549    
-## education           -0.0007622  0.0125688  -0.061   0.9517    
-## income              -0.0010071  0.0209086  -0.048   0.9616    
-## sisi_voteTRUE        0.5494024  0.0414417  13.257   &lt;2e-16 ***
-## not_voteboycottTRUE  0.0806941  0.0453807   1.778   0.0760 .  
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 0.4036 on 516 degrees of freedom
-##   (56 observations deleted due to missingness)
-## Multiple R-squared:  0.2926, Adjusted R-squared:  0.2789 
-## F-statistic: 21.34 on 10 and 516 DF,  p-value: &lt; 2.2e-16</code></pre>
-</div>
-<div id="test-whether-the-effects-of-treatment-1-police-favorable-message-are-the-same-as-treatment-3-both-sides-for-each-dependent-variable.-feel-free-to-use-the-linearhypothesis-function-in-the-car-package." class="section level2 hasAnchor" number="7.5">
-<h2><span class="header-section-number">7.5</span> Test whether the effects of treatment 1 (police-favorable message) are the same as treatment 3 (both sides) for each dependent variable. Feel free to use the linearHypothesis function in the car package.<a href="lab-vi-experiments.html#test-whether-the-effects-of-treatment-1-police-favorable-message-are-the-same-as-treatment-3-both-sides-for-each-dependent-variable.-feel-free-to-use-the-linearhypothesis-function-in-the-car-package." class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="lab-vi-experiments.html#cb111-1" aria-hidden="true" tabindex="-1"></a>reg<span class="fl">.1</span> <span class="ot">&lt;-</span> <span class="fu">lm</span>(just_binary_main<span class="sc">~</span>treat_b1 <span class="sc">+</span> treat_b2 <span class="sc">+</span> treat_b3 <span class="sc">+</span></span>
-<span id="cb111-2"><a href="lab-vi-experiments.html#cb111-2" aria-hidden="true" tabindex="-1"></a>               <span class="fu">factor</span>(age_cat) <span class="sc">+</span> male <span class="sc">+</span> education <span class="sc">+</span> income <span class="sc">+</span></span>
-<span id="cb111-3"><a href="lab-vi-experiments.html#cb111-3" aria-hidden="true" tabindex="-1"></a>               sisi_vote <span class="sc">+</span> not_voteboycott, <span class="at">data=</span>dta)</span>
-<span id="cb111-4"><a href="lab-vi-experiments.html#cb111-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb111-5"><a href="lab-vi-experiments.html#cb111-5" aria-hidden="true" tabindex="-1"></a><span class="fu">linearHypothesis</span>(reg<span class="fl">.1</span>, <span class="st">&quot;treat_b1=treat_b3&quot;</span>)</span></code></pre></div>
-<pre><code>## Linear hypothesis test
-## 
-## Hypothesis:
-## treat_b1 - treat_b3 = 0
-## 
-## Model 1: restricted model
-## Model 2: just_binary_main ~ treat_b1 + treat_b2 + treat_b3 + factor(age_cat) + 
-##     male + education + income + sisi_vote + not_voteboycott
-## 
-##   Res.Df    RSS Df Sum of Sq      F   Pr(&gt;F)   
-## 1    517 85.236                                
-## 2    516 84.062  1    1.1742 7.2075 0.007494 **
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-</div>
-<div id="in-some-political-contexts-messages-have-a-different-effect-on-people-with-less-engagement-in-politics.-are-there-heterogeneous-treatment-effects-by-those-who-did-not-vote-for-reasons-other-than-to-boycott-the-election-and-those-who-did-not-feel-free-to-explore-multiple-other-ways-there-could-be-heterogeneous-effects-e.g.-perhaps-there-are-different-effects-on-sisi-supporters-but-you-only-need-to-report-on-possible-differential-effects-of-the-treatments-on-the-not-accountable-dependent-variable." class="section level2 hasAnchor" number="7.6">
-<h2><span class="header-section-number">7.6</span> In some political contexts, messages have a different effect on people with less engagement in politics. Are there heterogeneous treatment effects by those who did not vote for reasons other than to boycott the election and those who did not? Feel free to explore multiple other ways there could be heterogeneous effects (e.g., perhaps there are different effects on Sisi supporters), but you only need to report on possible differential effects of the treatments on the “not-accountable” dependent variable.<a href="lab-vi-experiments.html#in-some-political-contexts-messages-have-a-different-effect-on-people-with-less-engagement-in-politics.-are-there-heterogeneous-treatment-effects-by-those-who-did-not-vote-for-reasons-other-than-to-boycott-the-election-and-those-who-did-not-feel-free-to-explore-multiple-other-ways-there-could-be-heterogeneous-effects-e.g.-perhaps-there-are-different-effects-on-sisi-supporters-but-you-only-need-to-report-on-possible-differential-effects-of-the-treatments-on-the-not-accountable-dependent-variable." class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="lab-vi-experiments.html#cb113-1" aria-hidden="true" tabindex="-1"></a>dta <span class="sc">%&gt;%</span></span>
-<span id="cb113-2"><a href="lab-vi-experiments.html#cb113-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(not_acc_binary_main <span class="sc">~</span> not_voteboycott<span class="sc">*</span>treat_b1 <span class="sc">+</span> not_voteboycott<span class="sc">*</span>treat_b2 <span class="sc">+</span> </span>
-<span id="cb113-3"><a href="lab-vi-experiments.html#cb113-3" aria-hidden="true" tabindex="-1"></a>                          not_voteboycott<span class="sc">*</span>treat_b3 <span class="sc">+</span><span class="fu">factor</span>(age_cat) <span class="sc">+</span> male <span class="sc">+</span> </span>
-<span id="cb113-4"><a href="lab-vi-experiments.html#cb113-4" aria-hidden="true" tabindex="-1"></a>                          education <span class="sc">+</span> income <span class="sc">+</span> sisi_vote, <span class="at">data =</span> .) <span class="sc">%&gt;%</span></span>
-<span id="cb113-5"><a href="lab-vi-experiments.html#cb113-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = not_acc_binary_main ~ not_voteboycott * treat_b1 + 
-##     not_voteboycott * treat_b2 + not_voteboycott * treat_b3 + 
-##     factor(age_cat) + male + education + income + sisi_vote, 
-##     data = .)
+## lm(formula = survived ~ pclass_2 + pclass_3 + female + child + 
+##     Queensland + Cherbourg + age, data = dta)
 ## 
 ## Residuals:
 ##      Min       1Q   Median       3Q      Max 
-## -0.58236 -0.22916 -0.05162  0.03384  0.99812 
+## -1.06991 -0.23871 -0.07251  0.24266  1.02432 
 ## 
 ## Coefficients:
-##                               Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)                   0.022268   0.095838   0.232  0.81636    
-## not_voteboycottTRUE           0.250014   0.075859   3.296  0.00105 ** 
-## treat_b1                      0.105574   0.053546   1.972  0.04919 *  
-## treat_b2                      0.038517   0.053542   0.719  0.47223    
-## treat_b3                      0.144074   0.054048   2.666  0.00793 ** 
-## factor(age_cat)2              0.009428   0.039361   0.240  0.81078    
-## factor(age_cat)3              0.015627   0.043724   0.357  0.72094    
-## male                         -0.017692   0.049679  -0.356  0.72189    
-## education                    -0.007508   0.011635  -0.645  0.51902    
-## income                        0.006283   0.019388   0.324  0.74602    
-## sisi_voteTRUE                 0.434241   0.038357  11.321  &lt; 2e-16 ***
-## not_voteboycottTRUE:treat_b1 -0.091467   0.105260  -0.869  0.38527    
-## not_voteboycottTRUE:treat_b2 -0.212318   0.104539  -2.031  0.04277 *  
-## not_voteboycottTRUE:treat_b3 -0.337778   0.108394  -3.116  0.00193 ** 
+##                 Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)     0.501995   0.054901   9.144  &lt; 2e-16 ***
+## pclass_2TRUE   -0.161974   0.036697  -4.414 1.12e-05 ***
+## pclass_3TRUE   -0.316913   0.034512  -9.183  &lt; 2e-16 ***
+## femaleTRUE      0.488617   0.025487  19.171  &lt; 2e-16 ***
+## childTRUE       0.086800   0.044482   1.951 0.051283 .  
+## QueenslandTRUE -0.100586   0.057468  -1.750 0.080365 .  
+## CherbourgTRUE   0.113481   0.032477   3.494 0.000496 ***
+## age            -0.003752   0.001120  -3.351 0.000833 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 0.3733 on 513 degrees of freedom
-##   (56 observations deleted due to missingness)
-## Multiple R-squared:  0.2461, Adjusted R-squared:  0.2269 
-## F-statistic: 12.88 on 13 and 513 DF,  p-value: &lt; 2.2e-16</code></pre>
+## Residual standard error: 0.3881 on 1038 degrees of freedom
+##   (263 observations deleted due to missingness)
+## Multiple R-squared:  0.3812, Adjusted R-squared:  0.3771 
+## F-statistic: 91.36 on 7 and 1038 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div id="for-the-model-from-above-what-are-the-minimum-and-maximum-predicted-probabilities-of-survival" class="section level2 hasAnchor" number="11.3">
+<h2><span class="header-section-number">11.3</span> For the model from above, what are the minimum and maximum predicted probabilities of survival?<a href="lab-x-mle.html#for-the-model-from-above-what-are-the-minimum-and-maximum-predicted-probabilities-of-survival" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="lab-x-mle.html#cb205-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Finding Min and Max</span></span>
+<span id="cb205-2"><a href="lab-x-mle.html#cb205-2" aria-hidden="true" tabindex="-1"></a>results_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(lpm_2)</span>
+<span id="cb205-3"><a href="lab-x-mle.html#cb205-3" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(results_pred)</span></code></pre></div>
+<pre><code>## [1] 1.130856</code></pre>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="lab-x-mle.html#cb207-1" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(results_pred)</span></code></pre></div>
+<pre><code>## [1] -0.1800428</code></pre>
+</div>
+<div id="what-is-the-name-age-gender-and-passenger-class-of-the-person-with-the-lowest-probability-of-surviving-first-though-make-a-prediction-about-the-gender-age-and-class-of-the-this-person." class="section level2 hasAnchor" number="11.4">
+<h2><span class="header-section-number">11.4</span> What is the name, age, gender and passenger class of the person with the lowest probability of surviving? First, though, make a prediction about the gender, age, and class of the this person.<a href="lab-x-mle.html#what-is-the-name-age-gender-and-passenger-class-of-the-person-with-the-lowest-probability-of-surviving-first-though-make-a-prediction-about-the-gender-age-and-class-of-the-this-person." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="lab-x-mle.html#cb209-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Extract the &quot;ID&quot; of individual with minimum survival probability </span></span>
+<span id="cb209-2"><a href="lab-x-mle.html#cb209-2" aria-hidden="true" tabindex="-1"></a>id <span class="ot">&lt;-</span> <span class="fu">names</span>(results_pred[results_pred <span class="sc">==</span> <span class="fu">min</span>(results_pred)])</span>
+<span id="cb209-3"><a href="lab-x-mle.html#cb209-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb209-4"><a href="lab-x-mle.html#cb209-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Look up the person from the original data</span></span>
+<span id="cb209-5"><a href="lab-x-mle.html#cb209-5" aria-hidden="true" tabindex="-1"></a>dta<span class="sc">$</span>name[<span class="fu">as.numeric</span>(id)]   <span class="co"># name</span></span></code></pre></div>
+<pre><code>## [1] &quot;Connors, Mr. Patrick&quot;</code></pre>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="lab-x-mle.html#cb211-1" aria-hidden="true" tabindex="-1"></a>dta<span class="sc">$</span>age[<span class="fu">as.numeric</span>(id)]    <span class="co"># age</span></span></code></pre></div>
+<pre><code>## [1] 70.5</code></pre>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="lab-x-mle.html#cb213-1" aria-hidden="true" tabindex="-1"></a>dta<span class="sc">$</span>sex[<span class="fu">as.numeric</span>(id)]    <span class="co"># gender</span></span></code></pre></div>
+<pre><code>## [1] &quot;male&quot;</code></pre>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="lab-x-mle.html#cb215-1" aria-hidden="true" tabindex="-1"></a>dta<span class="sc">$</span>pclass[<span class="fu">as.numeric</span>(id)] <span class="co"># passenger class</span></span></code></pre></div>
+<pre><code>## [1] 3</code></pre>
+</div>
+<div id="what-is-the-name-of-the-person-with-the-highest-probability-of-surviving-as-above-make-a-prediction-about-the-gender-age-and-class-of-the-this-person." class="section level2 hasAnchor" number="11.5">
+<h2><span class="header-section-number">11.5</span> What is the name of the person with the highest probability of surviving? As above, make a prediction about the gender, age, and class of the this person.<a href="lab-x-mle.html#what-is-the-name-of-the-person-with-the-highest-probability-of-surviving-as-above-make-a-prediction-about-the-gender-age-and-class-of-the-this-person." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="lab-x-mle.html#cb217-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Same as above but now for min</span></span>
+<span id="cb217-2"><a href="lab-x-mle.html#cb217-2" aria-hidden="true" tabindex="-1"></a>id_1 <span class="ot">&lt;-</span> <span class="fu">names</span>(results_pred[results_pred <span class="sc">==</span> <span class="fu">max</span>(results_pred)])</span>
+<span id="cb217-3"><a href="lab-x-mle.html#cb217-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb217-4"><a href="lab-x-mle.html#cb217-4" aria-hidden="true" tabindex="-1"></a>dta<span class="sc">$</span>name[<span class="fu">as.numeric</span>(id_1)]   <span class="co"># name</span></span></code></pre></div>
+<pre><code>## [1] &quot;Hippach, Miss. Jean Gertrude&quot;</code></pre>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="lab-x-mle.html#cb219-1" aria-hidden="true" tabindex="-1"></a>dta<span class="sc">$</span>age[<span class="fu">as.numeric</span>(id_1)]    <span class="co"># age</span></span></code></pre></div>
+<pre><code>## [1] 16</code></pre>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="lab-x-mle.html#cb221-1" aria-hidden="true" tabindex="-1"></a>dta<span class="sc">$</span>sex[<span class="fu">as.numeric</span>(id_1)]    <span class="co"># gender</span></span></code></pre></div>
+<pre><code>## [1] &quot;female&quot;</code></pre>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="lab-x-mle.html#cb223-1" aria-hidden="true" tabindex="-1"></a>dta<span class="sc">$</span>pclass[<span class="fu">as.numeric</span>(id_1)] <span class="co"># class</span></span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+</div>
+<div id="estimate-a-probit-and-logit-model-where-survival-is-a-function-of-only-passenger-class.-treat-passenger-class-as-a-nominal-variable.-compare-statistical-significance-to-a-similar-lpm-model.-can-we-easily-interpret-these-coefficients" class="section level2 hasAnchor" number="11.6">
+<h2><span class="header-section-number">11.6</span> Estimate a probit and logit model where survival is a function of (only) passenger class. Treat passenger class as a nominal variable. Compare statistical significance to a similar LPM model. Can we easily interpret these coefficients?<a href="lab-x-mle.html#estimate-a-probit-and-logit-model-where-survival-is-a-function-of-only-passenger-class.-treat-passenger-class-as-a-nominal-variable.-compare-statistical-significance-to-a-similar-lpm-model.-can-we-easily-interpret-these-coefficients" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="lab-x-mle.html#cb225-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Probit Model</span></span>
+<span id="cb225-2"><a href="lab-x-mle.html#cb225-2" aria-hidden="true" tabindex="-1"></a>prob_1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(survived <span class="sc">~</span> pclass_2 <span class="sc">+</span> pclass_3, <span class="at">data =</span> dta, </span>
+<span id="cb225-3"><a href="lab-x-mle.html#cb225-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;probit&quot;</span>))</span>
+<span id="cb225-4"><a href="lab-x-mle.html#cb225-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(prob_1)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = survived ~ pclass_2 + pclass_3, family = binomial(link = &quot;probit&quot;), 
+##     data = dta)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.3896  -0.7678  -0.7678   0.9791   1.6525  
+## 
+## Coefficients:
+##              Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)   0.30337    0.07092   4.278 1.89e-05 ***
+## pclass_2TRUE -0.48075    0.10375  -4.634 3.59e-06 ***
+## pclass_3TRUE -0.96130    0.08733 -11.008  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 1741.0  on 1308  degrees of freedom
+## Residual deviance: 1613.3  on 1306  degrees of freedom
+## AIC: 1619.3
+## 
+## Number of Fisher Scoring iterations: 4</code></pre>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="lab-x-mle.html#cb227-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Logit Model</span></span>
+<span id="cb227-2"><a href="lab-x-mle.html#cb227-2" aria-hidden="true" tabindex="-1"></a>logit_1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(survived <span class="sc">~</span> pclass_2 <span class="sc">+</span> pclass_3, <span class="at">data =</span> dta, </span>
+<span id="cb227-3"><a href="lab-x-mle.html#cb227-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>))</span>
+<span id="cb227-4"><a href="lab-x-mle.html#cb227-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(logit_1)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = survived ~ pclass_2 + pclass_3, family = binomial(link = &quot;logit&quot;), 
+##     data = dta)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.3896  -0.7678  -0.7678   0.9791   1.6525  
+## 
+## Coefficients:
+##              Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)    0.4861     0.1146   4.242 2.21e-05 ***
+## pclass_2TRUE  -0.7696     0.1669  -4.611 4.02e-06 ***
+## pclass_3TRUE  -1.5567     0.1433 -10.860  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 1741.0  on 1308  degrees of freedom
+## Residual deviance: 1613.3  on 1306  degrees of freedom
+## AIC: 1619.3
+## 
+## Number of Fisher Scoring iterations: 4</code></pre>
+</div>
+<div id="estimate-a-probit-and-logit-model-where-survival-is-a-function-of-passenger-class-treated-as-a-nominal-variable-age-gender-child-and-embarkation-location.-what-is-the-minimum-and-maximum-fitted-value" class="section level2 hasAnchor" number="11.7">
+<h2><span class="header-section-number">11.7</span> Estimate a probit and logit model where survival is a function of passenger class (treated as a nominal variable) age, gender, child and embarkation location. What is the minimum and maximum fitted value?<a href="lab-x-mle.html#estimate-a-probit-and-logit-model-where-survival-is-a-function-of-passenger-class-treated-as-a-nominal-variable-age-gender-child-and-embarkation-location.-what-is-the-minimum-and-maximum-fitted-value" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="lab-x-mle.html#cb229-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Probit Model</span></span>
+<span id="cb229-2"><a href="lab-x-mle.html#cb229-2" aria-hidden="true" tabindex="-1"></a>prob_2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(survived <span class="sc">~</span> pclass_2 <span class="sc">+</span> pclass_3 <span class="sc">+</span> age <span class="sc">+</span> female <span class="sc">+</span> child <span class="sc">+</span> Queensland <span class="sc">+</span> Cherbourg, </span>
+<span id="cb229-3"><a href="lab-x-mle.html#cb229-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> dta, <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;probit&quot;</span>))</span>
+<span id="cb229-4"><a href="lab-x-mle.html#cb229-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(prob_2)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = survived ~ pclass_2 + pclass_3 + age + female + 
+##     child + Queensland + Cherbourg, family = binomial(link = &quot;probit&quot;), 
+##     data = dta)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -2.6691  -0.6959  -0.4243   0.6807   2.5221  
+## 
+## Coefficients:
+##                 Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)     0.202305   0.211190   0.958 0.338098    
+## pclass_2TRUE   -0.587322   0.137707  -4.265    2e-05 ***
+## pclass_3TRUE   -1.118932   0.133242  -8.398  &lt; 2e-16 ***
+## age            -0.014960   0.004426  -3.380 0.000725 ***
+## femaleTRUE      1.501844   0.095523  15.722  &lt; 2e-16 ***
+## childTRUE       0.230958   0.168719   1.369 0.171032    
+## QueenslandTRUE -0.382351   0.228617  -1.672 0.094435 .  
+## CherbourgTRUE   0.412361   0.122014   3.380 0.000726 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 1414.6  on 1045  degrees of freedom
+## Residual deviance:  967.1  on 1038  degrees of freedom
+##   (263 observations deleted due to missingness)
+## AIC: 983.1
+## 
+## Number of Fisher Scoring iterations: 5</code></pre>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="lab-x-mle.html#cb231-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Logit Model</span></span>
+<span id="cb231-2"><a href="lab-x-mle.html#cb231-2" aria-hidden="true" tabindex="-1"></a>logit_2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(survived <span class="sc">~</span> pclass_2 <span class="sc">+</span> pclass_3 <span class="sc">+</span> age <span class="sc">+</span> female <span class="sc">+</span> child <span class="sc">+</span> Queensland <span class="sc">+</span> Cherbourg, </span>
+<span id="cb231-3"><a href="lab-x-mle.html#cb231-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">data =</span> dta, <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>))</span>
+<span id="cb231-4"><a href="lab-x-mle.html#cb231-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(logit_2)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = survived ~ pclass_2 + pclass_3 + age + female + 
+##     child + Queensland + Cherbourg, family = binomial(link = &quot;logit&quot;), 
+##     data = dta)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -2.5906  -0.6866  -0.4178   0.6665   2.4766  
+## 
+## Coefficients:
+##                 Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)     0.354412   0.366136   0.968 0.333054    
+## pclass_2TRUE   -0.982803   0.239313  -4.107 4.01e-05 ***
+## pclass_3TRUE   -1.974766   0.236301  -8.357  &lt; 2e-16 ***
+## age            -0.025803   0.007764  -3.323 0.000889 ***
+## femaleTRUE      2.538629   0.170096  14.925  &lt; 2e-16 ***
+## childTRUE       0.478567   0.295537   1.619 0.105379    
+## QueenslandTRUE -0.650478   0.393836  -1.652 0.098607 .  
+## CherbourgTRUE   0.703670   0.212002   3.319 0.000903 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 1414.6  on 1045  degrees of freedom
+## Residual deviance:  964.5  on 1038  degrees of freedom
+##   (263 observations deleted due to missingness)
+## AIC: 980.5
+## 
+## Number of Fisher Scoring iterations: 4</code></pre>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="lab-x-mle.html#cb233-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Compute predicted probabilities</span></span>
+<span id="cb233-2"><a href="lab-x-mle.html#cb233-2" aria-hidden="true" tabindex="-1"></a>prob_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(prob_2, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span>
+<span id="cb233-3"><a href="lab-x-mle.html#cb233-3" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(prob_pred)</span></code></pre></div>
+<pre><code>## [1] 0.9824895</code></pre>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="lab-x-mle.html#cb235-1" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(prob_pred)</span></code></pre></div>
+<pre><code>## [1] 0.009295578</code></pre>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="lab-x-mle.html#cb237-1" aria-hidden="true" tabindex="-1"></a><span class="do">## For the logit model</span></span>
+<span id="cb237-2"><a href="lab-x-mle.html#cb237-2" aria-hidden="true" tabindex="-1"></a>logit_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(logit_2, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span>
+<span id="cb237-3"><a href="lab-x-mle.html#cb237-3" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(logit_pred)</span></code></pre></div>
+<pre><code>## [1] 0.9749725</code></pre>
+<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="lab-x-mle.html#cb239-1" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(logit_pred)</span></code></pre></div>
+<pre><code>## [1] 0.01646478</code></pre>
+</div>
+<div id="what-is-the-name-of-the-person-with-the-lowest-probability-of-surviving-use-the-probit-model-results-from-g." class="section level2 hasAnchor" number="11.8">
+<h2><span class="header-section-number">11.8</span> What is the name of the person with the lowest probability of surviving? Use the probit model results from (g).<a href="lab-x-mle.html#what-is-the-name-of-the-person-with-the-lowest-probability-of-surviving-use-the-probit-model-results-from-g." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="lab-x-mle.html#cb241-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Finding the Name and other demographic factors</span></span>
+<span id="cb241-2"><a href="lab-x-mle.html#cb241-2" aria-hidden="true" tabindex="-1"></a>id_2 <span class="ot">&lt;-</span> <span class="fu">names</span>(prob_pred[prob_pred <span class="sc">==</span> <span class="fu">min</span>(prob_pred)])</span>
+<span id="cb241-3"><a href="lab-x-mle.html#cb241-3" aria-hidden="true" tabindex="-1"></a>dta<span class="sc">$</span>name[<span class="fu">as.numeric</span>(id_2)]</span></code></pre></div>
+<pre><code>## [1] &quot;Connors, Mr. Patrick&quot;</code></pre>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="lab-x-mle.html#cb243-1" aria-hidden="true" tabindex="-1"></a>dta<span class="sc">$</span>pclass[<span class="fu">as.numeric</span>(id_2)]</span></code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="lab-x-mle.html#cb245-1" aria-hidden="true" tabindex="-1"></a>dta<span class="sc">$</span>age[<span class="fu">as.numeric</span>(id_2)]</span></code></pre></div>
+<pre><code>## [1] 70.5</code></pre>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="lab-x-mle.html#cb247-1" aria-hidden="true" tabindex="-1"></a>dta<span class="sc">$</span>sex[<span class="fu">as.numeric</span>(id_2)]</span></code></pre></div>
+<pre><code>## [1] &quot;male&quot;</code></pre>
+</div>
+<div id="for-the-probit-model-from-part-g-what-is-the-effect-of-growing-one-year-older-for-an-adult-do-this-manually-using-the-observed-value-discrete-difference-method-described-in-the-booklecture." class="section level2 hasAnchor" number="11.9">
+<h2><span class="header-section-number">11.9</span> For the probit model from part (g), what is the effect of growing one year older (for an adult)? (Do this “manually”, using the observed-value, discrete difference method described in the book/lecture.)<a href="lab-x-mle.html#for-the-probit-model-from-part-g-what-is-the-effect-of-growing-one-year-older-for-an-adult-do-this-manually-using-the-observed-value-discrete-difference-method-described-in-the-booklecture." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="lab-x-mle.html#cb249-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Generate &quot;P1&quot; - the predicted values at actual values of X</span></span>
+<span id="cb249-2"><a href="lab-x-mle.html#cb249-2" aria-hidden="true" tabindex="-1"></a>p_1 <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(<span class="fu">coef</span>(prob_2)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">coef</span>(prob_2)[<span class="dv">2</span>]<span class="sc">*</span>dta<span class="sc">$</span>pclass_2 <span class="sc">+</span> <span class="fu">coef</span>(prob_2)[<span class="dv">3</span>]<span class="sc">*</span>dta<span class="sc">$</span>pclass_3 <span class="sc">+</span> <span class="fu">coef</span>(prob_2)[<span class="dv">4</span>]<span class="sc">*</span>dta<span class="sc">$</span>age <span class="sc">+</span> <span class="fu">coef</span>(prob_2)[<span class="dv">5</span>]<span class="sc">*</span>dta<span class="sc">$</span>female <span class="sc">+</span> <span class="fu">coef</span>(prob_2)[<span class="dv">6</span>]<span class="sc">*</span>dta<span class="sc">$</span>child <span class="sc">+</span> <span class="fu">coef</span>(prob_2)[<span class="dv">7</span>]<span class="sc">*</span>dta<span class="sc">$</span>Queensland <span class="sc">+</span> <span class="fu">coef</span>(prob_2)[<span class="dv">8</span>]<span class="sc">*</span>dta<span class="sc">$</span>Cherbourg)</span>
+<span id="cb249-3"><a href="lab-x-mle.html#cb249-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb249-4"><a href="lab-x-mle.html#cb249-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Generate &quot;P2&quot; - the predicted values with age increased by 1</span></span>
+<span id="cb249-5"><a href="lab-x-mle.html#cb249-5" aria-hidden="true" tabindex="-1"></a>p_2 <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(<span class="fu">coef</span>(prob_2)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">coef</span>(prob_2)[<span class="dv">2</span>] <span class="sc">*</span>dta<span class="sc">$</span>pclass_2 <span class="sc">+</span> <span class="fu">coef</span>(prob_2)[<span class="dv">3</span>]<span class="sc">*</span>dta<span class="sc">$</span>pclass_3 <span class="sc">+</span> <span class="fu">coef</span>(prob_2)[<span class="dv">4</span>]<span class="sc">*</span>(dta<span class="sc">$</span>age <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">+</span> <span class="fu">coef</span>(prob_2)[<span class="dv">5</span>]<span class="sc">*</span>dta<span class="sc">$</span>female <span class="sc">+</span> <span class="fu">coef</span>(prob_2)[<span class="dv">6</span>]<span class="sc">*</span>dta<span class="sc">$</span>child <span class="sc">+</span> <span class="fu">coef</span>(prob_2)[<span class="dv">7</span>]<span class="sc">*</span>dta<span class="sc">$</span>Queensland <span class="sc">+</span> <span class="fu">coef</span>(prob_2)[<span class="dv">8</span>]<span class="sc">*</span>dta<span class="sc">$</span>Cherbourg)</span>
+<span id="cb249-6"><a href="lab-x-mle.html#cb249-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb249-7"><a href="lab-x-mle.html#cb249-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Taking the Difference</span></span>
+<span id="cb249-8"><a href="lab-x-mle.html#cb249-8" aria-hidden="true" tabindex="-1"></a>diff_age <span class="ot">&lt;-</span> p_2 <span class="sc">-</span> p_1</span>
+<span id="cb249-9"><a href="lab-x-mle.html#cb249-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb249-10"><a href="lab-x-mle.html#cb249-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Finding the Mean Difference</span></span>
+<span id="cb249-11"><a href="lab-x-mle.html#cb249-11" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(diff_age, <span class="at">na.rm =</span> T)</span></code></pre></div>
+<pre><code>## [1] -0.003880686</code></pre>
+</div>
+<div id="compare-the-probit-effect-of-age-to-the-lpm-effect-of-age-in-part-b" class="section level2 hasAnchor" number="11.10">
+<h2><span class="header-section-number">11.10</span> Compare the probit effect of age to the LPM effect of age in part (b)<a href="lab-x-mle.html#compare-the-probit-effect-of-age-to-the-lpm-effect-of-age-in-part-b" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>They are basically the same.</p>
+</div>
+<div id="what-is-the-effect-of-the-passenger-class-female-and-child-variables-in-the-above-probit-model-use-the-mfx-package-as-described-in-the-lecture.-compare-the-predicted-effects-of-these-variables-in-the-probit-and-the-logit-models-to-the-results-in-the-lpm-in-part-b." class="section level2 hasAnchor" number="11.11">
+<h2><span class="header-section-number">11.11</span> What is the effect of the passenger class, female and child variables in the above probit model? Use the mfx package as described in the lecture. Compare the predicted effects of these variables in the probit and the logit models to the results in the LPM in part (b).<a href="lab-x-mle.html#what-is-the-effect-of-the-passenger-class-female-and-child-variables-in-the-above-probit-model-use-the-mfx-package-as-described-in-the-lecture.-compare-the-predicted-effects-of-these-variables-in-the-probit-and-the-logit-models-to-the-results-in-the-lpm-in-part-b." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="lab-x-mle.html#cb251-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Marginal Effects Approach</span></span>
+<span id="cb251-2"><a href="lab-x-mle.html#cb251-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb251-3"><a href="lab-x-mle.html#cb251-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Probt Model</span></span>
+<span id="cb251-4"><a href="lab-x-mle.html#cb251-4" aria-hidden="true" tabindex="-1"></a><span class="fu">probitmfx</span>(prob_2, <span class="at">data =</span> dta, <span class="at">atmean =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>## Call:
+## probitmfx(formula = prob_2, data = dta, atmean = FALSE)
+## 
+## Marginal Effects:
+##                     dF/dx  Std. Err.       z     P&gt;|z|    
+## pclass_2TRUE   -0.1447206  0.0314009 -4.6088  4.05e-06 ***
+## pclass_3TRUE   -0.3069759  0.0344924 -8.8998 &lt; 2.2e-16 ***
+## age            -0.0038868  0.0011353 -3.4238 0.0006176 ***
+## femaleTRUE      0.4886939  0.0280493 17.4227 &lt; 2.2e-16 ***
+## childTRUE       0.0613860  0.0456767  1.3439 0.1789729    
+## QueenslandTRUE -0.0953979  0.0542356 -1.7590 0.0785852 .  
+## CherbourgTRUE   0.1122969  0.0342715  3.2767 0.0010503 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## dF/dx is for discrete change for the following variables:
+## 
+## [1] &quot;pclass_2TRUE&quot;   &quot;pclass_3TRUE&quot;   &quot;femaleTRUE&quot;     &quot;childTRUE&quot;      &quot;QueenslandTRUE&quot; &quot;CherbourgTRUE&quot;</code></pre>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="lab-x-mle.html#cb253-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Logit Model</span></span>
+<span id="cb253-2"><a href="lab-x-mle.html#cb253-2" aria-hidden="true" tabindex="-1"></a><span class="fu">logitmfx</span>(logit_2, <span class="at">data =</span> dta, <span class="at">atmean =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>## Call:
+## logitmfx(formula = logit_2, data = dta, atmean = FALSE)
+## 
+## Marginal Effects:
+##                     dF/dx  Std. Err.       z     P&gt;|z|    
+## pclass_2TRUE   -0.1388455  0.0313257 -4.4323 9.322e-06 ***
+## pclass_3TRUE   -0.3121488  0.0348844 -8.9481 &lt; 2.2e-16 ***
+## age            -0.0038246  0.0011913 -3.2105  0.001325 ** 
+## femaleTRUE      0.4863850  0.0280803 17.3212 &lt; 2.2e-16 ***
+## childTRUE       0.0730217  0.0461283  1.5830  0.113419    
+## QueenslandTRUE -0.0925938  0.0533558 -1.7354  0.082670 .  
+## CherbourgTRUE   0.1094898  0.0340389  3.2166  0.001297 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## dF/dx is for discrete change for the following variables:
+## 
+## [1] &quot;pclass_2TRUE&quot;   &quot;pclass_3TRUE&quot;   &quot;femaleTRUE&quot;     &quot;childTRUE&quot;      &quot;QueenslandTRUE&quot; &quot;CherbourgTRUE&quot;</code></pre>
+</div>
+<div id="use-libraryggplot2-to-create-a-logitprobit-curve-depicting-the-relationship-between-the-cost-of-the-fare-and-survivability.-compare-this-with-a-plot-of-the-lpm." class="section level2 hasAnchor" number="11.12">
+<h2><span class="header-section-number">11.12</span> Use <code>library(ggplot2)</code> to create a logit/probit curve depicting the relationship between the cost of the fare and survivability. Compare this with a plot of the LPM.<a href="lab-x-mle.html#use-libraryggplot2-to-create-a-logitprobit-curve-depicting-the-relationship-between-the-cost-of-the-fare-and-survivability.-compare-this-with-a-plot-of-the-lpm." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="lab-x-mle.html#cb255-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Logit Plot</span></span>
+<span id="cb255-2"><a href="lab-x-mle.html#cb255-2" aria-hidden="true" tabindex="-1"></a>dta <span class="sc">%&gt;%</span></span>
+<span id="cb255-3"><a href="lab-x-mle.html#cb255-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> fare, <span class="at">y =</span> survived)) <span class="sc">+</span> </span>
+<span id="cb255-4"><a href="lab-x-mle.html#cb255-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb255-5"><a href="lab-x-mle.html#cb255-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_smooth</span>(<span class="at">method =</span> <span class="st">&quot;glm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>, </span>
+<span id="cb255-6"><a href="lab-x-mle.html#cb255-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">method.args =</span> <span class="fu">list</span>(<span class="at">family=</span><span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;probit&quot;</span>))) <span class="sc">+</span></span>
+<span id="cb255-7"><a href="lab-x-mle.html#cb255-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<p><img src="log_plot.png" width="321" /></p>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="lab-x-mle.html#cb256-1" aria-hidden="true" tabindex="-1"></a><span class="do">## LPM Plot</span></span>
+<span id="cb256-2"><a href="lab-x-mle.html#cb256-2" aria-hidden="true" tabindex="-1"></a>dta <span class="sc">%&gt;%</span></span>
+<span id="cb256-3"><a href="lab-x-mle.html#cb256-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> fare, <span class="at">y =</span> survived)) <span class="sc">+</span> </span>
+<span id="cb256-4"><a href="lab-x-mle.html#cb256-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb256-5"><a href="lab-x-mle.html#cb256-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb256-6"><a href="lab-x-mle.html#cb256-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<p><img src="lpm_plot.png" width="321" /></p>
 </div>
 </div>
             </section>
@@ -563,8 +661,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="lab-v-2sls-instrumental-variables.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="lab-vii-lists-loops-functions-in-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="lab-ix-time-series.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="optional-lab-i-spatial-data-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
